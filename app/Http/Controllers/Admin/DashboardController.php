@@ -18,9 +18,7 @@ class DashboardController extends Controller
         $data['recored'] =$sum->map(fn($el) => floor($el / $sum->sum() * 100));
         return view('admin.dashboard.index' ,$data);
     }
-
     public function getIndex(){
-        // return view('welcome');
         return redirect()->route('admin.login');
     }
 }
