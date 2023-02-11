@@ -1,5 +1,10 @@
 <?php
 return [
+
+    'employees_management' => 'ادارة الموظفين',
+
+
+
     'name' => 'الاسم',
     'email' => 'الايميل',
     'password' => 'كلمه المرور',

@@ -1,5 +1,22 @@
 <?php
 return [
+
+    'employees_management' => 'employees management ',
+    'all_employees' => 'all employees ',
+    'employees' => 'employees ',
+    'Categoires' => 'Data Categoires ',
+    'Add' => 'Add ',
+    'Add_Categoires' => 'Add Categoires ',
+    'edit_Categoires' => 'edit Categoires ',
+    'categories_name' => 'categories Name ',
+    'Add_a_new_employee'=>'Add a new employee',
+    'salary'=>'salary',
+    'address'=>'address',
+    'Category'=>'Category',
+    'Choose'=>'Select a section',
+    'Cancle' => 'Cancle',
+    'Save'=>'Save',
+
     'name' => 'name',
     'email' => 'email',
     'password' => ' password',

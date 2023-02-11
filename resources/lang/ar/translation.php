@@ -1,5 +1,21 @@
 <?php
 return [
+    'employees_management' => 'ادارة الموظفين',
+    'employees' => ' الموظفين',
+    'all_employees' => 'كل الموظفين',
+    'Categoires' => ' اقسام الموظفين',
+    'Add' => 'اضافة',
+    'Add_Categoires' => 'اضافة قسم جديد ',
+    'edit_Categoires' => 'تعديل قسم  ',
+    'categories_name' => 'اسم القسم  ',
+    'Add_a_new_employee'=>'اضافة موظف جديد',
+    'salary'=>'الراتب ',
+    'address'=>'عنوان',
+    'Category'=>' القسم',
+    'Choose'=>'--حدد قسم--',
+    'Cancle' => 'الغاء',
+    'Save'=>'حفظ',
+
     'name' => 'الاسم',
     'email' => 'الايميل',
     'password' => 'كلمه المرور',
