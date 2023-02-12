@@ -18,6 +18,7 @@ class OwnerFactory extends Factory
             'email' => $this->faker->unique()->email,
             'password' => bcrypt('123456'),
             'phone' => '0915477451',
+            'identification_number' => random_int(10, 30)
         ];
     }
 }

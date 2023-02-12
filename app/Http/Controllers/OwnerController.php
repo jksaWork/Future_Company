@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OwnerDataTable;
 use App\Http\Requests\OwnersRequest;
 use App\Models\Owner;
 use App\Repo\Interfaces\OwnerInterFace;
@@ -20,10 +21,9 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(OwnerDataTable $datatable)
     {
-
-        return $this->interface->getOwnerIndex();
+        return $datatable->render('admin.owners.index');
     }
 
     /**

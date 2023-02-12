@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'owner@gmail.com',
             'password' => bcrypt('123456'),
         ]);
+        Owner::factory(20)->create();
 
     }
 }

@@ -3252,6 +3252,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset("assets/js/custom/modals/create-app.js")}}"></script>
     <script src="{{ asset("assets/js/custom/modals/users-search.js") }}"></script>
     <!--end::Page Custom Javascript-->
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     @stack('scripts')
 
     <!--end::Javascript-->
