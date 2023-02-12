@@ -22,6 +22,7 @@ class OwnerController extends Controller
      */
     public function index()
     {
+
         return $this->interface->getOwnerIndex();
     }
 
@@ -41,7 +42,7 @@ class OwnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OwnersRequest $request)
+    public function store(Request $request)
     {
         return $this->interface->StoreOwner($request);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Repo\Repositories;
 
+use App\Models\Attachments;
 use App\Models\Client;
 use App\Models\Owner;
 use App\Repo\Interfaces\ClientInteface;
@@ -20,17 +21,30 @@ class  OwnerRepository implements OwnerInterFace {
 
     public function StoreOwnerInDatabse($request){
         try{
+            // return
+
             $data = $request->all();
-            // dd($data);
             $data['password'] = bcrypt($request->password);
-            return $Owner  = Owner::create($data);
+            $filterd = collect($data)->except('_token', 'owner_attachment');
+             $Owner  = Owner::create($filterd->toArray());
+            if($request->hasFile('owner_attachment')){
+                $filename = $request->owner_attachment->store('owner_attachment');
+                // $Owner->attachments()->create([])
+                $attachment  = new Attachments();
+                // $attachment->attacheable = $agent->id;
+                $attachment->url = $filename;
+                $Owner->attachments()->save($attachment);
+            }
+            return $Owner->load('attachments');
         }catch(Exception $e){
             dd($e);
+            // return $e;
         }
     }
 
     public function getOwnerIndex(){
-        $Owners = Owner::whenSerach()->WhenAgentUser()->paginate(10);
+        $Owners = Owner::whenSerach()->paginate(10);
+
         return view('admin.owners.index',compact('Owners'));
     }
 

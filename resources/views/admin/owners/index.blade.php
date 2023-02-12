@@ -1,5 +1,5 @@
 {{-- @extends('layouts.admin.admin') --}}
-@extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
+@extends('layouts.admin.admin')
 @section('main-head' , __('translation.owners_dashboard'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -49,7 +49,7 @@
 
                         <!--end::Export-->
                         <!--begin::Add customer-->
-                        <a href='{{ route('owners.create')}}' class="btn btn-primary" >Add Owners</a>
+                        <a href='{{ route('owners.create')}}' class="btn btn-primary" >{{__('translation.add_owner')}}</a>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Toolbar-->
@@ -86,79 +86,15 @@
                                         value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">Name</th>
-                            <th class="">phone</th>
-                            <th class="">Email</th>
-                            <th class="">Status</th>
-
-                            @admin
-                            <th class="">{{__('translation.agent')}}</th>
-                            @endAdmin
-                            <th class="text-end min-w-70px">Actions</th>
+                            <th class="min-w-125px">{{__('translation.name')}}</th>
+                            <th class="">{{__('translation.phone')}}</th>
+                            <th class="">{{__('translation.email')}}</th>
+                            <th class="">{{__('translation.identification_type')}}</th>
+                            <th class="">{{__('translation.identification_number')}}</th>
+                            <th class="">{{__('translation.status')}}</th>
+                            <th class="text-end min-w-70px">{{__('translation.action')}}</th>
                         </tr>
-                        <!--end::Table row-->
                     </thead>
-                    <!--end::Table head-->
-                    <!--begin::Table body-->
-                    <tbody class="fw-bold text-gray-600">
-                        @forelse ($Owners as $Owner  )
-                        <tr>
-                            <td>
-                                <div
-                                    class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="{{$Owner->id}}" />
-                                </div>
-                            </td>
-                            <td>{{ $Owner->name}}</a>
-                            </td>
-                            <td>{{ $Owner->phone }}</a></td>
-                            <td>{{ $Owner->email }}</a></td>
-                            @admin
-                            <td class="">{{ $Owner->Agent->name ?? '-'}}</td>
-                            @endAdmin
-                            <td>{!! $Owner->getStatusWithSpan() !!}</a>
-                            </td>
-                            <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('owners.edit' , $Owner->id) }}" class="menu-link bg-light-info px-3">Edit</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('owners.show' , ['owner' => $Owner->id,  'status' => true]) }}" class="menu-link bg-light-success px-3">Change Status</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <form action="{{ route('owners.destroy' , $Owner->id)}}" method="post" id='{{'owner_delete_from_' . $Owner->id}}'>
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#" onclick="document.getElementById('owner_delete_from_{{$Owner->id}}').submit()" class="menu-link px-3 bg-light-danger "
-                                                    data-kt-menu-trigger="click"
-                                                    >Delete
-                                            </a>
-                                            </form>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                            </td>
-                        </tr>
-                        @empty
-                            <td colspan="4"> <div class="text-center">No Data Was Found</div></td>
-                        @endforelse
-                    </tbody>
-                    <!--end::Table body-->
                 </table>
                 <!--end::Table-->
             </div>
@@ -401,3 +337,5 @@
     <!--end::Container-->
 </div>
 @endsection
+@push('scripts')
+@endpush

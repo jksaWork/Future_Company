@@ -4,11 +4,9 @@
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-        <!--begin::Logo-->
         <a href="/">
             <img alt="Logo" src="{{ asset('/admin_login.png') }}" class="h-200px logo" />
         </a>
-        <!--end::Logo-->
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"

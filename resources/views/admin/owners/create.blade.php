@@ -5,8 +5,8 @@
 @extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
 {{-- @endif --}}
 @section('main-head')
-    Owner Mangement
-    <small> - Edit  Owners </small>
+    {{__('translation.owner_mangement')}}
+    <small> - {{__('translation.Add_Owners')}} </small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -18,25 +18,28 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         {{-- @include('layouts.includes.session') --}}
-                        <form action="{{ route('owners.store')}}" method="post">
+                        <form action="{{ route('owners.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <x:text-input name='name' class='col-md-6' />
                                 <x:text-input name='email' class='col-md-6' />
                                 <x:text-input name='password' class='col-md-6' />
                                 <x:text-input name='phone' class='col-md-6' />
-                                @if (auth()->guard('web')->check())
-                                    <x:text-input name='agent_id' class='col-md-6' value="{{auth()->user()->agent_id ?? ''}}" />
-                                @endif
+                                @php
+                                    $Identification_type= ['national_number','national_card','passport'];
+                                @endphp
+                                <x:select-options name='identification_type' :options='$Identification_type'  class='col-md-6' />
+                                <x:text-input name='identification_number' class='col-md-6' />
+                                <x:input-file name='owner_attachment' class='col-md-6'></x:input-file>
                                 <div class='col-md-6'>
                                     <x:status-filed />
                                 </div>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{__('translation.save')}}
                                     </button>
                                     <a href='{{ route('owners.index')}}' class="btn btn-outline-danger">
-                                        Cancle
+                                        {{__('translation.cancel')}}
                                     </a>
                                 </div>
                             </div>

@@ -27,4 +27,8 @@ class Owner extends Authenticatable
             return $q;
         }
     }
+
+    public function attachments(){
+        return $this->morphMany(Attachments::class, 'attachable');
+    }
 }

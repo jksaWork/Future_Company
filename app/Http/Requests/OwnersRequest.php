@@ -28,7 +28,8 @@ class OwnersRequest extends FormRequest
             'email' => 'email|unique:owners,email',
             'password'=>'required',
             'phone' => 'required|numeric',
-            'agent_id' => 'nullable',
+            'identification_number' => 'required',
+            'identification_type' => 'required'
         ];
         // dd(request()->email);
         if(request()->method() == 'PUT'){

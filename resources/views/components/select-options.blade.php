@@ -14,7 +14,7 @@
                         @endif
                     @endif
                     >
-                {{is_string($option) ? $option : $option->name }}
+                {{is_string($option) ? __('translation.' . $option) : $option->name }}
                 </option>
             @endforeach
         </select>

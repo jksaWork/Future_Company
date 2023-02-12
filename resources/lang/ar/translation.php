@@ -144,5 +144,17 @@ return [
     'login' => 'تسجيل دخول',
     'create_account' => 'انشاء حساب',
     'password_confirmation' => 'تاكيد كلمه المرور',
-    'agent Dashboard' => 'لوحه تحكم الوكاله'
+    'agent Dashboard' => 'لوحه تحكم الوكاله',
+    'add_owner' => 'اضافه مالك جديد',
+    'owner_mangement' => 'اجاره المستخدمين',
+    "Add_Owners" => "اضافه مالك",
+    'identification_number' => 'رقم الاثبات',
+    'identification_type' => ' نوع اثبات الشخصيه',
+    'national_number'=> 'رقم وطني',
+    "national_card" => 'بطاقه شخصيه',
+    'passport' => 'جواز سفر',
+    'owner_attachment' =>'مرفقات الوكاله',
+    'cancel' => 'حذف',
 ];
+
+// []
