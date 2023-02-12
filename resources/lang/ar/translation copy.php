@@ -1,20 +1,9 @@
 <?php
 return [
+
     'employees_management' => 'ادارة الموظفين',
-    'employees' => ' الموظفين',
-    'all_employees' => 'كل الموظفين',
-    'Categoires' => ' اقسام الموظفين',
-    'Add' => 'اضافة',
-    'Add_Categoires' => 'اضافة قسم جديد ',
-    'edit_Categoires' => 'تعديل قسم  ',
-    'categories_name' => 'اسم القسم  ',
-    'Add_a_new_employee'=>'اضافة موظف جديد',
-    'salary'=>'الراتب ',
-    'address'=>'عنوان',
-    'Category'=>' القسم',
-    'Choose'=>'--حدد قسم--',
-    'Cancle' => 'الغاء',
-    'Save'=>'حفظ',
+
+
 
     'name' => 'الاسم',
     'email' => 'الايميل',
@@ -91,14 +80,14 @@ return [
     'offer_history' => 'سجل العروضات',
     'search_on_offers' => 'بحث في العروض',
     'add_offer' => "اضافه عروض",
-    'show_offer_details' => ' تفاصيل العرض',
+    'show_offer_details'=> ' تفاصيل العرض',
     'offer_info' => 'معلومات العرض',
     'offer_attachment' => 'مرفقات الوكاله',
     'service' => 'الخدمه',
     'areas' => 'المناطق',
     'offers_image' => 'صور العرض',
     'Admin Dashboard' => 'لوجه تحكم الادمن',
-    'client' => "العميل",
+    'client'=> "العميل",
     'owner' => 'المالك',
     'fillable' => 'متاح',
     'infillable' => 'غير متاح',
@@ -117,7 +106,7 @@ return [
     'client_mangement' => 'اداره العملاء',
     'add_cleint' => 'اضافه عميل',
     'show_cleint' => 'عرض العملاء',
-    'Owners Mangement' => ' اداره المالكين',
+    'Owners Mangement'=> ' اداره المالكين',
     'Add Owners' => 'اضافه مالك جديد',
     'Show Owners' => 'عرض الملاك',
     'offer_status_and_ownerss' => 'حاله الطلب و المستفيدين',
@@ -126,7 +115,7 @@ return [
     'orders.list' => 'قائمه العروض',
     'Mangements' => 'الادارات',
     'reports' => 'التقارير ',
-    'agent_offer_report' => 'تقرير عروض الوكالات',
+    'agent_offer_report'=> 'تقرير عروض الوكالات',
     "offer_status_report" => 'تقرير حاله العروض',
     'offer_monthly_report' => 'تقرير العروض الشهري',
     'system_usage_monthly' => ' تقارير  مناطق و خدمات العروض ',
@@ -160,24 +149,5 @@ return [
     'login' => 'تسجيل دخول',
     'create_account' => 'انشاء حساب',
     'password_confirmation' => 'تاكيد كلمه المرور',
-<<<<<<< HEAD
-    'agent Dashboard' => 'لوحه تحكم الوكاله',
-    'add_owner' => 'اضافه مالك جديد',
-    'owner_mangement' => 'اجاره المستخدمين',
-    "Add_Owners" => "اضافه مالك",
-    'identification_number' => 'رقم الاثبات',
-    'identification_type' => ' نوع اثبات الشخصيه',
-    'national_number'=> 'رقم وطني',
-    "national_card" => 'بطاقه شخصيه',
-    'passport' => 'جواز سفر',
-    'owner_attachment' =>'مرفقات الوكاله',
-    'cancel' => 'حذف',
-    'intro' => 'المقدمه',
-    'id' => 'المعرف الرقمي',
-];
 
-// []
-=======
-    'agent Dashboard' => 'لوحه تحكم الوكاله'
 ];
->>>>>>> 0f4526701f8c3e0f22e58076519108bce5bb10fa
