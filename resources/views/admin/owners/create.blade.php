@@ -30,6 +30,7 @@
                                 @endphp
                                 <x:select-options name='identification_type' :options='$Identification_type'  class='col-md-6' />
                                 <x:text-input name='identification_number' class='col-md-6' />
+                                <x:text-input name='workplace' class='col-md-6' />
                                 <x:input-file name='owner_attachment' class='col-md-6'></x:input-file>
                                 <div class='col-md-6'>
                                     <x:status-filed />

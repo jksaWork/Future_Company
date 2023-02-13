@@ -26,12 +26,13 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form action="{{ route('owners.index')}}" method="get">
+                        {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text"  name='search'
+                            id="handelSearch"
                             value="{{request()->search}}"
-                            class="form-control form-control-solid w-250px ps-15"
-                            placeholder="Search Area" />
-                        </form>
+                            class="form-control form-control-solid w-350px ps-15"
+                            placeholder="{{__('translation.search_with_number_or_name_email')}}" />
+                        {{-- </form> --}}
                     </div>
                     <!--end::Search-->
                 </div>
@@ -71,8 +72,28 @@
             <!--begin::Card body-->
             <div class="card-body pt-0">
                 @include('layouts.includes.session')
-                    <!--begin::Table head-->
-                {{$dataTable->table()}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="roles-table" style="width: 100%;">
+                                <thead>
+                                    <tr>
+
+                                        <th>{{__('translation.id')}}</th>
+                                        <th>{{__('translation.email')}}</th>
+                                        <th>{{__('translation.phone')}}</th>
+                                        <th>{{__('translation.workplace')}}</th>
+                                        <th>{{__('translation.identification_type')}}</th>
+                                        <th>{{__('translation.identification_number')}}</th>
+                                        <th>{{__('translation.status')}}</th>
+                                        <th>@lang('translation.created_at')</th>
+                                        <th>@lang('translation.action')</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div><!-- end of table responsive -->
+                    </div><!-- end of col -->
+                </div><!-- end of row -->
                 <!--end::Table-->
             </div>
             <!--end::Card body-->
@@ -315,5 +336,49 @@
 </div>
 @endsection
 @push('scripts')
-{{$dataTable->scripts()}}
+<script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+<script>
+    let role;
+    let rolesTable = $('#roles-table').DataTable({
+        dom: "tiplr",
+        serverSide: true,
+        processing: true,
+        "language": {
+            "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
+        ajax: {
+            url: '{{ route('owners.data') }}',
+
+        },
+        columns: [
+            {data: 'name', name: 'name' },
+            {data: 'email', name: 'email'},
+            {data: 'phone', name: 'phone'},
+            {data: 'workplace', name: 'workplace'},
+
+            {data: 'identification_type', name: 'identification_type' ,searchable: false},
+            {data: 'identification_number', name: 'identification_number' ,searchable: false},
+            {data: 'status', name: 'status'},
+            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+        ],
+        order: [[2, 'desc']],
+        drawCallback: function (settings) {
+            $('.record__select').prop('checked', false);
+            $('#record__select-all').prop('checked', false);
+            $('#record-ids').val();
+            $('#bulk-delete').attr('disabled', true);
+        }
+    });
+
+    $('#handelSearch').keyup(function () {
+        rolesTable.search(this.value).draw();
+        // role = $(this).val();
+        // rolesTable.ajax.reload();
+    });
+    $('#roles').on('change' , function(){
+        role = $(this).val();
+        rolesTable.ajax.reload();
+    });
+</script>
 @endpush

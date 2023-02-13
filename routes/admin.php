@@ -80,6 +80,7 @@ Route::group(
         Route::middleware('auth:admin,web')->group(function(){
              // Owners Resource
             Route::resource('owners', OwnerController::class);
+            Route::get('owners-data', [OwnerController::class , 'data'])->name('owners.data');
             Route::resource('users', UserController::class);
             // User Controller
             Route::get('user-ajax', [UserController::class, 'data'])->name('users.data');

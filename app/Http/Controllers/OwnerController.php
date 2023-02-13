@@ -21,9 +21,14 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function data(){
+        return $this->interface->getOwnerData();
+     }
     public function index(OwnerDataTable $datatable)
     {
-        return $datatable->render('admin.owners.index');
+
+        return $this->interface->getOwnerIndex();
     }
 
     /**
@@ -42,7 +47,7 @@ class OwnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OwnersRequest $request)
     {
         return $this->interface->StoreOwner($request);
     }
@@ -56,6 +61,7 @@ class OwnerController extends Controller
     public function show(Owner $owner)
     {
         if(request()->has('status')) return $this->interface->ChangeStatus($owner);
+        else return $this->interface->ShowOwnerData($owner);
     }
 
     /**

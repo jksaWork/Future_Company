@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
+use Yajra\DataTables\Html\SearchPane;
 use Yajra\DataTables\Services\DataTable;
 
 class OwnerDataTable extends DataTable
@@ -22,10 +23,20 @@ class OwnerDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+
         return (new EloquentDataTable($query))
+        ->filter(function ($query) {
+            if (request()->has('name')) {
+                $query->where('name', 'like', "%" . request('name') . "%");
+            }
+
+            if (request()->has('email')) {
+                $query->where('email', 'like', "%" . request('email') . "%");
+            }
+        })
             ->addColumn('identification_type_trans', '{{__("translation.".$identification_type)}}')
-            ->addColumn('action', 'owner.action')
-            ->setRowId('id');
+            ->addColumn('action', fn(Owner $Owner) => view('admin.owners.data_table.action', compact('Owner')))
+            ->rawColumns(['action']);
     }
 
     /**
@@ -81,7 +92,7 @@ class OwnerDataTable extends DataTable
                 Column::computed('action' , trans('translation.action'))
                     ->exportable(false)
                     ->printable(false)
-                    ->width(60)
+                    ->width(100)
                     ->addClass('text-center'),
         ];
     }

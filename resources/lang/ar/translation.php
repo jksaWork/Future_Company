@@ -63,7 +63,7 @@ return [
     'excahnge_offer' => 'عروض الاستبدال',
     'agent_owners_mangement' => 'اداره المالكين',
     'agent' => 'الوكاله',
-    'owners_dashboard' => 'اداره حسابات  المالكين',
+    'owners_dashboard' => 'اداره المالكين',
     'offers' => 'العروض',
     'Add Users' => 'اضافه مستخدم',
     "show_users" => "عرض المستخدين",
@@ -160,7 +160,6 @@ return [
     'login' => 'تسجيل دخول',
     'create_account' => 'انشاء حساب',
     'password_confirmation' => 'تاكيد كلمه المرور',
-<<<<<<< HEAD
     'agent Dashboard' => 'لوحه تحكم الوكاله',
     'add_owner' => 'اضافه مالك جديد',
     'owner_mangement' => 'اجاره المستخدمين',
@@ -170,14 +169,23 @@ return [
     'national_number'=> 'رقم وطني',
     "national_card" => 'بطاقه شخصيه',
     'passport' => 'جواز سفر',
-    'owner_attachment' =>'مرفقات الوكاله',
+    'owner_attachment' =>'مرفقات المالك',
     'cancel' => 'حذف',
     'intro' => 'المقدمه',
     'id' => 'المعرف الرقمي',
+    'real_state_mangements' => 'اداره العقارات' ,
+    'created_at' => 'تاريخ الاضافه',
+    ' Status Was Change Succesfuly'  => 'تم تعديل الحاله بنجاح',
+    'Status Was Change Succesfuly'  => 'تم تعديل الحاله بنجاح',
+    'Status  Was Change Succesfuly' => 'تم تعديل الحاله بنجاح',
+    'Update  Was Done Succesfuly' => 'تم تعديل العنصر بنجاح',
+    'search_with_number_or_name_email' => 'الرقم \ الاسم \ الايمل ',
+    'Delete  Done Succesfuly' => 'تم الحذف بنجاح',
+    'Some Thing Went Worng' => 'حدث خطاء اثناء العمليه الرجار المحاوله مجددا',
+    'owner_real_state' => 'عقارات العميل',
+    'workplace' => 'مكان العمل',
+    'add_item_successfly' => 'تمت اضافه العنصر بنجاح',
+    'show_owner_details' => 'عرض بيانات المالك',
+    'attachment_is_required' => 'حقل المرفق لايجب ان يكون فارغ',
+    'the_file_was_uploaded_success' => 'تم ارفاق العنصر بنجاح',
 ];
-
-// []
-=======
-    'agent Dashboard' => 'لوحه تحكم الوكاله'
-];
->>>>>>> 0f4526701f8c3e0f22e58076519108bce5bb10fa

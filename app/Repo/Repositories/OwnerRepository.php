@@ -8,6 +8,7 @@ use App\Models\Owner;
 use App\Repo\Interfaces\ClientInteface;
 use App\Repo\Interfaces\OwnerInterFace;
 use Exception;
+use Yajra\DataTables\DataTables;
 
 class  OwnerRepository implements OwnerInterFace {
     public function create()
@@ -16,6 +17,7 @@ class  OwnerRepository implements OwnerInterFace {
     }
     public function StoreOwner($request){
         $this->StoreOwnerInDatabse($request);
+        session()->flash('success');
         return redirect()->route('owners.index');
     }
 
@@ -43,16 +45,36 @@ class  OwnerRepository implements OwnerInterFace {
     }
 
     public function getOwnerIndex(){
-        $Owners = Owner::whenSerach()->paginate(10);
+        return view('admin.owners.index');
+    }
 
-        return view('admin.owners.index',compact('Owners'));
+    public function ShowOwnerData($Owner){
+        // return $Owner;
+        return view('admin.owners.show' , compact('Owner'));
+    }
+    public function getOwnerData(){
+        $query = Owner::query();
+        return  DataTables::of($query)
+            ->editColumn('created_at', function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+            ->editColumn('identification_type', function ($item) {
+                return __('translation.'. $item->identification_type);
+            })
+            ->editColumn('status', function ($item) {
+                return  $item->getStatusWithSpan();
+            })
+            ->editColumn('actions',  'admin.owners.data_table.actions'
+            )
+            ->rawColumns(['actions', 'status'])
+            ->toJson();
     }
 
 
     public function ChangeStatus($Owner){
         // Change The Status
         $Owner->ChangeStatus();
-        session()->flash('success' , 'Status  Was Change Succesfuly');
+        session()->flash('success' , __('translation.Status  Was Change Succesfuly'));
         return redirect()->route('owners.index');
     }
 
@@ -66,10 +88,10 @@ class  OwnerRepository implements OwnerInterFace {
             $data = $request->except('_token' , '_method');
             $data['password'] = bcrypt($request->password);
             $owner->update($data);
-            session()->flash('success' , 'Update Owners Was Done Succesfuly');
+            session()->flash('success' , __('translation.' .'Update  Was Done Succesfuly'));
             return redirect()->route('owners.index');
         }catch(Exception $e){
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            session()->flash('error' ,   __('translation.Some Thing Went Worng'));
             return redirect()->back();
         }
     }
@@ -78,10 +100,10 @@ class  OwnerRepository implements OwnerInterFace {
     {
         try{
             $Owner->delete();
-            session()->flash('success' , 'Owners  Was Delete Succesfuly');
+            session()->flash('success' , __('translation.Delete  Done Succesfuly'));
             return redirect()->route('owners.index');
         }catch(Exception $e){
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            session()->flash('error' ,  __('translation.Some Thing Went Worng'));
             return redirect()->back();
         }
     }
