@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Area;
 use App\Models\Client;
 use App\Models\Owner;
+use App\Models\RealStateCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456'),
         ]);
         Owner::factory(20)->create();
+        RealStateCategory::factory()->create([
+            'name' => 'شقق للبيع',
+            'type' => 'sale',
+        ]);
+
+        RealStateCategory::factory()->create([
+            'name' => 'شقق للاجار',
+            'type' => 'rent',
+        ]);
 
     }
 }
