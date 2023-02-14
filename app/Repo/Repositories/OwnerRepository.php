@@ -17,7 +17,7 @@ class  OwnerRepository implements OwnerInterFace {
     }
     public function StoreOwner($request){
         $this->StoreOwnerInDatabse($request);
-        session()->flash('success');
+        session()->flash('success' , __('translation.add_item_successfly'));
         return redirect()->route('owners.index');
     }
 

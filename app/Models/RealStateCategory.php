@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\HasSearchScope;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RealStateCategory extends Model
 {
-    use HasFactory, HasStatus;
+    use HasFactory, HasStatus, HasSearchScope;
     public const TYPES = ['sale' , 'rent'];
-    public $fillable = ['type' , 'name' , 'status'];
+    public $guarded = [];
 }
 
 

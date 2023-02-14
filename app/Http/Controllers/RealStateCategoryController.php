@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RealStateCategory;
+use Exception;
 use Illuminate\Http\Request;
 
 class RealStateCategoryController extends Controller
@@ -14,7 +15,8 @@ class RealStateCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $items = RealStateCategory::WhenSerach()->get();
+        return view('admin.real_state_category.index', compact('items'));
     }
 
     /**
@@ -35,7 +37,20 @@ class RealStateCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+        ]);
+        try{
+        $category = RealStateCategory::create($request->except('_token'));
+        session()->flash('success' , __('translation.add_item_successfly'));
+        return redirect()->route('realstate.categories.index');
+        }
+        catch(Exception $e){
+        // dd($e);
+        session()->flash('error' , __('transaltion.Some Thing Went Worng'));
+        return redirect()->back();
+        }
     }
 
     /**
@@ -44,9 +59,24 @@ class RealStateCategoryController extends Controller
      * @param  \App\Models\RealStateCategory  $realStateCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(RealStateCategory $realStateCategory)
+    public function show($realStateCategory)
     {
-        //
+        $realStateCategory = RealStateCategory::findOrFail($realStateCategory);
+        // dd($realStateCategory);
+        try{
+            $realStateCategory->ChangeStatus();
+            // $realStateCategory->status = !$realStateCategory->status;
+            // $realStateCategory->save();
+            session()->flash('success', __('translation.Update  Was Done Succesfuly'));
+            return redirect()->route('realstate.categories.index');
+        }
+            catch(Exception $e){
+            // dd($e);
+            session()->flash('error' , __('transaltion.Some Thing Went Worng'));
+
+            return redirect()->back();
+
+        }
     }
 
     /**
@@ -69,7 +99,20 @@ class RealStateCategoryController extends Controller
      */
     public function update(Request $request, RealStateCategory $realStateCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        try {
+            $realStateCategory->update($request->except('_token' , 'method'));
+            session()->flash('success', __('translation.Update  Was Done Succesfuly'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //throw $th;
+            session()->flash('error' , __('transaltion.Some Thing Went Worng'));
+
+            return redirect()->back();
+
+        }
     }
 
     /**

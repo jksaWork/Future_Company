@@ -1,4 +1,6 @@
 @extends('layouts.admin.admin')
+@section('main-head' , __('translation.real_state_categories'))
+
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
@@ -24,9 +26,13 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-customer-table-filter="search"
+                        <form action="{{route('realstate.categories.index')}}" method="get">
+                            <input type="text" data-kt-customer-table-filter="search"
+                            name='search'
+                            value='{{request()->search ?? null}}'
                             class="form-control form-control-solid w-250px ps-15"
-                            placeholder="Search Area" />
+                            placeholder="{{__('translation.Search In Categoires')}}" />
+                        </form>
                     </div>
                     <!--end::Search-->
                 </div>
@@ -35,17 +41,8 @@
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-
-                        <!--begin::Menu 1-->
-
-                        <!--end::Menu 1-->
-                        <!--end::Filter-->
-                        <!--begin::Export-->
-
-                        <!--end::Export-->
-                        <!--begin::Add customer-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_add_customer">Add Area</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#kt_modal_add_customer">{{__('translation.add_real_state_category')}}</button>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Toolbar-->
@@ -82,40 +79,44 @@
                                         value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">Name</th>
-                            <th class="min-w-125px">Description</th>
-                            <th class="text-end min-w-70px">Actions</th>
+                            <th class="min-w-125px">{{__('translation.name')}}</th>
+                            <th class="min-w-125px">{{__('translation.type')}}</th>
+                            <th class="min-w-125px">{{__('translation.status')}}</th>
+                            <th class="text-end min-w-70px">{{__('translation.action')}}</th>
                         </tr>
                         <!--end::Table row-->
                     </thead>
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody class="fw-bold text-gray-600">
-                        @forelse ($areas as $key => $area  )
+                        @forelse ($items as $key => $item)
                         <tr>
                             <td>
                                 <div
                                     class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="{{$area->id}}" />
+                                    <input class="form-check-input" type="checkbox" value="{{$item->id}}" />
                                 </div>
                             </td>
-                            <td>{{ $area->name}}</a>
+                            <td>{{ $item->name}}</a>
                             </td>
-                            <td>{{ $area->description }}</a>
+                            <td>{{ __('translation.' . $item->type) }}</a>
+                                <td>{!! $item->getStatusWithSpan() !!}</a>
                             </td>
                             <td class="text-end">
-                                <form action="{{ route('area.destroy' , $area->id)}}" id='{{ 'delete_form_' . $key }}' method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"
-                                        {{-- data-kt-menu-trigger="click"a --}}
-                                        >Delete
-                                    </button>
-                                </form>
+                                <x:edit-real-state-category :item='$item' />
+                                <a href="{{ route('realstate.categories.show', $item->id) }}"
+                                    class="btn btn-light-success btn-sm btn-icon me-1">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black"></path>
+                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                         @empty
-                            <td colspan="4"> <div class="text-center">No Data Was Found</div></td>
+                            <td colspan="4"> <div class="text-center">{{__('translation.no_data_found')}}</div></td>
                         @endforelse
                     </tbody>
                     <!--end::Table body-->
@@ -133,13 +134,13 @@
                 <!--begin::Modal content-->
                 <div class="modal-content">
                     <!--begin::Form-->
-                    <form class="form" action="{{ route('area.store') }}" method="post"
+                    <form class="form" action="{{ route('realstate.categories.store') }}" method="post"
                     >
                     @csrf
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_add_customer_header">
                             <!--begin::Modal title-->
-                            <h2 class="fw-bolder">Add a Area</h2>
+                            <h2 class="fw-bolder">{{__('translation.add_real_state_category')}}</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div id="kt_modal_add_customer_close"
@@ -164,41 +165,25 @@
                             <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="#">
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-7">
-                                    <!--begin::Label-->
-                                    <label class="required fs-6 fw-bold mb-2">Name</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="name"/>
-                                    <!--end::Input-->
-                                </div>
+                                <x:text-input name='name' class='col-md-12' />
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-15">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-bold mb-2">Description</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="description" />
-                                    <!--end::Input-->
-                                </div>
+                                @php
+                                    $types = \App\Models\RealStateCategory::TYPES;
+                                @endphp
+                                <x:select-options :options='$types'  name='type' class='col-md-12'/>
                             </div>
                             <!--end::Scroll-->
                         </div>
                         <!--end::Modal body-->
                         <!--begin::Modal footer-->
-                        <div class="modal-footer flex-center">
+                        <div class="modal-footer ">
                             <!--begin::Button-->
                             <button type="reset" id="kt_modal_add_customer_cancel"
-                                class="btn btn-light me-3">Discard</button>
+                                class="btn btn-light me-3">{{__('translation.cancel')}}</button>
                             <!--end::Button-->
                             <!--begin::Button-->
-                           <button class="btn btn-primary"> Save </button>
+                           <button class="btn btn-primary"> {{__('translation.save')}} </button>
                             <!--end::Button-->
                         </div>
                         <!--end::Modal footer-->

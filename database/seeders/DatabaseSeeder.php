@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         RealStateCategory::factory()->create([
-            'name' => 'شقق للاجار',
+            'name' => 'متاجر للاجار',
             'type' => 'rent',
         ]);
 

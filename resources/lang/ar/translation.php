@@ -170,7 +170,7 @@ return [
     "national_card" => 'بطاقه شخصيه',
     'passport' => 'جواز سفر',
     'owner_attachment' =>'مرفقات المالك',
-    'cancel' => 'حذف',
+    'cancel' => 'الغاء',
     'intro' => 'المقدمه',
     'id' => 'المعرف الرقمي',
     'real_state_mangements' => 'اداره العقارات' ,
@@ -188,4 +188,9 @@ return [
     'show_owner_details' => 'عرض بيانات المالك',
     'attachment_is_required' => 'حقل المرفق لايجب ان يكون فارغ',
     'the_file_was_uploaded_success' => 'تم ارفاق العنصر بنجاح',
+    'Search In Categoires' => 'ابحث في الانواع',
+    'type' => 'النوع',
+    'real_state_categories' => "انواع العقارات",
+    'no_data_found' => 'لايوجد بيانات في الوقت الحالي',
+    'add_real_state_category' => 'اضافه نوع جديد',
 ];

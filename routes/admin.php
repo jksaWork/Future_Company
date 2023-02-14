@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AgentAuthController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AssingOrderToClientController;
 use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\RealStateCategoryController;
 use App\Http\Controllers\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -99,16 +101,13 @@ Route::group(
 
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-            // Area Routes
-            Route::resource('area', AdminAreaController::class);
-            // Service Resource
-            Route::resource('services', ServiceController::class);
-            // Clients Resource
-            Route::resource('clients', ClientController::class);
-
             // Agent Controller
             Route::resource('agent',  AgentController::class);
             Route::get('agents-ajax', [AgentController::class, 'data'])->name('agents.data');
+            Route::prefix('realstate')->name('realstate.')->group(function () {
+                Route::resource('categories', RealStateCategoryController::class);
+
+            });
         });
 
         Route::get('show_attachments/{attachment}' , [AttachmentsController::class , 'show'])->name('show_attachments');

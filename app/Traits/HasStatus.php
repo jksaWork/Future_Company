@@ -5,8 +5,9 @@ trait HasStatus {
     protected $statusattrubute = 'status';
     protected $status_filed = 'active';
     public function ChangeStatus(){
-        $this->{$this->statusattrubute} =!$this->status;
+        $this->{$this->statusattrubute} = ! $this->{$this->statusattrubute};
         $this->save();
+
     }
 
     public function getStatusWithSpan(){
