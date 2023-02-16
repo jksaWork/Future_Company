@@ -3,7 +3,7 @@
         ? 'layouts.admin.admin'
         : 'layouts.agents.agent_layouts'
 )
-@section('main-head', __('translation.Categoires'))
+@section('main-head', __('translation.Expense_sections'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -28,7 +28,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <form action="{{ route('Employee.categories.index') }}" method="get">
+                            <form action="{{ route('Employee.section.index') }}" method="get">
                                 <input type="text" name='search' value="{{ request()->search }}"
                                     class="form-control form-control-solid w-250px ps-15" placeholder="Search Area" />
 
@@ -50,7 +50,7 @@
 
                             <!--end::Export-->
                             <!--begin::Add customer-->
-                            <a href='{{ route('Employee.categories.create') }}'
+                            <a href='{{ route('Employee.section.create') }}'
                                 class="btn btn-primary">{{ __('translation.Add') }}</a>
                             <!--end::Add customer-->
                         </div>
@@ -94,18 +94,18 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @forelse ($categories as $index=>$category)
+                            @forelse ($section as $index=>$sections)
                                 <tr>
 
                                     <td>
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="{{ $category->id }}" />
+                                            <input class="form-check-input" type="checkbox" value="{{ $sections->id }}" />
 
                                         </div>
                                     </td>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $category->categories_name }}</td>
-                                    <td>{{ $category->description }}</td>
+                                    <td>{{ $sections->section_name }}</td>
+                                    <td>{{ $sections->description }}</td>
                                     {{-- <td></td> --}}
 
                                     <td class="text-end">
@@ -127,16 +127,16 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.categories.edit', $category->id) }}"
+                                                <a href="{{ route('Employee.section.edit', $sections->id) }}"
                                                     class="menu-link bg-light-info px-3">{{ __('translation.edit') }}</a>
 
                                             </div>
 
                                             <div class="menu-item px-3">
-                                                <form action="{{ route('Employee.categories.destroy', $category->id) }}" method="post" id='{{'owner_delete_from_' . $category->id}}'>
+                                                <form action="{{ route('Employee.section.destroy', $sections->id) }}" method="post" id='{{'owner_delete_from_' . $sections->id}}'>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="#" onclick="document.getElementById('owner_delete_from_{{$category->id}}').submit()" class="menu-link px-3 bg-light-danger "
+                                                    <a href="#" onclick="document.getElementById('owner_delete_from_{{$sections->id}}').submit()" class="menu-link px-3 bg-light-danger "
                                                         data-kt-menu-trigger="click"
                                                         >{{ __('translation.Delete') }}
                                                 </a>

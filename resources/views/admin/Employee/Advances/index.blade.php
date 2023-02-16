@@ -3,7 +3,7 @@
         ? 'layouts.admin.admin'
         : 'layouts.agents.agent_layouts'
 )
-@section('main-head', __('translation.employees'))
+@section('main-head', __('translation.Advancess'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -28,7 +28,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <form action="{{ route('Employee.All_Employee.index') }}" method="get">
+                            <form action="{{ route('Employee.Advances.index') }}" method="get">
                                 <input type="text" name='search' value="{{ request()->search }}"
                                     class="form-control form-control-solid w-250px ps-15" placeholder="Search Area" />
 
@@ -40,20 +40,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 
-                            <!--begin::Menu 1-->
-
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
-                            <!--begin::Export-->
-
-                            <!--end::Export-->
-                            <!--begin::Add customer-->
-                            <a href='{{ route('Employee.All_Employee.create') }}'
-                                class="btn btn-primary">{{ __('translation.Add') }}</a>
-                            <!--end::Add customer-->
-                        </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
                         <div class="d-flex justify-content-end align-items-center d-none"
@@ -84,11 +71,9 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px">#</th>
-                                <th class="">{{ __('translation.name') }}</th>
-                                <th class="">{{ __('translation.phone') }}</th>
-                                <th class="">{{ __('translation.salary') }}</th>
-                                <th class="">{{ __('translation.categories_id') }}</th>
-                                <th class="">{{ __('translation.status') }}</th>
+                                <th class="">{{ __('translation.employee_name') }}</th>
+                                <th class="">{{ __('translation.advances_value') }}</th>
+                                <th class="">{{ __('translation.advances_Date') }}</th>
                                 <th class="text-end min-w-70px">{{ __('translation.Actions') }}</th>
                             </tr>
                             <!--end::Table row-->
@@ -96,21 +81,19 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @forelse ($employees as $index=>$employee)
+                            @forelse ($Advances as $index=>$Advancess)
                                 <tr class="fw-bolder fs-6 text-gray-800">
 
                                     <td>
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="{{ $employee->id }}" />
+                                            {{-- <input class="form-check-input" type="checkbox" value="{{ $employee->id}}" /> --}}
 
                                         </div>
                                     </td>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $employee->name }}</td>
-                                    <td>{{ $employee->phone }}</td>
-                                    <td>{{ $employee->salary }}</td>
-                                    <td>{!! $employee->Categorys->categories_name !!}</td>
-                                    <td>{!! $employee->getActive() !!}</td>
+                                    <td>{{$index + 1 }}</td>
+                                    <td>{!!$Advancess->employee->name!!}</td>
+                                    <td>{!! number_format($Advancess->advances_value, 2)!!}</td>
+                                    <td>{!!$Advancess->advances_Date!!}</td>
                                     {{-- <td></td> --}}
 
                                     <td class=" text-end">
@@ -140,43 +123,11 @@
                                             style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-79px, 392px, 0px);"
                                             data-popper-placement="bottom-end">
 
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.All_Employee.show', $employee->id) }}"
-                                                    class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.show_employee_information') }}
-                                                </a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.employee_allowances.show', $employee->id) }}"
-                                                    class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.employee_allowances') }}
-                                                </a>
-                                            </div>
-                                            <!--end::Menu item-->
 
-                                             <!--begin::Menu item-->
-                                             <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.Advances.show', $employee->id) }}"
-                                                    class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.Advances') }}
-                                                </a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                              <!--begin::Menu item-->
-                                              <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.salaries.show', $employee->id) }}"
-                                                    class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.add_salaries') }}
-                                                </a>
-                                            </div>
-                                            <!--end::Menu item-->
 
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.All_Employee.edit', $employee->id) }}"
+                                                <a href="{{ route('Employee.Advances.edit', $Advancess->id) }}"
                                                     class="menu-link px-3" data-kt-docs-table-filter="edit_row">
                                                     {{ __('translation.edit') }}
                                                 </a>
@@ -186,14 +137,16 @@
 
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <form action="{{ route('Employee.All_Employee.destroy', $employee->id) }}"
-                                                    method="post" id='{{ 'owner_delete_from_' . $employee->id }}'>
+                                                <form action="{{ route('Employee.Advances.destroy', $Advancess->id)}}" id='{{ 'owner_delete_from_' . $Advancess->id }}'
+                                                    method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#"
-                                                        onclick="document.getElementById('owner_delete_from_{{ $employee->id }}').submit()"
+                                                    {{-- onclick="event.preventDefault();
+                                                    DeleteApp('delteForm')" --}}
                                                         class="menu-link px-3 bg-light-danger "
-                                                        data-kt-menu-trigger="click">{{ __('translation.Delete') }}
+                                                        onclick="document.getElementById('owner_delete_from_{{ $Advancess->id }}').submit()"
+                                                        >{{ __('translation.Delete') }}
                                                     </a>
                                                 </form>
                                             </div>

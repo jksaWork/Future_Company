@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmployeeRequest extends FormRequest
+class spendingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,17 +21,19 @@ class EmployeeRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         return [
-            'name' =>'required',
-            'email' => 'required',
-            'salary' =>'required',
-            'status' =>'required',
-            'phone' =>'required',
-            'address' =>'required',
-            'categories_id' =>'required',
-            'description' =>'required',
+            'list_spending.*.spending_name' =>'required',
+            // 'spending_name'=>'required',
+            // 'section_id'=>'required',
+            // 'spending_name'=>'required',
+            // 'month'=>'required',
+            // 'spending_value'=>'required',
         ];
     }
+
+
+
 }

@@ -31,4 +31,10 @@ class CategoiresRequest extends FormRequest
 
         return $roles;
     }
+    public function messages()
+    {
+        return [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+    }
 }

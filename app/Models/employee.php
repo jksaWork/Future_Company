@@ -11,12 +11,29 @@ class employee extends Model
 {
     protected $guarded = [];
 
-   public function Category()
+   public function Categorys()
    {
-   return $this->belongsTo('App\Models\Category');
+   return $this->belongsTo('App\Models\Category','categories_id');
    }
+
+   public function employee_allowances()
+    {
+        return $this->hasMany(employee_allowances::class);
+
+    }
+
+    public function Advances()
+    {
+        return $this->hasMany(Advances::class);
+
+    }
    public function getActive(){
-    return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+    return   $this -> status == 1 ? 'مفعل'  : 'غير مفعل';
+  }
+  public function images()
+  {
+      return $this->hasMany(Image::class);
+
   }
 
 }

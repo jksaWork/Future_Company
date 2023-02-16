@@ -3251,6 +3251,53 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset("assets/js/custom/modals/upgrade-plan.js")}}"></script>
     <script src="{{ asset("assets/js/custom/modals/create-app.js")}}"></script>
     <script src="{{ asset("assets/js/custom/modals/users-search.js") }}"></script>
+
+    <script src="{{ asset("path/to/jquery.js") }}"></script>
+    <script src="{{ asset("assets/plugins/custom/formrepeater/formrepeater.bundle.js") }}"></script>
+
+
+    <script>
+
+// being form repeater
+$('#kt_docs_repeater_advanced').repeater({
+    initEmpty: false,
+
+    defaultValues: {
+        'text-input': 'foo'
+    },
+
+    show: function () {
+        $(this).slideDown();
+
+        // Re-init select2
+        $(this).find('[data-kt-repeater="select2"]').select2();
+
+        // Re-init flatpickr
+        $(this).find('[data-kt-repeater="datepicker"]').flatpickr();
+
+        // Re-init tagify
+        new Tagify(this.querySelector('[data-kt-repeater="tagify"]'));
+        
+    },
+
+    hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+    },
+
+    ready: function(){
+        // Init select2
+        $('[data-kt-repeater="select2"]').select2();
+
+        // Init flatpickr
+        $('[data-kt-repeater="datepicker"]').flatpickr();
+
+        // Init Tagify
+        new Tagify(document.querySelector('[data-kt-repeater="tagify"]'));
+    }
+});
+
+
+    </script><!--end::form repeater Javascript-->
     <!--end::Page Custom Javascript-->
     @stack('scripts')
 
