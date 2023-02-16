@@ -20,6 +20,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RealStateCategoryController;
+use App\Http\Controllers\RealStateController;
 use App\Http\Controllers\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -106,7 +107,9 @@ Route::group(
             Route::get('agents-ajax', [AgentController::class, 'data'])->name('agents.data');
             Route::prefix('realstate')->name('realstate.')->group(function () {
                 Route::resource('categories', RealStateCategoryController::class);
-
+                // Real State Routes
+                Route::resource('realstate', RealStateController::class);
+                Route::get('realstate-data' ,[RealStateController::class , 'data'])->name('data');
             });
         });
 

@@ -12,12 +12,13 @@ class TextInput extends Component
      * @return void
      */
 
-     public $name, $class , $value , $hidden;
-    public function __construct($name, $class , $value = null)
+     public $name, $class , $value , $hidden, $disabled;
+    public function __construct($name, $class , $value = null, $disabled = false)
     {
         $this->name = $name;
         $this->class = $class;
         $this->value = $value;
+        $this->disabled = $disabled;
         $this->hidden  = Str::endsWith($name, '_id');
         // dd($this->hidden);
     }

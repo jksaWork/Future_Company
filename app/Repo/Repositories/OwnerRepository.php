@@ -23,8 +23,6 @@ class  OwnerRepository implements OwnerInterFace {
 
     public function StoreOwnerInDatabse($request){
         try{
-            // return
-
             $data = $request->all();
             $data['password'] = bcrypt($request->password);
             $filterd = collect($data)->except('_token', 'owner_attachment');
