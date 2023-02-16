@@ -25,6 +25,14 @@
                                 <x:text-input name='password' class='col-md-6'   />
                                 <x:text-input name='phone' class='col-md-6'  value='{{$owner->phone}}'/>
                                 {{-- <x:text-input name='phone' class='col-md-6' /> --}}
+                                @php
+                                    $Identification_type= ['national_number','national_card','passport'];
+                                @endphp
+                                <x:select-options name='identification_type' :options='$Identification_type'
+                                :value='$owner->Identification_type'
+                                class='col-md-6' />
+                                {{-- @dd($owner->identification_number); --}}
+                                <x:text-input  class='col-md-6' name='identification_number' value='{{$owner->identification_number}}'  />
                                 <div class='col-md-6'>
                                     <x:status-filed />
                                 </div>

@@ -1307,7 +1307,6 @@
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu separator-->
-                                    <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
@@ -1331,7 +1330,6 @@
 
                             <!--end::Menu item-->
                             <!--begin::Menu separator-->
-                            <div class="separator my-2"></div>
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5" data-kt-menu-trigger="hover"
@@ -1379,10 +1377,10 @@
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu separator-->
-                            <div class="separator my-2"></div>
+                            {{-- <div class="separator my-2"></div> --}}
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
-                            <div class="menu-item px-5">
+                            {{-- <div class="menu-item px-5">
                                 <div class="menu-content px-5">
                                     <label
                                         class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
@@ -1395,7 +1393,7 @@
                                             Mode</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!--end::Menu item-->
                         </div>
                         <!--end::Menu-->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OwnerDataTable;
 use App\Http\Requests\OwnersRequest;
 use App\Models\Owner;
 use App\Repo\Interfaces\OwnerInterFace;
@@ -20,8 +21,13 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+     public function data(){
+        return $this->interface->getOwnerData();
+     }
+    public function index(OwnerDataTable $datatable)
     {
+
         return $this->interface->getOwnerIndex();
     }
 
@@ -55,6 +61,7 @@ class OwnerController extends Controller
     public function show(Owner $owner)
     {
         if(request()->has('status')) return $this->interface->ChangeStatus($owner);
+        else return $this->interface->ShowOwnerData($owner);
     }
 
     /**

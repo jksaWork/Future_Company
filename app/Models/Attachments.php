@@ -15,6 +15,10 @@ class Attachments extends Model
 
     public function getUrlAttribute($key)
     {
+        switch($this->attachable_type){
+            case 'App\Models\Owner':
+                return  asset('owner/attachments/' . $key);
+        }
         if($this->attachable_type =='App\Models\Offer') return asset('offers/attachments/' . $key);
         else return asset('agents/attachments/' . $key);
     }

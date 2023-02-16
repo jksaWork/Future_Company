@@ -10,4 +10,7 @@ interface  OwnerInterFace {
     public function editOwner($Owner);
     public function updateOwner($request , $Owner);
     public function deleteOwner($Owner);
+    public function getOwnerData();
+    public function ShowOwnerData($owner);
+
 }

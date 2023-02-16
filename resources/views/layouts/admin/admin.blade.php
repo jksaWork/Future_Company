@@ -32,6 +32,8 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }} rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		{{-- <link href="{{ asset('datatable/bulma.min.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('datatable/dataTables.bulma.min.css')}}" rel="stylesheet" type="text/css" /> --}}
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		@if (app()->getLocale() == 'en')
@@ -3299,7 +3301,12 @@ $('#kt_docs_repeater_advanced').repeater({
 
     </script><!--end::form repeater Javascript-->
     <!--end::Page Custom Javascript-->
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.js')}}"></script>
+<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     @stack('scripts')
+
 
     <!--end::Javascript-->
 </body>

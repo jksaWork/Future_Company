@@ -20,8 +20,9 @@ class CreateOwnersTable extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
             $table->boolean('status')->default(1);
-            $table->string('latitude')->nullable();
-            $table->string('longtuide')->nullable();
+            $table->enum('identification_type' , ['national_number',"national_card",'passpord'])->default('national_number');
+            $table->string('identification_number');
+            $table->string('workplace')->nullable();
             $table->timestamps();
         });
     }
