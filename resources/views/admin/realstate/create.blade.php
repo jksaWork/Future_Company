@@ -29,6 +29,7 @@
                                 <x:select-options name='category_idd' :options='$categories'  class='col-md-6' />
                                 <x:select-options name='status' :options='["ready" , "inready"]'  class='col-md-6' />
                                 {{-- <x:text-input name='identification_number' class='col-md-6' /> --}}
+                                <x:input-file name='attachments[]' class='col-md-6'/>
                                 <x:text-area name='description' class='col-md-6' />
                                 <div class="mt-4">
                                     <button class="btn btn-primary">

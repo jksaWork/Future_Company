@@ -24,7 +24,9 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('is_rent')->default(0);
             $table->boolean('is_sale')->default(0);
+            $table->unsignedBigInteger('owner_id')->nullable();
             $table->foreignId('category_id')->references('id')->on('real_state_categories');
+            $table->foreign('owner_id')->references('id')->on('owners');
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Area;
 use App\Models\Client;
 use App\Models\Owner;
+use App\Models\RealState;
 use App\Models\RealStateCategory;
 use Illuminate\Database\Seeder;
 
@@ -34,6 +35,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'متاجر للاجار',
             'type' => 'rent',
         ]);
+
+        // RealState::factory()->create();
+
 
     }
 }
