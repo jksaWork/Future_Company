@@ -7,7 +7,7 @@ trait HasStatus {
     public function ChangeStatus(){
         $this->{$this->statusattrubute} = ! $this->{$this->statusattrubute};
         $this->save();
-
+        session()->flash('success' ,  __('translation.Status Was Change Succesfuly'));
     }
 
     public function getStatusWithSpan(){
