@@ -54,9 +54,11 @@ class CategoiresController extends Controller
     }
 
 
-    public function edit(Category $category)
+    public function edit(Request $request ,$id)
     {
-        return view('admin.Employee.categories.edit', compact('category'));
+        // return $id;
+        $categorys = Category::find($id);
+        return view('admin.Employee.categories.edit', compact('categorys'));
 
     }//end of edit
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmployeeRequest extends FormRequest
+class sectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +23,18 @@ class EmployeeRequest extends FormRequest
      */
     public function rules()
     {
+        $roles =  [
+            'section_name' => 'required',
+
+        ];
+
+
+        return $roles;
+    }
+    public function messages()
+    {
         return [
-            'name' =>'required',
-            'email' => 'required',
-            'salary' =>'required',
-            'status' =>'required',
-            'phone' =>'required',
-            'address' =>'required',
-            'categories_id' =>'required',
-            'description' =>'required',
+            'required' => 'هذا الحقل مطلوب',
         ];
     }
 }

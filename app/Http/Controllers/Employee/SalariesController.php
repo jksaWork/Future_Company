@@ -6,38 +6,41 @@ use App\Http\Controllers\Controller;
 use App\Models\employee;
 use App\Models\Category;
 use App\Models\Image;
-use App\Models\employee_allowances;
-use App\Models\Advances;
+
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 use Exception;
 
-class AllEmployeeController extends Controller
+class SalariesController extends Controller
 {
 
     public function index(Request $request)
     {
+        // return $request;
         $Categorys = Category::all();
+        // return $Categorys;
         $employees = employee::all();
 
-        return view('admin.Employee.All_Employee.index', compact('employees', 'Categorys'));
+        return view('admin.Employee.salaries.index', compact('employees', 'Categorys'));
     } //end of index
 
 
     public function create()
     {
         $Category = Category::all();
-        return view('admin.Employee.All_Employee.create', compact('Category'));
+        return view('admin.Employee.salaries.create', compact('Category'));
     } //end of create
 
 
     public function store(EmployeeRequest $request)
     {
+        // return  $request;
 
         try {
-            employee::create([
+            $DATA = employee::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'description' => $request->description,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'salary' => $request->salary,
@@ -45,8 +48,9 @@ class AllEmployeeController extends Controller
                 'status' => $request->status,
                 'description' => $request->description,
             ]);
+            //    return  $DATA;
             session()->flash('success', __('site.deleted_successfully'));
-            return redirect()->route('Employee.All_Employee.index');
+            return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
             // dd($e);
             session()->flash('error',  'Some Thing Went Worng ');
@@ -58,15 +62,9 @@ class AllEmployeeController extends Controller
     public function show($id)
     {
         // return $id;
-        $images = Image::all();
-        // return $images;
-
-            $allowances_id = employee_allowances::where( 'employee_id' ,[$id])->get();
-            // return $allowances_id;
-            $Advances_id = Advances::where( 'employee_id' ,[$id])->get();
-            // return $Advances_id;
+        $Category = Category::all();
         $employees = employee::findorfail($id);
-        return view('admin.Employee.All_Employee.show',compact('employees','images','Advances_id','allowances_id'));
+        return view('admin.Employee.salaries.create',compact('employees','Category'));
     }
 
 
@@ -75,7 +73,7 @@ class AllEmployeeController extends Controller
         $Categorys = Category::all();
         // return $Categorys;
         $employees = employee::find($id);
-        return view('admin.Employee.All_Employee.edit', compact('Categorys', 'employees'));
+        return view('admin.Employee.salaries.edit', compact('Categorys', 'employees'));
     } //end of edit
 
     public function update(EmployeeRequest $request, Employee $employee)
@@ -99,7 +97,7 @@ class AllEmployeeController extends Controller
                 'description' => $request->description,
         ]);
         session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('Employee.All_Employee.index');
+        return redirect()->route('Employee.salaries.index');
         }catch(Exception $e){
             dd($e);
             session()->flash('error' ,  'Some Thing Went Worng ');
@@ -114,7 +112,7 @@ class AllEmployeeController extends Controller
         $employee = employee::findOrFail($id);
         $employee->delete();
         session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('Employee.All_Employee.index');
+        return redirect()->route('Employee.salaries.index');
     } //end of destroy
 
 

@@ -18,76 +18,77 @@
                             <div class="row">
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="name" value="" required/>
-                                        @error('name')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                        name="name" value=""  />
+                                    @error('name')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.email') }}</label>
-                                    <input type="email" class="form-control form-control-solid"
-                                        placeholder="" name="email" value="" required/>
-                                        @error('email')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="email" class="form-control form-control-solid" placeholder=""
+                                        name="email" value=""  />
+                                    @error('email')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="phone" value="" required/>
-                                        @error('phone')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                        name="phone" value=""  />
+                                    @error('phone')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.address') }}</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="address" value="" required/>
-                                        @error('address')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                        name="address" value=""  />
+                                    @error('address')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.salary') }}</label>
-                                    <input type="number" class="form-control form-control-solid"
-                                        placeholder="" step="0.01" name="salary" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required />
-                                        @error('salary')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="number" class="form-control form-control-solid" placeholder=""
+                                        step="0.01" name="salary" value=""
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                         />
+                                    @error('salary')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
                                         </label>
                                         <select class="form-control" name="categories_id" id="categories_id"
-                                            class="form-control" >
+                                            class="form-control">
                                             <option value="" selected disabled> {{ __('translation.Choose') }}
                                             </option>
                                             @foreach ($Category as $categoryres)
-                                                <option value="{{ $categoryres->id }}">{{ $categoryres->categories_name  }}
+                                                <option value="{{ $categoryres->id }}">{{ $categoryres->categories_name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error("Category")
-                                        <span class="text-danger">
-                                            {{$message}}
-                                        </span>
-                                    @enderror
+                                        @error('categories_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
@@ -100,10 +101,10 @@
                                 </div>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{ __('translation.Save') }}
                                     </button>
-                                    <a href='{{ route('Employee.All_Employee.index')}}' class="btn btn-outline-danger">
-                                        Cancle
+                                    <a href='{{ route('Employee.All_Employee.index') }}' class="btn btn-outline-danger">
+                                        {{ __('translation.Cancle') }}
                                     </a>
                                 </div>
                             </div>

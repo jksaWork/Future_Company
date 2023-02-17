@@ -1,7 +1,7 @@
 @extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
 @section('main-head')
-{{__('translation.edit_Categoires')}}
-    <small> - {{__('translation.employees_management')}}</small>
+{{__('translation.Add_section')}}
+    <small> - {{__('translation.Expenses_and_calculations')}}</small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -13,14 +13,14 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         @include('layouts.includes.session')
-                        <form action="{{ route('Employee.categories.update' , $categorys->id) }}" method="post">
-                            @csrf
-                            @method('PUT')
+                        <form action="{{ route('Employee.section.store') }}" method="post">
+                            {{ csrf_field() }}
+                        {{ method_field('post') }}
                             <div class="row">
-                                <x:text-input name='categories_name' value='{{$categorys->categories_name}}' class='col-md-6' />
+                                <x:text-input name='section_name' class='col-md-6' />
                                 <div class="d-flex flex-column mb-3">
                                     <label class="fs-4 fw-bold mb-2">{{__('translation.description')}}</label>
-                                    <textarea cols="30" rows="10" class="form-control form-control-solid" name="description" value='{{$categorys->description}}'  >{{$categorys->description}}</textarea>
+                                    <textarea class="form-control form-control-solid" rows="1" name="description" placeholder="{{__('translation.description')}}"></textarea>
                                 </div>
                                 <div class='col-md-6'>
                                 </div>
@@ -28,7 +28,7 @@
                                     <button  type="submit" class="btn btn-primary">
                                         {{__('translation.Save')}}
                                     </button>
-                                    <a href='{{ route('Employee.categories.index')}}' class="btn btn-outline-danger">
+                                    <a href='{{ route('Employee.section.index')}}' class="btn btn-outline-danger">
                                         {{__('translation.Cancle')}}
                                     </a>
                                 </div>
@@ -42,7 +42,6 @@
             </div>
             <!--end::Card-->
 
-            <!--end::Modals-->
         </div>
         <!--end::Container-->
     </div>

@@ -85,11 +85,11 @@
                                 </th>
                                 <th class="min-w-125px">#</th>
                                 <th class="">{{ __('translation.name') }}</th>
-                                <th class="">{{ __('translation.phone') }}</th>
-                                <th class="">{{ __('translation.salary') }}</th>
+                                <th class="">{{ __('translation.phone ') }}</th>
+                                <th class="">{{ __('translation.salary ') }}</th>
                                 <th class="">{{ __('translation.categories_id') }}</th>
-                                <th class="">{{ __('translation.status') }}</th>
-                                <th class="text-end min-w-70px">{{ __('translation.Actions') }}</th>
+                                <th class="">{{ __('translation.status ') }}</th>
+                                <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -118,7 +118,7 @@
                                             class="btn btn-light btn-active-light-primary btn-sm show menu-dropdown"
                                             data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
                                             data-kt-menu-flip="top-end">
-                                            {{ __('translation.Actions') }}
+                                            Actions
                                             <span class="svg-icon svg-icon-5 m-0">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -144,7 +144,7 @@
                                             <div class="menu-item px-3">
                                                 <a href="{{ route('Employee.All_Employee.show', $employee->id) }}"
                                                     class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.show_employee_information') }}
+                                                    show
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
@@ -152,7 +152,7 @@
                                             <div class="menu-item px-3">
                                                 <a href="{{ route('Employee.employee_allowances.show', $employee->id) }}"
                                                     class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.employee_allowances') }}
+                                                    employee_allowances
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
@@ -161,15 +161,7 @@
                                              <div class="menu-item px-3">
                                                 <a href="{{ route('Employee.Advances.show', $employee->id) }}"
                                                     class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.Advances') }}
-                                                </a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                              <!--begin::Menu item-->
-                                              <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.salaries.show', $employee->id) }}"
-                                                    class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.add_salaries') }}
+                                                    Advances
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
@@ -178,7 +170,7 @@
                                             <div class="menu-item px-3">
                                                 <a href="{{ route('Employee.All_Employee.edit', $employee->id) }}"
                                                     class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                    {{ __('translation.edit') }}
+                                                    Edit
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
@@ -193,7 +185,7 @@
                                                     <a href="#"
                                                         onclick="document.getElementById('owner_delete_from_{{ $employee->id }}').submit()"
                                                         class="menu-link px-3 bg-light-danger "
-                                                        data-kt-menu-trigger="click">{{ __('translation.Delete') }}
+                                                        data-kt-menu-trigger="click">Delete
                                                     </a>
                                                 </form>
                                             </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpendingTable extends Migration
+class CreateSpendingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSpendingTable extends Migration
      */
     public function up()
     {
-        Schema::create('spending', function (Blueprint $table) {
+        Schema::create('spendings', function (Blueprint $table) {
             $table->id();
             $table->string('spending_name')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('spending_value')->nullable();
             $table->date('month');
             $table->unsignedBigInteger('section_id');
@@ -32,6 +32,6 @@ class CreateSpendingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spending');
+        Schema::dropIfExists('spendings');
     }
 }
