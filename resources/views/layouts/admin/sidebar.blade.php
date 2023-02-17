@@ -93,7 +93,7 @@
                         <span class="menu-title">{{ __('translation.map') }}</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <a class="menu-link " href="{{ route('area.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
@@ -112,9 +112,9 @@
                         </span>
                         <span class="menu-title">{{ __('translation.areas') }}</span>
                     </a>
-                </div>
+                </div> --}}
 
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <a class="menu-link {{ !request()->routeIs('services.index') ?: 'active' }}"
                         href="{{ route('services.index') }}">
                         <span class="menu-icon">
@@ -134,7 +134,7 @@
                         </span>
                         <span class="menu-title">{{ __('translation.services') }}</span>
                     </a>
-                </div>
+                </div> --}}
 
                 {{-- being section-management --}}
                 <div class="menu-item">

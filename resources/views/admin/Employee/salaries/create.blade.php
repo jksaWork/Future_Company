@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin')
 @section('main-head')
-    {{ __('translation.Add_a_new_employee') }}
+    {{ __('translation.Add_a_new_salary') }}
     <small> - {{ __('translation.employees_management') }} </small>
 @endsection
 @section('content')
@@ -13,6 +13,28 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         @include('layouts.includes.session')
+<form>
+    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">{{__('translation.salary_history')}}</label>
+                            <input class="form-control flatpickr-input" data-kt-repeater="datepicker" name="month" value="{{ date('Y-m-d') }}" placeholder="Pick a date" type="date" readonly="readonly" required>
+                            @error('month')
+                            <span class="text-danger">
+                                {{$message}}
+                            </span>
+                        @enderror
+                        </div>
+                        <div class="col-md-6" style="text-align: center;padding: 27px;">
+
+                            <button class="btn btn-primary">
+                                Save
+                            </button>
+
+
+                        </div></div>
+</form>
+
+
                         <form action="{{ route('Employee.salaries.store') }}" method="post">
                             @csrf
                             <div class="row">
@@ -28,43 +50,11 @@
                                             </span>
                                         @enderror
                                 </div>
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.allownacees_salary') }}</label>
-                                    <input type="email" class="form-control form-control-solid"
-                                        placeholder="" name="allownacees_salary" value="" required/>
-                                        @error('email')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
-                                </div>
 
                                 <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="phone" value="" required/>
-                                        @error('phone')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
-                                </div>
-
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.address') }}</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="address" value="" required/>
-                                        @error('address')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
-                                </div>
-
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.salary') }}</label>
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.fixed_salary') }}</label>
                                     <input type="number" class="form-control form-control-solid"
-                                        placeholder="" step="0.01" name="salary" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        placeholder="" step="0.01" name="fixed_salary" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         required />
                                         @error('salary')
                                             <span class="text-danger">
@@ -72,34 +62,77 @@
                                             </span>
                                         @enderror
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
-                                        </label>
-                                        <select class="form-control" name="categories_id" id="categories_id"
-                                            class="form-control" >
-                                            <option value="" selected disabled> {{ __('translation.Choose') }}
-                                            </option>
-                                            @foreach ($Category as $categoryres)
-                                                <option value="{{ $categoryres->id }}">{{ $categoryres->categories_name  }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error("Category")
-                                        <span class="text-danger">
-                                            {{$message}}
-                                        </span>
-                                    @enderror
-                                    </div>
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.allownacees_salary') }}</label>
+                                    <input type="number" class="form-control form-control-solid"
+                                    placeholder="" step="0.01" name="allownacees_salary" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required />
+                                        @error('allownacees_salary')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
                                 </div>
-                                <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
-                                </label>
-                                <textarea class="form-control form-control-solid" rows="1" name="description"
-                                    placeholder="{{ __('translation.description') }}"></textarea>
+
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.advances') }}</label>
+                                    <input type="number" class="form-control form-control-solid"
+                                    placeholder="" step="0.01" name="advances" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required />
+                                        @error('advances')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
+                                </div>
+
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.totle_salaries') }}</label>
+                                    <input type="number" class="form-control form-control-solid"
+                                    placeholder="" step="0.01" name="totle_salaries" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required />
+                                        @error('totle_salaries')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
+                                </div>
+
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.discounts') }}</label>
+                                    <input type="number" class="form-control form-control-solid"
+                                    placeholder="" step="0.01" name="discounts" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required />
+                                        @error('discounts')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">{{__('translation.salary_history')}}</label>
+                                    <input class="form-control flatpickr-input" data-kt-repeater="datepicker" name="month" value="{{ date('Y-m-d') }}" placeholder="Pick a date" type="date" readonly="readonly" required>
+                                    @error('month')
+                                    <span class="text-danger">
+                                        {{$message}}
+                                    </span>
+                                @enderror
+                                </div>
+
+
+
+
+
+
 
                                 <div class='col-md-6'>
                                     <x:status-filed name='status' />
                                 </div>
+                                <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
+                                </label>
+                                <textarea class="form-control form-control-solid" rows="1" name="discrption"
+                                placeholder="{{ __('translation.description') }}"></textarea>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
                                         Save

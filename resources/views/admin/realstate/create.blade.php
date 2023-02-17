@@ -18,7 +18,7 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         {{-- @include('layouts.includes.session') --}}
-                        <form action="{{ route('realstate.realstate.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('realstate.categories.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <x:text-input name='title' class='col-md-6' />
@@ -55,8 +55,8 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                         <!--begin::Form-->
-                        <form class="form" action="{{ route('area.store') }}" id="" method="post">
-                            @csrf
+                        {{-- <form class="form" action="{{ route('area.store') }}" id="" method="post">
+                            @csrf --}}
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_customer_header">
                                 <!--begin::Modal title-->
@@ -251,7 +251,7 @@
                                     </button>
                                 </div>
                                 <!--end::Actions-->
-                            </form>
+                            {{-- </form> --}}
                             <!--end::Form-->
                         </div>
                         <!--end::Modal body-->
