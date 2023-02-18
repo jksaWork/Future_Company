@@ -18,7 +18,7 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         {{-- @include('layouts.includes.session') --}}
-                        <form action="{{ route('realstate.realstate.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('realstate.categories.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <x:text-input name='title' class='col-md-6' />
