@@ -34,8 +34,9 @@ class RealState extends Model
         $this->save();
 
     }
-    public function Owner(){
-        $this->belongsTo(Owner::class , 'owenr_id');
+    public function Owners(){
+       return  $this->belongsToMany(Owner::class , 'owners_realstates', 'realstate_id', 'owner_id')
+       ->withPivot('month_count', 'rent_status');
     }
     public function getSaleStatusWithSpan($status, $status_filed){
         if(!$this->{$this->{$status}}) return "<span class='badge badge-light-warning'> " .  __('translation.in' . $status_filed)  . " </span>";

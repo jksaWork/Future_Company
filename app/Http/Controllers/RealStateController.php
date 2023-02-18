@@ -114,8 +114,7 @@ class RealStateController extends Controller
     public function handelShow(RealState $realState)
     {
         try {
-            $realState->load('Owner' , 'attachments');
-        return redirect()->route('realstate.realstate.index');
+            return view('admin.realstate.show' , compact('realState')) ;
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -176,4 +175,35 @@ class RealStateController extends Controller
             return redirect()->back()->withErrors($th->getMessage());
         }
     }
+
+    public function getGetRealState(Request $request){
+
+        $search = $request->search;
+
+        if($search == ''){
+           $employees = RealState::
+           where([
+            'status' => 1,
+            'is_rent' => 0,
+            'is_sale' => 0
+           ])->
+           orderby('title','asc')->select('id','title')->limit(5)->get();
+        }else{
+           $employees = RealState::where([
+            'status' => 1,
+            'is_rent' => 0,
+            'is_sale' => 0
+           ])-> orderby('title','asc')->select('id','title')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+        }
+
+        $response = array();
+        foreach($employees as $employee){
+           $response[] = array(
+                "id"=>$employee->id,
+                "text"=>$employee->title
+           );
+        }
+        return response()->json($response);
+     }
+
 }

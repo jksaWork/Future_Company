@@ -29,25 +29,27 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
+        <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
-		<link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }} rel="stylesheet" type="text/css" />
+		{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+        <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }} rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-		{{-- <link href="{{ asset('datatable/bulma.min.css')}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('datatable/dataTables.bulma.min.css')}}" rel="stylesheet" type="text/css" /> --}}
-		<!--end::Page Vendor Stylesheets-->
-		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		@if (app()->getLocale() == 'en')
+        {{-- <link href="{{asset('datatable/select2.min.css')}}" rel="stylesheet" /> --}}
+        @if (app()->getLocale() == 'en')
         <link href="{{ asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<!--end::Global Stylesheets Bundle-->
        @else
        <link href="{{ asset('assets/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
        <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
-
        @endif
         @notifyCss
         @notifyJs
 
+        <style>
+            .select2-container--open .select2-dropdown { transform: translate(100%, 0); }
+        </style>
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&family=El+Messiri&display=swap" rel="stylesheet">
@@ -3254,58 +3256,22 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset("assets/js/custom/modals/create-app.js")}}"></script>
     <script src="{{ asset("assets/js/custom/modals/users-search.js") }}"></script>
 
-    <script src="{{ asset("path/to/jquery.js") }}"></script>
     <script src="{{ asset("assets/plugins/custom/formrepeater/formrepeater.bundle.js") }}"></script>
-
-
-    <script>
-
-// being form repeater
-$('#kt_docs_repeater_advanced').repeater({
-    initEmpty: false,
-
-    defaultValues: {
-        'text-input': 'foo'
-    },
-
-    show: function () {
-        $(this).slideDown();
-
-        // Re-init select2
-        $(this).find('[data-kt-repeater="select2"]').select2();
-
-        // Re-init flatpickr
-        $(this).find('[data-kt-repeater="datepicker"]').flatpickr();
-
-        // Re-init tagify
-        new Tagify(this.querySelector('[data-kt-repeater="tagify"]'));
-        
-    },
-
-    hide: function (deleteElement) {
-        $(this).slideUp(deleteElement);
-    },
-
-    ready: function(){
-        // Init select2
-        $('[data-kt-repeater="select2"]').select2();
-
-        // Init flatpickr
-        $('[data-kt-repeater="datepicker"]').flatpickr();
-
-        // Init Tagify
-        new Tagify(document.querySelector('[data-kt-repeater="tagify"]'));
-    }
-});
-
-
-    </script><!--end::form repeater Javascript-->
+    <!--end::form repeater Javascript-->
     <!--end::Page Custom Javascript-->
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('datatable/jquery.js')}}"></script>
 <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    @stack('scripts')
+<script src="{{ asset('datatable/sweetalert.js') }}"></script>
+    <!-- Script -->
+    <script src="{{asset('datatable/jquery.min.js')}}"></script>
+    <script src="{{asset('datatable/select2.min.js')}}"></script>
+    <script>
+        console.log('hello');
+    </script>
+@stack('scripts')
+
 
 
     <!--end::Javascript-->

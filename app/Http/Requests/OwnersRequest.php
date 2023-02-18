@@ -26,7 +26,6 @@ class OwnersRequest extends FormRequest
         $roles =  [
             'name' => 'required',
             'email' => 'email|unique:owners,email',
-            'password'=>'required',
             'phone' => 'required|numeric',
             'identification_number' => 'required',
             'identification_type' => 'required',

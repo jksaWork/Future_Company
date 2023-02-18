@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         Admin::factory(1)->create();
         Owner::factory(1)->create([
             'email' => 'owner@gmail.com',
-            'password' => bcrypt('123456'),
         ]);
         Owner::factory(20)->create();
         RealStateCategory::factory()->create([
@@ -35,6 +34,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'متاجر للاجار',
             'type' => 'rent',
         ]);
+
+        $this->call(RealStateSedder::class);
 
         // RealState::factory()->create();
 

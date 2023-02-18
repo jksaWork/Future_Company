@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AreaController as AdminAreaController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RentController;
 // use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminHomeController;
@@ -83,6 +84,7 @@ Route::group(
         Route::middleware('auth:admin,web')->group(function(){
              // Owners Resource
             Route::resource('owners', OwnerController::class);
+            Route::get('owners-data-ajax', [OwnerController::class , 'getOwners'])->name('owners.ajax');
             Route::get('owners-data', [OwnerController::class , 'data'])->name('owners.data');
             Route::resource('users', UserController::class);
             // User Controller
@@ -110,6 +112,10 @@ Route::group(
                 // Real State Routes
                 Route::resource('realstate', RealStateController::class);
                 Route::get('realstate-data' ,[RealStateController::class , 'data'])->name('data');
+                Route::get('realstate-data-ajax' ,[RealStateController::class , 'getGetRealState'])->name('ajax');
+                Route::post('finsh-rent' , [RentController::class , 'FinshRent'])->name('FinshRent');
+                Route::get('assing-realstate/{id?}' , [RentController::class , 'AssignOwnerTORealState'])->name('assignOwner');
+                Route::post('assing-realstate-to-owner' , [RentController::class , 'Asgin'])->name('assignOwnerToRalstate');
             });
         });
 

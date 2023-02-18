@@ -18,7 +18,6 @@ class CreateOwnersTable extends Migration
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('email')->nullable()->unique();
-            $table->string('password')->nullable();
             $table->boolean('status')->default(1);
             $table->enum('identification_type' , ['national_number',"national_card",'passpord'])->default('national_number');
             $table->string('identification_number');
