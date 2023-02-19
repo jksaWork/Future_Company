@@ -291,4 +291,13 @@ return [
     'assing' => 'تعين مالك جديد',
     'this_realstate_under_rent'=> 'هذا العقار تحت الايجار مسبقا',
     'assgin_new_owner_was_done' => 'تم تعين مالك جديد لهذا العقار',
+    'rent_history' => 'سجل الايجارات',
+    'rent_realstate_hsitory' => 'سجل الايجارات',
+    'owner_phone' => ' هاتف المستاجر'  ,
+    'owner_name' => 'اسم المستاجر',
+    'real_state_title' => 'عنوان العقار',
+    'real_state_type' => 'نوع العقار ',
+    'form_date' => 'من تاريخ',
+    'add_rent' => 'اضافه ايجار جديد',
+    'rent_is_finsh_sucess' => 'تم انهاء الايجار بنجاح',
 ];

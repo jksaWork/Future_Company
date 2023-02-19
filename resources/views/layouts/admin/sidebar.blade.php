@@ -72,7 +72,6 @@
                             class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.Mangements') }}</span>
                     </div>
                 </div>
-{{-- being  section --}}
 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
     <span class="menu-link">
         <span class="menu-icon">
@@ -313,6 +312,22 @@
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">{{ __('translation.show_real_state') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('realstate.assignOwner') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.add_rent') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('realstate.rent.hitory') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.rent_realstate_hsitory') }}</span>
                             </a>
                         </div>
                     </div>

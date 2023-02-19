@@ -116,6 +116,8 @@ Route::group(
                 Route::post('finsh-rent' , [RentController::class , 'FinshRent'])->name('FinshRent');
                 Route::get('assing-realstate/{id?}' , [RentController::class , 'AssignOwnerTORealState'])->name('assignOwner');
                 Route::post('assing-realstate-to-owner' , [RentController::class , 'Asgin'])->name('assignOwnerToRalstate');
+                Route::get('rent-history', [RentController::class , 'renthistory'])->name('rent.hitory');
+                Route::get('rent-history-data', [RentController::class , 'renthistoryData'])->name('rent.hitory.data');
             });
         });
 

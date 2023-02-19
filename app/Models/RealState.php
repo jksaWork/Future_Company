@@ -42,5 +42,9 @@ class RealState extends Model
         if(!$this->{$this->{$status}}) return "<span class='badge badge-light-warning'> " .  __('translation.in' . $status_filed)  . " </span>";
         else  return "<span class='badge badge-light-success'> " .  __('translation.' . $status_filed)  . "</span>";
     }
-
+    public function CurrentOwner(){
+        return  $this->belongsToMany(Owner::class , 'owners_realstates', 'realstate_id', 'owner_id')
+        ->withPivot('month_count', 'rent_status')
+        ->wherePivot('rent_status' , 1);
+    }
 }

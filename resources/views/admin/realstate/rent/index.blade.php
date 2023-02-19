@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
-@section('main-head' , __('translation.realstate_mangements'))
+@section('main-head' , __('translation.rent_history'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
@@ -70,16 +70,15 @@
                                     <tr>
 
                                         <th>{{__('translation.id')}}</th>
-                                        <th>{{__('translation.title')}}</th>
-                                        <th>{{__('translation.realstate_number')}}</th>
+                                        <th>{{__('translation.owner_name')}}</th>
+                                        <th>{{__('translation.owner_phone')}}</th>
+                                        <th>{{__('translation.real_state_title')}}</th>
+                                        <th>{{__('translation.real_state_type')}}</th>
                                         <th>{{__('translation.address')}}</th>
                                         <th>{{__('translation.price')}}</th>
-                                        <th>{{__('translation.type')}}</th>
-                                        <th>{{__('translation.category')}}</th>
-                                        <th>{{__('translation.status')}}</th>  {{-- جاهز ولا م جاهز --}}
-                                        <th>{{true ? __('translation.is_saled') : __('translation.is_rented')}}</th>  {{-- جاهز ولا م جاهز --}}
-
-                                        <th>@lang('translation.created_at')</th>
+                                        <th>{{__('translation.month_count')}}</th>
+                                        <th>{{__('translation.form_date')}}</th>
+                                        <th>{{__('translation.status')}}</th>
                                         <th>@lang('translation.action')</th>
                                     </tr>
                                 </thead>
@@ -111,19 +110,20 @@
             "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
         },
         ajax: {
-            url: '{{ route('realstate.data') }}',
+            url: '{{ route('realstate.rent.hitory.data') }}',
         },
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'id', name: 'id' , searchable: false, sortable: false},
+            {data: 'owner_name', name: 'owner_name', searchable: false, sortable: false },
+            {data: 'owner_phone', name: 'owner_phone', searchable: false, sortable: false},
             {data: 'title', name: 'title'},
-            {data: 'realstate_number', name: 'realstate_number'},
+            {data: 'category_id', name: 'category_id' ,searchable: false},
             {data: 'address', name: 'address'},
             {data: 'price', name: 'price' },
-            {data: 'type', name: 'type' },
-            {data: 'category_id', name: 'category_id' ,searchable: false},
-            {data: 'status', name: 'status',  sortable:false},
-            {data: 'is_sale', name: 'is_sale',  sortable:false},
+            {data: 'month_count', name: 'month_count', searchable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
+
+            {data: 'status', name: 'status',  sortable:false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[2, 'desc']],
