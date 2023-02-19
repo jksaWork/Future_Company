@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
-@section('main-head', __('translation.rent_history'))
+@section('main-head', __('translation.revenues_history'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -10,37 +10,53 @@
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
-                    <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
-                                        rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                                    <path
-                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
-                            <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
-                                class="form-control form-control-solid w-350px ps-15"
-                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
-                            {{-- </form> --}}
+                    {{-- <div class="card-title"> --}}
+                    <div class="row col-md-9">
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="form-group">
+                                    <label class='form-lable'> {{ __('translation.realstate') }}</label>
+                                    <select id='realstate' style='width:100%' name='realstate_id'>
+                                        <option value='0'> {{ __('translation.chose_your_real_state') }}</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <!--end::Search-->
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="form-group">
+                                    <label class='form-lable'> {{ __('translation.owner') }}</label>
+                                    <select id='owner' style='width:100%' name='owner_id'>
+                                        <option value='0'> {{ __('translation.chose_your_real_state') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="form-group">
+                                    <label class='form-lable'> {{ __('translation.status') }}</label>
+                                    <select id='status' style='width:100%' name='realstate_id'>
+                                        <option value='1'> {{ __('translation.revened') }}</option>
+                                        <option value='0'> {{ __('translation.unrevened') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!--begin::Search-->
+                    {{-- </div> --}}
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
-                    <div class="card-toolbar">
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a href='{{ route('realstate.assignOwner', ['type' => request()->type]) }}'
-                                class="btn btn-primary">{{ __('translation.assing_new_owner') }}</a>
+                    {{-- <div class="card-toolbar"> --}}
+
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <a href='{{ route('realstate.receipt') }}'
+                                class="btn btn-primary btn-sm">{{ __('translation.recept_revenues') }}</a>
                         </div>
+                        {{-- </div> --}}
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
                         <div class="d-flex justify-content-end align-items-center d-none"
@@ -49,7 +65,8 @@
                                 <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
                             </div>
                             <button type="button" class="btn btn-danger"
-                                data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                                data-kt-customer-table-select="delete_selected">Delete
+                                Selected</button>
                         </div>
                         <!--end::Group actions-->
                     </div>
@@ -66,12 +83,10 @@
                                     id="roles-table" style="width: 100%;">
                                     <thead>
                                         <tr>
-
                                             <th>{{ __('translation.id') }}</th>
                                             <th>{{ __('translation.owner_name') }}</th>
                                             <th>{{ __('translation.owner_phone') }}</th>
                                             <th>{{ __('translation.real_state_title') }}</th>
-                                            <th>{{ __('translation.real_state_type') }}</th>
                                             <th>{{ __('translation.address') }}</th>
                                             <th>{{ __('translation.price') }}</th>
                                             <th>{{ __('translation.month_count') }}</th>
@@ -98,18 +113,29 @@
     <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+
+    {{-- <script src="{{ asset('datatable/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('datatable/select2.min.js') }}"></script>
+
     <script>
-        let role;
+        let stauts, realstate_id, owner_id;
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
             serverSide: true,
             processing: true,
+            distroy: true,
             "language": {
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('realstate.rent.hitory.data') }}',
+                url: '{{ route('realstate.recept_revenues.data') }}',
+                data: function(q) {
+                    q.status = $('#status').val();;
+                    q.realstate_id = realstate_id;
+                    q.owner_id = owner_id;
+                },
             },
+
             columns: [{
                     data: 'id',
                     name: 'id',
@@ -117,14 +143,14 @@
                     sortable: false
                 },
                 {
-                    data: 'owner_name',
-                    name: 'owner_name',
+                    data: 'name',
+                    name: 'name',
                     searchable: false,
                     sortable: false
                 },
                 {
-                    data: 'owner_phone',
-                    name: 'owner_phone',
+                    data: 'phone',
+                    name: 'phone',
                     searchable: false,
                     sortable: false
                 },
@@ -132,11 +158,7 @@
                     data: 'title',
                     name: 'title'
                 },
-                {
-                    data: 'category_id',
-                    name: 'category_id',
-                    searchable: false
-                },
+                // {data: 'category_id', name: 'category_id' ,searchable: false},
                 {
                     data: 'address',
                     name: 'address'
@@ -146,8 +168,8 @@
                     name: 'price'
                 },
                 {
-                    data: 'month_count',
-                    name: 'month_count',
+                    data: 'month_number',
+                    name: 'month_number',
                     searchable: false
                 },
                 {
@@ -155,7 +177,6 @@
                     name: 'created_at',
                     searchable: false
                 },
-
                 {
                     data: 'status',
                     name: 'status',
@@ -171,22 +192,68 @@
             ],
             order: [
                 [2, 'desc']
-            ],
-            drawCallback: function(settings) {
-                $('.record__select').prop('checked', false);
-                $('#record__select-all').prop('checked', false);
-                $('#record-ids').val();
-                $('#bulk-delete').attr('disabled', true);
-            }
+            ]
+
         });
 
         $('#handelSearch').keyup(function() {
             rolesTable.search(this.value).draw();
-            // role = $(this).val();
-            // rolesTable.ajax.reload();
+
         });
-        $('#roles').on('change', function() {
-            role = $(this).val();
+        $('#status').on('change', function() {
+            status = $(this).val();
+            rolesTable.ajax.reload();
+            console.log('form here');
+        });
+
+        $("#realstate").select2({
+            ajax: {
+                url: "{{ route('realstate.ajax') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $("#owner").select2({
+            ajax: {
+                url: "{{ route('owners.ajax') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#realstate').on('change', function() {
+            realstate_id = $(this).val();
+            rolesTable.ajax.reload();
+            console.log(realstate_id);
+        });
+
+        $('#owner').on('change', function() {
+            owner_id = $(this).val();
             rolesTable.ajax.reload();
         });
     </script>

@@ -23,5 +23,17 @@ class RealStateSedder extends Seeder
                 ['owner_id' => rand(1, 5), 'realstate_id' => $real->random()->id ,  'month_count' => rand(1, 5)]
             );
         }
+        for ($i=0; $i < 12 ; $i++) {
+            DB::table('rent_revenues')->insert(
+                [
+                    'owner_id' => rand(1, 5),
+                    'realstate_id' => $real->random()->id ,
+                    'month_number' => $i,
+                    'status' =>1,
+                    'price' => rand(10000, 100000),
+                ]
+            );
+        }
+
     }
 }

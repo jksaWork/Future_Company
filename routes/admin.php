@@ -113,11 +113,17 @@ Route::group(
                 Route::resource('realstate', RealStateController::class);
                 Route::get('realstate-data' ,[RealStateController::class , 'data'])->name('data');
                 Route::get('realstate-data-ajax' ,[RealStateController::class , 'getGetRealState'])->name('ajax');
+                //  Rent Routes Section Assing And OWner
                 Route::post('finsh-rent' , [RentController::class , 'FinshRent'])->name('FinshRent');
                 Route::get('assing-realstate/{id?}' , [RentController::class , 'AssignOwnerTORealState'])->name('assignOwner');
                 Route::post('assing-realstate-to-owner' , [RentController::class , 'Asgin'])->name('assignOwnerToRalstate');
                 Route::get('rent-history', [RentController::class , 'renthistory'])->name('rent.hitory');
                 Route::get('rent-history-data', [RentController::class , 'renthistoryData'])->name('rent.hitory.data');
+                //  Rent Routes Section Route The Revenue
+                Route::get('receipt-revenue/{id?}',[RentController::class ,  'receiptRevenue'])->name('receipt');
+                Route::post('receipt-revenue',[RentController::class ,  'handelRevenue'])->name('Revenue');
+                Route::get('revenue-hsitory' , [RentController::class, 'revenueHsitory'])->name('recept_revenues.hitory');
+                Route::get('revenue-hsitory-data' ,[RentController::class, 'revenueHsitoryData'])->name('recept_revenues.data');
             });
         });
 

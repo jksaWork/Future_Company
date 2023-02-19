@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\RealState;
 use Illuminate\Http\Request;
 use DB;
+use Exception;
+use Illuminate\Auth\Events\Validated;
 use Yajra\DataTables\Facades\DataTables;
 
 class RentController extends Controller
@@ -53,7 +55,8 @@ class RentController extends Controller
         }
     }
 
-    public function renthistory(Request $request){
+    public function renthistory(){
+
         return view('admin.realstate.rent.index');
     }
 
@@ -86,6 +89,95 @@ class RentController extends Controller
             ->editColumn(
                 'actions',
                 'admin.realstate.rent.data_table.actions'
+            )
+            ->rawColumns(['actions', 'status', 'is_rent', 'is_sale' , 'owner_phone'  ,'owner_name'])
+            ->toJson();
+
+    }
+    //  Receipt Revenue  Section
+    public function receiptRevenue($id = null){
+        $realstate =  $id ? RealState::find($id): null;
+        return view('admin.realstate.rent.receiptrevenue' ,compact('realstate'));
+    }
+
+    public function receiptRevenueSetp2(Request $request){
+        $realstate = RealState::with('CurrentOwner')->find($request->realstate_id);
+        $month_number =$request->month_number;
+        if(count($realstate->CurrentOwner) == 0) throw new Exception(__('translation.has_no_current_user'));
+        return view('admin.realstate.rent.setp_2' , compact('realstate' , 'month_number'));
+    }
+    public function handelRevenue(Request $request){
+         $request->validate([
+            'realstate_id' => 'required',
+            'month_number' => 'required',
+        ]);
+        //  Fecth Payment Is Exist Or Not
+        try {
+            $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id, 1|| $request->month_number]);
+            //  If Is Exist the Spesfic Month And And RealState ID
+            if($is_payed[0]->c != 0)
+                return redirect()->back()->withErrors(__('translation.the_select_month_was_payed'));
+            // Check If Request Has No OWner ID return It To Go To Setp Tow
+            if(!request()->has('owner_id')) return $this->receiptRevenueSetp2($request);
+            // IF esle INsert The Renveu To DataBase
+            $realstate = RealState::findOrFail($request->realstate_id);
+            // insert The New Row
+            DB::table('rent_revenues')->insert(
+                [
+                'owner_id' => $request->owner_id,
+                'month_number' => $request->month_number,
+                'realstate_id' => $request->realstate_id ,
+                'price' => $realstate->price,
+                'status' => 1,
+                ]
+            );
+            return redirect()->route('realstate.realstate.show' , $request->realstate_id);
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    public function revenueHsitory(){
+        return view('admin.realstate.rent.revenues');
+    }
+
+    public function revenueHsitoryData(){
+        // if(request()->has('status')) dd('Hello');
+        $query = DB::table('rent_revenues')->select(
+            [
+                'rent_revenues.*',
+                'rent_revenues.status',
+                'rent_revenues.price' ,
+                'rent_revenues.month_number',
+                'rent_revenues.realstate_id',
+                'rent_revenues.owner_id' ,
+                't1.name',
+                't1.phone',
+                't2.title',
+                't2.address',
+                't2.realstate_number',
+            ]
+        )
+        ->when(request()->status != null , function($q){
+            $q->where('rent_revenues.status' , request()->status);
+        })
+        ->when(request()->realstate_id != null , function($q){
+            $q->where('rent_revenues.realstate_id' , request()->realstate_id );
+        })
+        ->when(request()->owner_id != null , function($q){
+            $q->where('rent_revenues.owner_id' , request()->owner_id );
+        })
+        ->join('owners as t1' , 'rent_revenues.owner_id' , 't1.id')
+        ->leftJoin('real_states as t2' , 'rent_revenues.realstate_id' , 't2.id');
+
+        return DataTables::of($query)
+        ->editColumn('status', function ($item) {
+            if ($item->status) return  "<span class='badge badge-light-success'>" . __('translation.revened') ."</span>";
+            else return "<span class='badge badge-light-danger'> " . __('translation.unrevened') ."</span>";
+            })
+            ->editColumn(
+                'actions',
+                'admin.realstate.rent.reveune.actions'
             )
             ->rawColumns(['actions', 'status', 'is_rent', 'is_sale' , 'owner_phone'  ,'owner_name'])
             ->toJson();

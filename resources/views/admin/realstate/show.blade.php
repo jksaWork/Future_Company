@@ -25,6 +25,10 @@
                                     <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">
                                         {{ __('translation.realstate_attachment') }}</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">
+                                        {{ __('translation.realstate_revenues') }}</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -81,6 +85,16 @@
                             </div>
 
                             <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel">
+                                <div>
+                                    <form action="{{ route('attachments.store') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name='type' value='realstate'>
+                                        <input type="hidden" name="attachmentable" value='{{ $realState->id }}'>
+                                        <x:input-file class="col-12" name='attachments[]' />
+                                        <button class="btn btn-light-primary mt-3">{{__('translation.Attach')}} </button>
+                                    </form>
+                                </div>
                                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
                                     <!--begin::Table head-->
                                     <thead>
@@ -121,16 +135,65 @@
                                             @endforeach
                                         @endif
                                     </tbody>
-                                    <div>
-                                        <form action="{{ route('attachments.store') }}" method="post"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" name='type' value='realstate'>
-                                            <input type="hidden" name="attachmentable" value='{{ $realState->id }}'>
-                                            <x:input-file class="col-12" name='attachments[]' />
-                                            <button class="btn btn-light-primary mt-3">{{__('translation.Attach')}} </button>
-                                        </form>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class='p-2'>
+                                            {{__('translation.Revenues_history')}}
+                                        </h3>
+                                        <div class="btn-group">
+                                            <div class="" style='display:inline ;margin:3px'>
+                                                <a href="{{route('realstate.receipt' , $realState->id)}}"
+                                                class="btn btn-primary btn-sm">
+                                                    {{__('translation.receipt_of_revenue')}}
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
+                                        <thead>
+                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                                <th class="">{{ __('translation.name') }}</th>
+                                                <th class="">{{ __('translation.phone') }}</th>
+                                                <th class="">{{ __('translation.month_number') }}</th>
+                                                <th class="">{{ __('translation.amount') }}</th>
+                                                <th class="">{{ __('translation.rent_status') }}</th>
+                                                <th class="">{{ __('translation.from_date') }}</th>
+                                            </tr>
+                                            <!--end::Table row-->
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                        @forelse ($realState->Revenues->reverse() as $item)
+                                               <tr>
+
+                                                    <td> {{ $item->name }}</td>
+                                                    <td> {{ $item->phone }}</td>
+                                                    <td> {{ $item->pivot->month_number }}</td>
+                                                    <td> {{ $item->pivot->price }}</td>
+                                                    <td>
+                                                        @if ($item->pivot->status)
+                                                        <span class='badge badge-light-success'>{{__('translation.pay_done')}} </span>
+                                                        @else
+                                                        <span class='badge badge-light-danger'>{{__('translation.pay_undone')}} </span>
+                                                            @endif
+                                                    </td>
+                                                    <td> {{$item->created_at->format('y-m-d')}}</td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td collspan='12'>
+                                                        {{__('translation.no_data_found')}}
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

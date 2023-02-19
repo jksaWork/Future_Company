@@ -101,7 +101,7 @@
 <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
-<script>
+    <script>
     let role;
     let rolesTable = $('#roles-table').DataTable({
         dom: "tiplr",

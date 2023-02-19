@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--
 Author: Keenthemes
@@ -11,59 +10,72 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang=""  direction="{{ app()->getLocale() == 'en' ?: 'rtl' }} " dir="{{ app()->getLocale() == 'en' ?: 'rtl'}}" style="{{ app()->getLocale() == 'en' ?: 'direction: rtl'}}">
-	<!--begin::Head-->
-	<head><base href="">
-		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
-		<meta charset="utf-8" />
-		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta property="og:locale" content="en_US" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.icon') }}" />
-		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<!--end::Fonts-->
-        <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<!--begin::Page Vendor Stylesheets(used by this page)-->
-		{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-        <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }} rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-        {{-- <link href="{{asset('datatable/select2.min.css')}}" rel="stylesheet" /> --}}
-        @if (app()->getLocale() == 'en')
-        <link href="{{ asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-       @else
-       <link href="{{ asset('assets/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
-       <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
-       @endif
-        @notifyCss
-        @notifyJs
+<html lang="" direction="{{ app()->getLocale() == 'en' ?: 'rtl' }} " dir="{{ app()->getLocale() == 'en' ?: 'rtl' }}"
+    style="{{ app()->getLocale() == 'en' ?: 'direction: rtl' }}">
+<!--begin::Head-->
 
-        <style>
-            .select2-container--open .select2-dropdown { transform: translate(100%, 0); }
-        </style>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&family=El+Messiri&display=swap" rel="stylesheet">
-        <style>
-           * {
-                font-family: 'Cairo', sans-serif;
-                font-family: 'El Messiri', sans-serif;
-            }
-        </style>
-        @stack('links')
-    </head>
-	<!--end::Head-->
-	<!--begin::Body-->
-	<body id="kt_body"
+<head>
+    <base href="">
+    <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel
+        by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords"
+        content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title"
+        content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.icon') }}" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }} rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
+        type="text/css" />
+    {{-- <link href="{{asset('datatable/select2.min.css')}}" rel="stylesheet" /> --}}
+    @if (app()->getLocale() == 'en')
+        <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    @else
+        <link href="{{ asset('assets/plugins/global/plugins.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+    @endif
+    @notifyCss
+    @notifyJs
+
+    <style>
+        .select2-container--open .select2-dropdown {
+            transform: translate(100%, 0);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&family=El+Messiri&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+            font-family: 'El Messiri', sans-serif;
+        }
+    </style>
+    @stack('links')
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body"
     class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
     style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
     <!--begin::Main-->
@@ -72,7 +84,7 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Page-->
         <div class="page d-flex flex-row flex-column-fluid">
             <!--begin::Aside-->
-           @include('layouts.admin.sidebar')
+            @include('layouts.admin.sidebar')
             <!--end::Aside-->
             <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
@@ -90,7 +102,8 @@ License: For each use you must have a valid license purchased only from above li
                                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                                 <!--begin::Title-->
-                                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">@yield('main-head','Dashboard' )</h1>
+                                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">@yield('main-head', 'Dashboard')
+                                </h1>
                                 <!--end::Title-->
                                 <!--begin::Separator-->
                                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -132,7 +145,7 @@ License: For each use you must have a valid license purchased only from above li
                     @yield('content')
                     <!--end::Post-->
                 </div>
-            <!--end::Content-->
+                <!--end::Content-->
                 <!--begin::Footer-->
                 {{-- <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
                     <!--begin::Container-->
@@ -285,8 +298,8 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
         <span class="svg-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)"
-                    fill="black" />
+                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1"
+                    transform="rotate(90 13 6)" fill="black" />
                 <path
                     d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z"
                     fill="black" />
@@ -308,12 +321,12 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                         <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                    transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                    fill="black" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                    transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
@@ -500,9 +513,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Users</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -518,9 +532,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Integrations</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -536,9 +551,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -553,13 +569,16 @@ License: For each use you must have a valid license purchased only from above li
                                                 <span class="fw-bold fs-5 text-muted flex-grow-1">Finance Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -572,13 +591,16 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -591,13 +613,16 @@ License: For each use you must have a valid license purchased only from above li
                                                     Platform</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -610,13 +635,16 @@ License: For each use you must have a valid license purchased only from above li
                                                     Space</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -632,7 +660,8 @@ License: For each use you must have a valid license purchased only from above li
                                         <!--begin::Heading-->
                                         <div class="pb-5">
                                             <h2 class="fw-bolder text-dark">What’s in Startup Plan?</h2>
-                                            <div class="text-muted fw-bold">Optimal for 100+ team size and grown company
+                                            <div class="text-muted fw-bold">Optimal for 100+ team size and grown
+                                                company
                                             </div>
                                         </div>
                                         <!--end::Heading-->
@@ -644,9 +673,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Users</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -662,9 +692,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Integrations</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -680,9 +711,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -698,9 +730,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -716,9 +749,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -734,13 +768,16 @@ License: For each use you must have a valid license purchased only from above li
                                                     Platform</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -753,13 +790,16 @@ License: For each use you must have a valid license purchased only from above li
                                                     Space</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen040.svg-->
                                                 <span class="svg-icon svg-icon-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                        <rect x="7" y="15.3137" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                        <rect x="8.41422" y="7" width="12"
+                                                            height="2" rx="1"
                                                             transform="rotate(45 8.41422 7)" fill="black" />
                                                     </svg>
                                                 </span>
@@ -786,9 +826,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Users</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -804,9 +845,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Integrations</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -822,9 +864,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -840,9 +883,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -858,9 +902,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Module</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -876,9 +921,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Platform</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -894,9 +940,10 @@ License: For each use you must have a valid license purchased only from above li
                                                     Space</span>
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2"
+                                                            width="20" height="20" rx="10"
                                                             fill="black" />
                                                         <path
                                                             d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
@@ -947,12 +994,12 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                         <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                    transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                    fill="black" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                    transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
@@ -1081,13 +1128,14 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                                 <span class="required">App Name</span>
-                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                                    title="Specify your unique app name"></i>
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip" title="Specify your unique app name"></i>
                                             </label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="name" placeholder="" value="" />
+                                            <input type="text"
+                                                class="form-control form-control-lg form-control-solid" name="name"
+                                                placeholder="" value="" />
                                             <!--end::Input-->
                                         </div>
                                         <!--end::Input group-->
@@ -1096,8 +1144,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-5 fw-bold mb-4">
                                                 <span class="required">Category</span>
-                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                                    title="Select your app category"></i>
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip" title="Select your app category"></i>
                                             </label>
                                             <!--end::Label-->
                                             <!--begin:Options-->
@@ -1111,8 +1159,9 @@ License: For each use you must have a valid license purchased only from above li
                                                             <span class="symbol-label bg-light-primary">
                                                                 <!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
                                                                 <span class="svg-icon svg-icon-1 svg-icon-primary">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none">
                                                                         <path opacity="0.3"
                                                                             d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z"
                                                                             fill="black" />
@@ -1136,8 +1185,8 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--end:Label-->
                                                     <!--begin:Input-->
                                                     <span class="form-check form-check-custom form-check-solid">
-                                                        <input class="form-check-input" type="radio" name="category"
-                                                            value="1" />
+                                                        <input class="form-check-input" type="radio"
+                                                            name="category" value="1" />
                                                     </span>
                                                     <!--end:Input-->
                                                 </label>
@@ -1151,16 +1200,24 @@ License: For each use you must have a valid license purchased only from above li
                                                             <span class="symbol-label bg-light-danger">
                                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect x="2" y="2" width="9" height="9" rx="2"
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none">
+                                                                        <rect x="2" y="2"
+                                                                            width="9" height="9"
+                                                                            rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13"
+                                                                            y="2" width="9"
+                                                                            height="9" rx="2"
                                                                             fill="black" />
-                                                                        <rect opacity="0.3" x="13" y="2" width="9"
-                                                                            height="9" rx="2" fill="black" />
-                                                                        <rect opacity="0.3" x="13" y="13" width="9"
-                                                                            height="9" rx="2" fill="black" />
-                                                                        <rect opacity="0.3" x="2" y="13" width="9"
-                                                                            height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13"
+                                                                            y="13" width="9"
+                                                                            height="9" rx="2"
+                                                                            fill="black" />
+                                                                        <rect opacity="0.3" x="2"
+                                                                            y="13" width="9"
+                                                                            height="9" rx="2"
+                                                                            fill="black" />
                                                                     </svg>
                                                                 </span>
                                                                 <!--end::Svg Icon-->
@@ -1169,7 +1226,8 @@ License: For each use you must have a valid license purchased only from above li
                                                         <!--end:Icon-->
                                                         <!--begin:Info-->
                                                         <span class="d-flex flex-column">
-                                                            <span class="fw-bolder fs-6">Face to Face Discussions</span>
+                                                            <span class="fw-bolder fs-6">Face to Face
+                                                                Discussions</span>
                                                             <span class="fs-7 text-muted">Creating a clear text
                                                                 structure is just one aspect</span>
                                                         </span>
@@ -1178,8 +1236,8 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--end:Label-->
                                                     <!--begin:Input-->
                                                     <span class="form-check form-check-custom form-check-solid">
-                                                        <input class="form-check-input" type="radio" name="category"
-                                                            value="2" />
+                                                        <input class="form-check-input" type="radio"
+                                                            name="category" value="2" />
                                                     </span>
                                                     <!--end:Input-->
                                                 </label>
@@ -1193,8 +1251,9 @@ License: For each use you must have a valid license purchased only from above li
                                                             <span class="symbol-label bg-light-success">
                                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen013.svg-->
                                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none">
                                                                         <path opacity="0.3"
                                                                             d="M20.9 12.9C20.3 12.9 19.9 12.5 19.9 11.9C19.9 11.3 20.3 10.9 20.9 10.9H21.8C21.3 6.2 17.6 2.4 12.9 2V2.9C12.9 3.5 12.5 3.9 11.9 3.9C11.3 3.9 10.9 3.5 10.9 2.9V2C6.19999 2.5 2.4 6.2 2 10.9H2.89999C3.49999 10.9 3.89999 11.3 3.89999 11.9C3.89999 12.5 3.49999 12.9 2.89999 12.9H2C2.5 17.6 6.19999 21.4 10.9 21.8V20.9C10.9 20.3 11.3 19.9 11.9 19.9C12.5 19.9 12.9 20.3 12.9 20.9V21.8C17.6 21.3 21.4 17.6 21.8 12.9H20.9Z"
                                                                             fill="black" />
@@ -1218,8 +1277,8 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--end:Label-->
                                                     <!--begin:Input-->
                                                     <span class="form-check form-check-custom form-check-solid">
-                                                        <input class="form-check-input" type="radio" name="category"
-                                                            value="3" />
+                                                        <input class="form-check-input" type="radio"
+                                                            name="category" value="3" />
                                                     </span>
                                                     <!--end:Input-->
                                                 </label>
@@ -1239,8 +1298,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-5 fw-bold mb-4">
                                                 <span class="required">Select Framework</span>
-                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                                    title="Specify your apps framework"></i>
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip" title="Specify your apps framework"></i>
                                             </label>
                                             <!--end::Label-->
                                             <!--begin:Option-->
@@ -1367,8 +1426,9 @@ License: For each use you must have a valid license purchased only from above li
                                             <label class="required fs-5 fw-bold mb-2">Database Name</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="dbname" placeholder="" value="master_db" />
+                                            <input type="text"
+                                                class="form-control form-control-lg form-control-solid" name="dbname"
+                                                placeholder="" value="master_db" />
                                             <!--end::Input-->
                                         </div>
                                         <!--end::Input group-->
@@ -1377,7 +1437,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-5 fw-bold mb-4">
                                                 <span class="required">Select Database Engine</span>
-                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip"
                                                     title="Select your app database engine"></i>
                                             </label>
                                             <!--end::Label-->
@@ -1476,12 +1537,12 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                                 <span class="required">Name On Card</span>
-                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                                    title="Specify a card holder's name"></i>
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7"
+                                                    data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
                                             </label>
                                             <!--end::Label-->
-                                            <input type="text" class="form-control form-control-solid" placeholder=""
-                                                name="card_name" value="Max Doe" />
+                                            <input type="text" class="form-control form-control-solid"
+                                                placeholder="" name="card_name" value="Max Doe" />
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -1500,10 +1561,10 @@ License: For each use you must have a valid license purchased only from above li
                                                 <div class="position-absolute translate-middle-y top-50 end-0 me-5">
                                                     <img src="assets/media/svg/card-logos/visa.svg" alt=""
                                                         class="h-25px" />
-                                                    <img src="assets/media/svg/card-logos/mastercard.svg" alt=""
-                                                        class="h-25px" />
-                                                    <img src="assets/media/svg/card-logos/american-express.svg" alt=""
-                                                        class="h-25px" />
+                                                    <img src="assets/media/svg/card-logos/mastercard.svg"
+                                                        alt="" class="h-25px" />
+                                                    <img src="assets/media/svg/card-logos/american-express.svg"
+                                                        alt="" class="h-25px" />
                                                 </div>
                                                 <!--end::Card logos-->
                                             </div>
@@ -1523,8 +1584,9 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--begin::Col-->
                                                     <div class="col-6">
                                                         <select name="card_expiry_month"
-                                                            class="form-select form-select-solid" data-control="select2"
-                                                            data-hide-search="true" data-placeholder="Month">
+                                                            class="form-select form-select-solid"
+                                                            data-control="select2" data-hide-search="true"
+                                                            data-placeholder="Month">
                                                             <option></option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -1544,8 +1606,9 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--begin::Col-->
                                                     <div class="col-6">
                                                         <select name="card_expiry_year"
-                                                            class="form-select form-select-solid" data-control="select2"
-                                                            data-hide-search="true" data-placeholder="Year">
+                                                            class="form-select form-select-solid"
+                                                            data-control="select2" data-hide-search="true"
+                                                            data-placeholder="Year">
                                                             <option></option>
                                                             <option value="2021">2021</option>
                                                             <option value="2022">2022</option>
@@ -1578,10 +1641,12 @@ License: For each use you must have a valid license purchased only from above li
                                                 <div class="position-relative">
                                                     <!--begin::Input-->
                                                     <input type="text" class="form-control form-control-solid"
-                                                        minlength="3" maxlength="4" placeholder="CVV" name="card_cvv" />
+                                                        minlength="3" maxlength="4" placeholder="CVV"
+                                                        name="card_cvv" />
                                                     <!--end::Input-->
                                                     <!--begin::CVV icon-->
-                                                    <div class="position-absolute translate-middle-y top-50 end-0 me-3">
+                                                    <div
+                                                        class="position-absolute translate-middle-y top-50 end-0 me-3">
                                                         <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
                                                         <span class="svg-icon svg-icon-2hx">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -1607,7 +1672,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="me-5">
                                                 <label class="fs-6 fw-bold form-label">Save Card for further
                                                     billing?</label>
-                                                <div class="fs-7 fw-bold text-muted">If you need more info, please check
+                                                <div class="fs-7 fw-bold text-muted">If you need more info, please
+                                                    check
                                                     budget planning</div>
                                             </div>
                                             <!--end::Label-->
@@ -1630,7 +1696,8 @@ License: For each use you must have a valid license purchased only from above li
                                         <h1 class="fw-bolder text-dark mb-3">Release!</h1>
                                         <!--end::Heading-->
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-3">Submit your app to kickstart your project.
+                                        <div class="text-muted fw-bold fs-3">Submit your app to kickstart your
+                                            project.
                                         </div>
                                         <!--end::Description-->
                                         <!--begin::Illustration-->
@@ -1650,9 +1717,10 @@ License: For each use you must have a valid license purchased only from above li
                                             data-kt-stepper-action="previous">
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                                             <span class="svg-icon svg-icon-3 me-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="6" y="11"
+                                                        width="13" height="2" rx="1"
                                                         fill="black" />
                                                     <path
                                                         d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z"
@@ -1670,9 +1738,10 @@ License: For each use you must have a valid license purchased only from above li
                                             <span class="indicator-label">Submit
                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                                                 <span class="svg-icon svg-icon-3 ms-2 me-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="18" y="13"
+                                                            width="13" height="2" rx="1"
                                                             transform="rotate(-180 18 13)" fill="black" />
                                                         <path
                                                             d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
@@ -1689,9 +1758,10 @@ License: For each use you must have a valid license purchased only from above li
                                             data-kt-stepper-action="next">Continue
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                                             <span class="svg-icon svg-icon-3 ms-1 me-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="18" y="13"
+                                                        width="13" height="2" rx="1"
                                                         transform="rotate(-180 18 13)" fill="black" />
                                                     <path
                                                         d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
@@ -1730,12 +1800,13 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                         <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                    transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16"
+                                    height="2" rx="1" transform="rotate(-45 6 17.3137)"
                                     fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2"
+                                    rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
@@ -1752,10 +1823,11 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Content-->
                     <!--begin::Search-->
-                    <div id="kt_modal_users_search_handler" data-kt-search-keypress="true" data-kt-search-min-length="2"
-                        data-kt-search-enter="enter" data-kt-search-layout="inline">
+                    <div id="kt_modal_users_search_handler" data-kt-search-keypress="true"
+                        data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="inline">
                         <!--begin::Form-->
-                        <form data-kt-search-element="form" class="w-100 position-relative mb-5" autocomplete="off">
+                        <form data-kt-search-element="form" class="w-100 position-relative mb-5"
+                            autocomplete="off">
                             <!--begin::Hidden input(Added to disable form autocomplete)-->
                             <input type="hidden" />
                             <!--end::Hidden input-->
@@ -1763,10 +1835,11 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <span
                                 class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
-                                        transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+                                        height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
+                                        fill="black" />
                                     <path
                                         d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
                                         fill="black" />
@@ -1776,7 +1849,8 @@ License: For each use you must have a valid license purchased only from above li
                             <!--end::Icon-->
                             <!--begin::Input-->
                             <input type="text" class="form-control form-control-lg form-control-solid px-15"
-                                name="search" value="" placeholder="Search by username, full name or email..."
+                                name="search" value=""
+                                placeholder="Search by username, full name or email..."
                                 data-kt-search-element="input" />
                             <!--end::Input-->
                             <!--begin::Spinner-->
@@ -1791,12 +1865,13 @@ License: For each use you must have a valid license purchased only from above li
                                 data-kt-search-element="clear">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                            transform="rotate(-45 6 17.3137)" fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
+                                            height="2" rx="1" transform="rotate(-45 6 17.3137)"
+                                            fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2"
+                                            rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
@@ -1855,7 +1930,7 @@ License: For each use you must have a valid license purchased only from above li
                                         <!--end::Avatar-->
                                         <!--begin::Info-->
                                         <div class="fw-bold">
-                                            <span class="fs-6 text-gray-800 me-2"> {{ auth()->user()->name}}</span>
+                                            <span class="fs-6 text-gray-800 me-2"> {{ auth()->user()->name }}</span>
                                         </div>
                                         <!--end::Info-->
                                     </a>
@@ -1954,7 +2029,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--end::Checkbox-->
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-35px symbol-circle">
-                                                <span class="symbol-label bg-light-danger text-danger fw-bold">M</span>
+                                                <span
+                                                    class="symbol-label bg-light-danger text-danger fw-bold">M</span>
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Details-->
@@ -2201,7 +2277,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--end::Checkbox-->
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-35px symbol-circle">
-                                                <span class="symbol-label bg-light-danger text-danger fw-bold">O</span>
+                                                <span
+                                                    class="symbol-label bg-light-danger text-danger fw-bold">O</span>
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Details-->
@@ -2325,7 +2402,8 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--end::Checkbox-->
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-35px symbol-circle">
-                                                <span class="symbol-label bg-light-danger text-danger fw-bold">E</span>
+                                                <span
+                                                    class="symbol-label bg-light-danger text-danger fw-bold">E</span>
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Details-->
@@ -2601,9 +2679,10 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Users-->
                                 <!--begin::Actions-->
                                 <div class="d-flex flex-center mt-15">
-                                    <button type="reset" id="kt_modal_users_search_reset" data-bs-dismiss="modal"
-                                        class="btn btn-active-light me-3">Cancel</button>
-                                    <button type="submit" id="kt_modal_users_search_submit" class="btn btn-primary">Add
+                                    <button type="reset" id="kt_modal_users_search_reset"
+                                        data-bs-dismiss="modal" class="btn btn-active-light me-3">Cancel</button>
+                                    <button type="submit" id="kt_modal_users_search_submit"
+                                        class="btn btn-primary">Add
                                         Selected Users</button>
                                 </div>
                                 <!--end::Actions-->
@@ -2614,7 +2693,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Message-->
                                 <div class="fw-bold py-10">
                                     <div class="text-gray-600 fs-3 mb-2">No users found</div>
-                                    <div class="text-muted fs-6">Try to search by username, full name or email...</div>
+                                    <div class="text-muted fs-6">Try to search by username, full name or email...
+                                    </div>
                                 </div>
                                 <!--end::Message-->
                                 <!--begin::Illustration-->
@@ -2649,12 +2729,13 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                         <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                    transform="rotate(-45 6 17.3137)" fill="black" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16"
+                                    height="2" rx="1" transform="rotate(-45 6 17.3137)"
                                     fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2"
+                                    rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
@@ -2678,7 +2759,8 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Heading-->
                     <!--begin::Google Contacts Invite-->
                     <div class="btn btn-light-primary fw-bolder w-100 mb-8">
-                        <img alt="Logo" src="assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Invite
+                        <img alt="Logo" src="assets/media/svg/brand-logos/google-icon.svg"
+                            class="h-20px me-3" />Invite
                         Gmail Contacts
                     </div>
                     <!--end::Google Contacts Invite-->
@@ -2688,8 +2770,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Separator-->
                     <!--begin::Textarea-->
-                    <textarea class="form-control form-control-solid mb-8" rows="3"
-                        placeholder="Type or paste emails here"></textarea>
+                    <textarea class="form-control form-control-solid mb-8" rows="3" placeholder="Type or paste emails here"></textarea>
                     <!--end::Textarea-->
                     <!--begin::Users-->
                     <div class="mb-10">
@@ -2709,7 +2790,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
                                             Smith</a>
                                         <div class="fw-bold text-muted">e.smith@kpmg.com.au</div>
                                     </div>
@@ -2718,8 +2800,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2739,7 +2821,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Melody
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Melody
                                             Macy</a>
                                         <div class="fw-bold text-muted">melody@altbox.com</div>
                                     </div>
@@ -2748,8 +2831,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1" selected="selected">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2769,7 +2852,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Max
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Max
                                             Smith</a>
                                         <div class="fw-bold text-muted">max@kt.com</div>
                                     </div>
@@ -2778,8 +2862,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -2799,7 +2883,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Sean
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Sean
                                             Bean</a>
                                         <div class="fw-bold text-muted">sean@dellito.com</div>
                                     </div>
@@ -2808,8 +2893,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2829,7 +2914,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Brian
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Brian
                                             Cox</a>
                                         <div class="fw-bold text-muted">brian@exchange.com</div>
                                     </div>
@@ -2838,8 +2924,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -2859,7 +2945,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Mikaela
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Mikaela
                                             Collins</a>
                                         <div class="fw-bold text-muted">mikaela@pexcom.com</div>
                                     </div>
@@ -2868,8 +2955,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2889,7 +2976,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Francis
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Francis
                                             Mitcham</a>
                                         <div class="fw-bold text-muted">f.mitcham@kpmg.com.au</div>
                                     </div>
@@ -2898,8 +2986,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -2919,7 +3007,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Olivia
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Olivia
                                             Wild</a>
                                         <div class="fw-bold text-muted">olivia@corpmail.com</div>
                                     </div>
@@ -2928,8 +3017,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2949,7 +3038,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Neil
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Neil
                                             Owen</a>
                                         <div class="fw-bold text-muted">owen.neil@gmail.com</div>
                                     </div>
@@ -2958,8 +3048,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1" selected="selected">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -2979,7 +3069,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Dan
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Dan
                                             Wilson</a>
                                         <div class="fw-bold text-muted">dam@consilting.com</div>
                                     </div>
@@ -2988,8 +3079,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -3009,7 +3100,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
                                             Bold</a>
                                         <div class="fw-bold text-muted">emma@intenso.com</div>
                                     </div>
@@ -3018,8 +3110,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -3039,7 +3131,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Ana
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Ana
                                             Crown</a>
                                         <div class="fw-bold text-muted">ana.cf@limtel.com</div>
                                     </div>
@@ -3048,8 +3141,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1" selected="selected">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -3069,7 +3162,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Robert
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Robert
                                             Doe</a>
                                         <div class="fw-bold text-muted">robert@benko.com</div>
                                     </div>
@@ -3078,8 +3172,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -3099,7 +3193,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">John
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">John
                                             Miller</a>
                                         <div class="fw-bold text-muted">miller@mapple.com</div>
                                     </div>
@@ -3108,8 +3203,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -3129,7 +3224,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Lucy
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Lucy
                                             Kunic</a>
                                         <div class="fw-bold text-muted">lucy.m@fentech.com</div>
                                     </div>
@@ -3138,8 +3234,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2" selected="selected">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -3159,7 +3255,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Ethan
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Ethan
                                             Wilder</a>
                                         <div class="fw-bold text-muted">ethan@loop.com.au</div>
                                     </div>
@@ -3168,8 +3265,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1" selected="selected">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3">Can Edit</option>
@@ -3189,7 +3286,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Avatar-->
                                     <!--begin::Details-->
                                     <div class="ms-5">
-                                        <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
+                                        <a href="#"
+                                            class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Emma
                                             Smith</a>
                                         <div class="fw-bold text-muted">e.smith@kpmg.com.au</div>
                                     </div>
@@ -3198,8 +3296,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Details-->
                                 <!--begin::Access menu-->
                                 <div class="ms-2 w-100px">
-                                    <select class="form-select form-select-solid form-select-sm" data-control="select2"
-                                        data-hide-search="true">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                        data-control="select2" data-hide-search="true">
                                         <option value="1">Guest</option>
                                         <option value="2">Owner</option>
                                         <option value="3" selected="selected">Can Edit</option>
@@ -3238,43 +3336,39 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Modal - Invite Friend-->
     <!--end::Modals-->
     <!--begin::Javascript-->
-    <script>var hostUrl = "assets/";</script>
+    <script>
+        var hostUrl = "assets/";
+    </script>
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    <script src="{{asset("assets/plugins/global/plugins.bundle.js")}}"></script>
-    <script src="{{asset("assets/js/scripts.bundle.js")}}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Page Vendors Javascript(used by this page)-->
-    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Page Vendors Javascript-->
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{ asset('assets/js/custom/apps/customers/list/export.js')}}"></script>
-    <script src="{{ asset('assets/js/custom/apps/customers/list/list.js')}}"></script>
-    <script src="{{asset("assets/js/custom/apps/customers/add.js")}}"></script>
-    <script src="{{ asset("assets/js/custom/widgets.js")}}"></script>
-    <script src="{{ asset('assets/js/custom/apps/chat/chat.js')}}"></script>
-    <script src="{{ asset("assets/js/custom/modals/upgrade-plan.js")}}"></script>
-    <script src="{{ asset("assets/js/custom/modals/create-app.js")}}"></script>
-    <script src="{{ asset("assets/js/custom/modals/users-search.js") }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/customers/list/export.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/customers/add.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/modals/users-search.js') }}"></script>
 
-    <script src="{{ asset("assets/plugins/custom/formrepeater/formrepeater.bundle.js") }}"></script>
+    <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
     <!--end::form repeater Javascript-->
     <!--end::Page Custom Javascript-->
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-    <script src="{{ asset('datatable/jquery.js')}}"></script>
-<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-<script src="{{ asset('datatable/sweetalert.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('datatable/sweetalert.js') }}"></script>
     <!-- Script -->
-    <script src="{{asset('datatable/jquery.min.js')}}"></script>
-    <script src="{{asset('datatable/select2.min.js')}}"></script>
-    <script>
-        console.log('hello');
-    </script>
-@stack('scripts')
-
-
-
-    <!--end::Javascript-->
+    <script src="{{ asset('datatable/jquery.min.js') }}"></script>
+    <script src="{{ asset('datatable/select2.min.js') }}"></script>
+    @stack('scripts')
 </body>
-	<!--end::Body-->
+<!--end::Body-->
+
 </html>
