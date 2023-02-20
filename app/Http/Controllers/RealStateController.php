@@ -6,6 +6,7 @@ use App\Models\Attachments;
 use App\Models\Category;
 use App\Models\RealState;
 use App\Models\RealStateCategory;
+use App\Models\RealstateInstallment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -24,13 +25,20 @@ class RealStateController extends Controller
 
     public function data()
     {
-        $query = RealState::with('Category');
+        $query = RealState::with('Category')
+                ->typeScope()
+                ->StatusScope()
+                ->rentOrSaleScope();
+
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
             })
             ->editColumn('status', function ($item) {
                 return  $item->getStatusWithSpan();
+            })
+            ->editColumn('type', function ($item) {
+                return __('translation.' . $item->type);
             })
             ->editColumn('is_sale', fn ($item) => $item->getSaleStatusWithSpan('is_sale', 'saled'))
             ->editColumn('is_rent', fn ($item) => $item->getSaleStatusWithSpan('is_rent', 'rented'))
@@ -49,7 +57,8 @@ class RealStateController extends Controller
      */
     public function create()
     {
-        $categories = RealStateCategory::get();
+
+        $categories = RealStateCategory::where('type' ,request()->type ?? 'rent'  )->get();
         return view('admin.realstate.create', compact('categories'));
     }
 
@@ -61,6 +70,7 @@ class RealStateController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('hello');
         $request->validate([
             'title' => 'required',
             'price' => 'required|numeric',
@@ -68,23 +78,57 @@ class RealStateController extends Controller
             'realstate_number' => 'required',
             'address' => 'required',
             'category_idd' => 'required',
+            'type' => 'required',
+            'installment' => 'required_if:type,sale',
+            'installment.*.precentage' => 'required',
+            'installment.*.amount' => 'required',
+            'installment.*.date' => 'required',
         ]);
+    //    return $request;
+
         try {
 
             $data = array_merge(
-                $request->except('_token', 'category_idd', 'attachments'),
-                ['category_id' => $request->category_idd]
+                $request->except('_token', 'category_idd', 'attachments', 'installment'),
+                [
+                    'category_id' => $request->category_idd,
+                    'type' => $request->type
+                 ]
             );
             // dd($data);
             $realstate  = RealState::create($data);
             Attachments::AttachMUltiFIleFiles($request->attachments, $realstate, 'realstate/attachments');
+            //  Check If The Request Comming By Sale Type
+            if($request->has('type') && $request->type == 'sale') $this->SaveTheIstallment($realstate, $request->installment);
             return redirect()->route('realstate.realstate.index', ['type' => $request->type]);
         } catch (\Throwable $th) {
             dd($th);
         }
     }
 
-    /**
+
+/**
+     * To Save The Installments On Database
+     *
+     * @param  \App\Models\RealState  $realState
+     * @param  \App\Models\RealState  $realState
+     * @return void
+     */
+    public function SaveTheIstallment( RealState $realstate , $installment)
+    {
+        $collect = collect($installment);
+        // Retrive Data And Handel Status
+        $data = $collect->map(function($el) use ($realstate)  {
+        $el['realstate_id'] = $realstate->id;
+        $el['is_payed'] = $el['is_payed'][0]  ?? 0;
+            return $el;
+        });
+
+        RealstateInstallment::insert($data->all());
+
+
+    }
+/**
      * Display the specified resource.
      *
      * @param  \App\Models\RealState  $realState

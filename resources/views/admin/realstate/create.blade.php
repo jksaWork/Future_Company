@@ -17,15 +17,18 @@
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
-                        {{-- @include('layouts.includes.session') --}}
-                        <form action="{{ route('realstate.categories.store')}}" method="post" enctype="multipart/form-data">
+                        @include('layouts.includes.session')
+                        <form action="{{ route('realstate.realstate.store')}}" method="post"
+                        id='save_realstate'
+                        enctype="multipart/form-data">
                             @csrf
+                            @if(request()->type == 'rent')
                             <div class="row">
+                                <input type='hidden' name='type' value={{request()->type}} />
                                 <x:text-input name='title' class='col-md-6' />
                                 <x:text-input name='realstate_number' class='col-md-6' />
                                 <x:text-input name='address' class='col-md-6' />
                                 <x:text-input name='price' class='col-md-6' />
-
                                 <x:select-options name='category_idd' :options='$categories'  class='col-md-6' />
                                 <x:select-options name='status' :options='["ready" , "inready"]'  class='col-md-6' />
                                 {{-- <x:text-input name='identification_number' class='col-md-6' /> --}}
@@ -40,6 +43,9 @@
                                     </a>
                                 </div>
                             </div>
+                            @else
+                            <x:sale-form-steper :categories='$categories' />
+                            @endif
 
                         </form>
 

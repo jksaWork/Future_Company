@@ -3365,7 +3365,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('datatable/sweetalert.js') }}"></script>
     <!-- Script -->
-    <script src="{{ asset('datatable/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('datatable/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     @stack('scripts')
 </body>
