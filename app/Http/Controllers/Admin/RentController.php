@@ -35,6 +35,7 @@ class RentController extends Controller
         $request->validate([
             'realstate_id' => 'required',
             'owner_id'=> 'required',
+            'type' => 'required',
         ]);
         try {
             $realstate = RealState::findOrFail($request->realstate_id);
@@ -45,13 +46,16 @@ class RentController extends Controller
             $realstate->save();
 
             DB::table('owners_realstates')->insert(
-                ['owner_id' => $request->owner_id, 'realstate_id' => $request->realstate_id]
+                 [
+                    'owner_id' => $request->owner_id,
+                    'realstate_id' => $request->realstate_id,
+                    'type' => $request->type,
+                 ]
             );
             session()->flash('success' , __('translation.assgin_new_owner_was_done'));
             return redirect()->route('realstate.realstate.show' , $realstate->id);
         } catch (\Throwable $th) {
             return  redirect()->back()->withErrors(__('translation.6'));
-
         }
     }
 
@@ -71,8 +75,9 @@ class RentController extends Controller
                     return  "<span class='badge badge-light-success'>" . __('translation.underrent') ."</span>";
                 else
                       return "<span class='badge badge-light-danger'> " . __('translation.finshed') ."</span>";
-
             })
+
+
             ->editColumn('owner_name', function ($item) {
                 return  $item->CurrentOwner[0]->name;
             })

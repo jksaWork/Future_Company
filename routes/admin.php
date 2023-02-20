@@ -22,6 +22,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RealStateCategoryController;
 use App\Http\Controllers\RealStateController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -124,6 +125,14 @@ Route::group(
                 Route::post('receipt-revenue',[RentController::class ,  'handelRevenue'])->name('Revenue');
                 Route::get('revenue-hsitory' , [RentController::class, 'revenueHsitory'])->name('recept_revenues.hitory');
                 Route::get('revenue-hsitory-data' ,[RentController::class, 'revenueHsitoryData'])->name('recept_revenues.data');
+
+                // Sale Routes And  Controller
+                Route::post('recept-installment', [SaleController::class, 'receptInstallment'])->name('receptInstallment');
+                Route::get('assing-sale-owner/{id?}' , [SaleController::class , 'assignSaleOwner'])->name('assignSaleOwner');
+                Route::get('sale-history' , [SaleController::class , 'saleHistory'])->name('saleHistory');
+                Route::get('sale-history-data' , [SaleController::class , 'saleHistoryData'])->name('saleHistory.data');
+
+
             });
         });
 

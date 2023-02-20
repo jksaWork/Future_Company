@@ -14,4 +14,7 @@ class RealstateInstallment extends Model
     public function RealState(){
         return $this->belongsTo(RealState::class, 'realstate_id');
     }
+    public function Owner(){
+        return $this->belongsTo(RealState::class, 'owner_id');
+    }
 }

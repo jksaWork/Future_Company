@@ -36,6 +36,7 @@
 
                         </div>
                         {{-- </form> --}}
+                        @if (request()->type == 'rent')
                         <div class="d-flex mr-3">
                             <div class="form-group">
                                 <select class="form-control" name="" id="rent_status">
@@ -45,6 +46,17 @@
                                 </select>
                               </div>
                         </div>
+                        @else
+                        <div class="d-flex mr-3">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="sale_status">
+                                  <option> -- {{__('translation.is_saled')}} --</option>
+                                  <option value='1'>{{__('translation.saled')}}</option>
+                                  <option value='0'>{{__('translation.insaled')}}</option>
+                                </select>
+                              </div>
+                        </div>
+                        @endif
                         <div class="d-flex mr-3">
                             <div class="form-group">
                                 <select class="form-control" name="" id="status">
@@ -95,7 +107,7 @@
                                         <th>{{__('translation.type')}}</th>
                                         <th>{{__('translation.category')}}</th>
                                         <th>{{__('translation.status')}}</th>  {{-- جاهز ولا م جاهز --}}
-                                        <th>{{true ? __('translation.is_saled') : __('translation.is_rented')}}</th>  {{-- جاهز ولا م جاهز --}}
+                                        <th>{{request()->type == 'sale' ? __('translation.is_saled') : __('translation.is_rented')}}</th>  {{-- جاهز ولا م جاهز --}}
 
                                         <th>@lang('translation.created_at')</th>
                                         <th>@lang('translation.action')</th>

@@ -79,6 +79,7 @@ class RealStateController extends Controller
             'address' => 'required',
             'category_idd' => 'required',
             'type' => 'required',
+            'status' => 'required',
             'installment' => 'required_if:type,sale',
             'installment.*.precentage' => 'required',
             'installment.*.amount' => 'required',
@@ -138,7 +139,7 @@ class RealStateController extends Controller
     {
 
         try {
-            $rel = RealState::findOrFail($realStat_id);
+            $rel = RealState::with('attachments' , 'Category' ,'Owners', 'CurrentOwner', 'Installments.Owner')->findOrFail($realStat_id);
             if (request()->has('status')) return $this->handelStatus($rel);
             else return $this->HandelShow($rel);
         } catch (\Throwable $th) {
@@ -158,6 +159,7 @@ class RealStateController extends Controller
     public function handelShow(RealState $realState)
     {
         try {
+            // $realState->load('')
             return view('admin.realstate.show' , compact('realState')) ;
         } catch (\Throwable $th) {
             dd($th);
@@ -226,18 +228,33 @@ class RealStateController extends Controller
 
         if($search == ''){
            $employees = RealState::
-           where([
-            'status' => 1,
-            'is_rent' => 0,
-            'is_sale' => 0
-           ])->
-           orderby('title','asc')->select('id','title')->limit(5)->get();
+            where([
+                'status' => 1,
+                'is_rent' => 0,
+                'is_sale' => 0
+            ])
+            ->when(request()->type, function($q){
+                return $q->where('type' , request()->type);
+             })
+            ->orderby('title','asc')->select('id','title')
+            ->limit(5)
+            ->get();
         }else{
            $employees = RealState::where([
             'status' => 1,
             'is_rent' => 0,
             'is_sale' => 0
-           ])-> orderby('title','asc')->select('id','title')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+           ])
+           ->when(request()->type, function($q){
+            return $q->where('type' , request()->type);
+            })
+            ->orderby('title','asc')->select('id','title')->
+            when($search , function($q) use ($search){
+                return $q->where('title', 'like', '%' .$search . '%')
+                    ->orWhere('address', 'like', '%' .$search . '%')
+                    ->orWhere('realstate_number', 'like', '%' .$search . '%');
+                })
+            ->limit(5)->get();
         }
 
         $response = array();

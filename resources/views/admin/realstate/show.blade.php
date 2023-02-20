@@ -221,6 +221,11 @@
                                         <h3 class='p-2'>
                                             {{__('translation.ownersale_info')}}
                                         </h3>
+                                        <div class="">
+                                            <a  href='#' class=" btn btn-light-primary">
+                                                {{__('translation.add_owner')}}
+                                            </a>
+                                        </div>
                                     </div>
                                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
                                         <thead>
@@ -260,6 +265,71 @@
                                                 @endforelse
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="kt_tab_pane_12" role="tabpanel">
+                                <div class="div">
+                                    <table class="table align-middle gs-0 gy-3">
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                            <th class="">{{ __('translation.title') }}</th>
+                                            <th class="">{{ __('translation.owner_name') }}</th>
+                                            <th class="">{{ __('translation.precentage') }}</th>
+                                            <th class="">{{ __('translation.amount') }}</th>
+                                            <th class="">{{ __('translation.is_payed') }}</th>
+                                            <th class="">{{ __('translation.qast_date') }}</th>
+                                            <th class="">{{ __('translation.action') }}</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                <tbody class="fw-bold text-gray-600">
+                                    @forelse ($realState->Installments as $item)
+                                           <tr>
+                                                <td> {{ $realState->title }}</td>
+                                                <td> {{ $item->Owner->name ?? '-' }}</td>
+                                                <td> {{ $item->precentage . '%' }}</td>
+                                                <td> {{ $item->amount }}</td>
+                                                <td>
+                                                    @if ($item->is_payed)
+                                                    <span class='badge badge-light-success'>{{__('translation.done')}} </span>
+                                                    @else
+                                                    <span class='badge badge-light-danger'>{{__('translation.not_done')}} </span>
+                                                        @endif
+                                                </td>
+                                                <td> {{$item->date}}</td>
+                                                <td>
+                                                    @if (!$item->is_payed)
+                                                        <form style='display:inline ;margin:3px'
+                                                        action='{{route('realstate.receptInstallment')}}'
+                                                        method='post'
+                                                        >
+                                                        @csrf
+                                                            {{-- <input  type='hidden' name='real_state_id' value='{{$realstate->id}}'/> --}}
+                                                            <input type='hidden' name='installment_id' value='{{$item->id}}'  >
+                                                            <button
+                                                            class="btn btn-light-info btn-sm"
+                                                            >
+                                                            {{__('translation.recept_installment')}}
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+
+
+
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td collspan='12'>
+                                                    {{__('translation.no_data_found')}}
+                                                </td>
+                                            </tr>
+                                            @endforelse
+                                    </tbody>
+                                </table>
                                 </div>
                             </div>
                         </div>

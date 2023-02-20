@@ -118,7 +118,7 @@
             <div class="d-flex flex-stack">
                 <!--begin::Wrapper-->
                 <div class="me-2">
-                    <a href='#' type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">Back</a>
+                    <a href='#' type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">{{__('translation.back')}}</a>
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Wrapper-->

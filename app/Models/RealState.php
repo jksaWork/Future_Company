@@ -51,7 +51,7 @@ class RealState extends Model
         ->orderByPivot('created_at' , 'desc');
      }
      public function Installments(){
-        return $this->hasMany(RealstateInstallment::class);
+        return $this->hasMany(RealstateInstallment::class, 'realstate_id');
      }
 
     public function CurrentOwner(){
@@ -77,9 +77,7 @@ class RealState extends Model
     public function scoperentOrSaleScope($query){
         return $query->when(request()->has('is_rent') , function($q){
             return $q->where('is_rent' , request()->is_rent ?? '1');
-        });
-
-        return $query->when(request()->has('is_sale') , function($q){
+        })->when(request()->has('is_sale') , function($q){
             return $q->where('is_sale' , request()->is_sale ?? '1');
         });
 

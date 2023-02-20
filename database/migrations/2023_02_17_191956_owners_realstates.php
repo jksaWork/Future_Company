@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('realstate_id') -> references('id') -> on('real_states');
             $table->foreignId('owner_id') -> references('id') -> on('owners');
+            $table->enum('type' , ['rent' , 'sale'])->nullable();
             $table->integer('month_count')->default(0);
             $table->boolean('rent_status')->default(1);
+            $table->boolean('sale_status')->default(1);
             $table->timestamps();
         });
     }
