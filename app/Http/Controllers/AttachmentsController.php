@@ -22,7 +22,8 @@ class AttachmentsController extends Controller
         ['required' => __('translation.attachment_is_required')]
     );
 
-        $attachmentableArray = $this->getAttachableModel($request->type);
+        $attachmentableArray = Attachments::getAttachableModel($request->type);
+        // dd($attachmentableArray);
         // Get Attachable From And Route And Key From Function getAttachableModel
         [$attachmentableClass , $route , $routeKey] = $attachmentableArray;
         $attachmentable = $attachmentableClass::find($request->attachmentable);
@@ -85,16 +86,4 @@ class AttachmentsController extends Controller
         $pathToFile = public_path($file_name);
         return response()->download($pathToFile);
     }
-
-    public function getAttachableModel($type):array
-    {
-        switch($type){
-            case 'owner':
-                return [Owner::class, 'owners.show' , 'owner'];
-            default:
-            return [Owner::class, 'owners.show' , 'owner'];
-        }
-    }
-
-
 }

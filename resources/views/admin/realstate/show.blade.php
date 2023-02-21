@@ -1,5 +1,5 @@
 @extends('layouts.admin.admin')
-@section('main-head', __('translation.show_owner_details'))
+@section('main-head', __('translation.show_real_state_detalis'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -10,21 +10,36 @@
                     {{-- <div class="card "> --}}
                         @include('layouts.includes.session')
                     <div class="card-header card-header-stretch">
-                        <h3 class="card-title">{{ __('translation.show_owner_details') }}</h3>
+                        <h3 class="card-title">{{ __('translation.realstate_information') }}</h3>
                         <div class="card-toolbar">
                             <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_7">
-                                        {{ __('translation.agent_info') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab"
-                                        href="#kt_tab_pane_8">{{ __('translation.owner_real_state') }}</a>
+                                        {{ __('translation.realstate_information') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">
-                                        {{ __('translation.owner_attachment') }}</a>
+                                        {{ __('translation.realstate_attachment') }}</a>
                                 </li>
+                                @if($realState->type == 'rent')
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab"
+                                        href="#kt_tab_pane_8">{{ __('translation.realstate_owner_info') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_11">
+                                        {{ __('translation.realstate_revenues') }}</a>
+                                </li>
+                                @elseif ($realState->type == 'sale')
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab"
+                                        href="#kt_tab_pane_11">{{ __('translation.ownersale_info') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_12">
+                                        {{ __('translation.realstate_installment') }}</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -32,76 +47,73 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
                                 <div>
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
-                                        <!--begin::Table head-->
-                                        <thead>
-                                            <!--begin::Table row-->
-                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
-                                                <th class="">{{ __('translation.logo') }}</th>
-                                                <th class="">{{ __('translation.name') }}</th>
-                                                <th class="">{{ __('translation.phone') }}</th>
-                                                <th class="">{{ __('translation.location') }}</th>
-                                                <th class="">{{ __('translation.description') }}</th>
-                                                <th class="">{{ __('translation.status') }}</th>
-                                            </tr>
-                                            <!--end::Table row-->
-                                        </thead>
-                                        <!--end::Table head-->
-                                        <!--begin::Table body-->
-                                        <tbody class="fw-bold text-gray-600">
-                                            <tr>
+                                    <div class="tab-pane fade show active" id="kt_table_widget_7_tab_1">
+                                        <!--begin::Table container-->
+                                        <div class="table-responsive">
+                                            <!--begin::Table-->
+                                            <table class="table align-middle gs-0 gy-3">
+                                                <!--begin::Table head-->
+                                                <thead>
+                                                    <tr class="fw-bolder text-muted bg-light">
+                                                        <th scope="row">
+                                                            <b>{{ __('translation.title') }}</b>
+                                                        </th>
+                                                        <td>{{ $realState->title }}</td>
+                                                        <th scope="row">{{ __('translation.realstate_number') }}</th>
+                                                        <td>{{$realState->realstate_number}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">{{ __('translation.address') }}</th>
+                                                        <td>{{$realState->address }}</td>
+                                                        <th scope="row">{{ __('translation.price') }}</th>
+                                                        <td>{{$realState->price }}</td>
+                                                    </tr>
+                                                    <tr class="fw-bolder text-muted bg-light">
+                                                            <th scope="row">{{ __('translation.category')}}</th>
+                                                            <td>{{ $realState->Category->name ?? ''}}</td>
+                                                            <th scope="row">{{ __('translation.description') }}</th>
+                                                            <td>{{$realState->description }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                            <th scope="row">{{ __('translation.status') }}</th>
+                                                            <td>{!! $realState->getStatusWithSpan() !!}</td>
+                                                                @if($realState->type == 'rent')
+                                                                <th scope="row">{{ __('translation.is_rented') }}</th>
+                                                                <td>{!! $realState->getSaleStatusWithSpan('is_rent' , 'rented') !!}</td>
+                                                                @else
+                                                                <th scope="row">{{ __('translation.is_saled') }}</th>
+                                                                <td>{!! $realState->getSaleStatusWithSpan('is_sale' , 'saled') !!}</td>
+                                                                @endif
 
-                                                <td> {{ $Owner->name }}</td>
-                                                <td> {{ $Owner->email }}</td>
-                                                <td> {{ $Owner->phone }}</td>
-                                                <td> {{ $Owner->identification_type }}</td>
-                                                <td> {{ $Owner->identification_number }}</td>
-                                                <td> {!! $Owner->getStatusWithSpan() !!}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                     </div>
+                                                        </tr>
+                                                </thead>
+                                                <!--end::Table head-->
+                                                <!--begin::Table body-->
+
+                                                <!--end::Table body-->
+                                            </table>
+                                        </div>
+                                        <!--end::Table-->
+                                    </div>
+                                 </div>
                             </div>
                             <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
                                 <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
-                                        <!--begin::Table head-->
-                                        <thead>
-                                            <!--begin::Table row-->
-                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
-                                                <th class="">{{ __('translation.logo') }}</th>
-                                                <th class="">{{ __('translation.name') }}</th>
-                                                <th class="">{{ __('translation.phone') }}</th>
-                                                <th class="">{{ __('translation.email') }}</th>
-                                                {{-- <th class="">{{ __('translation.location')}}</th>
-                                        <th class="">{{__('translation.description')}}</th> --}}
-                                                <th class="">{{ __('translation.status') }}</th>
-                                            </tr>
-                                            <!--end::Table row-->
-                                        </thead>
-                                        <!--end::Table head-->
-                                        <!--begin::Table body-->
-                                    <tbody class="fw-bold text-gray-600">
-                                            @foreach ($Owner->RealState as $realsate)
-                                                <tr>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <img src="{{ $realsate->logo }}" width='70' alt="">
-                                                        </div>
-                                                    </td>
-                                                    <td> {{ $realsate->realsate }}</td>
-                                                    <td> {{ $realsate->price }}</td>
-                                                    <td> {{ $realsate->email }}</td>
-                                                    {{-- <td> {{$agent->description}}</td> --}}
-                                                    <td> {!! $realsate->getStatusWithSpan() !!}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                    <x:rent-real-state-owner :realstates='$realState->Owners' :realstate='$realState'  />
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel">
+                                <div>
+                                    <form action="{{ route('attachments.store') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name='type' value='realstate'>
+                                        <input type="hidden" name="attachmentable" value='{{ $realState->id }}'>
+                                        <x:input-file class="col-12" name='attachments[]' />
+                                        <button class="btn btn-light-primary mt-3">{{__('translation.Attach')}} </button>
+                                    </form>
+                                </div>
                                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
                                     <!--begin::Table head-->
                                     <thead>
@@ -114,14 +126,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (count($Owner->attachments) > 0)
-                                            @foreach ($Owner->attachments as $attachment)
+                                        @if (count($realState->attachments) > 0)
+                                            @foreach ($realState->attachments as $attachment)
                                                 <tr>
                                                     <td class=" "> {{ $attachment->id }}</td>
                                                     <td class=" "> <img
                                                             src="{{  $attachment->url }}"
                                                             width="80" alt=""></td>
-                                                    <td class=" "> {{ $Owner->name }}</td>
+                                                    <td class=" "> {{ $realState->title }}</td>
                                                     <td class=" ">
                                                         <div style="">
                                                             <a href="{{ route('show_attachments', $attachment->id) }}"
@@ -142,16 +154,183 @@
                                             @endforeach
                                         @endif
                                     </tbody>
-                                    <div>
-                                        <form action="{{ route('attachments.store') }}" method="post"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" name='type' value='attachmentable'>
-                                            <input type="hidden" name="attachmentable" value='{{ $Owner->id }}'>
-                                            <x:input-file class="col-12" name='attachments[]' />
-                                            <button class="btn btn-light-primary mt-3">Attach </button>
-                                        </form>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class='p-2'>
+                                            {{__('translation.Revenues_history')}}
+                                        </h3>
+                                        <div class="btn-group">
+                                            <div class="" style='display:inline ;margin:3px'>
+                                                <a href="{{route('realstate.receipt' , $realState->id)}}"
+                                                class="btn btn-primary btn-sm">
+                                                    {{__('translation.receipt_of_revenue')}}
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
+                                        <thead>
+                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                                <th class="">{{ __('translation.name') }}</th>
+                                                <th class="">{{ __('translation.phone') }}</th>
+                                                <th class="">{{ __('translation.month_number') }}</th>
+                                                <th class="">{{ __('translation.amount') }}</th>
+                                                <th class="">{{ __('translation.rent_status') }}</th>
+                                                <th class="">{{ __('translation.from_date') }}</th>
+                                            </tr>
+                                            <!--end::Table row-->
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                        @forelse ($realState->Revenues->reverse() as $item)
+                                               <tr>
+
+                                                    <td> {{ $item->name }}</td>
+                                                    <td> {{ $item->phone }}</td>
+                                                    <td> {{ $item->pivot->month_number }}</td>
+                                                    <td> {{ $item->pivot->price }}</td>
+                                                    <td>
+                                                        @if ($item->pivot->status)
+                                                        <span class='badge badge-light-success'>{{__('translation.pay_done')}} </span>
+                                                        @else
+                                                        <span class='badge badge-light-danger'>{{__('translation.pay_undone')}} </span>
+                                                            @endif
+                                                    </td>
+                                                    <td> {{$item->created_at->format('y-m-d')}}</td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td collspan='12'>
+                                                        {{__('translation.no_data_found')}}
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="kt_tab_pane_11" role="tabpanel">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class='p-2'>
+                                            {{__('translation.ownersale_info')}}
+                                        </h3>
+                                        <div class="">
+                                            <a  href='#' class=" btn btn-light-primary">
+                                                {{__('translation.add_owner')}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
+                                        <thead>
+                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                                <th>{{ __('translation.id') }}</th>
+                                                <th>{{ __('translation.name') }}</th>
+                                                <th>{{ __('translation.phone') }}</th>
+                                                <th>{{ __('translation.workplace') }}</th>
+                                                <th>{{ __('translation.identification_type') }}</th>
+                                                <th>{{ __('translation.identification_number') }}</th>
+                                                <th>{{ __('translation.status') }}</th>
+                                            </tr>
+                                            <!--end::Table row-->
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                        @forelse ($realState->CurrentOwner as $item)
+                                               <tr>
+
+                                                    <td> {{ $item->name }}</td>
+                                                    <td> {{ $item->phone }}</td>
+                                                    <td> {{ $item->workplace }}</td>
+                                                    <td> {{ $item->identification_type }}</td>
+                                                    <td> {{ $item->identification_number }}</td>
+                                                    <td>
+                                                        {!! $item->getStatusWithSpan() !!}
+                                                    </td>
+                                                    <td> {{$item->created_at->format('y-m-d')}}</td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td collspan='12'>
+                                                        {{__('translation.no_data_found')}}
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="kt_tab_pane_12" role="tabpanel">
+                                <div class="div">
+                                    <table class="table align-middle gs-0 gy-3">
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                            <th class="">{{ __('translation.title') }}</th>
+                                            <th class="">{{ __('translation.owner_name') }}</th>
+                                            <th class="">{{ __('translation.precentage') }}</th>
+                                            <th class="">{{ __('translation.amount') }}</th>
+                                            <th class="">{{ __('translation.is_payed') }}</th>
+                                            <th class="">{{ __('translation.qast_date') }}</th>
+                                            <th class="">{{ __('translation.action') }}</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                <tbody class="fw-bold text-gray-600">
+                                    @forelse ($realState->Installments as $item)
+                                           <tr>
+                                                <td> {{ $realState->title }}</td>
+                                                <td> {{ $item->Owner->name ?? '-' }}</td>
+                                                <td> {{ $item->precentage . '%' }}</td>
+                                                <td> {{ $item->amount }}</td>
+                                                <td>
+                                                    @if ($item->is_payed)
+                                                    <span class='badge badge-light-success'>{{__('translation.done')}} </span>
+                                                    @else
+                                                    <span class='badge badge-light-danger'>{{__('translation.not_done')}} </span>
+                                                        @endif
+                                                </td>
+                                                <td> {{$item->date}}</td>
+                                                <td>
+                                                    @if (!$item->is_payed)
+                                                        <form style='display:inline ;margin:3px'
+                                                        action='{{route('realstate.receptInstallment')}}'
+                                                        method='post'
+                                                        >
+                                                        @csrf
+                                                            {{-- <input  type='hidden' name='real_state_id' value='{{$realstate->id}}'/> --}}
+                                                            <input type='hidden' name='installment_id' value='{{$item->id}}'  >
+                                                            <button
+                                                            class="btn btn-light-info btn-sm"
+                                                            >
+                                                            {{__('translation.recept_installment')}}
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+
+
+
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td collspan='12'>
+                                                    {{__('translation.no_data_found')}}
+                                                </td>
+                                            </tr>
+                                            @endforelse
+                                    </tbody>
+                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,49 +339,3 @@
         </div>
     @endsection
 
-    @push('scripts')
-        <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
-        <script src="//code.jquery.com/jquery.js"></script>
-        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        {{-- <script>
-        // alert('worgiing');
-
-        // let role;
-        let rolesTable = $('#roles-table').DataTable({
-            dom: "tiplr",
-            serverSide: true,
-            processing: true,
-            "language": {
-                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
-            ajax: {
-                url: '{{ route('agents.data') }}',
-                // data : function (d) {
-                //     d.role_id = role;
-                // },
-            },
-            columns: [
-                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'logo', name: 'logo' },
-                {data: 'name', name: 'name' },
-                {data: 'phone', name: 'phone'},
-                {data: 'location', name: 'location'},
-                {data: 'description', name: 'description'},
-                {data: 'status', name: 'status', searchable: false},
-                {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
-            ],
-            order: [[3, 'desc']],
-            drawCallback: function (settings) {
-                $('.record__select').prop('checked', false);
-                $('#record__select-all').prop('checked', false);
-                $('#record-ids').val();
-                $('#bulk-delete').attr('disabled', true);
-            }
-        });
-        $('#data-table-search').keyup(function () {
-            rolesTable.search(this.value).draw();
-        });
-    </script> --}}
-    @endpush

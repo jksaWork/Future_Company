@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
             $table->string('filename');
             $table->unsignedBigInteger('imageable_id');
             $table->string('imageable_type');
-            $table->foreign('imageable_id')->references('id')->on('employees')->onDelete('cascade');
+            // $table->foreign('imageable_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }

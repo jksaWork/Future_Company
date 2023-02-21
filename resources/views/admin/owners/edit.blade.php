@@ -22,7 +22,6 @@
                             <div class="row">
                                 <x:text-input name='name' class='col-md-6'  value='{{$owner->name}}'/>
                                 <x:text-input name='email' class='col-md-6'  value='{{$owner->email}}' />
-                                <x:text-input name='password' class='col-md-6'   />
                                 <x:text-input name='phone' class='col-md-6'  value='{{$owner->phone}}'/>
                                 {{-- <x:text-input name='phone' class='col-md-6' /> --}}
                                 @php

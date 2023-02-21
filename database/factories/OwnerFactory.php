@@ -16,7 +16,6 @@ class OwnerFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->email,
-            'password' => bcrypt('123456'),
             'phone' => '0915477451',
             'identification_number' => random_int(10, 30)
         ];

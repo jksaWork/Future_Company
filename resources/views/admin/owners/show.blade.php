@@ -37,8 +37,8 @@
                                         <thead>
                                             <!--begin::Table row-->
                                             <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
-                                                <th class="">{{ __('translation.logo') }}</th>
                                                 <th class="">{{ __('translation.name') }}</th>
+                                                <th class="">{{ __('translation.email') }}</th>
                                                 <th class="">{{ __('translation.phone') }}</th>
                                                 <th class="">{{ __('translation.location') }}</th>
                                                 <th class="">{{ __('translation.description') }}</th>

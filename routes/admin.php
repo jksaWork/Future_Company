@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AreaController as AdminAreaController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RentController;
 // use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminHomeController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RealStateCategoryController;
 use App\Http\Controllers\RealStateController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -83,6 +85,7 @@ Route::group(
         Route::middleware('auth:admin,web')->group(function(){
              // Owners Resource
             Route::resource('owners', OwnerController::class);
+            Route::get('owners-data-ajax', [OwnerController::class , 'getOwners'])->name('owners.ajax');
             Route::get('owners-data', [OwnerController::class , 'data'])->name('owners.data');
             Route::resource('users', UserController::class);
             // User Controller
@@ -110,6 +113,28 @@ Route::group(
                 // Real State Routes
                 Route::resource('realstate', RealStateController::class);
                 Route::get('realstate-data' ,[RealStateController::class , 'data'])->name('data');
+                Route::get('realstate-data-ajax' ,[RealStateController::class , 'getGetRealState'])->name('ajax');
+                //  Rent Routes Section Assing And OWner
+                Route::post('finsh-rent' , [RentController::class , 'FinshRent'])->name('FinshRent');
+                Route::get('assing-realstate/{id?}' , [RentController::class , 'AssignOwnerTORealState'])->name('assignOwner');
+                Route::post('assing-realstate-to-owner' , [RentController::class , 'Asgin'])->name('assignOwnerToRalstate');
+                Route::get('rent-history', [RentController::class , 'renthistory'])->name('rent.hitory');
+                Route::get('rent-history-data', [RentController::class , 'renthistoryData'])->name('rent.hitory.data');
+                //  Rent Routes Section Route The Revenue
+                Route::get('receipt-revenue/{id?}',[RentController::class ,  'receiptRevenue'])->name('receipt');
+                Route::post('receipt-revenue',[RentController::class ,  'handelRevenue'])->name('Revenue');
+                Route::get('revenue-hsitory' , [RentController::class, 'revenueHsitory'])->name('recept_revenues.hitory');
+                Route::get('revenue-hsitory-data' ,[RentController::class, 'revenueHsitoryData'])->name('recept_revenues.data');
+
+                // Sale Routes And  Controller
+                Route::post('recept-installment', [SaleController::class, 'receptInstallment'])->name('receptInstallment');
+                Route::get('assing-sale-owner/{id?}' , [SaleController::class , 'assignSaleOwner'])->name('assignSaleOwner');
+                Route::get('sale-history' , [SaleController::class , 'saleHistory'])->name('saleHistory');
+                Route::get('sale-history-data' , [SaleController::class , 'saleHistoryData'])->name('saleHistory.data');
+                Route::get('recept-realstate-installment', [SaleController::class, 'receptRealStateInstallment'])->name('receptRealStateInstallment');
+                Route::get('get-installment/' , [SaleController::class , 'getRealStateInstallments'])->name('get_installment');
+                Route::get('get-installment-histry/' , [SaleController::class , 'InstallmentsHistory'])->name('installment_hsitory');
+                Route::get('get-installment-history-data/' , [SaleController::class , 'InstallmentsHistoryData'])->name('installment_hsitory.data');
             });
         });
 

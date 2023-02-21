@@ -97,4 +97,23 @@ class OwnerController extends Controller
     {
         return $this->interface->deleteOwner($owner);
     }
+    public function getOwners(Request $request){
+
+        $search = $request->search;
+
+        if($search == ''){
+           $employees = Owner::where('status' , 1)->orderby('name','asc')->select('id','name')->limit(5)->get();
+        }else{
+           $employees = Owner::where('status' , 1)->orderby('name','asc')->select('id','name')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+        }
+
+        $response = array();
+        foreach($employees as $employee){
+           $response[] = array(
+                "id"=>$employee->id,
+                "text"=>$employee->name
+           );
+        }
+        return response()->json($response);
+     }
 }

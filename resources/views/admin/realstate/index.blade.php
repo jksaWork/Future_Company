@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
-@section('main-head' , __('translation.owners_dashboard'))
+@section('main-head' , __('translation.realstate_mangements'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
@@ -10,34 +10,64 @@
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
-                <div class="card-title">
+                {{-- <div class="card-title"> --}}
                     <!--begin::Search-->
-                    <div class="d-flex align-items-center position-relative my-1">
+                    <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                    height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
-                                    fill="black" />
-                                <path
-                                    d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                    fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                        {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
-                            <input type="text"  name='search'
-                            id="handelSearch"
-                            value="{{request()->search}}"
-                            class="form-control form-control-solid w-350px ps-15"
-                            placeholder="{{__('translation.search_with_number_or_name_email')}}" />
+                        <div class="col-md-6  d-flex align-items-center position-relative my-1 ">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+                                        height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
+                                        fill="black" />
+                                    <path
+                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
+                                <input type="text"  name='search'
+                                id="handelSearch"
+                                value="{{request()->search}}"
+                                class="form-control form-control-solid  ps-15"
+                                placeholder="{{__('translation.search_with_number_or_name_email')}}" />
+
+                        </div>
                         {{-- </form> --}}
+                        @if (request()->type == 'rent')
+                        <div class="d-flex mr-3">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="rent_status">
+                                  <option> -- {{__('translation.is_rented')}} --</option>
+                                  <option value='1'>{{__('translation.rented')}}</option>
+                                  <option value='0'>{{__('translation.inrented')}}</option>
+                                </select>
+                              </div>
+                        </div>
+                        @else
+                        <div class="d-flex mr-3">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="sale_status">
+                                  <option> -- {{__('translation.is_saled')}} --</option>
+                                  <option value='1'>{{__('translation.saled')}}</option>
+                                  <option value='0'>{{__('translation.insaled')}}</option>
+                                </select>
+                              </div>
+                        </div>
+                        @endif
+                        <div class="d-flex mr-3">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="status">
+                                  <option> -- {{__('translation.status')}} --</option>
+                                  <option value='1'>{{__('translation.ready')}}</option>
+                                  <option value='0'>{{__('translation.inready')}}</option>
+                                </select>
+                              </div>
+                        </div>
                     </div>
-                    <!--end::Search-->
-                </div>
-                <!--begin::Card title-->
-                <!--begin::Card toolbar-->
+
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
@@ -77,7 +107,7 @@
                                         <th>{{__('translation.type')}}</th>
                                         <th>{{__('translation.category')}}</th>
                                         <th>{{__('translation.status')}}</th>  {{-- جاهز ولا م جاهز --}}
-                                        <th>{{true ? __('translation.is_saled') : __('translation.is_rented')}}</th>  {{-- جاهز ولا م جاهز --}}
+                                        <th>{{request()->type == 'sale' ? __('translation.is_saled') : __('translation.is_rented')}}</th>  {{-- جاهز ولا م جاهز --}}
 
                                         <th>@lang('translation.created_at')</th>
                                         <th>@lang('translation.action')</th>
@@ -93,7 +123,101 @@
         </div>
         <!--end::Card-->
         <!--begin::Modals-->
+        <!--begin::Modal - Customers - Add-->
+        <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+            <!--begin::Modal dialog-->
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <!--begin::Modal content-->
+                <div class="modal-content">
+                    <!--begin::Form-->
+                    <form class="form" action="{{ route('area.store') }}" id=""
+                        method="post"
+                    >
+                    @csrf
+                        <!--begin::Modal header-->
+                        <div class="modal-header" id="kt_modal_add_customer_header">
+                            <!--begin::Modal title-->
+                            <h2 class="fw-bolder">Add a Area</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div id="kt_modal_add_customer_close"
+                                class="btn btn-icon btn-sm btn-active-icon-primary">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body py-10 px-lg-17">
+                            <!--begin::Scroll-->
+                            <div class="scroll-y me-n7 pe-7" id="#">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">Name</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid"
+                                        placeholder="" name="name"/>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
 
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-15">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-bold mb-2">Description</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid"
+                                        placeholder="" name="description" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Billing toggle-->
+
+                                <!--end::Billing toggle-->
+                                <!--begin::Billing form-->
+
+                                <!--end::Billing form-->
+                            </div>
+                            <!--end::Scroll-->
+                        </div>
+                        <!--end::Modal body-->
+                        <!--begin::Modal footer-->
+                        <div class="modal-footer flex-center">
+                            <!--begin::Button-->
+                            <button type="reset" id="kt_modal_add_customer_cancel"
+                                class="btn btn-light me-3">Discard</button>
+                            <!--end::Button-->
+                            <!--begin::Button-->
+                            <button type="submit" id="kt_modal_add_customer_submit"
+                                class="btn btn-primary">
+                                <span class="indicator-label">Submit</span>
+                                <span class="indicator-progress">Please wait...
+                                    <span
+                                        class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Modal footer-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+            </div>
+        </div>
         <!--end::Modal - Customers - Add-->
         <!--begin::Modal - Adjust Balance-->
         <div class="modal fade" id="kt_customers_export_modal" tabindex="-1" aria-hidden="true">
@@ -235,9 +359,14 @@
 </div>
 @endsection
 @push('scripts')
+<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="{{ asset('datatable/jquery.js')}}"></script>
+<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
-<script>
-    let role;
+    <script>
+    let type = @json(request()->type);
+    let status, is_rent , is_sale;
     let rolesTable = $('#roles-table').DataTable({
         dom: "tiplr",
         serverSide: true,
@@ -247,6 +376,12 @@
         },
         ajax: {
             url: '{{ route('realstate.data') }}',
+            data: function (d){
+                d.type = type;
+                d.status = status;
+                d.is_rent = is_rent;
+                d.is_sale = is_sale;
+            }
         },
         columns: [
             {data: 'id', name: 'id'},
@@ -272,11 +407,22 @@
 
     $('#handelSearch').keyup(function () {
         rolesTable.search(this.value).draw();
-        // role = $(this).val();
-        // rolesTable.ajax.reload();
     });
-    $('#roles').on('change' , function(){
-        role = $(this).val();
+
+
+    $('#rent_status').on('change' , function(){
+        is_rent = $(this).val();
+        rolesTable.ajax.reload();
+    });
+
+    $('#sale_status').on('change' , function(){
+        is_sale = $(this).val();
+        rolesTable.ajax.reload();
+    });
+
+    $('#status').on('change' , function(){
+        console.log('helllo');
+        status = $(this).val();
         rolesTable.ajax.reload();
     });
 </script>

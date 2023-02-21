@@ -18,9 +18,12 @@ class Attachments extends Model
         switch($this->attachable_type){
             case 'App\Models\Owner':
                 return  asset('owner/attachments/' . $key);
-        }
-        if($this->attachable_type =='App\Models\Offer') return asset('offers/attachments/' . $key);
-        else return asset('agents/attachments/' . $key);
+                case 'App\Models\RealState':
+                    return  asset('realstate/attachments/' . $key);
+
+                default:
+            return asset('agents/attachments/' . $key);;
+            }
     }
 
      public  static function AttachMUltiFIleFiles($files , Model $model,string  $disc)
@@ -36,6 +39,19 @@ class Attachments extends Model
                     $model->attachments()->save($attachment);
             }
             return true;
+        }
+    }
+
+    public static function getAttachableModel($type):array
+    {
+        switch($type){
+            case 'owner':
+                return [Owner::class, 'owners.show' , 'owner'];
+
+            case 'realstate':
+                return [RealState::class, 'realstate.realstate.show' , 'realstate'];
+                default:
+            return [Owner::class, 'owners.show' , 'owner'];
         }
     }
 }
