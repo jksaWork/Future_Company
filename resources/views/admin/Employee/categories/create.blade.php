@@ -49,7 +49,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                         <!--begin::Form-->
-                        <form class="form" action="{{ route('area.store') }}" id="" method="post">
+                        {{-- <form class="form" action="{{ route('area.store') }}" id="" method="post">
                             @csrf
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_customer_header">
@@ -127,7 +127,7 @@
                                 <!--end::Button-->
                             </div>
                             <!--end::Modal footer-->
-                        </form>
+                        </form> --}}
                         <!--end::Form-->
                     </div>
                 </div>

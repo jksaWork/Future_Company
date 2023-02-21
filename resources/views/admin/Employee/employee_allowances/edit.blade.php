@@ -34,23 +34,44 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.month') }}
                                         </label>
-                                        <select class="form-control" name="allowances_id" class="form-control">
+                                        <input type="date" id="advances_Date"class="form-control form-control-solid" name="advances_Date" value="{{$employee_allowances->month}}">
+                                        {{-- <select class="form-control" name="month"  value='{{$employee_allowances->month}}' class="form-control">
+                                            <option value="January"> {{ __('translation.January') }}
+                                            </option>
+                                            <option value="February"> {{ __('translation.February') }}
+                                            </option>
+                                            <option value="March"> {{ __('translation.March') }}
+                                            </option>
+                                            <option value="April"> {{ __('translation.April') }}
+                                            </option>
+                                            <option value="May"> {{ __('translation.May') }}
+                                            </option>
+                                            <option value="June"> {{ __('translation.June') }}
+                                            </option>
+                                            <option value="July"> {{ __('translation.July') }}
+                                            </option>
+                                            <option value="August"> {{ __('translation.August') }}
+                                            </option>
+                                            <option value="September"> {{ __('translation.September') }}
+                                            </option>
+                                            <option value="October"> {{ __('translation.October') }}
+                                            </option>
+                                            <option value="November"> {{ __('translation.November') }}
+                                            </option>
+                                            <option value="December"> {{ __('translation.December') }}
+                                            </option>
 
-                                            @foreach ($allowances as $allowancess)
-                                                <option value="{{ $allowancess->id }}">{{ $employee_allowances->allowances->allowances_name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('allowances_id')
+                                        </select> --}}
+                                        <label for="start">Start date:</label>
+                                        @error('month')
                                             <span class="text-danger">
                                                 {{ $message }}
                                             </span>
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
                                         Save

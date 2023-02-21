@@ -3279,7 +3279,7 @@ $('#kt_docs_repeater_advanced').repeater({
 
         // Re-init tagify
         new Tagify(this.querySelector('[data-kt-repeater="tagify"]'));
-        
+
     },
 
     hide: function (deleteElement) {

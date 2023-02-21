@@ -10,6 +10,7 @@ use App\Http\Controllers\Employee\AdvancesController;
 use App\Http\Controllers\Employee\SalariesController;
 use App\Http\Controllers\Employee\SectionController;
 use App\Http\Controllers\Employee\SpendingController;
+use App\Http\Controllers\Employee\EmployeeSalariesController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -42,10 +43,16 @@ Route::group(
               Route::resource('salaries', SalariesController::class);
               Route::resource('section', SectionController::class);
               Route::resource('spending', SpendingController::class);
+            //   Route::resource('EmployeeSalaries', EmployeeSalariesController::class);
+              Route::post('salaries_show', [SalariesController::class ,'salaries_show'])->name('salaries_show');
 
               Route::resource('Upload_attachment', AttachmentController::class);
               Route::get('Download_attachment/{studentsname}/{filename}', [AttachmentController::class ,'Download_attachment'])->name('Download_attachment');
               Route::post('Delete_attachment', [AttachmentController::class ,'Delete_attachment'])->name('Delete_attachment');
+        });
+
+        Route::prefix('Salaries')->name('Salaries.')->group(function () {
+            Route::get('Salaries-data' ,[EmployeeSalariesController::class , 'data'])->name('data');
         });
     }
 );
