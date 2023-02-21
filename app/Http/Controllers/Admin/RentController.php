@@ -35,14 +35,14 @@ class RentController extends Controller
         $request->validate([
             'realstate_id' => 'required',
             'owner_id'=> 'required',
-            'type' => 'required',
+            'type' => 'required|in:rent,sale',
         ]);
         try {
             $realstate = RealState::findOrFail($request->realstate_id);
-            if($realstate->status == 0 ||$realstate->is_rent == true){
-                return  redirect()->back()->withErrors(__('translation.this_realstate_under_rent'));
+            if($realstate->status == 0 ||$realstate->{$request->type} == true){
+                return  redirect()->back()->withErrors(__('translation.this_realstate_under_opration_or_not_ready'));
             }
-            $realstate->is_rent = true;
+            $realstate->{$request->type} = true;
             $realstate->save();
 
             DB::table('owners_realstates')->insert(

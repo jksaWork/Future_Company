@@ -415,19 +415,19 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.receipt') }}">
+                            <a class="menu-link" href="{{ route('realstate.receptRealStateInstallment') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">{{ __('translation.recept_revenues') }}</span>
+                                <span class="menu-title">{{ __('translation.recept_installment') }}</span>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.recept_revenues.hitory') }}">
+                            <a class="menu-link" href="{{ route('realstate.installment_hsitory') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">{{ __('translation.revenues_history') }}</span>
+                                <span class="menu-title">{{ __('translation.installment_history') }}</span>
                             </a>
                         </div>
                     </div>

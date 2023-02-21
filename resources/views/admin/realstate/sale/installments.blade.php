@@ -17,7 +17,7 @@
 
                 @include('layouts.includes.session')
                 <div class="row">
-                    <form action='{{route('realstate.Revenue')}}' method='post'>
+                    <form action='{{route('realstate.receptInstallment')}}' method='post'>
                         @csrf
                         <div class="col-md-12">
                             <div class="row">
@@ -26,11 +26,7 @@
                                         <div class="form-group">
                                           <label for="" style='font-size:20px'>{{__('translation.realstate')}}</label>
                                           <select id='realstate'  style='width:100%' name='realstate_id'
-                                          {{!$realstate ?:'readonly'}}
                                           >
-                                            @if($realstate)
-                                            <option value='{{$realstate->id}}'> {{ $realstate->title }}</option>
-                                            @endif
                                             <option value='0'> {{__('translation.chose_your_real_state')}}</option>
                                         </select>
                                         </div>
@@ -39,12 +35,9 @@
                                 <div class="col-md-6">
                                     <div class="">
                                         <div class="form-group">
-                                          <label for="" style='font-size:20px'>{{__('translation.month_number')}}</label>
-                                          <select id=''  style='width:100%' name='month_number'>
-                                            <option value=''> {{__('translation.chose_month_number')}}</option>
-                                            @for ($i = 1; $i < 13; $i++)
-                                            <option value='{{$i}}'> {{$i . '  --   ' . date("F", mktime(null, null, null, $i, 1));}}</option>
-                                            @endfor
+                                          <label for="" style='font-size:20px'>{{__('translation.installment')}}</label>
+                                          <select id='installment_id'  style='width:100%' name='installment_id'>
+                                            <option value=''> {{__('translation.chose_installment')}}</option>
                                         </select>
                                         </div>
                                     </div>
@@ -93,7 +86,7 @@ $( "#selUser" ).select2({
 });
 $( "#realstate" ).select2({
   ajax: {
-    url: "{{route('realstate.ajax')}}",
+    url: "{{route('realstate.ajax' , ['type' => 'sale'])}}",
     type: "get",
     dataType: 'json',
     delay: 250,
@@ -112,5 +105,29 @@ $( "#realstate" ).select2({
 
 });
 });
+
+$('#realstate').on('change' ,function(){
+    let id = $(this).val();
+    let url = "{{route('realstate.get_installment')}}" + `?id=${id}`;
+    let options;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+            options = res.map(
+                (el) =>{
+                   let option  =  `<option value='${el.id}' ${(!el.is_payed ?null:'disabled')}>   نسبه القصد %${el.precentage} بقمه ${el.amount} </option>`;
+                   $('#installment_id').append(option);
+                })
+                // console.log(options.toString())
+                // $('installment_id').append(options.toString());
+            } ,
+        error:function (err){
+            console.log('error');
+        }});    // console.log(url);
+});
+
+
 </script>
 @endpush

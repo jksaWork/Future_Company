@@ -26,7 +26,7 @@
                                         <div class="form-group">
                                           <label for="" style='font-size:20px'>{{__('translation.realstate')}}</label>
                                           <select id='realstate'  style='width:100%' name='realstate_id'>
-                                            <option value='0'> {{__('translation.chose_your_owner')}}</option>
+                                            <option value='0'> {{__('translation.chose_realstate')}}</option>
                                           </select>
                                         </div>
                                     </div>

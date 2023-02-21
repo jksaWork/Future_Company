@@ -119,7 +119,8 @@ class RealStateController extends Controller
     {
         $collect = collect($installment);
         // Retrive Data And Handel Status
-        $data = $collect->map(function($el) use ($realstate)  {
+        $data = $collect->map(function($el , $index) use ($realstate)  {
+        $el['order_number'] = $index +1 ;
         $el['realstate_id'] = $realstate->id;
         $el['is_payed'] = $el['is_payed'][0]  ?? 0;
             return $el;
@@ -227,33 +228,26 @@ class RealStateController extends Controller
         $search = $request->search;
 
         if($search == ''){
-           $employees = RealState::
-            where([
-                'status' => 1,
-                'is_rent' => 0,
-                'is_sale' => 0
-            ])
-            ->when(request()->type, function($q){
+           $employees = RealState::when(request()->type, function($q){
                 return $q->where('type' , request()->type);
              })
             ->orderby('title','asc')->select('id','title')
             ->limit(5)
             ->get();
         }else{
-           $employees = RealState::where([
-            'status' => 1,
-            'is_rent' => 0,
-            'is_sale' => 0
-           ])
+           $employees = RealState::
+           where('status' ,  1)
+           ->where('is_rent' ,  0)
+           ->where('is_sale' ,  0)
            ->when(request()->type, function($q){
             return $q->where('type' , request()->type);
             })
-            ->orderby('title','asc')->select('id','title')->
-            when($search , function($q) use ($search){
+            ->when($search , function($q) use ($search){
                 return $q->where('title', 'like', '%' .$search . '%')
                     ->orWhere('address', 'like', '%' .$search . '%')
                     ->orWhere('realstate_number', 'like', '%' .$search . '%');
                 })
+            ->orderby('title','asc')->select('id','title')
             ->limit(5)->get();
         }
 
