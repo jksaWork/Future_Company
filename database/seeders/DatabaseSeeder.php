@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use App\Models\Area;
 use App\Models\Client;
+use App\Models\FinancialTreasury;
 use App\Models\Owner;
 use App\Models\RealState;
 use App\Models\RealStateCategory;
@@ -39,6 +40,10 @@ class DatabaseSeeder extends Seeder
 
         // RealState::factory()->create();
 
-
+            FinancialTreasury::create([
+                'total' => 0,
+                'total_debit' => 0,
+                'total_credit'=>0,
+            ]);
     }
 }
