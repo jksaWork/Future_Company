@@ -73,6 +73,7 @@
                                 <th class="min-w-125px">#</th>
                                 <th class="">{{ __('translation.employee_name') }}</th>
                                 <th class="">{{ __('translation.allowances_name') }}</th>
+                                <th class="">{{ __('translation.month') }}</th>
                                 <th class="text-end min-w-70px"> {{ __('translation.Actions') }}</th>
                             </tr>
                             <!--end::Table row-->
@@ -92,6 +93,7 @@
                                     <td>{{$index + 1 }}</td>
                                     <td>{!!$employee->employee->name!!}</td>
                                     <td>{!!$employee->allowances->allowances_name!!}</td>
+                                    <td>{!!$employee->month!!}</td>
                                     {{-- <td></td> --}}
 
                                     <td class=" text-end">

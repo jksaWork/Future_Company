@@ -16,7 +16,7 @@ class CreateAdvancesTable extends Migration
         Schema::create('advances', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('advances_value');
-            $table->date('advances_Date')->nullable();
+            $table->date('advances_Date');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();

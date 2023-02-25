@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\employee;
-use App\Models\Category;
+use App\Models\salaries;
 use App\Models\employee_allowances;
 use App\Models\allowances;
-
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 use Exception;
+use PhpParser\Node\Stmt\Echo_;
 
-class EmployeeAllowancesController extends Controller
+class EmployeeSalariesController extends Controller
 {
 
     public function index(Request $request)
@@ -39,16 +40,22 @@ class EmployeeAllowancesController extends Controller
         // return  $request;
 
         try {
-            employee_allowances::create([
-                'employee_id'   => $request->employee_id,
-                'allowances_id' => $request->allowances_id,
+            $DATA = salaries::create([
+                'employee_id' => $request->employee_id,
+                'fixed_salary' => $request->fixed_salary,
+                'allownacees_salary' => $request->allownacees_salary,
+                'advances' => $request->advances,
+                'totle_salaries' => $request->totle_salaries,
+                'discounts' => $request->discounts,
                 'month' => $request->month,
+                'status' => $request->status,
+                'description' => $request->description,
             ]);
             //    return  $DATA;
             session()->flash('success', __('site.deleted_successfully'));
-            return redirect()->route('Employee.employee_allowances.index');
+            return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             session()->flash('error',  'Some Thing Went Worng ');
             return redirect()->back();
         }
@@ -107,6 +114,25 @@ class EmployeeAllowancesController extends Controller
         return redirect()->route('Employee.employee_allowances.index');
     } //end of destroy
 
-
+public function data(){
+// echo 'hhjhkh';
+    $query = salaries::with('employee');
+    return  DataTables::of($query)
+        ->editColumn('created_at', function ($item) {
+            return $item->created_at->format('Y-m-d');
+        })
+        ->editColumn('status', function ($item) {
+            return  $item->getStatusWithSpan();
+        })
+        // ->editColumn('is_sale', fn ($item) => $item->getSaleStatusWithSpan('is_sale', 'saled'))
+        // ->editColumn('is_rent', fn ($item) => $item->getSaleStatusWithSpan('is_rent', 'rented'))
+        ->editColumn('employee_id', fn ($item) => $item->employee->name ?? '')
+        ->editColumn(
+            'actions',
+            'admin.realstate.data_table.actions'
+        )
+        ->rawColumns(['actions', 'status', 'is_rent', 'is_sale'])
+        ->toJson();
+}
 
 }//end of controller

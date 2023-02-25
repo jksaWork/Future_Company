@@ -46,8 +46,34 @@
 
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label>{{__('translation.month')}}  :</label>
-                                    <input class="form-control fc-datepicker" name="advances_Date" placeholder="YYYY-MM-DD"
-                                    type="date" value="{{$Advancess->advances_Date}}" required>
+                                    <input type="date" id="advances_Date"class="form-control form-control-solid" name="advances_Date" value="{{$Advancess->advances_Date}}">
+                                    {{-- <select class="form-control" name="advances_Date" value="{{$Advancess->advances_Date}}" class="form-control">
+                                        <option value="January"> {{ __('translation.January') }}
+                                        </option>
+                                        <option value="February"> {{ __('translation.February') }}
+                                        </option>
+                                        <option value="March"> {{ __('translation.March') }}
+                                        </option>
+                                        <option value="April"> {{ __('translation.April') }}
+                                        </option>
+                                        <option value="May"> {{ __('translation.May') }}
+                                        </option>
+                                        <option value="June"> {{ __('translation.June') }}
+                                        </option>
+                                        <option value="July"> {{ __('translation.July') }}
+                                        </option>
+                                        <option value="August"> {{ __('translation.August') }}
+                                        </option>
+                                        <option value="September"> {{ __('translation.September') }}
+                                        </option>
+                                        <option value="October"> {{ __('translation.October') }}
+                                        </option>
+                                        <option value="November"> {{ __('translation.November') }}
+                                        </option>
+                                        <option value="December"> {{ __('translation.December') }}
+                                        </option>
+
+                                    </select> --}}
                                         @error('advances_Date')
                                             <span class="text-danger">
                                                 {{$message}}

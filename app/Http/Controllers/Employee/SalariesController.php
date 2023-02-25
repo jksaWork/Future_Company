@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\salaries;
 use App\Models\employee;
-use App\Models\Category;
-use App\Models\Image;
+use App\Models\advances;
+use App\Models\employee_allowances;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
@@ -16,43 +19,49 @@ class SalariesController extends Controller
 
     public function index(Request $request)
     {
-        // return $request;
-        $Categorys = Category::all();
-        // return $Categorys;
-        $employees = employee::all();
+        $month = $request->month;
+        $employee_id = $request->employee_id;
+        $end_month = $request->end_month;
 
-        return view('admin.Employee.salaries.index', compact('employees', 'Categorys'));
+        // being sreach date and id employee employee allowances
+        $employee_allowancess = employee_allowances::where('employee_id', $employee_id)->whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+        // end employee allowances
+        // being sreach date and id employee employee advances
+        $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+       // end employee advances;
+        // return $employee_advances;
+        $employees = employee::findorfail($employee_id);
+        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess'));
     } //end of index
 
 
-    public function create()
+    public function create(Request $request)
     {
-        $Category = Category::all();
-        return view('admin.Employee.salaries.create', compact('Category'));
+        $salaries = salaries::all();
+        return view('admin.Employee.salaries.index', compact('salaries'));
     } //end of create
 
 
-    public function store(EmployeeRequest $request)
+    public function store(Request $request)
     {
-        // return  $request;
-
+        // return $request;
         try {
-            $DATA = employee::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'description' => $request->description,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'salary' => $request->salary,
-                'categories_id' => $request->categories_id,
+            $DATA = salaries::create([
+                'employee_id' => $request->employee_id,
+                'fixed_salary' => $request->fixed_salary,
+                'allownacees_salary' => $request->allownacees_salary,
+                'advances' => $request->advances,
+                'totle_salaries' => $request->totle_salaries,
+                'discounts' => $request->discounts,
+                'month' => $request->month,
                 'status' => $request->status,
-                'description' => $request->description,
+                'discrption' => $request->discrption,
             ]);
             //    return  $DATA;
             session()->flash('success', __('site.deleted_successfully'));
-            return redirect()->route('Employee.salaries.index');
+            return redirect()->route('Employee.salaries.create');
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
             session()->flash('error',  'Some Thing Went Worng ');
             return redirect()->back();
         }
@@ -61,59 +70,77 @@ class SalariesController extends Controller
 
     public function show($id)
     {
-        // return $id;
-        $Category = Category::all();
+
         $employees = employee::findorfail($id);
-        return view('admin.Employee.salaries.create',compact('employees','Category'));
+        return view('admin.Employee.salaries.create', compact('employees'));
     }
 
 
-    public function edit(employee $employee, $id)
+    public function edit( $id)
     {
-        $Categorys = Category::all();
-        // return $Categorys;
-        $employees = employee::find($id);
-        return view('admin.Employee.salaries.edit', compact('Categorys', 'employees'));
+
+        $salaries = salaries::find($id);
+        return view('admin.Employee.salaries.edit', compact('salaries'));
     } //end of edit
 
-    public function update(EmployeeRequest $request, Employee $employee)
+    public function update(Request $request,  $id)
     {
         // return $request;
-        try{
+        try {
+            $salaries = salaries::findOrFail($id);
 
-        $id = Category::where('categories_name', $request->categories_id)->first()->id;
-        //    return $id;
-        $employee = employee::findOrFail($request->pro_id);
-
-        $employee->update([
-            'name' => $request->name,
-                'email' => $request->email,
-                'description' => $request->description,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'salary' => $request->salary,
-                'categories_id' => $id,
+            $salaries->update([
+                'employee_id' => $request->employee_id,
+                'fixed_salary' => $request->fixed_salary,
+                'allownacees_salary' => $request->allownacees_salary,
+                'advances' => $request->advances,
+                'totle_salaries' => $request->totle_salaries,
+                'discounts' => $request->discounts,
+                'month' => $request->month,
                 'status' => $request->status,
-                'description' => $request->description,
-        ]);
-        session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('Employee.salaries.index');
-        }catch(Exception $e){
+                'discrption' => $request->discrption,
+            ]);
+            session()->flash('success', __('site.deleted_successfully'));
+            return redirect()->route('Employee.salaries.create');
+        } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            session()->flash('error',  'Some Thing Went Worng ');
             return redirect()->back();
         }
-
     } //end of update
 
-    public function destroy( Employee $employee , $id)
+    public function destroy( $id)
     {
         // return $id;
-        $employee = employee::findOrFail($id);
-        $employee->delete();
+        $salaries = salaries::findOrFail($id);
+        $salaries->delete();
         session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('Employee.salaries.index');
+        return redirect()->route('Employee.salaries.create');
     } //end of destroy
+
+
+    public function salaries_show(Request $request)
+    {
+        $month = $request->month;
+        $employee_id = $request->employee_id;
+        $end_month = $request->end_month;
+
+        // being sreach date and id employee employee allowances
+        $employee_allowances = employee_allowances::whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+        foreach ($employee_allowances as $list_allowancess) {
+            $employee_allowancess = $list_allowancess->where('employee_id', $employee_id)->get();
+        }
+        // end employee allowances
+        // being sreach date and id employee employee advances
+        $advances = advances::whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+        foreach ($advances as $list_advances) {
+            $employee_advances = $list_advances->where('employee_id', $employee_id)->get();
+        } // end employee advances;
+        $employees = employee::findorfail($employee_id);
+        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess'));
+
+    } //end of salaries_show
+
 
 
 

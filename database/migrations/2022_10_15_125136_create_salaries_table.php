@@ -15,14 +15,14 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->string('allownacees_salary');
-            $table->string('advances');
+            $table->Integer('allownacees_salary');
+            $table->Integer('advances');
             $table->date('month');
-            $table->text('discrption');
-            $table->Integer('totle_salaries');
+            $table->text('discrption')->nullable();
+            $table->bigInteger('totle_salaries');
             $table->Integer('discounts');
             $table->string('status')->default(1);
-            $table->bigInteger('fixed_salary')->nullable();
+            $table->bigInteger('fixed_salary');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();

@@ -189,7 +189,7 @@
 
 
 <div class="menu-item">
-    <a class="menu-link" href="{{ route('Employee.salaries.index') }}">
+    <a class="menu-link" href="{{ route('Employee.salaries.create') }}">
         <span class="menu-bullet">
             <span class="bullet bullet-dot"></span>
         </span>
