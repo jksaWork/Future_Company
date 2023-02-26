@@ -6,6 +6,9 @@ use App\Models\FinancialTreasuryTransactionHistorys;
 use App\Models\FinancialTreasury;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use DB;
+use DivisionByZeroError;
+use Exception;
 
 class FinanicalTreasuryController extends Controller
 {
@@ -31,7 +34,9 @@ class FinanicalTreasuryController extends Controller
 
     public function data()
     {
-        $query = FinancialTreasuryTransactionHistorys::query()
+        $query = FinancialTreasuryTransactionHistorys::whenType()
+            ->whenTransactionType()
+            ->WhenFromDate()
             ->orderBy('id', 'desc');
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
@@ -54,5 +59,51 @@ class FinanicalTreasuryController extends Controller
             )
             ->rawColumns(['actions', 'transaction_type', 'type'])
             ->toJson();
+    }
+    public function revenues()
+    {
+        $data = [];
+        $Treasury =  DB::table(
+            'financial_treasuries'
+        )->select(
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and  transaction_type ="revenues") as revenues_total '),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="installment") as installment_total '),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="main_treasury") as main_treasury'),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" ) as total '),
+        )->get();
+        $Treasury = $Treasury[0];
+        foreach (['revenues_total', 'main_treasury', 'installment_total'] as  $value) {
+            $data[$value] = $this->getPrecetage($Treasury, $value);
+        }
+        return view('admin.treasury.revenues', $data);
+    }
+
+    public function spending()
+    {
+        $data = [];
+        $Treasury =  DB::table(
+            'financial_treasuries'
+        )->select(
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and  transaction_type ="revenues") as revenues_total '),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="installment") as installment_total '),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="main_treasury") as main_treasury'),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" ) as total '),
+        )->get();
+        $Treasury = $Treasury[0];
+        foreach (['revenues_total', 'main_treasury', 'installment_total'] as  $value) {
+            $data[$value] = $this->getPrecetage($Treasury, $value);
+        }
+        return view('admin.treasury.spending', $data);
+    }
+
+    public function getPrecetage($object, $key)
+    {
+        try {
+            $value = $object->$key;
+            $total = $object->total;
+            return floor(($value / $total) * 100);
+        } catch (DivisionByZeroError $en) {
+            return __('translation.non_predictive');
+        }
     }
 }

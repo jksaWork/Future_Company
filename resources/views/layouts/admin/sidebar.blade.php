@@ -94,12 +94,23 @@
                                 <span class="menu-title">{{ __('translation.treasury') }}</span>
                             </a>
                         </div>
+
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('Employee.spending.index', ['service_id' => 1]) }}">
+                            <a class="menu-link" href="{{ route('admin.spending') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title"> {{ __('translation.spending') }}</span>
+                            </a>
+                        </div>
+
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.revenues') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.revenues_trsury') }}</span>
                             </a>
                         </div>
 

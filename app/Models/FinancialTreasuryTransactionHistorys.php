@@ -10,8 +10,15 @@ class FinancialTreasuryTransactionHistorys extends Model
 {
     use HasFactory;
     public $fillable = ['amount', 'type', 'note', 'financial_treasury_history',  'transaction_type', 'ref_id'];
-    public const  TYPES =  ['advance' => "debit", 'salries' => "debit", 'spending' => "debit", "incentives" => "
-    ", 'revenues' => "credit", 'installment'  => "credit", 'main_treasury' => "credit"];
+    public const  TYPES =  [
+        'advance' => "debit",
+        'salries' => "debit",
+        'spending' => "debit",
+        "incentives" => "debit",
+        'revenues' => "credit",
+        'installment'  => "credit",
+        'main_treasury' => "credit"
+    ];
     // this function to make new Record On  Transacation hisotry
     public const  STATUS = ['primary',  'secondary', 'success', 'info', 'warning', 'danger', 'dark'];
     public static function  getStatus()
@@ -48,5 +55,33 @@ class FinancialTreasuryTransactionHistorys extends Model
             return FinancialTreasury::IncreamtnFromTreasury($amount);
         else
             return FinancialTreasury::DecreamtnFromTreasury($amount);
+    }
+
+    public function scopewhenType($query)
+    {
+        $query->when(request()->has('type'), function ($q) {
+            return $q->where('type', request()->type);
+        });
+    }
+
+    public function scopewhenTransactionType($query)
+    {
+        $query->when(request()->has('transaction_type'), function ($q) {
+            return $q->where('transaction_type', request()->transaction_type);
+        });
+    }
+
+    public function scopeWhenFromDate($query)
+    {
+        $query->when(request()->has('from_date'), function ($q) {
+            return $q->where('created_at', '>=',  request()->from_date);
+        });
+    }
+
+    public function scopeWhenToDate($query)
+    {
+        $query->when(request()->has('to_date'), function ($q) {
+            return $q->where('created_at', ',=',  request()->to_date);
+        });
     }
 }

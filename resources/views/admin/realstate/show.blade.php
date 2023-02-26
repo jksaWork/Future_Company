@@ -224,11 +224,7 @@
                                         <h3 class='p-2'>
                                             {{ __('translation.ownersale_info') }}
                                         </h3>
-                                        <div class="">
-                                            <a href='#' class=" btn btn-light-primary">
-                                                {{ __('translation.add_owner') }}
-                                            </a>
-                                        </div>
+
                                     </div>
                                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
                                         <thead>
