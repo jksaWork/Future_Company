@@ -16,11 +16,12 @@ return new class extends Migration
     {
         Schema::create('financial_treasury_transaction_historys', function (Blueprint $table) {
             $table->id();
-            $table->enum('type' , ['debit', 'credit'])->nullable();
-            $table->enum('transaction_type' , FinancialTreasuryTransactionHistorys::TYPES)->nullable();
+            $table->enum('type', ['debit', 'credit'])->nullable();
+            $table->enum('transaction_type', array_keys(FinancialTreasuryTransactionHistorys::TYPES))->nullable();
             $table->double('amount', 15, 8);
             $table->unsignedBigInteger('ref_id');
             $table->json('financial_treasury_history')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

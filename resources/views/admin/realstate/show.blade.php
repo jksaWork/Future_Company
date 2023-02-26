@@ -8,7 +8,7 @@
                 <div class="card-body p-3">
                     {{-- <h2>{{ __('translation.agent_details')}}</h2> --}}
                     {{-- <div class="card "> --}}
-                        @include('layouts.includes.session')
+                    @include('layouts.includes.session')
                     <div class="card-header card-header-stretch">
                         <h3 class="card-title">{{ __('translation.realstate_information') }}</h3>
                         <div class="card-toolbar">
@@ -21,24 +21,24 @@
                                     <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">
                                         {{ __('translation.realstate_attachment') }}</a>
                                 </li>
-                                @if($realState->type == 'rent')
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab"
-                                        href="#kt_tab_pane_8">{{ __('translation.realstate_owner_info') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_11">
-                                        {{ __('translation.realstate_revenues') }}</a>
-                                </li>
+                                @if ($realState->type == 'rent')
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab"
+                                            href="#kt_tab_pane_8">{{ __('translation.realstate_owner_info') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">
+                                            {{ __('translation.realstate_revenues') }}</a>
+                                    </li>
                                 @elseif ($realState->type == 'sale')
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab"
-                                        href="#kt_tab_pane_11">{{ __('translation.ownersale_info') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_12">
-                                        {{ __('translation.realstate_installment') }}</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab"
+                                            href="#kt_tab_pane_11">{{ __('translation.ownersale_info') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_12">
+                                            {{ __('translation.realstate_installment') }}</a>
+                                    </li>
                                 @endif
                             </ul>
                         </div>
@@ -60,32 +60,32 @@
                                                         </th>
                                                         <td>{{ $realState->title }}</td>
                                                         <th scope="row">{{ __('translation.realstate_number') }}</th>
-                                                        <td>{{$realState->realstate_number}}</td>
+                                                        <td>{{ $realState->realstate_number }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">{{ __('translation.address') }}</th>
-                                                        <td>{{$realState->address }}</td>
+                                                        <td>{{ $realState->address }}</td>
                                                         <th scope="row">{{ __('translation.price') }}</th>
-                                                        <td>{{$realState->price }}</td>
+                                                        <td>{{ $realState->price }}</td>
                                                     </tr>
                                                     <tr class="fw-bolder text-muted bg-light">
-                                                            <th scope="row">{{ __('translation.category')}}</th>
-                                                            <td>{{ $realState->Category->name ?? ''}}</td>
-                                                            <th scope="row">{{ __('translation.description') }}</th>
-                                                            <td>{{$realState->description }}</td>
+                                                        <th scope="row">{{ __('translation.category') }}</th>
+                                                        <td>{{ $realState->Category->name ?? '' }}</td>
+                                                        <th scope="row">{{ __('translation.description') }}</th>
+                                                        <td>{{ $realState->description }}</td>
                                                     </tr>
                                                     <tr>
-                                                            <th scope="row">{{ __('translation.status') }}</th>
-                                                            <td>{!! $realState->getStatusWithSpan() !!}</td>
-                                                                @if($realState->type == 'rent')
-                                                                <th scope="row">{{ __('translation.is_rented') }}</th>
-                                                                <td>{!! $realState->getSaleStatusWithSpan('is_rent' , 'rented') !!}</td>
-                                                                @else
-                                                                <th scope="row">{{ __('translation.is_saled') }}</th>
-                                                                <td>{!! $realState->getSaleStatusWithSpan('is_sale' , 'saled') !!}</td>
-                                                                @endif
+                                                        <th scope="row">{{ __('translation.status') }}</th>
+                                                        <td>{!! $realState->getStatusWithSpan() !!}</td>
+                                                        @if ($realState->type == 'rent')
+                                                            <th scope="row">{{ __('translation.is_rented') }}</th>
+                                                            <td>{!! $realState->getSaleStatusWithSpan('is_rent', 'rented') !!}</td>
+                                                        @else
+                                                            <th scope="row">{{ __('translation.is_saled') }}</th>
+                                                            <td>{!! $realState->getSaleStatusWithSpan('is_sale', 'saled') !!}</td>
+                                                        @endif
 
-                                                        </tr>
+                                                    </tr>
                                                 </thead>
                                                 <!--end::Table head-->
                                                 <!--begin::Table body-->
@@ -95,11 +95,11 @@
                                         </div>
                                         <!--end::Table-->
                                     </div>
-                                 </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
                                 <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
-                                    <x:rent-real-state-owner :realstates='$realState->Owners' :realstate='$realState'  />
+                                    <x:rent-real-state-owner :realstates='$realState -> Owners' :realstate='$realState' />
                                 </div>
                             </div>
 
@@ -111,7 +111,7 @@
                                         <input type="hidden" name='type' value='realstate'>
                                         <input type="hidden" name="attachmentable" value='{{ $realState->id }}'>
                                         <x:input-file class="col-12" name='attachments[]' />
-                                        <button class="btn btn-light-primary mt-3">{{__('translation.Attach')}} </button>
+                                        <button class="btn btn-light-primary mt-3">{{ __('translation.Attach') }} </button>
                                     </form>
                                 </div>
                                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
@@ -130,9 +130,8 @@
                                             @foreach ($realState->attachments as $attachment)
                                                 <tr>
                                                     <td class=" "> {{ $attachment->id }}</td>
-                                                    <td class=" "> <img
-                                                            src="{{  $attachment->url }}"
-                                                            width="80" alt=""></td>
+                                                    <td class=" "> <img src="{{ $attachment->url }}" width="80"
+                                                            alt=""></td>
                                                     <td class=" "> {{ $realState->title }}</td>
                                                     <td class=" ">
                                                         <div style="">
@@ -161,13 +160,13 @@
                                 <div>
                                     <div class="d-flex justify-content-between">
                                         <h3 class='p-2'>
-                                            {{__('translation.Revenues_history')}}
+                                            {{ __('translation.Revenues_history') }}
                                         </h3>
                                         <div class="btn-group">
                                             <div class="" style='display:inline ;margin:3px'>
-                                                <a href="{{route('realstate.receipt' , $realState->id)}}"
-                                                class="btn btn-primary btn-sm">
-                                                    {{__('translation.receipt_of_revenue')}}
+                                                <a href="{{ route('realstate.receipt', $realState->id) }}"
+                                                    class="btn btn-primary btn-sm">
+                                                    {{ __('translation.receipt_of_revenue') }}
                                                 </a>
                                             </div>
                                         </div>
@@ -186,9 +185,9 @@
                                         </thead>
                                         <!--end::Table head-->
                                         <!--begin::Table body-->
-                                    <tbody class="fw-bold text-gray-600">
-                                        @forelse ($realState->Revenues->reverse() as $item)
-                                               <tr>
+                                        <tbody class="fw-bold text-gray-600">
+                                            @forelse ($realState->Revenues->reverse() as $item)
+                                                <tr>
 
                                                     <td> {{ $item->name }}</td>
                                                     <td> {{ $item->phone }}</td>
@@ -196,20 +195,24 @@
                                                     <td> {{ $item->pivot->price }}</td>
                                                     <td>
                                                         @if ($item->pivot->status)
-                                                        <span class='badge badge-light-success'>{{__('translation.pay_done')}} </span>
+                                                            <span
+                                                                class='badge badge-light-success'>{{ __('translation.pay_done') }}
+                                                            </span>
                                                         @else
-                                                        <span class='badge badge-light-danger'>{{__('translation.pay_undone')}} </span>
-                                                            @endif
+                                                            <span
+                                                                class='badge badge-light-danger'>{{ __('translation.pay_undone') }}
+                                                            </span>
+                                                        @endif
                                                     </td>
-                                                    <td> {{$item->created_at->format('y-m-d')}}</td>
+                                                    <td> {{ $item->created_at->format('y-m-d') }}</td>
                                                 </tr>
-                                                @empty
+                                            @empty
                                                 <tr>
                                                     <td collspan='12'>
-                                                        {{__('translation.no_data_found')}}
+                                                        {{ __('translation.no_data_found') }}
                                                     </td>
                                                 </tr>
-                                                @endforelse
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -219,11 +222,11 @@
                                 <div>
                                     <div class="d-flex justify-content-between">
                                         <h3 class='p-2'>
-                                            {{__('translation.ownersale_info')}}
+                                            {{ __('translation.ownersale_info') }}
                                         </h3>
                                         <div class="">
-                                            <a  href='#' class=" btn btn-light-primary">
-                                                {{__('translation.add_owner')}}
+                                            <a href='#' class=" btn btn-light-primary">
+                                                {{ __('translation.add_owner') }}
                                             </a>
                                         </div>
                                     </div>
@@ -242,9 +245,9 @@
                                         </thead>
                                         <!--end::Table head-->
                                         <!--begin::Table body-->
-                                    <tbody class="fw-bold text-gray-600">
-                                        @forelse ($realState->CurrentOwner as $item)
-                                               <tr>
+                                        <tbody class="fw-bold text-gray-600">
+                                            @forelse ($realState->CurrentOwner as $item)
+                                                <tr>
 
                                                     <td> {{ $item->name }}</td>
                                                     <td> {{ $item->phone }}</td>
@@ -254,15 +257,15 @@
                                                     <td>
                                                         {!! $item->getStatusWithSpan() !!}
                                                     </td>
-                                                    <td> {{$item->created_at->format('y-m-d')}}</td>
+                                                    <td> {{ $item->created_at->format('y-m-d') }}</td>
                                                 </tr>
-                                                @empty
+                                            @empty
                                                 <tr>
                                                     <td collspan='12'>
-                                                        {{__('translation.no_data_found')}}
+                                                        {{ __('translation.no_data_found') }}
                                                     </td>
                                                 </tr>
-                                                @endforelse
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -271,65 +274,67 @@
                             <div class="tab-pane fade" id="kt_tab_pane_12" role="tabpanel">
                                 <div class="div">
                                     <table class="table align-middle gs-0 gy-3">
-                                    <thead>
-                                        <!--begin::Table row-->
-                                        <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
-                                            <th class="">{{ __('translation.title') }}</th>
-                                            <th class="">{{ __('translation.owner_name') }}</th>
-                                            <th class="">{{ __('translation.precentage') }}</th>
-                                            <th class="">{{ __('translation.amount') }}</th>
-                                            <th class="">{{ __('translation.is_payed') }}</th>
-                                            <th class="">{{ __('translation.qast_date') }}</th>
-                                            <th class="">{{ __('translation.action') }}</th>
-                                        </tr>
-                                        <!--end::Table row-->
-                                    </thead>
-                                    <!--end::Table head-->
-                                <tbody class="fw-bold text-gray-600">
-                                    @forelse ($realState->Installments as $item)
-                                           <tr>
-                                                <td> {{ $realState->title }}</td>
-                                                <td> {{ $item->Owner->name ?? '-' }}</td>
-                                                <td> {{ $item->precentage . '%' }}</td>
-                                                <td> {{ $item->amount }}</td>
-                                                <td>
-                                                    @if ($item->is_payed)
-                                                    <span class='badge badge-light-success'>{{__('translation.done')}} </span>
-                                                    @else
-                                                    <span class='badge badge-light-danger'>{{__('translation.not_done')}} </span>
+                                        <thead>
+                                            <!--begin::Table row-->
+                                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
+                                                <th class="">{{ __('translation.title') }}</th>
+                                                <th class="">{{ __('translation.owner_name') }}</th>
+                                                <th class="">{{ __('translation.precentage') }}</th>
+                                                <th class="">{{ __('translation.amount') }}</th>
+                                                <th class="">{{ __('translation.is_payed') }}</th>
+                                                <th class="">{{ __('translation.qast_date') }}</th>
+                                                <th class="">{{ __('translation.action') }}</th>
+                                            </tr>
+                                            <!--end::Table row-->
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <tbody class="fw-bold text-gray-600">
+                                            @forelse ($realState->Installments as $item)
+                                                <tr>
+                                                    <td> {{ $realState->title }}</td>
+                                                    <td> {{ $item->Owner->name ?? '-' }}</td>
+                                                    <td> {{ $item->precentage . '%' }}</td>
+                                                    <td> {{ $item->amount }}</td>
+                                                    <td>
+                                                        @if ($item->is_payed)
+                                                            <span
+                                                                class='badge badge-light-success'>{{ __('translation.done') }}
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                                class='badge badge-light-danger'>{{ __('translation.not_done') }}
+                                                            </span>
                                                         @endif
-                                                </td>
-                                                <td> {{$item->date}}</td>
-                                                <td>
-                                                    @if (!$item->is_payed)
-                                                        <form style='display:inline ;margin:3px'
-                                                        action='{{route('realstate.receptInstallment')}}'
-                                                        method='post'
-                                                        >
-                                                        @csrf
-                                                            {{-- <input  type='hidden' name='real_state_id' value='{{$realstate->id}}'/> --}}
-                                                            <input type='hidden' name='installment_id' value='{{$item->id}}'  >
-                                                            <button
-                                                            class="btn btn-light-info btn-sm"
-                                                            >
-                                                            {{__('translation.recept_installment')}}
-                                                            </button>
-                                                        </form>
-                                                    @endif
-                                                </td>
+                                                    </td>
+                                                    <td> {{ $item->date }}</td>
+                                                    <td>
+                                                        @if (!$item->is_payed)
+                                                            <form style='display:inline ;margin:3px'
+                                                                action='{{ route('realstate.receptInstallment') }}'
+                                                                method='post'>
+                                                                @csrf
+                                                                {{-- <input  type='hidden' name='real_state_id' value='{{$realstate->id}}'/> --}}
+                                                                <input type='hidden' name='installment_id'
+                                                                    value='{{ $item->id }}'>
+                                                                <button class="btn btn-light-info btn-sm">
+                                                                    {{ __('translation.recept_installment') }}
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </td>
 
 
 
-                                            </tr>
+                                                </tr>
                                             @empty
-                                            <tr>
-                                                <td collspan='12'>
-                                                    {{__('translation.no_data_found')}}
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td collspan='12'>
+                                                        {{ __('translation.no_data_found') }}
+                                                    </td>
+                                                </tr>
                                             @endforelse
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -338,4 +343,3 @@
             </div>
         </div>
     @endsection
-

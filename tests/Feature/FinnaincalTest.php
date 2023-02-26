@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\FinancialTreasury;
+use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
