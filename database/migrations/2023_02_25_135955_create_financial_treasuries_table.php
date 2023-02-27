@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('financial_treasuries', function (Blueprint $table) {
             $table->id();
-            $table->double('total', 15, 8)->nullable();
-            $table->double('total_debit', 15, 8)->nullable();
-            $table->double('total_credit', 15, 8)->nullable();
+            $table->decimal('total', 30, 8)->nullable();
+            $table->decimal('total_debit', 30, 8)->nullable();
+            $table->decimal('total_credit', 30, 8)->nullable();
             $table->timestamps();
         });
     }

@@ -17,16 +17,36 @@ class FinancialTreasury extends Model
     public static function IncreamntToTreasury($amount): FinancialTreasury
     {
         $treasury = self::getInstance();
-        $treasury->total += $amount;
-        $treasury->total_credit += $amount;
+        $treasury->total = $treasury->total + $amount;
+        $treasury->total_credit = $treasury->total_credit +  $amount;
         $treasury->save();
         return $treasury;
     }
     public static function DecreamtnFromTreasury($amount): FinancialTreasury
     {
         $treasury = self::getInstance();
-        $treasury->total -= $amount;
-        $treasury->total_debit += $amount;
+        $treasury->total = $treasury->total -  $amount;
+        $treasury->total_debit  = $treasury->total_debit + $amount;
+        $treasury->save();
+        return $treasury;
+    }
+
+    public static function IncToatalAndDecDebitTreasury($amount): FinancialTreasury
+    {
+        $treasury = self::getInstance();
+        $treasury->total = $treasury->total +  $amount;
+        $treasury->total_debit = $treasury->total_debit - $amount;
+        $treasury->save();
+        return $treasury;
+    }
+
+
+
+    public static function DecToatalAndInCrditTreasury($amount): FinancialTreasury
+    {
+        $treasury = self::getInstance();
+        $treasury->total = $treasury->total + $amount;
+        $treasury->total_credit = $treasury->total_credit - $amount;
         $treasury->save();
         return $treasury;
     }

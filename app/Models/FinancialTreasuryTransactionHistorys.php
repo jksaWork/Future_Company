@@ -66,13 +66,13 @@ class FinancialTreasuryTransactionHistorys extends Model
         $oldInstance->save();
         // dd($old_amount, $new_amount);
         if ($oldInstance->type == 'credit') {
-            FinancialTreasury::DecreamtnFromTreasury($old_amount);
-            FinancialTreasury::IncreamntToTreasury($new_amount);
+            FinancialTreasury::DecToatalAndInCrditTreasury($old_amount);
+            FinancialTreasury::IncToatalAndDecDebitTreasury($new_amount);
         }
         //  Heelo Jksa Altigani Osamn
         if ($oldInstance->type == 'debit') {
-            FinancialTreasury::IncreamntToTreasury($old_amount);
-            FinancialTreasury::DecreamtnFromTreasury($new_amount);
+            FinancialTreasury::IncToatalAndDecDebitTreasury($old_amount);
+            FinancialTreasury::DecToatalAndInCrditTreasury($new_amount);
         }
     }
 

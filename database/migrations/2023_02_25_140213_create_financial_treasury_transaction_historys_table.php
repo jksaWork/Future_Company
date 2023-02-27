@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['debit', 'credit'])->nullable();
             $table->enum('transaction_type', array_keys(FinancialTreasuryTransactionHistorys::TYPES))->nullable();
-            $table->double('amount', 15, 8);
+            $table->decimal('amount', 30, 8);
             $table->unsignedBigInteger('ref_id');
             $table->json('financial_treasury_history')->nullable();
             $table->string('note')->nullable();
