@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\spendings;
 use App\Models\section;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\SpendingRequest;
 use Illuminate\Http\Request;
 use Exception;
@@ -35,21 +36,21 @@ class SpendingController extends Controller
         // return  $request;
 
         $list_spending = $request->list_spending;
+        DB::beginTransaction();
         try {
-            foreach ($list_spending as $list_spendings) {
+            $DATA = spendings::create([
+                'section_id' => $request->section_id,
+                'spending_name' => $request->spending_name,
+                'month' => $request->month,
+                'spending_value' => $request->spending_value,
+                'description' => $request->description,
 
-                $spendings = new spendings();
-                $spendings->section_id = $list_spendings['section_id'];
-                $spendings->spending_name = $list_spendings['spending_name'];
-                $spendings->month = $list_spendings['month'];
-                $spendings->spending_value = $list_spendings['spending_value'];
-                $spendings->description = $list_spendings['description'];
-                $spendings->save();
-            }
+            ]);
             //    return  $DATA;
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.spending.index');
         } catch (Exception $e) {
+            DB::rollback();
             //dd($e);
             session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();

@@ -219,3 +219,20 @@
             // // $allowances = implode(',', $allowances_id);
             // $data = json_encode($allowances_prvent);
             // return $data;
+
+
+
+
+
+
+
+            foreach ($list_spending as $list_spendings) {
+
+                $spendings = new spendings();
+                $spendings->section_id = $list_spendings['section_id'];
+                $spendings->spending_name = $list_spendings['spending_name'];
+                $spendings->month = $list_spendings['month'];
+                $spendings->spending_value = $list_spendings['spending_value'];
+                $spendings->description = $list_spendings['description'];
+                $spendings->save();
+            }

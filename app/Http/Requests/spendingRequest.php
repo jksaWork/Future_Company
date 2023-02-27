@@ -25,10 +25,10 @@ class SpendingRequest extends FormRequest
     public function rules()
     {
         return [
-            'list_spending.*.spending_name' =>'required|string|max:100',
-            'list_spending.*.section_id'=>'required|exists:sections,id',
-            'list_spending.*.month'=>'required|date_format:Y-m-d',
-            'list_spending.*.spending_value'=>'required|min:0|numeric',
+            'spending_name' =>'required|string|max:100',
+            'section_id'=>'required|exists:sections,id',
+            'month'=>'required|date_format:Y-m-d',
+            'spending_value'=>'required|min:0|numeric',
         ];
     }
 

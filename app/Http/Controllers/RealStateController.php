@@ -26,10 +26,16 @@ class RealStateController extends Controller
     public function data()
     {
         $query = RealState::with('Category')
+<<<<<<< HEAD
                 // ->typeScope()
                 ->StatusScope();
                 // ->rentOrSaleScope();
                 // select * from users
+=======
+            ->typeScope()
+            ->StatusScope()
+            ->rentOrSaleScope();
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
 
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
@@ -59,7 +65,7 @@ class RealStateController extends Controller
     public function create()
     {
 
-        $categories = RealStateCategory::where('type' ,request()->type ?? 'rent'  )->get();
+        $categories = RealStateCategory::where('type', request()->type ?? 'rent')->get();
         return view('admin.realstate.create', compact('categories'));
     }
 
@@ -86,7 +92,7 @@ class RealStateController extends Controller
             'installment.*.amount' => 'required',
             'installment.*.date' => 'required',
         ]);
-    //    return $request;
+        //    return $request;
 
         try {
 
@@ -95,13 +101,13 @@ class RealStateController extends Controller
                 [
                     'category_id' => $request->category_idd,
                     'type' => $request->type
-                 ]
+                ]
             );
             // dd($data);
             $realstate  = RealState::create($data);
             Attachments::AttachMUltiFIleFiles($request->attachments, $realstate, 'realstate/attachments');
             //  Check If The Request Comming By Sale Type
-            if($request->has('type') && $request->type == 'sale') $this->SaveTheIstallment($realstate, $request->installment);
+            if ($request->has('type') && $request->type == 'sale') $this->SaveTheIstallment($realstate, $request->installment);
             return redirect()->route('realstate.realstate.index', ['type' => $request->type]);
         } catch (\Throwable $th) {
             dd($th);
@@ -109,29 +115,27 @@ class RealStateController extends Controller
     }
 
 
-/**
+    /**
      * To Save The Installments On Database
      *
      * @param  \App\Models\RealState  $realState
      * @param  \App\Models\RealState  $realState
      * @return void
      */
-    public function SaveTheIstallment( RealState $realstate , $installment)
+    public function SaveTheIstallment(RealState $realstate, $installment)
     {
         $collect = collect($installment);
         // Retrive Data And Handel Status
-        $data = $collect->map(function($el , $index) use ($realstate)  {
-        $el['order_number'] = $index +1 ;
-        $el['realstate_id'] = $realstate->id;
-        $el['is_payed'] = $el['is_payed'][0]  ?? 0;
+        $data = $collect->map(function ($el, $index) use ($realstate) {
+            $el['order_number'] = $index + 1;
+            $el['realstate_id'] = $realstate->id;
+            $el['is_payed'] = $el['is_payed'][0]  ?? 0;
             return $el;
         });
 
         RealstateInstallment::insert($data->all());
-
-
     }
-/**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\RealState  $realState
@@ -141,7 +145,7 @@ class RealStateController extends Controller
     {
 
         try {
-            $rel = RealState::with('attachments' , 'Category' ,'Owners', 'CurrentOwner', 'Installments.Owner')->findOrFail($realStat_id);
+            $rel = RealState::with('attachments', 'Category', 'Owners', 'CurrentOwner', 'Installments.Owner')->findOrFail($realStat_id);
             if (request()->has('status')) return $this->handelStatus($rel);
             else return $this->HandelShow($rel);
         } catch (\Throwable $th) {
@@ -162,7 +166,7 @@ class RealStateController extends Controller
     {
         try {
             // $realState->load('')
-            return view('admin.realstate.show' , compact('realState')) ;
+            return view('admin.realstate.show', compact('realState'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -199,7 +203,7 @@ class RealStateController extends Controller
         try {
             $realState = RealState::find($realState);
             $realState->update($data);
-            session()->flash('success', __('translation.Update Was Done Succesfuly'));
+            session()->flash('success', __('translation.4'));
             return redirect()->route('realstate.realstate.index', ['type' => $realState->type]);
         } catch (\Throwable $th) {
             //throw $th;
@@ -224,42 +228,41 @@ class RealStateController extends Controller
         }
     }
 
-    public function getGetRealState(Request $request){
+    public function getGetRealState(Request $request)
+    {
 
         $search = $request->search;
 
-        if($search == ''){
-           $employees = RealState::when(request()->type, function($q){
-                return $q->where('type' , request()->type);
-             })
-            ->orderby('title','asc')->select('id','title')
-            ->limit(5)
-            ->get();
-        }else{
-           $employees = RealState::
-           where('status' ,  1)
-           ->where('is_rent' ,  0)
-           ->where('is_sale' ,  0)
-           ->when(request()->type, function($q){
-            return $q->where('type' , request()->type);
+        if ($search == '') {
+            $employees = RealState::when(request()->type, function ($q) {
+                return $q->where('type', request()->type);
             })
-            ->when($search , function($q) use ($search){
-                return $q->where('title', 'like', '%' .$search . '%')
-                    ->orWhere('address', 'like', '%' .$search . '%')
-                    ->orWhere('realstate_number', 'like', '%' .$search . '%');
+                ->orderby('title', 'asc')->select('id', 'title')
+                ->limit(5)
+                ->get();
+        } else {
+            $employees = RealState::where('status',  1)
+                ->where('is_rent',  0)
+                ->where('is_sale',  0)
+                ->when(request()->type, function ($q) {
+                    return $q->where('type', request()->type);
                 })
-            ->orderby('title','asc')->select('id','title')
-            ->limit(5)->get();
+                ->when($search, function ($q) use ($search) {
+                    return $q->where('title', 'like', '%' . $search . '%')
+                        ->orWhere('address', 'like', '%' . $search . '%')
+                        ->orWhere('realstate_number', 'like', '%' . $search . '%');
+                })
+                ->orderby('title', 'asc')->select('id', 'title')
+                ->limit(5)->get();
         }
 
         $response = array();
-        foreach($employees as $employee){
-           $response[] = array(
-                "id"=>$employee->id,
-                "text"=>$employee->title
-           );
+        foreach ($employees as $employee) {
+            $response[] = array(
+                "id" => $employee->id,
+                "text" => $employee->title
+            );
         }
         return response()->json($response);
-     }
-
+    }
 }

@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('dashboard') ?: 'active'}}" href="/admin/dashboard">
+                    <a class="menu-link {{ request()->routeIs('dashboard') ?: 'active' }}" href="/admin/dashboard">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -66,138 +66,193 @@
                         <span class="menu-title">{{ __('translation.dashboard') }}</span>
                     </a>
                 </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                                        fill="black" />
+                                    <rect opacity="0.3" x="8" y="3" width="8" height="8"
+                                        rx="4" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"> {{ __('translation.finanical_treasury') }} </span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.finanical') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.treasury') }}</span>
+                            </a>
+                        </div>
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.spending') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.spending') }}</span>
+                            </a>
+                        </div>
+
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.revenues') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.revenues_trsury') }}</span>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+
                 <div class="menu-item">
                     <div class="menu-content pb-2">
                         <span
                             class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.Mangements') }}</span>
                     </div>
                 </div>
-<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-    <span class="menu-link">
-        <span class="menu-icon">
-            <span class="svg-icon svg-icon-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
-                        fill="black" />
-                    <rect opacity="0.3" x="8" y="3" width="8"
-                        height="8" rx="4" fill="black" />
-                </svg>
-            </span>
-            <!--end::Svg Icon-->
-        </span>
-        <span class="menu-title"> {{ __('translation.Expenses_and_calculations') }} </span>
-        <span class="menu-arrow"></span>
-    </span>
-    <div class="menu-sub menu-sub-accordion menu-active-bg">
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('Employee.section.index', ['service_id' => 1]) }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">{{ __('translation.section') }}</span>
-            </a>
-        </div>
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('Employee.spending.index' , ['service_id' =>1]) }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title"> {{ __('translation.spending') }}</span>
-            </a>
-        </div>
+
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                                        fill="black" />
+                                    <rect opacity="0.3" x="8" y="3" width="8"
+                                        height="8" rx="4" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"> {{ __('translation.Expenses_and_calculations') }} </span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.section.index', ['service_id' => 1]) }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.section') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.spending.index', ['service_id' => 1]) }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.spending') }}</span>
+                            </a>
+                        </div>
 
 
-    </div>
-</div>
+                    </div>
+                </div>
 
-{{-- END section --}}
-
-
-{{-- being all employees --}}
-<div class="menu-item">
-    <div class="menu-content pb-2">
-        <span
-            class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.employees_management') }}</span>
-    </div>
-</div>
-<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-    <span class="menu-link">
-        <span class="menu-icon">
-            <span class="svg-icon svg-icon-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
-                        fill="black" />
-                    <rect opacity="0.3" x="8" y="3" width="8"
-                        height="8" rx="4" fill="black" />
-                </svg>
-            </span>
-            <!--end::Svg Icon-->
-        </span>
-        <span class="menu-title"> {{ __('translation.employees') }} </span>
-        <span class="menu-arrow"></span>
-    </span>
-    <div class="menu-sub menu-sub-accordion menu-active-bg">
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('Employee.categories.index', ['service_id' => 1]) }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">{{ __('translation.Categoires') }}</span>
-            </a>
-        </div>
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('Employee.All_Employee.index') }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title"> {{ __('translation.all_employees') }}</span>
-            </a>
-        </div>
-
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('Employee.allowances.index') }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title"> {{ __('translation.Allowances_and_incentives') }}</span>
-            </a>
-        </div>
-
-<div class="menu-item">
-    <a class="menu-link" href="{{ route('Employee.employee_allowances.index') }}">
-        <span class="menu-bullet">
-            <span class="bullet bullet-dot"></span>
-        </span>
-        <span class="menu-title"> {{ __('translation.employee_allowances') }}</span>
-    </a>
-</div>
+                {{-- END section --}}
 
 
+                {{-- being all employees --}}
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span
+                            class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.employees_management') }}</span>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                                        fill="black" />
+                                    <rect opacity="0.3" x="8" y="3" width="8"
+                                        height="8" rx="4" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"> {{ __('translation.employees') }} </span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link"
+                                href="{{ route('Employee.categories.index', ['service_id' => 1]) }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.Categoires') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.All_Employee.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.all_employees') }}</span>
+                            </a>
+                        </div>
 
-<div class="menu-item">
-    <a class="menu-link" href="{{ route('Employee.Advances.index') }}">
-        <span class="menu-bullet">
-            <span class="bullet bullet-dot"></span>
-        </span>
-        <span class="menu-title"> {{ __('translation.Advancess') }}</span>
-    </a>
-</div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.allowances.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.Allowances_and_incentives') }}</span>
+                            </a>
+                        </div>
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.employee_allowances.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.employee_allowances') }}</span>
+                            </a>
+                        </div>
 
 
-<div class="menu-item">
-    <a class="menu-link" href="{{ route('Employee.salaries.create') }}">
-        <span class="menu-bullet">
-            <span class="bullet bullet-dot"></span>
-        </span>
-        <span class="menu-title"> {{ __('translation.salaries') }}</span>
-    </a>
-</div>
-</div>
-</div>
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.Advances.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.Advancess') }}</span>
+                            </a>
+                        </div>
+
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('Employee.salaries.create') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.salaries') }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
                         <span
@@ -205,7 +260,8 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ ! request()->routeIs('Employee.categories.index') ?: 'active' }}" href="{{ route('realstate.categories.index' ) }}">
+                    <a class="menu-link {{ !request()->routeIs('Employee.categories.index') ?: 'active' }}"
+                        href="{{ route('realstate.categories.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                             <span class="menu-icon">
@@ -305,7 +361,8 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.realstate.create' , ['type' => 'rent']) }}">
+                            <a class="menu-link"
+                                href="{{ route('realstate.realstate.create', ['type' => 'rent']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -313,7 +370,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.realstate.index' , ['type' => 'rent']) }}">
+                            <a class="menu-link" href="{{ route('realstate.realstate.index', ['type' => 'rent']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -383,7 +440,8 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.realstate.create' , ['type' => 'sale']) }}">
+                            <a class="menu-link"
+                                href="{{ route('realstate.realstate.create', ['type' => 'sale']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -391,7 +449,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('realstate.realstate.index' , ['type' => 'sale']) }}">
+                            <a class="menu-link" href="{{ route('realstate.realstate.index', ['type' => 'sale']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -489,97 +547,97 @@
                         </div>
                     </div>
                 </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
-                                            fill="black" />
-                                        <rect opacity="0.3" x="8" y="3" width="8"
-                                            height="8" rx="4" fill="black" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                                        fill="black" />
+                                    <rect opacity="0.3" x="8" y="3" width="8"
+                                        height="8" rx="4" fill="black" />
+                                </svg>
                             </span>
-                            <span class="menu-title"> {{ __('translation.user_account') }}</span>
-                            <span class="menu-arrow"></span>
+                            <!--end::Svg Icon-->
                         </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('users.create') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.add_account') }}</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('users.index') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.show_users') }}</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('admin.roles.index') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.roles') }}</span>
-                                </a>
-                            </div>
+                        <span class="menu-title"> {{ __('translation.user_account') }}</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('users.create') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.add_account') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('users.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.show_users') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.roles.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.roles') }}</span>
+                            </a>
                         </div>
                     </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
-                                            fill="black" />
-                                        <rect opacity="0.3" x="8" y="3" width="8"
-                                            height="8" rx="4" fill="black" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                                        fill="black" />
+                                    <rect opacity="0.3" x="8" y="3" width="8"
+                                        height="8" rx="4" fill="black" />
+                                </svg>
                             </span>
-                            <span class="menu-title">{{ __('translation.reports') }}</span>
-                            <span class="menu-arrow"></span>
+                            <!--end::Svg Icon-->
                         </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('report.agent') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.agent_offer_report') }}</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('report.offer_status_report') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.offer_status_report') }}</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{ route('report.system_usage_monthly') }}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{ __('translation.system_usage_monthly') }}</span>
-                                </a>
-                            </div>
-                            {{-- <div class="menu-item">
+                        <span class="menu-title">{{ __('translation.reports') }}</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('report.agent') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.agent_offer_report') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('report.offer_status_report') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.offer_status_report') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('report.system_usage_monthly') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.system_usage_monthly') }}</span>
+                            </a>
+                        </div>
+                        {{-- <div class="menu-item">
                             <a class="menu-link" href="{{route('admin.roles.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -587,13 +645,13 @@
                                 <span class="menu-title">Roles</span>
                             </a>
                         </div> --}}
-                        </div>
                     </div>
                 </div>
-
-
-
             </div>
+
+
+
         </div>
     </div>
+</div>
 </div>
