@@ -75,8 +75,10 @@ class FinnaincalTest extends TestCase
         $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($AMOUNT, 'main_treasury', 'hello');
         FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT);
         $oldData = FinancialTreasury::getInstance();
-        $this->assertEquals($oldData->total, $AMOUNT);
+        $this->assertEquals($oldData->total, $New_AMOUNT);
     }
+
+
 
     public function test_fresh_data_base()
     {

@@ -45,7 +45,7 @@ class FinancialTreasury extends Model
     public static function DecToatalAndInCrditTreasury($amount): FinancialTreasury
     {
         $treasury = self::getInstance();
-        $treasury->total = $treasury->total + $amount;
+        $treasury->total = $treasury->total - $amount;
         $treasury->total_credit = $treasury->total_credit - $amount;
         $treasury->save();
         return $treasury;
