@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\EmployeeRequest;
+use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -28,10 +29,10 @@ class SalariesController extends Controller
         // end employee allowances
         // being sreach date and id employee employee advances
         $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-       // end employee advances;
+        // end employee advances;
         // return $employee_advances;
         $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess'));
+        return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
     } //end of index
 
 
@@ -46,6 +47,7 @@ class SalariesController extends Controller
     {
         // return $request;
         try {
+            $employee =  employee::findOrFail($request->employee_id);
             $DATA = salaries::create([
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
@@ -58,6 +60,8 @@ class SalariesController extends Controller
                 'discrption' => $request->discrption,
             ]);
             //    return  $DATA;
+            FinancialTreasuryTransactionHistorys::MakeTransacaion($request->Installment->totle_salaries, 'salries',  __('translation.employee_salary') . ' - ' . $employee->name, $DATA->id);
+
             session()->flash('success', __('site.deleted_successfully'));
             return redirect()->route('Employee.salaries.create');
         } catch (Exception $e) {
@@ -76,7 +80,7 @@ class SalariesController extends Controller
     }
 
 
-    public function edit( $id)
+    public function edit($id)
     {
 
         $salaries = salaries::find($id);
@@ -109,7 +113,7 @@ class SalariesController extends Controller
         }
     } //end of update
 
-    public function destroy( $id)
+    public function destroy($id)
     {
         // return $id;
         $salaries = salaries::findOrFail($id);
@@ -137,8 +141,7 @@ class SalariesController extends Controller
             $employee_advances = $list_advances->where('employee_id', $employee_id)->get();
         } // end employee advances;
         $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess'));
-
+        return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
     } //end of salaries_show
 
 

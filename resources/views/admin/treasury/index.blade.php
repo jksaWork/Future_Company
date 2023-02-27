@@ -123,7 +123,7 @@
                                 <div class="form-group">
                                     <label class='form-lable'> {{ __('translation.type') }}</label>
                                     <select id='realstate' style='width:100%' name='realstate_id' class='form-control'>
-                                        <option value='null'> {{ __('translation.all_types') }}</option>
+                                        <option value=''> {{ __('translation.all_types') }}</option>
                                         <option value='credit'> {{ __('translation.credit_types') }}</option>
                                         <option value='debit'> {{ __('translation.debit_types') }}</option>
                                     </select>
@@ -186,7 +186,9 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    @include('layouts.includes.session')
+                    <div class="p-2">
+                        @include('layouts.includes.session')
+                    </div>
                     <div class="row">
                         <div class="col-md-12 pt-5">
                             <div class="table-responsive">

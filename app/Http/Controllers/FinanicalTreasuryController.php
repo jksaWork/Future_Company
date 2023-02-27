@@ -32,6 +32,23 @@ class FinanicalTreasuryController extends Controller
         }
     }
 
+
+
+    public function update(Request $request, $id)
+    {
+        // return $id;
+        $data = $request->validate([
+            'amount' => 'required',
+        ]);
+        try {
+            FinancialTreasuryTransactionHistorys::EditTransaction($id, $request->amount);
+            session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
+    }
+
     public function data()
     {
         $query = FinancialTreasuryTransactionHistorys::whenType()

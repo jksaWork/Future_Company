@@ -19,14 +19,14 @@ class SaleController extends Controller
 
         $owner_id = $Installment->RealState->CurrentOwner[0]->id;
         $owner_name = $Installment->RealState->CurrentOwner[0]->name;
-        DB::table('installments_history')
+        $id =  DB::table('installments_history')
             ->insertGetId([
                 'realstate_id' => $Installment->realstate_id,
                 'owner_id' => $owner_id,
                 'amount' => $Installment->amount,
                 'order_number' => $Installment->order_number,
             ]);
-        FinancialTreasuryTransactionHistorys::MakeTransacaion($Installment->amount, 'installment', $owner_name . '-' . __('translation.installment_order_' . $Installment->order_number));
+        FinancialTreasuryTransactionHistorys::MakeTransacaion($Installment->amount, 'installment', $owner_name . '-' . __('translation.installment_order_' . $Installment->order_number, $id));
         session()->flash('success', __('translation.installment_sucess'));
         return redirect()->route('realstate.realstate.show', $Installment->realstate_id);
     }

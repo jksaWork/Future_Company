@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class FinancialTreasury extends Model
 {
     use HasFactory;
-    public $fillable = ['total' , 'total_debit' , 'total_credit'];
+    public $fillable = ['total', 'total_debit', 'total_credit'];
 
-    public static function   getInstance(){
+    public static function   getInstance()
+    {
         return FinancialTreasury::first();
     }
-    public static function IncreamtnFromTreasury($amount)
-    :FinancialTreasury
+    public static function IncreamntToTreasury($amount): FinancialTreasury
     {
         $treasury = self::getInstance();
         $treasury->total += $amount;
@@ -22,7 +22,7 @@ class FinancialTreasury extends Model
         $treasury->save();
         return $treasury;
     }
-    public static function DecreamtnFromTreasury($amount):FinancialTreasury
+    public static function DecreamtnFromTreasury($amount): FinancialTreasury
     {
         $treasury = self::getInstance();
         $treasury->total -= $amount;

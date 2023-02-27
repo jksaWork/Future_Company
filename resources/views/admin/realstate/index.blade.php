@@ -132,6 +132,10 @@
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
+        function alert2(e) {
+            alert(e);
+            e.preventDefault();
+        }
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
@@ -185,8 +189,8 @@
                     sortable: false
                 },
                 {
-                    data: 'is_sale',
-                    name: 'is_sale',
+                    data: 'is_{{ request()->type }}',
+                    name: 'is_{{ request()->type }}',
                     sortable: false
                 },
                 {

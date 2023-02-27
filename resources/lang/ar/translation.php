@@ -408,4 +408,8 @@ return [
     'installments' => 'ايراد الاقصاد',
     'revenue_income' => 'ايراد الايجارات',
     'revenues_trsury' => 'الايرادات',
+    'employee_salary' => 'مرتب شهري',
+    'employee_advances' => 'سلفيات موظفين',
+    'edit_amount' => 'تعديل المبلغ',
+    'Edit_pay_to_Treasury_was_done_success' => 'تم تعديل بيانات الايراد بنجاح',
 ];
