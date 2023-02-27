@@ -18,20 +18,20 @@ class FinnaincalTest extends TestCase
     public function test_can_increase_from_finanical_treasur()
     {
         $oldData = FinancialTreasury::getInstance();
-        $data = FinancialTreasury::IncreamtnFromTreasury(1000);
+        $data = FinancialTreasury::IncreamntToTreasury(1000);
         // Asserions
-        $this->assertEquals($data->total ,$oldData->total + 1000);
-        $this->assertEquals($data->total_credit ,$oldData->total_credit +  1000);
-        $this->assertEquals($data->total_debit ,$oldData-> total_debit);
+        $this->assertEquals($data->total, $oldData->total + 1000);
+        $this->assertEquals($data->total_credit, $oldData->total_credit +  1000);
+        $this->assertEquals($data->total_debit, $oldData->total_debit);
     }
     public function test_can_decrease_from_finanical_treasur()
     {
         $oldData = FinancialTreasury::getInstance();
         $data = FinancialTreasury::DecreamtnFromTreasury(1000);
         // Asserions
-        $this->assertEquals($data->total ,$oldData->total - 1000);
-        $this->assertEquals($data->total_credit ,$oldData->total_credit);
-        $this->assertEquals($data->total_debit ,$oldData-> total_debit + 1000);
+        $this->assertEquals($data->total, $oldData->total - 1000);
+        $this->assertEquals($data->total_credit, $oldData->total_credit);
+        $this->assertEquals($data->total_debit, $oldData->total_debit + 1000);
     }
 
 
@@ -39,10 +39,25 @@ class FinnaincalTest extends TestCase
     {
         $oldData = FinancialTreasury::getInstance();
         $data = FinancialTreasury::DecreamtnFromTreasury(1000);
-        $data = FinancialTreasury::IncreamtnFromTreasury(1000);
+        $data = FinancialTreasury::IncreamntToTreasury(1000);
         // Asserions
-        $this->assertEquals($data->total ,$oldData->total);
-        $this->assertEquals($data->total_credit ,$oldData->total_credit + 1000);
-        $this->assertEquals($data->total_debit ,$oldData-> total_debit + 1000);
+        $this->assertEquals($data->total, $oldData->total);
+        $this->assertEquals($data->total_credit, $oldData->total_credit + 1000);
+        $this->assertEquals($data->total_debit, $oldData->total_debit + 1000);
+        // EditTransaction
+
+    }
+
+
+
+    public function test_can_i_make_transaction_and_edit_it_after_its_maked()
+    {
+        //  Check IF I can Drowl And Payments
+        $oldData = FinancialTreasury::getInstance();
+        $oldData->update(['total' => 0, 'total_debit' => 0, 'total_credit' => 0]);
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion(1000, 'main_treasury', 'hello');
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, 1001);
+        $oldData = FinancialTreasury::getInstance();
+        $this->assertEquals($oldData->total, 1001);
     }
 }

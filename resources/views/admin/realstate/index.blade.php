@@ -154,6 +154,7 @@
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
 <<<<<<< HEAD
+<<<<<<< HEAD
     let type = @json(request()->type);
     let status, is_rent , is_sale;
     let rolesTable = $('#roles-table').DataTable({
@@ -189,6 +190,12 @@
 
     });
 =======
+=======
+        function alert2(e) {
+            alert(e);
+            e.preventDefault();
+        }
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
@@ -242,8 +249,8 @@
                     sortable: false
                 },
                 {
-                    data: 'is_sale',
-                    name: 'is_sale',
+                    data: 'is_{{ request()->type }}',
+                    name: 'is_{{ request()->type }}',
                     sortable: false
                 },
                 {

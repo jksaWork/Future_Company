@@ -421,5 +421,13 @@ return [
     'installments' => 'ايراد الاقصاد',
     'revenue_income' => 'ايراد الايجارات',
     'revenues_trsury' => 'الايرادات',
+<<<<<<< HEAD
 >>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
 ];
+=======
+    'employee_salary' => 'مرتب شهري',
+    'employee_advances' => 'سلفيات موظفين',
+    'edit_amount' => 'تعديل المبلغ',
+    'Edit_pay_to_Treasury_was_done_success' => 'تم تعديل بيانات الايراد بنجاح',
+];
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3

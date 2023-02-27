@@ -139,6 +139,7 @@ Route::group(
             Route::get('finanical-treasury', [FinanicalTreasuryController::class, 'finanical'])->name('admin.finanical');
             Route::get('finanical-treasury-ajax', [FinanicalTreasuryController::class, 'data'])->name('admin.finanical.data');
             Route::post('finanical-treasury', [FinanicalTreasuryController::class, 'store'])->name('admin.finanical.store');
+            Route::put('finanical-treasury-update/{id}', [FinanicalTreasuryController::class, 'update'])->name('admin.finanical.update');
             Route::get('finanical-treasury-spending', [FinanicalTreasuryController::class, 'spending'])->name('admin.spending');
             Route::get('finanical-treasury-revenues', [FinanicalTreasuryController::class, 'revenues'])->name('admin.revenues');
         });

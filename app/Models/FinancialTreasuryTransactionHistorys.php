@@ -42,7 +42,7 @@ class FinancialTreasuryTransactionHistorys extends Model
                 throw new Exception('The Treasury Is Less Than Amount', 50);
             }
         }
-        self::create([
+        $instance  = self::create([
             'amount' => $amount,
             'type' => $type,
             'financial_treasury_history' => $json,
@@ -52,21 +52,40 @@ class FinancialTreasuryTransactionHistorys extends Model
         ]);
         // Check IF Debit Or credit Trnsaction
         if ($type == 'credit')
-            return FinancialTreasury::IncreamtnFromTreasury($amount);
+            FinancialTreasury::IncreamntToTreasury($amount);
         else
-            return FinancialTreasury::DecreamtnFromTreasury($amount);
+            FinancialTreasury::DecreamtnFromTreasury($amount);
+        return $instance;
+    }
+
+    public static function EditTransaction($transaction_id, $new_amount)
+    {
+        $oldInstance = FinancialTreasuryTransactionHistorys::findOrFail($transaction_id);
+        $old_amount  = $oldInstance->amount;
+        $oldInstance->amount = $new_amount;
+        $oldInstance->save();
+        // dd($old_amount, $new_amount);
+        if ($oldInstance->type == 'credit') {
+            FinancialTreasury::DecreamtnFromTreasury($old_amount);
+            FinancialTreasury::IncreamntToTreasury($new_amount);
+        }
+        //  Heelo Jksa Altigani Osamn
+        if ($oldInstance->type == 'debit') {
+            FinancialTreasury::IncreamntToTreasury($old_amount);
+            FinancialTreasury::DecreamtnFromTreasury($new_amount);
+        }
     }
 
     public function scopewhenType($query)
     {
-        $query->when(request()->has('type'), function ($q) {
+        $query->when(request()->has('type') && request()->type != null, function ($q) {
             return $q->where('type', request()->type);
         });
     }
 
     public function scopewhenTransactionType($query)
     {
-        $query->when(request()->has('transaction_type'), function ($q) {
+        $query->when(request()->has('transaction_type') && request()->transaction_type != null, function ($q) {
             return $q->where('transaction_type', request()->transaction_type);
         });
     }

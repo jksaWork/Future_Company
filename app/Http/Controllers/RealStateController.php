@@ -110,7 +110,8 @@ class RealStateController extends Controller
             if ($request->has('type') && $request->type == 'sale') $this->SaveTheIstallment($realstate, $request->installment);
             return redirect()->route('realstate.realstate.index', ['type' => $request->type]);
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
+            return redirect()->back()->withErrors(__('translation.6'));
         }
     }
 
@@ -158,7 +159,7 @@ class RealStateController extends Controller
     public function handelStatus(RealState $realState)
     {
         $realState->ChangeStatus();
-        return redirect()->route('realstate.realstate.index');
+        return redirect()->route('realstate.realstate.index', ['type' => $realState->type]);
     }
 
 
@@ -222,7 +223,7 @@ class RealStateController extends Controller
         try {
             RealState::findOrFail($realState)->delete();
             session()->flash('success', __('translation.5'));
-            return  redirect()->route('realstate.realstate.index');
+            return  redirect()->route('realstate.realstate.index', ['type' => $realState->type]);
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors($th->getMessage());
         }
