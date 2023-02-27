@@ -37,11 +37,11 @@ class CategoiresController extends Controller
         // return  $request;
         try{
         Category::create($request->all());
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.categories.index');
     }catch(Exception $e){
         dd($e);
-        session()->flash('error' ,  'Some Thing Went Worng ');
+        session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
         return redirect()->back();
     }
 
@@ -66,12 +66,12 @@ class CategoiresController extends Controller
     {
         try{
         $category->update($request->all());
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.categories.index');
 
     }catch(Exception $e){
         dd($e);
-        session()->flash('error' ,  'Some Thing Went Worng ');
+        session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
         return redirect()->back();
     }
 

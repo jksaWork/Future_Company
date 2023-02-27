@@ -18,15 +18,15 @@
                             <div class="row">
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
-                                    <input type="hidden" class="form-control form-control-solid"
-                                    placeholder="" name="employee_id" value=" {{$employees->id}}" required/>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="" value=" {{ $employees->name }}" required/>
-                                        @error('employee_id')
-                                            <span class="text-danger">
-                                                {{$message}}
-                                            </span>
-                                        @enderror
+                                    <input type="hidden" class="form-control form-control-solid" placeholder=""
+                                        name="employee_id" value=" {{ $employees->id }}" readonly />
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                        name="" value=" {{ $employees->name }}" readonly />
+                                    @error('employee_id')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-md-6">
@@ -51,63 +51,41 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.month') }}
-                                        </label>
-                                        <input type="date" id="advances_Date"class="form-control form-control-solid" name="month" value="{{ date('Y-m-d') }}">
-                                        {{-- <select class="form-control" name="month" class="form-control">
-                                            <option value="January"> {{ __('translation.January') }}
-                                            </option>
-                                            <option value="February"> {{ __('translation.February') }}
-                                            </option>
-                                            <option value="March"> {{ __('translation.March') }}
-                                            </option>
-                                            <option value="April"> {{ __('translation.April') }}
-                                            </option>
-                                            <option value="May"> {{ __('translation.May') }}
-                                            </option>
-                                            <option value="June"> {{ __('translation.June') }}
-                                            </option>
-                                            <option value="July"> {{ __('translation.July') }}
-                                            </option>
-                                            <option value="August"> {{ __('translation.August') }}
-                                            </option>
-                                            <option value="September"> {{ __('translation.September') }}
-                                            </option>
-                                            <option value="October"> {{ __('translation.October') }}
-                                            </option>
-                                            <option value="November"> {{ __('translation.November') }}
-                                            </option>
-                                            <option value="December"> {{ __('translation.December') }}
-                                            </option>
-
-                                        </select> --}}
-                                        <label for="start">Start date:</label>
-                                        @error('month')
-                                            <span class="text-danger">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <button class="btn btn-primary">
-                                        Save
-                                    </button>
-                                    <a href='{{ route('Employee.All_Employee.index') }}' class="btn btn-outline-danger">
-                                        Cancle
-                                    </a>
+                                        <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
+                                        <select id='' class="form-control" name='month_number'>
+                                            <option value=''> {{ __('translation.chose_month_number') }}</option>
+                                            @for ($i = 1; $i < 13; $i++)
+                                                <option value='{{ $i }}'>
+                                                    {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                        @error('month_number')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
-
-                        </form>
-
+                    <div class="mt-4">
+                        <button class="btn btn-primary">
+                            Save
+                        </button>
+                        <a href='{{ route('Employee.All_Employee.index') }}' class="btn btn-outline-danger">
+                            Cancle
+                        </a>
                     </div>
                 </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Card-->
 
+                </form>
+
+            </div>
         </div>
-        <!--end::Container-->
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+
+    </div>
+    <!--end::Container-->
     </div>
 @endsection

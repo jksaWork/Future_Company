@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\employee;
-use App\Models\Category;
 use App\Models\employee_allowances;
 use App\Models\allowances;
 
-use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\Employee_allowancesRequest;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -18,10 +17,16 @@ class EmployeeAllowancesController extends Controller
     public function index(Request $request)
     {
         // return $Categorys;
-        $employee_allowances = employee_allowances::all();
+        // $employee_allowances = employee_allowances::all();
+        $employee_allowances =employee_allowances::where([
+            ['status',  0],
+        ])->get();
         // return $employee_allowances;
         $employee   = employee::all();
-        $allowances = allowances::all();
+        $allowances =allowances::where([
+            ['status',  0],
+        ])->get();
+        // $allowances = allowances::all();
 
         return view('admin.Employee.employee_allowances.index', compact('employee_allowances' ,'employee' ,'allowances'));
     } //end of index
@@ -34,7 +39,7 @@ class EmployeeAllowancesController extends Controller
     } //end of create
 
 
-    public function store(Request $request)
+    public function store(employee_allowancesRequest $request)
     {
         // return  $request;
 
@@ -42,14 +47,15 @@ class EmployeeAllowancesController extends Controller
             employee_allowances::create([
                 'employee_id'   => $request->employee_id,
                 'allowances_id' => $request->allowances_id,
-                'month' => $request->month,
+                'status' => 0,
+                'month_number' => $request->month_number,
             ]);
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.employee_allowances.index');
         } catch (Exception $e) {
-            dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            // //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -57,7 +63,10 @@ class EmployeeAllowancesController extends Controller
 
     public function show($id)
     {
-        $allowances =allowances::all();
+        $allowances =allowances::where([
+            ['status',  0],
+        ])->get();
+        // $allowances =allowances::all();
         $employees = employee::findorfail($id);
         // return $employees;
         return view('admin.Employee.employee_allowances.create',compact('employees' , 'allowances'));
@@ -67,13 +76,16 @@ class EmployeeAllowancesController extends Controller
     public function edit(employee $employee, $id)
     {
         // return $id;
-        $allowances =allowances::all();
+        $allowances =allowances::where([
+            ['status',  0],
+        ])->get();
+        // $allowances =allowances::all();
         $employee_allowances = employee_allowances::findorfail($id);
 
         return view('admin.Employee.employee_allowances.edit', compact('allowances', 'employee_allowances'));
     } //end of edit
 
-    public function update(Request $request, Employee $employee)
+    public function update(employee_allowancesRequest $request, Employee $employee)
     {
         // return $request;
         try{
@@ -86,13 +98,14 @@ class EmployeeAllowancesController extends Controller
 
             'employee_id'   => $request->employee_id,
             'allowances_id' => $request->allowances_id,
-            'month' => $request->month,
+            'status' => 0,
+            'month_number' => $request->month_number,
         ]);
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
         }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 

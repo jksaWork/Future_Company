@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\spendings;
 use App\Models\section;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\spendingRequest;
+use App\Http\Requests\SpendingRequest;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -30,7 +30,7 @@ class SpendingController extends Controller
     } //end of create
 
 
-    public function store(Request $request)
+    public function store(SpendingRequest $request)
     {
         // return  $request;
 
@@ -47,11 +47,11 @@ class SpendingController extends Controller
                 $spendings->save();
             }
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.spending.index');
         } catch (Exception $e) {
-            dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -73,7 +73,7 @@ class SpendingController extends Controller
         return view('admin.Employee.spending.edit', compact('spendings', 'sections'));
     } //end of edit
 
-    public function update(spendingRequest $request)
+    public function update(SpendingRequest $request)
     {
         // return $request;
         try{
@@ -89,11 +89,11 @@ class SpendingController extends Controller
             'section_id' => $id,
             'description' => $request->description,
         ]);
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.spending.index');
         }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 

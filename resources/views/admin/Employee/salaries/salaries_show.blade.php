@@ -75,8 +75,8 @@
                                                                         <th class="">
                                                                             {{ __('translation.advances_value') }}</th>
                                                                         <th class="">
-                                                                            {{ __('translation.advances_Date') }}</th>
-                                                                        <th class="">{{ __('translation.month') }}
+                                                                            {{ __('translation.month_number') }}</th>
+                                                                        <th class="">{{ __('translation.created_at') }}
                                                                         </th>
                                                                     </tr>
                                                                     <!--end::Table row-->
@@ -91,7 +91,7 @@
 
                                                                             <td>{!! $Advancess->employee->name !!}</td>
                                                                             <td>{!! number_format($Advancess->advances_value, 2) !!}</td>
-                                                                            <td>{!! $Advancess->advances_Date !!}</td>
+                                                                            <td>{!! $Advancess->month_number !!}</td>
                                                                             <td>{!! $Advancess->created_at->toFormattedDateString() !!}</td>
                                                                             {{-- <td></td> --}}
 
@@ -120,6 +120,7 @@
                                                         <!--end::Tabs-->
                                                     </div>
                                                     <!--end::Col-->
+
                                                     <!--begin::Col-->
                                                     <div class="col-lg-6">
                                                         <!--begin::Tab Pane-->
@@ -134,8 +135,8 @@
                                                                     <th class="">{{ __('translation.employee_name') }} </th>
                                                                     <th class="">{{ __('translation.value') }}</th>
                                                                     <th class="">{{ __('translation.allowances_name') }}</th>
-                                                                    <th class="">{{ __('translation.date') }}</th>
-                                                                    <th class="">{{ __('translation.month') }}</th>
+                                                                    <th class="">{{ __('translation.month_number') }}</th>
+                                                                    <th class="">{{ __('translation.created_at') }}</th>
                                                                 </tr>
                                                                 <!--end::Table row-->
                                                             </thead>
@@ -148,12 +149,12 @@
 
 
                                                                         <td>{!!$employee_allowancess->employee->name !!}</td>
-                                                                        <td>{!!number_format($employee_allowancess->allowances->allowances_value, 2) !!}</td>
-                                                                        <td>{!!$employee_allowancess->allowances->allowances_name !!}</td>
-                                                                        <td>{!!$employee_allowancess->month !!}</td>
+                                                                        <td>{!!number_format($employee_allowancess->Allowances_id->allowances_value, 2) !!}</td>
+                                                                        <td>{!!$employee_allowancess->Allowances_id->allowances_name !!}</td>
+                                                                        <td>{!!$employee_allowancess->month_number !!}</td>
                                                                         <td>{!!$employee_allowancess->created_at->toFormattedDateString() !!}</td>
                                                                     </tr>
-                                                                    <?php $sum_allowances_value += $employee_allowancess->allowances->allowances_value; ?>
+                                                                    <?php $sum_allowances_value += $employee_allowancess->Allowances_id->allowances_value; ?>
                                                                 @empty
                                                                     <td colspan="4">
                                                                         <div class="text-center">No Data Was Found</div>
@@ -235,7 +236,20 @@
                                     step="0.01" name="fixed_salary" value="{{ $employees->salary }}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     readonly />
-                                @error('salary')
+                                @error('fixed_salary')
+                                    <span class="text-danger">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="fv-row mb-7 col-md-6 ">
+                                <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowancess_fixed') }}</label>
+                                <input type="number" class="form-control form-control-solid" placeholder=""
+                                   step="0.01" name="allowancess_fixed" value="{{$allowancess_sum}}"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    readonly />
+                                @error('allowancess_fixed')
                                     <span class="text-danger">
                                         {{ $message }}
                                     </span>
@@ -271,7 +285,7 @@
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.totle_salaries') }}</label>
                                 <input type="number" class="form-control form-control-solid totle_salaries" placeholder=""
                                     step="0.01" id="totle_salaries" name="totle_salaries"
-                                    value="{{ $employees->salary + $sum_allowances_value - $sum_advances_value }}"
+                                    value="{{ $employees->salary + $sum_allowances_value + $allowancess_sum - $sum_advances_value }}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     readonly />
                                 @error('totle_salaries')
@@ -286,22 +300,27 @@
                                 <input type="number" class="form-control form-control-solid discounts" placeholder=""
                                     step="1" min="0" name="discounts" value="0" id="discounts"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    required onchange="Discounts()" />
+                                     onchange="Discounts()" />
                                 @error('discounts')
                                     <span class="text-danger">
                                         {{ $message }}
                                     </span>
                                 @enderror
                             </div>
-
                             <div class="col-md-6">
-                                <label class="form-label">{{ __('translation.salary_history') }}</label>
-                                <input type="date" id="advances_Date"class="form-control form-control-solid" name="month" value="{{ date('Y-m-d') }}">
-                                @error('month')
+                                <div class="form-group">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
+                                    <select id='' class="form-control form-control-solid discounts" name='month_number'  value='{{$Advancess->month_number}}' readonly>
+
+                                        <option value='{{$Advancess->month_number}}'> {{$Advancess->month_number . '  --   ' . date('F', mktime(null, null, null,$Advancess->month_number , 1)) }}</option>
+                                       
+                                    </select>
+                                    @error('month_number')
                                     <span class="text-danger">
                                         {{ $message }}
                                     </span>
                                 @enderror
+                            </div>
                             </div>
 
 
@@ -311,17 +330,17 @@
 
 
                             <div class='col-md-6'>
-                                <x:status-filed name='status' />
+                                <x:status-filed name='status'  class="form-control form-control-solid discounts"/>
                             </div>
                             <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                             </label>
-                            <textarea class="form-control form-control-solid" rows="1" name="discrption"
+                            <textarea class="form-control form-control-solid" rows="3" name="discrption"
                                 placeholder="{{ __('translation.description') }}"></textarea>
                             <div class="mt-4">
                                 <a href="#" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_upgrade_plan">{{ __('translation.information') }}</a>
                                 <button class="btn btn-primary">
-                                    Save
+                                    {{__('translation.save')}}
                                 </button>
                                 <a href='{{ route('Employee.salaries.index') }}' class="btn btn-outline-danger">
                                     Cancle
@@ -356,11 +375,14 @@
 
 
             var totle_salaries = parseFloat(document.getElementById("totle_salaries").value);
+            var advances = parseFloat(document.querySelector('input[name="advances"]').value);
+            var allownacees_salary = parseFloat(document.querySelector('input[name="allownacees_salary"]').value);
+            var fixed_salary = parseFloat(document.querySelector('input[name="fixed_salary"]').value);
+            var allowancess_fixed = parseFloat(document.querySelector('input[name="allowancess_fixed"]').value);
             var discounts = parseFloat(document.getElementById("discounts").value);
 
 
-            var capital_totle = totle_salaries - discounts;
-            // console.log(capital_totle);
+            var capital_totle = allownacees_salary + fixed_salary + allowancess_fixed - advances - discounts;
             if (typeof totle_salaries === 'undefined') {
 
                 alert('يرجى التاكد من  البيانات ');

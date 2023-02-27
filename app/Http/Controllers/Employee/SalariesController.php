@@ -13,25 +13,34 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 use Exception;
+use PhpParser\Node\Stmt\Foreach_;
 
 class SalariesController extends Controller
 {
 
     public function index(Request $request)
     {
-        $month = $request->month;
-        $employee_id = $request->employee_id;
-        $end_month = $request->end_month;
+            $month_number = $request->month_number;
+            $employee_id = $request->employee_id;
+        $employee_allowancess = employee_allowances::where([['employee_id', $employee_id],
+        ['month_number', $month_number],
+        ['status', 0],
+        ])->get();
 
-        // being sreach date and id employee employee allowances
-        $employee_allowancess = employee_allowances::where('employee_id', $employee_id)->whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-        // end employee allowances
-        // being sreach date and id employee employee advances
-        $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-       // end employee advances;
-        // return $employee_advances;
+         $allowancess_fixed = employee_allowances::where([['employee_id', $employee_id],
+        ['status', 1],
+        ])->get();
+
+        $employee_advances = advances::where([['employee_id', $employee_id],
+        ['month_number', $month_number],
+        ])->get();
+        $allowancess_sum = 0;
+        foreach($allowancess_fixed as  $q){
+            $allowancess_sum += $q->Allowances_id->allowances_value;
+        }
+        // return $allowancess_sum;
         $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess'));
+        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess','allowancess_sum'));
     } //end of index
 
 
@@ -44,25 +53,41 @@ class SalariesController extends Controller
 
     public function store(Request $request)
     {
+
         // return $request;
+        $request->validate([
+            'employee_id' => 'required',
+            'fixed_salary' => 'required|numeric',
+            'allownacees_salary' => 'required|numeric',
+            'advances' => 'required|numeric',
+            'totle_salaries' => 'required|numeric',
+            'discounts' => 'required|numeric',
+            'month_number' => 'required|numeric',
+            'allowancess_fixed' => 'required|numeric',
+            'status' => 'required',
+        ]);
+
+
         try {
+            // return $request;
             $DATA = salaries::create([
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
+                'allowancess_fixed'=> $request->allowancess_fixed,
                 'allownacees_salary' => $request->allownacees_salary,
                 'advances' => $request->advances,
                 'totle_salaries' => $request->totle_salaries,
                 'discounts' => $request->discounts,
-                'month' => $request->month,
+                'month_number' => $request->month_number,
                 'status' => $request->status,
                 'discrption' => $request->discrption,
             ]);
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.salaries.create');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -85,26 +110,37 @@ class SalariesController extends Controller
 
     public function update(Request $request,  $id)
     {
-        // return $request;
+        $request->validate([
+            'employee_id' => 'required',
+            'fixed_salary' => 'required|numeric',
+            'allowancess_fixed' => 'required|numeric',
+            'allownacees_salary' => 'required|numeric',
+            'advances' => 'required|numeric',
+            'totle_salaries' => 'required|numeric',
+            'discounts' => 'required|numeric',
+            'month_number' => 'required|numeric',
+            'status' => 'required',
+        ]);
         try {
             $salaries = salaries::findOrFail($id);
 
             $salaries->update([
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
+                'allowancess_fixed' => $request->allowancess_fixed,
                 'allownacees_salary' => $request->allownacees_salary,
                 'advances' => $request->advances,
                 'totle_salaries' => $request->totle_salaries,
                 'discounts' => $request->discounts,
-                'month' => $request->month,
+                'month_number' => $request->month_number,
                 'status' => $request->status,
                 'discrption' => $request->discrption,
             ]);
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.salaries.create');
         } catch (Exception $e) {
-            dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of update

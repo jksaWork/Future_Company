@@ -12,7 +12,8 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-'required'=>'هذه الحقل محمد',
+    'allowances_name.required' => ':attribute مطلوب.',
+    'allowances_name.string'  =>'الاسم لابد ان يكون حروف او حروف وارقام ',
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
@@ -39,7 +40,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => 'صيغه البريد الالكتروني غير صحيحه',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -96,7 +97,8 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    // 'required' => 'The :attribute field is required.',
+    'required' => 'هذه  الحقل مطلوب ',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -133,6 +135,47 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'categories_id' => [
+            'categories_id.exists'  => 'القسم غير موجود ',
+        ],
+
+        'email' => [
+            'unique' => 'البريد الالكتروني مستخدم من قبل ',
+            'email' => 'ضيغه البريد الالكتروني غير صحيحه',
+        ],
+        'phone' => [
+            'max'  => 'هذا الحقل طويل',
+            'unique' => 'رقم الهاتف مستخدم من قبل ',
+        ],
+        'address' => [
+
+            'string' => 'العنوان لابد ان يكون حروف او حروف وارقام ',
+            'max'  => 'هذا الحقل طويل',
+        ],
+        'salary' => [
+            'nullable' => ' القيم المدخلة غير صحيحة ',
+            'numeric' => ' يجب ان تكون ارقام   ',
+        ],
+        'status' => [
+            'in' => 'القيم المدخلة غير صحيحة ',
+        ],
+
+
+        'allowances_id' => [
+            'in' => 'القيم المدخلة غير صحيحة ',
+        ],
+
+        'employee_id' => [
+            'in' => 'القيم المدخلة غير صحيحة ',
+        ],
+
+
+
+
+        'month_number' => [
+
+            'date_format'  => 'يجب التاكد من التاريخ',
+        ],
     ],
 
     /*
@@ -146,6 +189,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'  =>'الاسم ',
+
+
+    ],
 
 ];

@@ -245,7 +245,7 @@
                                                         </td>
                                                         <td>{{$index + 1 }}</td>
                                                         <td>{!!$employee->employee->name!!}</td>
-                                                        <td>{!!$employee->allowances->allowances_name!!}</td>
+                                                        <td>{!!$employee->Allowances_id->allowances_name!!}</td>
                                                         <td>{!!$employee->created_at->format('d/M/Y')!!}</td>
 
                                                     </tr>

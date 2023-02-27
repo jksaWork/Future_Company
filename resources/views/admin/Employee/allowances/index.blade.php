@@ -81,6 +81,7 @@
                                 </th>
                                 <th class="min-w-125px">#</th>
                                 <th class="">{{ __('translation.allowances_name') }}</th>
+                                <th class="">{{ __('translation.status') }}</th>
                                 <th class="">{{ __('translation.allowances_value') }}</th>
                             </tr>
                             <!--end::Table row-->
@@ -99,6 +100,7 @@
                                     </td>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $allowances->allowances_name }}</td>
+                                    <td>{!! $allowances->getActive() !!}</td>
                                     <td>{{ $allowances->allowances_value }}</td>
 
                                         <td class=" text-end">

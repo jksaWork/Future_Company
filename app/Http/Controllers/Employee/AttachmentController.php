@@ -29,7 +29,7 @@ class AttachmentController extends Controller
             $images->imageable_type = 'App\Models\employees';
             $images->save();
         }
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.All_Employee.show',$request->employees_id);
     }
 

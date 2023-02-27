@@ -88,6 +88,7 @@
                                 <th class="">{{ __('translation.phone') }}</th>
                                 <th class="">{{ __('translation.salary') }}</th>
                                 <th class="">{{ __('translation.categories_id') }}</th>
+                                <th class="">{{ __('translation.allowances_id') }}</th>
                                 <th class="">{{ __('translation.status') }}</th>
                                 <th class="text-end min-w-70px">{{ __('translation.Actions') }}</th>
                             </tr>
@@ -110,6 +111,11 @@
                                     <td>{{ $employee->phone }}</td>
                                     <td>{{ $employee->salary }}</td>
                                     <td>{!! $employee->Categorys->categories_name !!}</td>
+
+                                    <td>@forelse ($allowns as $allowances){!! $allowances->Allowances_id->allowances_name !!}- @empty
+                                       No Data Was Found
+                                    @endforelse</td>
+
                                     <td>{!! $employee->getActive() !!}</td>
                                     {{-- <td></td> --}}
 

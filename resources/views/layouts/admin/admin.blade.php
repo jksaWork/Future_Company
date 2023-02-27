@@ -82,7 +82,9 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
-        <div class="page d-flex flex-row flex-column-fluid">
+        <div class="page d-flex flex-row flex-column-fluid" style="
+        flex: 0 0 auto;
+    ">
             <!--begin::Aside-->
             @include('layouts.admin.sidebar')
             <!--end::Aside-->

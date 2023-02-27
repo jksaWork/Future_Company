@@ -19,9 +19,9 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
                                     <input type="hidden" class="form-control form-control-solid" placeholder=""
-                                        name="employee_id" value=" {{ $employees->id }}" required />
+                                        name="employee_id" value=" {{ $employees->id }}" readonly />
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="" value=" {{ $employees->name }}" required />
+                                        name="" value=" {{ $employees->name }}" readonly />
                                     @error('employee_id')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -34,7 +34,7 @@
                                     <input type="number" class="form-control form-control-solid" placeholder=""
                                         step="0.01" name="advances_value" value=""
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required />
+                                         />
                                     @error('advances_value')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -42,37 +42,18 @@
                                     @enderror
                                 </div>
 
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label>{{ __('translation.advances_Date') }} :</label>
-                                    <input type="date" id="advances_Date"class="form-control form-control-solid" name="advances_Date" value="{{ date('Y-m-d') }}">
-                                    {{-- <select class="form-control" name="advances_Date" class="form-control">
-                                        <option value="January"> {{ __('translation.January') }}
-                                        </option>
-                                        <option value="February"> {{ __('translation.February') }}
-                                        </option>
-                                        <option value="March"> {{ __('translation.March') }}
-                                        </option>
-                                        <option value="April"> {{ __('translation.April') }}
-                                        </option>
-                                        <option value="May"> {{ __('translation.May') }}
-                                        </option>
-                                        <option value="June"> {{ __('translation.June') }}
-                                        </option>
-                                        <option value="July"> {{ __('translation.July') }}
-                                        </option>
-                                        <option value="August"> {{ __('translation.August') }}
-                                        </option>
-                                        <option value="September"> {{ __('translation.September') }}
-                                        </option>
-                                        <option value="October"> {{ __('translation.October') }}
-                                        </option>
-                                        <option value="November"> {{ __('translation.November') }}
-                                        </option>
-                                        <option value="December"> {{ __('translation.December') }}
-                                        </option>
-
-                                    </select> --}}
-                                    @error('advances_Date')
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
+                                        <select id='' class="form-control" name='month_number'>
+                                            <option value=''> {{ __('translation.chose_month_number') }}</option>
+                                            @for ($i = 1; $i < 13; $i++)
+                                                <option value='{{ $i }}'>
+                                                    {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                        @error('month_number')
                                         <span class="text-danger">
                                             {{ $message }}
                                         </span>

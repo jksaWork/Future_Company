@@ -25,8 +25,8 @@ class allowancesRequest extends FormRequest
     {
         return [
 
-            'allowances_name' =>'required',
-            'allowances_name' => 'required',
+            'allowances_name'=>'required|string|max:100',
+            'allowances_value'=>'required',
 
         ];
     }

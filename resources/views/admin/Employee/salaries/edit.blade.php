@@ -48,6 +48,18 @@
                                     @enderror
                                 </div>
                                 <div class="fv-row mb-7 col-md-6 ">
+                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowancess_fixed') }}</label>
+                                    <input type="number" class="form-control form-control-solid" placeholder=""
+                                       step="0.01" name="allowancess_fixed" value="{{ $salaries->allowancess_fixed}}"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        readonly />
+                                    @error('allowancess_fixed')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.allownacees_salary') }}</label>
                                     <input type="number" class="form-control form-control-solid" placeholder=""
                                         step="0.01" name="allownacees_salary" value="{{$salaries->allownacees_salary}}"
@@ -63,9 +75,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.advances') }}</label>
                                     <input type="number" class="form-control form-control-solid" placeholder=""
-                                        step="0.01" name="advances" value="{{$salaries->advances}}"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        readonly />
+                                        step="0.01" name="advances" value="{{$salaries->advances}}"/>
                                     @error('advances')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -92,7 +102,7 @@
                                     <input type="number" class="form-control form-control-solid discounts" placeholder=""
                                         step="1" min="0" name="discounts" value="0" id="discounts"  value="{{$salaries->discounts}}"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required onchange="Discounts()" />
+                                         onchange="Discounts()" />
                                     @error('discounts')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -100,22 +110,30 @@
                                     @enderror
                                 </div>
 
+
+
                                 <div class="col-md-6">
-                                    <label class="form-label">{{ __('translation.salary_history') }}</label>
-                                    <input type="date" id="advances_Date"class="form-control form-control-solid" name="month" value="{{$salaries->month}}">
-                                    @error('month')
+                                    <div class="form-group">
+                                        <label class=" fs-6 fw-bold mb-2">{{ __('translation.salary_history') }}</label>
+                                        <select id='' class="form-control form-control-solid discounts" name='month_number'>
+
+                                            <option value='{{$salaries->month_number}}'> {{$salaries->month_number . '  --   ' . date('F', mktime(null, null, null,$salaries->month_number , 1)) }}</option>
+
+                                        </select>
+                                        @error('month_number')
                                         <span class="text-danger">
                                             {{ $message }}
                                         </span>
                                     @enderror
+                                </div>
                                 </div>
                                 <div class='col-md-6'>
                                     {{-- <x:status-filed name='status'  value="{{$salaries->status}}"/> --}}
                                         <div class="form-group">
                                             <label for="" class="fs-6 fw-bold mb-2"> {{__('translation.status')}} </label>
                                             <select class="form-control" name="status"  >
-                                                <option value="1" @if($salaries ->status == '1')  checked @endif>{{__('translation.active')}}</option>
-                                                <option value="0" @if($salaries ->status == '0')  checked @endif>{{__('translation.in_active')}}</option>
+                                                <option value="1" @if($salaries ->status == '1')  selected @endif>{{__('translation.active')}}</option>
+                                                <option value="0" @if($salaries ->status == '0')  selected @endif>{{__('translation.in_active')}}</option>
                                             </select>
                                         </div>
                                 </div>
@@ -159,11 +177,14 @@
 
 
         var totle_salaries = parseFloat(document.getElementById("totle_salaries").value);
+        var advances = parseFloat(document.querySelector('input[name="advances"]').value);
+        var allownacees_salary = parseFloat(document.querySelector('input[name="allownacees_salary"]').value);
+        var fixed_salary = parseFloat(document.querySelector('input[name="fixed_salary"]').value);
+        var allowancess_fixed = parseFloat(document.querySelector('input[name="allowancess_fixed"]').value);
         var discounts = parseFloat(document.getElementById("discounts").value);
 
 
-        var capital_totle = totle_salaries - discounts;
-        // console.log(capital_totle);
+        var capital_totle = allownacees_salary + fixed_salary + allowancess_fixed - advances - discounts;
         if (typeof totle_salaries === 'undefined') {
 
             alert('يرجى التاكد من  البيانات ');

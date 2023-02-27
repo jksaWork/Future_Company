@@ -25,13 +25,15 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' =>'required',
-            'email' => 'required',
-            'salary' =>'required',
-            'status' =>'required',
-            'phone' =>'required',
-            'address' =>'required',
-            'categories_id' =>'required',
-            'description' =>'required',
+            'email' => 'required|email|unique:employees,email,'.$this -> id,
+            'phone' =>'required|max:100|unique:employees,phone,'.$this -> id,
+            'address' =>'required|string|max:500',
+            'salary' =>'required|nullable|numeric',
+            'categories_id' =>'required|exists:categories,id',
+            'data'=>'required',
+            'status' =>'required|in:1,0',
         ];
+
     }
+
 }

@@ -18,9 +18,14 @@ class employee extends Model
 
    public function employee_allowances()
     {
-        return $this->hasMany(employee_allowances::class);
+        return $this->belongsTo(employee_allowances::class ,'allowances_id');
 
     }
+    public function allowances()
+    {
+        return $this->belongsTo(allowances::class ,'allowances_id');
+    }
+
 
     public function Advances()
     {

@@ -22,6 +22,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <input type="hidden" name='type' value='rent'>
                                     <div class="">
                                         <div class="form-group">
                                           <label for="" style='font-size:20px'>{{__('translation.realstate')}}</label>

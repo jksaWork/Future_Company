@@ -16,6 +16,7 @@ class CreateAllowancesTable extends Migration
         Schema::create('allowances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('allowances_value');
+            $table->string('status')->default(1);
             $table->string('allowances_name')->nullable();
             $table->timestamps();
         });

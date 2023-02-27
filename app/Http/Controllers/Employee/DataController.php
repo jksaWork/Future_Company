@@ -4,19 +4,49 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\employee;
-use App\Models\Advances;
+use App\Models\section;
+use Yajra\DataTables\Facades\DataTables;
 
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use Exception;
 
-class AdvancesController extends Controller
+class DataController extends Controller
 {
+
+
+    public function SectionhistoryData(Request $request)
+    {
+
+
+        $query = section::with('section_name')->where('type' , 'section_name');
+        return  DataTables::of($query)
+            ->editColumn('created_at', function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+
+
+
+            ->editColumn('section_name', function ($item) {
+                return  $item->CurrentOwner[0]->section_name;
+            })
+            ->editColumn('section_name', fn ($item) => $item->section_name ?? '')
+            ->editColumn(
+                'actions',
+                'admin.Employee.section.data_table.actions'
+            )
+            ->rawColumns(['actions', 'section_name', 'description'])
+            ->toJson();
+
+
+
+    } //end of SectionhistoryData
+
 
     public function index(Request $request)
     {
 
-        $Advances = Advances::all();
+        // $Advances = Advances::all();
 
         return view('admin.Employee.Advances.index', compact('Advances'));
     } //end of index
@@ -37,12 +67,12 @@ class AdvancesController extends Controller
         ]);
 
         try {
-            Advances::create([
-                'employee_id' => $request->employee_id,
-                'advances_value' => $request->advances_value,
-                'month_number' => $request->month_number,
+            // // Advances::create([
+            //     'employee_id' => $request->employee_id,
+            //     'advances_value' => $request->advances_value,
+            //     'month_number' => $request->month_number,
 
-            ]);
+            // ]);
             //    return  $DATA;
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.Advances.index');
@@ -66,7 +96,7 @@ class AdvancesController extends Controller
     public function edit(Request $request, $id)
     {
 // return $id;
-        $Advancess = Advances::find($id);
+        // $Advancess = Advances::find($id);
         return view('admin.Employee.Advances.edit', compact( 'Advancess'));
     } //end of edit
 
@@ -80,13 +110,13 @@ class AdvancesController extends Controller
                 'advances_value' => 'required|numeric',
                 'month_number' => 'required',
             ]);
-        $Advancess = Advances::findOrFail($request->pro_id);
+        // $Advancess = Advances::findOrFail($request->pro_id);
 
-        $Advancess->update([
-            'employee_id' => $request->employee_id,
-            'advances_value' => $request->advances_value,
-            'month_number' => $request->month_number,
-        ]);
+        // $Advancess->update([
+        //     'employee_id' => $request->employee_id,
+        //     'advances_value' => $request->advances_value,
+        //     'month_number' => $request->month_number,
+        // ]);
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.Advances.index');
         }catch(Exception $e){
@@ -100,8 +130,8 @@ class AdvancesController extends Controller
     public function destroy( Request $request , $id)
     {
         // return $id;
-        $Advances = Advances::findOrFail($id);
-        $Advances->delete();
+        // $Advances = Advances::findOrFail($id);
+        // $Advances->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('Employee.Advances.index');
     } //end of destroy

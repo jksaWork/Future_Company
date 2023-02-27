@@ -73,7 +73,7 @@
                                 <th class="min-w-125px">#</th>
                                 <th class="">{{ __('translation.employee_name') }}</th>
                                 <th class="">{{ __('translation.advances_value') }}</th>
-                                <th class="">{{ __('translation.advances_Date') }}</th>
+                                <th class="">{{ __('translation.created_at') }}</th>
                                 <th class="text-end min-w-70px">{{ __('translation.Actions') }}</th>
                             </tr>
                             <!--end::Table row-->
@@ -93,7 +93,7 @@
                                     <td>{{$index + 1 }}</td>
                                     <td>{!!$Advancess->employee->name!!}</td>
                                     <td>{!! number_format($Advancess->advances_value, 2)!!}</td>
-                                    <td>{!!$Advancess->advances_Date!!}</td>
+                                    <td>{!!$Advancess->created_at->toFormattedDateString()!!}</td>
                                     {{-- <td></td> --}}
 
                                     <td class=" text-end">
