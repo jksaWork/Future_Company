@@ -86,7 +86,7 @@ $( "#selUser" ).select2({
 });
 $( "#realstate" ).select2({
   ajax: {
-    url: "{{route('realstate.ajax', ['type' => 'sale'])}}",
+    url: "{{route('realstate.ajax', ['type' => 'sale' , 'is_sale' => true])}}",
     type: "get",
     dataType: 'json',
     delay: 250,

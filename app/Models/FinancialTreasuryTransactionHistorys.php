@@ -19,6 +19,20 @@ class FinancialTreasuryTransactionHistorys extends Model
         'installment'  => "credit",
         'main_treasury' => "credit"
     ];
+
+    public function genrateUrl()
+    {
+        $urls = [
+            'advance' => route('Employee.Advances.index', ['id' => $this->ref_id]),
+            'salries' => route('Employee.salaries.index', ['id' => $this->ref_id]),
+            'spending' => route('Employee.spending.index', ['id' => $this->ref_id]),
+            'incentives' => '',
+            'revenues' => route('realstate.recept_revenues.hitory', ['id' => $this->ref_id]),
+            'installment' => route('realstate.installment_hsitory', ['id' => $this->ref_id]),
+            'main_treasury' => '',
+        ];
+        return $urls[$this->transaction_type];
+    }
     // this function to make new Record On  Transacation hisotry
     public const  STATUS = ['primary',  'secondary', 'success', 'info', 'warning', 'danger', 'dark'];
     public static function  getStatus()
@@ -32,9 +46,9 @@ class FinancialTreasuryTransactionHistorys extends Model
     }
     public static function MakeTransacaion($amount, $transaction_type, $note, $ref = 1)
     {
+        // dd('first line');
         $Treasury = FinancialTreasury::getInstance();
         $json = $Treasury->toJson();
-
         $type = self::TYPES[$transaction_type];
         // Insert to Json
         if ($type == 'debit') {
@@ -114,4 +128,6 @@ class FinancialTreasuryTransactionHistorys extends Model
             return $q->where('created_at', ',=',  request()->to_date);
         });
     }
+
+    // public function scope
 }

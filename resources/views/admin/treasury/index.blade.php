@@ -30,9 +30,9 @@
                                 <!--end::Svg Icon-->
                                 <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
-                                        {{ number_format($Treasury->total_credit, 5) }}
+                                        {{ number_format($Treasury->total_credit, 2) }}
                                     </div>
-                                    <div class="fw-bold text-white fs-4">{{ __('translation.revenues') }}</div>
+                                    <div class="fw-bold text-white fs-4">{{ __('translation.all_revenues') }}</div>
                                 </div>
                             </div>
                         </div>

@@ -133,7 +133,7 @@ Route::group(
                 Route::get('sale-history-data', [SaleController::class, 'saleHistoryData'])->name('saleHistory.data');
                 Route::get('recept-realstate-installment', [SaleController::class, 'receptRealStateInstallment'])->name('receptRealStateInstallment');
                 Route::get('get-installment/', [SaleController::class, 'getRealStateInstallments'])->name('get_installment');
-                Route::get('get-installment-histry/', [SaleController::class, 'InstallmentsHistory'])->name('installment_hsitory');
+                Route::get('get-installment-history/', [SaleController::class, 'InstallmentsHistory'])->name('installment_hsitory');
                 Route::get('get-installment-history-data/', [SaleController::class, 'InstallmentsHistoryData'])->name('installment_hsitory.data');
             });
             Route::get('finanical-treasury', [FinanicalTreasuryController::class, 'finanical'])->name('admin.finanical');

@@ -1,20 +1,20 @@
 {{-- @if (auth()->user()->hasPermission('update_admins')) --}}
-@if ($transaction_type == 'main_treasury')
+@if ($item->transaction_type == 'main_treasury')
 <div style="min-width: 200px">
     <a href="#"
-    data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer_{{ $id }}"
+    data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer_{{ $item->id }}"
     class="btn btn-light-primary  btn-sm">
         {{ __('translation.edit_amount') }}
     </a>
 </div>
 
-<div class="modal fade" id="kt_modal_add_customer_{{ $id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kt_modal_add_customer_{{ $item->id }}" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Form-->
-            <form class="form" action="{{ route('admin.finanical.update' , $id) }}" method="post">
+            <form class="form" action="{{ route('admin.finanical.update' , $item->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <!--begin::Modal header-->
@@ -45,9 +45,9 @@
                     <!--begin::Scroll-->
                     <div class="scroll-y me-n7 pe-7" id="#">
                         <!--begin::Input group-->
-                        <x:text-input name='amount' value='{{ $amount }}' class='col-md-12' />
+                        <x:text-input name='amount' value='{{ $item->amount }}' class='col-md-12' />
                         <!--end::Input group-->
-                        <x:text-area class='col-md-12' value='{{ $note }}' name='note'></x:text-area>
+                        <x:text-area class='col-md-12' value='{{ $item->note }}' name='note'></x:text-area>
                         <!--begin::Input group-->
                     </div>
                     <!--end::Scroll-->
@@ -60,7 +60,7 @@
                         class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
                     <!--end::Button-->
                     <!--begin::Button-->
-                    <button class="btn btn-primary"> {{ __('translation.add_to_trnsury') }} </button>
+                    <button class="btn btn-primary"> {{ __('translation.edit_trnsury') }} </button>
                     <!--end::Button-->
                 </div>
                 <!--end::Modal footer-->
@@ -70,6 +70,10 @@
     </div>
 </div>
 @else
-
+<div style="min-width: 200px">
+    <a href="{{ $item->genrateUrl() }}" class="btn btn-light-primary  btn-sm">
+        {{ __('translation.show_transacation_details') }}
+    </a>
+</div>
 @endif
 {{-- @endif --}}

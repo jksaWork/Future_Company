@@ -244,7 +244,7 @@
                                         <tbody class="fw-bold text-gray-600">
                                             @forelse ($realState->CurrentOwner as $item)
                                                 <tr>
-
+                                                    <td> {{ $item->id }}</td>
                                                     <td> {{ $item->name }}</td>
                                                     <td> {{ $item->phone }}</td>
                                                     <td> {{ $item->workplace }}</td>
@@ -253,7 +253,6 @@
                                                     <td>
                                                         {!! $item->getStatusWithSpan() !!}
                                                     </td>
-                                                    <td> {{ $item->created_at->format('y-m-d') }}</td>
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -312,10 +311,14 @@
                                                                 {{-- <input  type='hidden' name='real_state_id' value='{{$realstate->id}}'/> --}}
                                                                 <input type='hidden' name='installment_id'
                                                                     value='{{ $item->id }}'>
+                                                                    <input type='hidden' name='realstate_id'
+                                                                    value='{{ $realState->id }}'>
                                                                 <button class="btn btn-light-info btn-sm">
                                                                     {{ __('translation.recept_installment') }}
                                                                 </button>
                                                             </form>
+                                                            @else
+                                                            -
                                                         @endif
                                                     </td>
 

@@ -412,5 +412,11 @@ return [
     'employee_advances' => 'سلفيات موظفين',
     'edit_amount' => 'تعديل المبلغ',
     'Edit_pay_to_Treasury_was_done_success' => 'تم تعديل بيانات الايراد بنجاح',
-
+    'edit_trnsury' => 'تعديل المبلغ',
+    'show_transacation_details' => 'عرض بيانات التحويله',
+    'all_revenues' => 'الايرادات',
+    'this_real_state_not_have_owner' => 'هذا العقار ليس لديه مالك',
+    'rael_state_is_not_ready' => 'هذا العقار غير  جاهز للبيع او الايجار',
+    'rael_state_is_under_opration' => 'هذا العقار غير تحت عمليه بيع او ايجار',
+    'Status  Was Change Succesfuly' => 'بنجاح تم تعديل حاله العنصر',
 ];

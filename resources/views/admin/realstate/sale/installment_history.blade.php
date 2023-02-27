@@ -106,7 +106,7 @@
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
 
     <script>
-        let stauts, realstate_id, owner_id;
+        let stauts, realstate_id, owner_id, installment_id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
             serverSide: true,
@@ -120,6 +120,7 @@
                 data: function(q) {
                     q.realstate_id = realstate_id;
                     q.owner_id = owner_id;
+                    q.id = installment_id
                 },
             },
 

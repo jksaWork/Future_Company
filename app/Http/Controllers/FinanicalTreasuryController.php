@@ -42,7 +42,7 @@ class FinanicalTreasuryController extends Controller
         ]);
         try {
             FinancialTreasuryTransactionHistorys::EditTransaction($id, $request->amount);
-            session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+            session()->flash('success', __('translation.Edit_pay_to_Treasury_was_done_success'));
             return redirect()->back();
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(__('translation.6'));
@@ -72,7 +72,10 @@ class FinanicalTreasuryController extends Controller
             })
             ->editColumn(
                 'actions',
-                'admin.treasury.data_table.actions'
+                fn ($i) => view(
+                    'admin.treasury.data_table.actions',
+                    ['item' => $i]
+                )
             )
             ->rawColumns(['actions', 'transaction_type', 'type'])
             ->toJson();
