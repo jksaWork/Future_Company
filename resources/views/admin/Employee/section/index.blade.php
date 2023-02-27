@@ -28,11 +28,11 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <form action="{{ route('Employee.section.index') }}" method="get">
-                                <input type="text" name='search' value="{{ request()->search }}"
-                                    class="form-control form-control-solid w-250px ps-15" placeholder="Search Area" />
-
-                            </form>
+                            {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
+                            <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
+                                class="form-control form-control-solid w-350px ps-15"
+                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
+                            {{-- </form> --}}
                         </div>
                         <!--end::Search-->
                     </div>
@@ -41,18 +41,9 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-
-                            <!--begin::Menu 1-->
-
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
-                            <!--begin::Export-->
-
-                            <!--end::Export-->
-                            <!--begin::Add customer-->
-                            <a href='{{ route('Employee.section.create') }}'
+                           
+                                <a href='{{ route('Employee.section.create', ['type' => request()->type]) }}'
                                 class="btn btn-primary">{{ __('translation.Add') }}</a>
-                            <!--end::Add customer-->
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -72,28 +63,22 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     @include('layouts.includes.session')
-                    <table  class="table align-middle table-row-dashed fs-6 gy-4" id="kt_docs_datatable_subtable">
-                        <!--begin::Table head-->
-                        <thead>
-                            <!--begin::Table row-->
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
-                                    </div>
-                                </th>
-                                <th class="min-w-125px">#</th>
-                                <th class="">{{ __('translation.name') }}</th>
-                                <th class="">{{ __('translation.description') }}</th>
-                                {{-- <th class="">{{__('translation.linked')}}</th> --}}
-                                <th class="text-end min-w-70px">{{ __('translation.Actions') }}</th>
-                            </tr>
-                            <!--end::Table row-->
-                        </thead>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                    id="roles-table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="min-w-125px">#</th>
+                                            <th class="">{{ __('translation.name') }}</th>
+                                            <th class="">{{ __('translation.description') }}</th>
+                                        </tr>
+                                    </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
-                        <tbody class="fw-bold text-gray-600">
+                        {{-- <tbody class="fw-bold text-gray-600">
                             @forelse ($section as $index=>$sections)
                                 <tr>
 
@@ -106,7 +91,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $sections->section_name }}</td>
                                     <td>{{ $sections->description }}</td>
-                                    {{-- <td></td> --}}
+                                    <td></td>
 
                                     <td class="text-end">
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
@@ -152,7 +137,7 @@
                                     <div class="text-center">No Data Was Found</div>
                                 </td>
                             @endforelse
-                        </tbody>
+                        </tbody> --}}
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
@@ -192,3 +177,56 @@
         }
     </script>
 @endsection
+@push('scripts')
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+    <script>
+        let role;
+        let rolesTable = $('#roles-table').DataTable({
+            dom: "tiplr",
+            serverSide: true,
+            processing: true,
+            "language": {
+                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
+            ajax: {
+                url: '{{ route('Section.Section.hitory.data') }}',
+            },
+            columns: [{
+                    data: 'id',
+                    name: 'id',
+                    searchable: false,
+                    sortable: false
+                },
+                {
+                    data: 'section_name',
+                    name: 'section_name',
+                    searchable: false,
+                    sortable: false
+                },
+            ],
+            order: [
+                [2, 'desc']
+            ],
+            drawCallback: function(settings) {
+                $('.record__select').prop('checked', false);
+                $('#record__select-all').prop('checked', false);
+                $('#record-ids').val();
+                $('#bulk-delete').attr('disabled', true);
+            }
+        });
+
+        $('#handelSearch').keyup(function() {
+            rolesTable.search(this.value).draw();
+            // role = $(this).val();
+            // rolesTable.ajax.reload();
+        });
+        $('#roles').on('change', function() {
+            role = $(this).val();
+            rolesTable.ajax.reload();
+        });
+    </script>
+@endpush

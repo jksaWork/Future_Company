@@ -55,7 +55,7 @@ class EmployeeSalariesController extends Controller
             session()->flash('success', __('site.deleted_successfully'));
             return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
-            // dd($e);
+            // //dd($e);
             session()->flash('error',  'Some Thing Went Worng ');
             return redirect()->back();
         }
@@ -95,11 +95,11 @@ class EmployeeSalariesController extends Controller
             'allowances_id' => $request->allowances_id,
             'month' => $request->month,
         ]);
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
         }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 

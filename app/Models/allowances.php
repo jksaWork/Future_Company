@@ -15,6 +15,10 @@ class allowances extends Model
    {
    return $this->belongsTo('App\Models\Category','categories_id');
    }
-  
+
+   public function getActive(){
+    return   $this -> status == 1 ? 'ثابت'  : 'غير ثابت';
+  }
+
 
 }

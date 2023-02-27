@@ -17,12 +17,13 @@ class CreateSalariesTable extends Migration
             $table->id();
             $table->Integer('allownacees_salary');
             $table->Integer('advances');
-            $table->date('month');
+            $table->integer('month_number')->default(0);
             $table->text('discrption')->nullable();
             $table->bigInteger('totle_salaries');
             $table->Integer('discounts');
             $table->string('status')->default(1);
             $table->bigInteger('fixed_salary');
+            $table->bigInteger('allowancess_fixed');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();

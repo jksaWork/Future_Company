@@ -126,7 +126,11 @@ class RentController extends Controller
         ]);
         //  Fecth Payment Is Exist Or Not
         try {
+<<<<<<< HEAD
+            $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
+=======
             $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id, $request->month_number]);
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
             //  If Is Exist the Spesfic Month And And RealState ID
             if ($is_payed[0]->c != 0)
                 return redirect()->back()->withErrors(__('translation.the_select_month_was_payed'));

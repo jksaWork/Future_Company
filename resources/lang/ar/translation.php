@@ -37,6 +37,11 @@ return [
     'Advancess' => 'السلفيات',
     'month' => 'تاريخ المنصرف',
     'spending_name' => 'اسم العميل',
+<<<<<<< HEAD
+    'proven'=>'ثابت',
+    'not_fixed'=>'غير ثابت',
+=======
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
     'section_id' => 'اقسام المصروفات',
     'phone' => 'رقم الهاتف',
     'salary' => 'الراتب الثابت ',
@@ -249,6 +254,7 @@ return [
     'id' => 'المعرف الرقمي',
     'real_state_mangements' => 'اداره العقارات',
     'created_at' => 'تاريخ الاضافه',
+    'allowancess_fixed'=>'بدلات الثابت',
     ' Status Was Change Succesfuly'  => 'تم تعديل الحاله بنجاح',
     'Status Was Change Succesfuly'  => 'تم تعديل الحاله بنجاح',
     '3'  => 'تم تعديل الحاله بنجاح',
@@ -277,6 +283,9 @@ return [
     'show_real_state' => 'عرض العقارات',
     'category_idd' => 'القسم',
     'realstate_number' => 'رقم العقار',
+    'insert_record'=>'ادارج سجل',
+    'allowances_id'=>'بدلات الثابت',
+    'Choose_allowances'=>'قم باختيار البدل المناسب',
     'address' => 'المكان',
     'is_saled' => 'حاله البيع',
     'is_rented' => 'حاله الاستجار',
@@ -331,6 +340,7 @@ return [
     'chose_month_number' => 'اختار  رقم الشهر المراد استلامه',
     'chose_your_real_state' => 'اختر العقار',
     'the_select_month_was_payed' => "ايراد هذا الشهر تم دفعه مسبقا",
+    'the_select_month_was_payed' => "مرتب هذا الشهر تم دفعه مسبقا",
     'has_no_current_user' => 'هذا العقار لايوجد لديه مالك اومستاجر',
     'realstate_info' => 'معلومات العقار',
     'owner_info' => 'معلومات المستاجر',
@@ -382,6 +392,9 @@ return [
     'installment_order_4' => "القصد الرابع",
     'installment_order_5' => "القصد الخامس",
     'installment_order_6' => "القصد السادس",
+<<<<<<< HEAD
+
+=======
     'finanical_treasury' => 'الخزينه الماليه',
     'treasury' => 'الخزينه',
     'current_treasury' => 'الخزينه الحاليه',
@@ -408,8 +421,13 @@ return [
     'installments' => 'ايراد الاقصاد',
     'revenue_income' => 'ايراد الايجارات',
     'revenues_trsury' => 'الايرادات',
+<<<<<<< HEAD
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
+];
+=======
     'employee_salary' => 'مرتب شهري',
     'employee_advances' => 'سلفيات موظفين',
     'edit_amount' => 'تعديل المبلغ',
     'Edit_pay_to_Treasury_was_done_success' => 'تم تعديل بيانات الايراد بنجاح',
 ];
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3

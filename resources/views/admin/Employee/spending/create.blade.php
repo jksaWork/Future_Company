@@ -13,20 +13,14 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         @include('layouts.includes.session')
-
-
-
-                        <!--begin::Repeater-->
-                        <div id="kt_docs_repeater_advanced">
-                            <!--begin::Form group-->
-                            <form action="{{ route('Employee.spending.store') }}" method="post">
-                                @csrf
+                        <form action="{{ route('Employee.spending.store') }}" method="post">
+                            @csrf
+                            <div id="kt_docs_repeater_basic">
+                                <!--begin::Form group-->
                                 <div class="form-group">
                                     <div data-repeater-list="list_spending">
                                         <div data-repeater-item>
                                             <div class="form-group row mb-5">
-
-
                                                 <div class="fv-row mb-7 col-md-6 ">
                                                     <label
                                                         class="form-label">{{ __('translation.Disbursement_departments') }}</label>
@@ -70,7 +64,9 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">{{ __('translation.month') }}</label>
-                                                    <input type="date" id="advances_Date"class="form-control form-control-solid" name="month" value="{{ date('Y-m-d') }}">
+                                                    <input type="date"
+                                                        id="advances_Date"class="form-control form-control-solid"
+                                                        name="month" value="{{ date('Y-m-d') }}">
 
                                                     @error('month')
                                                         <span class="text-danger">
@@ -85,10 +81,11 @@
                                                 </label>
                                                 <textarea class="form-control form-control-solid" rows="1" name="description"
                                                     placeholder="{{ __('translation.description') }}"></textarea>
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-4">
                                                     <a href="javascript:;" data-repeater-delete
-                                                        class="btn btn-sm btn-light-danger mt-3 mt-md-9">
-                                                        <i class="la la-trash-o fs-3"></i>Delete
+                                                        class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                        <i class="la la-trash-o"></i>{{ __('translation.Delete') }}
                                                     </a>
                                                 </div>
                                             </div>
@@ -98,35 +95,36 @@
                                 <!--end::Form group-->
 
                                 <!--begin::Form group-->
-                                <div class="form-group">
-
-                                </div>
-                                <div class="mt-4">
+                                <div class="form-group mt-5">
                                     <a href="javascript:;" data-repeater-create class="btn btn-success">
-                                        <i class="la la-plus"></i>Add
+                                        <i class="la la-plus"></i>{{ __('translation.insert_record') }}
                                     </a>
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{ __('translation.Save') }}
                                     </button>
                                     <a href='{{ route('Employee.spending.index') }}' class="btn btn-danger">
-                                        Cancle
+                                        {{ __('translation.Cancle') }}
                                     </a>
                                 </div>
-                            </form>
-                            <!--end::Form group-->
-                        </div>
-
+                                <!--end::Form group-->
+                            </div>
                     </div>
 
-
-
+                    <!--end::Form group-->
                 </div>
 
             </div>
-            <!--end::Card-->
+        </form>
+
+
+
+
 
         </div>
-        <!--end::Container-->
+        <!--end::Card-->
+
+    </div>
+    <!--end::Container-->
 
 
     </div>

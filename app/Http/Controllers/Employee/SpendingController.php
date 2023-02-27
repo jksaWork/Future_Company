@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\spendings;
 use App\Models\section;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\spendingRequest;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\SpendingRequest;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -30,28 +31,28 @@ class SpendingController extends Controller
     } //end of create
 
 
-    public function store(Request $request)
+    public function store(SpendingRequest $request)
     {
         // return  $request;
 
         $list_spending = $request->list_spending;
+        DB::beginTransaction();
         try {
-            foreach ($list_spending as $list_spendings) {
+            $DATA = spendings::create([
+                'section_id' => $request->section_id,
+                'spending_name' => $request->spending_name,
+                'month' => $request->month,
+                'spending_value' => $request->spending_value,
+                'description' => $request->description,
 
-                $spendings = new spendings();
-                $spendings->section_id = $list_spendings['section_id'];
-                $spendings->spending_name = $list_spendings['spending_name'];
-                $spendings->month = $list_spendings['month'];
-                $spendings->spending_value = $list_spendings['spending_value'];
-                $spendings->description = $list_spendings['description'];
-                $spendings->save();
-            }
+            ]);
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.spending.index');
         } catch (Exception $e) {
-            dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            DB::rollback();
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -73,7 +74,7 @@ class SpendingController extends Controller
         return view('admin.Employee.spending.edit', compact('spendings', 'sections'));
     } //end of edit
 
-    public function update(spendingRequest $request)
+    public function update(SpendingRequest $request)
     {
         // return $request;
         try{
@@ -89,11 +90,11 @@ class SpendingController extends Controller
             'section_id' => $id,
             'description' => $request->description,
         ]);
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.spending.index');
         }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            //dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 

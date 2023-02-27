@@ -37,13 +37,14 @@ class AllowancesController extends Controller
             $DATA = allowances::create([
                 'allowances_name' => $request->allowances_name,
                 'allowances_value' => $request->allowances_value,
+                'status'=>$request->status,
             ]);
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+            session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.allowances.index');
         } catch (Exception $e) {
             // dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -68,13 +69,14 @@ class AllowancesController extends Controller
         // return $request;
         try{
 
-     
+
         //    return $id;
         $allowances = allowances::findOrFail($request->pro_id);
 
         $allowances->update([
             'allowances_name' => $request->allowances_name,
             'allowances_value' => $request->allowances_value,
+            'status'=>$request->status,
         ]);
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('Employee.allowances.index');

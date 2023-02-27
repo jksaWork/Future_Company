@@ -20,7 +20,7 @@
                                 <x:text-input name='section_name' class='col-md-6' />
                                 <div class="d-flex flex-column mb-3">
                                     <label class="fs-4 fw-bold mb-2">{{__('translation.description')}}</label>
-                                    <textarea class="form-control form-control-solid" rows="1" name="description" placeholder="{{__('translation.description')}}"></textarea>
+                                    <textarea class="form-control form-control-solid" rows="3" name="description" placeholder="{{__('translation.description')}}"></textarea>
                                 </div>
                                 <div class='col-md-6'>
                                 </div>

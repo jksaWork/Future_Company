@@ -11,7 +11,7 @@ class employee_allowances extends Model
 {
     protected $guarded = [];
 
-   public function allowances()
+   public function Allowances_id()
    {
    return $this->belongsTo('App\Models\allowances','allowances_id');
    }
@@ -21,6 +21,6 @@ class employee_allowances extends Model
    return $this->belongsTo('App\Models\employee','employee_id');
    }
 
- 
+
 
 }

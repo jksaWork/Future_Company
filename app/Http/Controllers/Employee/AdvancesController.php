@@ -30,7 +30,11 @@ class AdvancesController extends Controller
 
     public function store(Request $request)
     {
-        // return  $request;
+        $request->validate([
+            'employee_id' => 'required',
+            'advances_value' => 'required|numeric',
+            'month_number' => 'required',
+        ]);
 
         try {
             $employee = employee::select('name')->findOrFail($request->employee_id);
@@ -38,16 +42,24 @@ class AdvancesController extends Controller
             $advance = Advances::create([
                 'employee_id' => $request->employee_id,
                 'advances_value' => $request->advances_value,
+<<<<<<< HEAD
+                'month_number' => $request->month_number,
+
+            ]);
+            //    return  $DATA;
+            session()->flash('success', __('site.added_successfully'));
+=======
                 'advances_Date' => $request->advances_Date,
             ]);
 
             FinancialTreasuryTransactionHistorys::MakeTransacaion($request->advances_value, 'advance', __('translation.employee_advances')  . ' - ' . $employee->name, $advance->id);
 
             session()->flash('success', __('site.deleted_successfully'));
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -74,6 +86,25 @@ class AdvancesController extends Controller
         // return $request;
         try {
 
+<<<<<<< HEAD
+            $request->validate([
+                'employee_id' => 'required',
+                'advances_value' => 'required|numeric',
+                'month_number' => 'required',
+            ]);
+        $Advancess = Advances::findOrFail($request->pro_id);
+
+        $Advancess->update([
+            'employee_id' => $request->employee_id,
+            'advances_value' => $request->advances_value,
+            'month_number' => $request->month_number,
+        ]);
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('Employee.Advances.index');
+        }catch(Exception $e){
+            dd($e);
+            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+=======
             // $id = Category::where('categories_name', $request->categories_id)->first()->id;
             //    return $id;
             $Advancess = Advances::findOrFail($request->pro_id);
@@ -88,6 +119,7 @@ class AdvancesController extends Controller
         } catch (Exception $e) {
             dd($e);
             session()->flash('error',  'Some Thing Went Worng ');
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
             return redirect()->back();
         }
     } //end of update

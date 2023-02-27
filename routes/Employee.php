@@ -11,6 +11,7 @@ use App\Http\Controllers\Employee\SalariesController;
 use App\Http\Controllers\Employee\SectionController;
 use App\Http\Controllers\Employee\SpendingController;
 use App\Http\Controllers\Employee\EmployeeSalariesController;
+use App\Http\Controllers\Employee\DataController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -51,8 +52,10 @@ Route::group(
               Route::post('Delete_attachment', [AttachmentController::class ,'Delete_attachment'])->name('Delete_attachment');
         });
 
-        Route::prefix('Salaries')->name('Salaries.')->group(function () {
-            Route::get('Salaries-data' ,[EmployeeSalariesController::class , 'data'])->name('data');
+        Route::prefix('Section')->name('Section.')->group(function () {
+
+
+                Route::get('Section-history-data', [DataController::class , 'SectionhistoryData'])->name('Section.hitory.data');
         });
     }
 );

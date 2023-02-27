@@ -14,6 +14,7 @@ return [
     'added_successfully' => 'Record added successfully',
     'updated_successfully' => 'Record updated successfully',
     'deleted_successfully' => 'Record deleted successfully',
+    'Some_Thing_Went_Worng'=>'Some Thing Went Worng',
     'confirm_delete' => 'Confirm deletion',
     'yes' => 'Yes',
     'no' => 'No',

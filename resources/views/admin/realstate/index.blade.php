@@ -108,6 +108,26 @@
                                             <th>{{ request()->type == 'sale' ? __('translation.is_saled') : __('translation.is_rented') }}
                                             </th> {{-- جاهز ولا م جاهز --}}
 
+<<<<<<< HEAD
+                                        <th>@lang('translation.created_at')</th>
+                                        <th>@lang('translation.action')</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div><!-- end of table responsive -->
+                    </div><!-- end of col -->
+                </div><!-- end of row -->
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+        <!--begin::Modals-->
+        <!--begin::Modal - Customers - Add-->
+
+        <!--end::Modal - New Card-->
+        <!--end::Modals-->
+=======
                                             <th>@lang('translation.created_at')</th>
                                             <th>@lang('translation.action')</th>
                                         </tr>
@@ -123,6 +143,7 @@
             <!--end::Modals-->
         </div>
         <!--end::Container-->
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
     </div>
 @endsection
 @push('scripts')
@@ -132,10 +153,49 @@
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    let type = @json(request()->type);
+    let status, is_rent , is_sale;
+    let rolesTable = $('#roles-table').DataTable({
+        dom: "tiplr",
+        serverSide: true,
+        processing: true,
+        "language": {
+            "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
+        ajax: {
+            url: '{{ route('realstate.data') }}',
+            data: function (d){
+                d.type = type;
+                d.status = status;
+                d.is_rent = 1;
+                d.is_sale = is_sale;
+            }
+        },
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'title', name: 'title'},
+            {data: 'realstate_number', name: 'realstate_number'},
+            {data: 'address', name: 'address'},
+            {data: 'price', name: 'price' },
+            {data: 'type', name: 'type' },
+            {data: 'category_id', name: 'category_id' ,searchable: false},
+            {data: 'status', name: 'status',  sortable:false},
+            {data: 'is_sale', name: 'is_sale',  sortable:false},
+            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'actions', name: 'actions', searchable: false, sortable: true, width: '20%'},
+        ],
+        order: [[2, 'desc']],
+
+    });
+=======
+=======
         function alert2(e) {
             alert(e);
             e.preventDefault();
         }
+>>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
@@ -216,6 +276,7 @@
                 $('#bulk-delete').attr('disabled', true);
             }
         });
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
 
         $('#handelSearch').keyup(function() {
             rolesTable.search(this.value).draw();
@@ -232,10 +293,18 @@
             rolesTable.ajax.reload();
         });
 
+<<<<<<< HEAD
+    $('#status').on('change' , function(){
+        status = $(this).val();
+        rolesTable.ajax.reload();
+    });
+</script>
+=======
         $('#status').on('change', function() {
             console.log('helllo');
             status = $(this).val();
             rolesTable.ajax.reload();
         });
     </script>
+>>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
 @endpush

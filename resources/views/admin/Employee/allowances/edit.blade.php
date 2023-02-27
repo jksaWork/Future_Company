@@ -46,6 +46,7 @@
                                         @enderror
                                 </div>
 
+                                <x:select-options name='status' :options='["proven" , "not_fixed"]' :value='$allowancess->status' class='col-md-6' />
 
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
