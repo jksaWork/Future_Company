@@ -80,6 +80,78 @@ class FinnaincalTest extends TestCase
 
 
 
+    public function test_can_i_make_credit_transaction_and_edit_it_after_its_maked()
+    {
+
+        // future_company
+        // mbhtechc_future
+        // mbhtechc_future
+        $AMOUNT = rand(10000000, 10000000000);
+        $New_AMOUNT = rand(10000000, 10000000000);
+        $oldData = FinancialTreasury::getInstance();
+        $oldData->update(['total' => 0, 'total_debit' => 0, 'total_credit' => 0]);
+        //  Check IF I can Drowl And Payments
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($AMOUNT, 'installment', 'hello');
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT);
+        $oldData = $oldData->fresh();
+        $this->assertEquals($oldData->total, $New_AMOUNT);
+        $this->assertEquals($oldData->total_credit, $New_AMOUNT);
+
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT + 500);
+        $oldData = $oldData->fresh();
+        $this->assertEquals($oldData->total, $New_AMOUNT + 500);
+        $this->assertEquals($oldData->total_credit, $New_AMOUNT + 500);
+
+
+        //  Make Dbit Transacation
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($New_AMOUNT, 'spending', 'hello', 1);
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT);
+        $oldData = FinancialTreasury::getInstance();
+        $this->assertEquals($oldData->total, 500);
+        $this->assertEquals($oldData->total_credit, $New_AMOUNT + 500);
+        $this->assertEquals($oldData->total_debit, $New_AMOUNT);
+    }
+
+    public function test_add_and_edit_and_delelt_credit_transaction()
+    {
+        $AMOUNT = rand(10000000, 10000000000);
+        $New_AMOUNT = rand(10000000, 10000000000);
+        $oldData = FinancialTreasury::getInstance();
+        $oldData->update(['total' => 0, 'total_debit' => 0, 'total_credit' => 0]);
+
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($AMOUNT, 'installment', 'hello');
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT);
+        $oldData = $oldData->fresh();
+        $this->assertEquals($oldData->total, $New_AMOUNT);
+        $this->assertEquals($oldData->total_credit, $New_AMOUNT);
+
+        FinancialTreasuryTransactionHistorys::DestoryTransaction($transaction->id);
+        $oldData = $oldData->fresh();
+        $this->assertEquals($oldData->total, 0);
+        $this->assertEquals($oldData->total_credit, 0);
+    }
+
+
+    public function test_add_and_edit_and_delelt_debit_transaction()
+    {
+        $AMOUNT = 500;
+        $New_AMOUNT = 400;
+        $oldData = FinancialTreasury::getInstance();
+        $oldData->update(['total' => 1000, 'total_debit' => 0, 'total_credit' => 0]);
+
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($AMOUNT, 'advance', 'hello');
+        FinancialTreasuryTransactionHistorys::EditTransaction($transaction->id, $New_AMOUNT);
+        $oldData = $oldData->fresh();
+        $this->assertEquals($oldData->total, (1000 - $New_AMOUNT));
+        $this->assertEquals($oldData->total_debit, $New_AMOUNT);
+
+        FinancialTreasuryTransactionHistorys::DestoryTransaction($transaction->id);
+        $oldData = $oldData->fresh();
+
+        $this->assertEquals($oldData->total,  1000);
+        $this->assertEquals($oldData->total_debit, 0);
+    }
+
     public function test_fresh_data_base()
     {
         $oldData = FinancialTreasury::getInstance();

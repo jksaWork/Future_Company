@@ -125,35 +125,34 @@ class RentController extends Controller
             'month_number' => 'required',
         ]);
         //  Fecth Payment Is Exist Or Not
-        try {
-<<<<<<< HEAD
-            $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
-=======
-            $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id, $request->month_number]);
->>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
-            //  If Is Exist the Spesfic Month And And RealState ID
-            if ($is_payed[0]->c != 0)
-                return redirect()->back()->withErrors(__('translation.the_select_month_was_payed'));
-            // Check If Request Has No OWner ID return It To Go To Setp Tow
-            if (!request()->has('owner_id')) return $this->receiptRevenueSetp2($request);
-            // IF esle INsert The Renveu To DataBase
-            $realstate = RealState::findOrFail($request->realstate_id);
-            // insert The New Row
-            $id = DB::table('rent_revenues')->insertGetId(
-                [
-                    'owner_id' => $request->owner_id,
-                    'month_number' => $request->month_number,
-                    'realstate_id' => $request->realstate_id,
-                    'price' => $realstate->price,
-                    'status' => 1,
-                ]
-            );
-            // Add Money To History
-            FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
-            return redirect()->route('realstate.realstate.show', $request->realstate_id);
-        } catch (\Throwable $th) {
-            return redirect()->back()->withErrors($th->getMessage());
-        }
+        //try {
+        $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
+        //  If Is Exist the Spesfic Month And And RealState ID
+        if ($is_payed[0]->c != 0)
+            return redirect()->back()->withErrors(__('translation.the_select_month_was_payed'));
+        // Check If Request Has No OWner ID return It To Go To Setp Tow
+        if (!request()->has('owner_id')) return $this->receiptRevenueSetp2($request);
+        // IF esle INsert The Renveu To DataBase
+        $realstate = RealState::findOrFail($request->realstate_id);
+        // insert The New Row
+        $id = DB::table('rent_revenues')->insertGetId(
+            [
+                'owner_id' => $request->owner_id,
+                'month_number' => $request->month_number,
+                'realstate_id' => $request->realstate_id,
+                'price' => $realstate->price,
+                'status' => 1,
+            ]
+        );
+        // Add Money To History
+        $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
+        DB::table('rent_revenues')
+            ->where('id', $id)
+            ->update(['transaction_id' => $transaction->id]);
+        return redirect()->route('realstate.realstate.show', $request->realstate_id);
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->withErrors($th->getMessage());
+        // }
     }
 
     public function revenueHsitory()

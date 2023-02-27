@@ -66,14 +66,25 @@ class FinancialTreasuryTransactionHistorys extends Model
         $oldInstance->save();
         // dd($old_amount, $new_amount);
         if ($oldInstance->type == 'credit') {
-            FinancialTreasury::DecToatalAndInCrditTreasury($old_amount);
-            FinancialTreasury::IncToatalAndDecDebitTreasury($new_amount);
+            FinancialTreasury::creditTransactionEdit($old_amount, $new_amount);
+            //  Heelo Jksa Altigani Osamn
         }
-        //  Heelo Jksa Altigani Osamn
+
         if ($oldInstance->type == 'debit') {
-            FinancialTreasury::IncToatalAndDecDebitTreasury($old_amount);
-            FinancialTreasury::DecToatalAndInCrditTreasury($new_amount);
+            FinancialTreasury::debitTransactionEdit($old_amount, $new_amount);
         }
+    }
+
+    public  static function DestoryTransaction($transaction_id)
+    {
+        $oldInstance = FinancialTreasuryTransactionHistorys::findOrFail($transaction_id);
+        if ($oldInstance->type == 'credit') {
+            FinancialTreasury::DestoryCreditTransaction($oldInstance->amount);
+        }
+        if ($oldInstance->type == 'debit') {
+            FinancialTreasury::DestoryDebitTransaction($oldInstance->amount);
+        }
+        $oldInstance->delete();
     }
 
     public function scopewhenType($query)

@@ -15,22 +15,6 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
-<<<<<<< HEAD
-                @include('layouts.includes.session')
-                <div class="row">
-                    <form action='{{route('realstate.assignOwnerToRalstate')}}' method='post'>
-                        @csrf
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="hidden" name='type' value='rent'>
-                                    <div class="">
-                                        <div class="form-group">
-                                          <label for="" style='font-size:20px'>{{__('translation.realstate')}}</label>
-                                          <select id='realstate'  style='width:100%' name='realstate_id'>
-                                            <option value='0'> {{__('translation.chose_your_owner')}}</option>
-                                          </select>
-=======
                     @include('layouts.includes.session')
                     <div class="row">
                         <form action='{{ route('realstate.assignOwnerToRalstate') }}' method='post'>
@@ -48,7 +32,6 @@
                                                     </option>
                                                 </select>
                                             </div>
->>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
                                         </div>
                                     </div>
                                     <div class="col-md-6">
