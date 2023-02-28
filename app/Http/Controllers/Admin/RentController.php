@@ -160,7 +160,10 @@ class RentController extends Controller
                 ->where('id', $id)
                 ->update(['transaction_id' => $transaction->id]);
 
+            session()->flash('success',  __('translation.recept_revenues_success_fule'));
+
             DB::commit();
+
             return redirect()->route('realstate.realstate.show', $request->realstate_id);
         } catch (\Throwable $th) {
             DB::rollback();

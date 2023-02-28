@@ -340,6 +340,7 @@ return [
     'rent_mangemnt' => 'الايجارات',
     "revenues" => "ايراد الايجار",
     'recept_revenues' => 'استلام ايراد جديد',
+    'recept_revenues_success_fule' => 'تم استلام الايراد بنجاح',
     'revenues_history' => 'سجل الايردات',
     'revened' => 'تم الايراد',
     'unrevened' => 'لم يتم الايراد',
