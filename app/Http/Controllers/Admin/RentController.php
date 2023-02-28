@@ -100,8 +100,6 @@ class RentController extends Controller
                 else
                     return "<span class='badge badge-light-danger'> " . __('translation.finshed') . "</span>";
             })
-
-
             ->editColumn('owner_name', function ($item) {
                 return  $item->CurrentOwner[0]->name;
             })

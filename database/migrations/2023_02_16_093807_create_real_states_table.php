@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('realstate_number');
             $table->string('address');
             $table->integer('price');
-            $table->enum('type' , ['rent' , 'sale'])->defualt('rent');
+            $table->enum('type', ['rent', 'sale'])->defualt('rent');
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
             $table->boolean('is_rent')->default(0);
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('real_state_categories');
             $table->foreign('owner_id')->references('id')->on('owners');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

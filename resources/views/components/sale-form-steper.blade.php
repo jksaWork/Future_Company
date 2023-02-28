@@ -76,11 +76,12 @@
                                         <div class="form-group row mb-5">
                                             <div class="col-md-3">
                                                 <label class="form-label">{{__('translation.precentage')}}:</label>
-                                                <input type="number" max='100'  name='precentage' rendonly class="form-control mb-2 mb-md-0" placeholder="Enter full name">
+                                                <input type="number" max='100'  name='precentage'  class="form-control mb-2 mb-md-0 precentage_value"
+                                                placeholder="Enter full name">
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">{{__('translation.aqsat_amount')}}:</label>
-                                                <input type="number"  name='amount' class="form-control mb-2 mb-md-0" placeholder="Enter contact number">
+                                                <input type="number"  name='amount' readonly class="form-control mb-2 mb-md-0 precentage_amount" placeholder="Enter contact number">
                                             </div>
 
                                             <div class="col-md-3">
@@ -142,6 +143,7 @@
 <script>
 jQuery = $;
 var element = document.querySelector("#kt_stepper_example_basic");
+var const_price_value;
 
 // Initialize Stepper
 var stepper = new KTStepper(element);
@@ -165,11 +167,32 @@ $('#installment').repeater({
     },
     show: function () {
         $(this).slideDown();
+        eventHandler();
     },
     hide: function (deleteElement) {
         $(this).slideUp(deleteElement);
+        eventHandler();
     }
 });
 
+let eventHandler =() => ( $('.precentage_value').on('keyup',function(){
+
+$('.precentage_value').each((index , el) =>{
+    // console.log(el, index);
+    price_value = $('input[name="price"]').val();
+    let precentage  = price_value * $(this).val() / 100 ;
+
+    $(el).on('change' , function(){
+        $($('.precentage_amount')[index]).val(precentage);
+        console.log('Hello Form Hell', index , $(this).val());
+    });
+    // console.log('hello');
+});
+
+}));
+eventHandler();
+$('input[name="price"]').change(function(){
+    const_price_value = $(this).val();
+})
 </script>
 @endpush

@@ -28,6 +28,7 @@ class FinanicalTreasuryController extends Controller
             session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
             return redirect()->back();
         } catch (\Throwable $th) {
+            // dd($th);
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -55,6 +56,7 @@ class FinanicalTreasuryController extends Controller
             ->whenTransactionType()
             ->WhenFromDate()
             ->orderBy('id', 'desc');
+        // dd($query->get());
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');

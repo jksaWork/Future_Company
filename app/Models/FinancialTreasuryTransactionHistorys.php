@@ -17,7 +17,7 @@ class FinancialTreasuryTransactionHistorys extends Model
         "incentives" => "debit",
         'revenues' => "credit",
         'installment'  => "credit",
-        'D' => "credit"
+        'main_treasury' => "credit"
     ];
 
     public function genrateUrl()
@@ -42,7 +42,7 @@ class FinancialTreasuryTransactionHistorys extends Model
 
     public function getTransactionType()
     {
-        return "<span class='badge badge-" .  self::getStatus()[$this->transaction_type] . "'>" . __('translation.' . $this->transaction_type)  . "</span>";
+        return "<span class='badge badge-" .  self::getStatus()[$this->transaction_type]   ?? 'danger' . "'>" . __('translation.' . $this->transaction_type)  . "</span>";
     }
     public static function MakeTransacaion($amount, $transaction_type, $note, $ref = 1)
     {
@@ -128,4 +128,8 @@ class FinancialTreasuryTransactionHistorys extends Model
             return $q->where('created_at', ',=',  request()->to_date);
         });
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4d97ca59a7b164548e7b622b2161a2c26d6b34eb
