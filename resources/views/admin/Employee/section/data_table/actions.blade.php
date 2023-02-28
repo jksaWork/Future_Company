@@ -1,17 +1,10 @@
 {{-- @if (auth()->user()->hasPermission('update_admins')) --}}
 <div style="min-width: 200px">
-    <a href="{{ route('realstate.realstate.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
-        <i class="fa fa-eye"></i>
-    </a>
-
-    <form id='end_real_state_rent_{{$id}}'
-     action="{{ route('realstate.FinshRent', $id) }}" class="my-1 my-xl-0" method="post">
+    <a href="{{ route('Employee.section.edit', $id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+    <form action="{{ route('Employee.section.destroy', $id) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
-        <input  type='hidden' name='real_state_id' value='{{$id}}'/>
-        <button type="submit"
-        data-element='end_real_state_rent_{{$id}}' class="btn btn-light-danger btn-sm delete end_rent_btn">
-            {{__('translation.finsh_the_currnt_rent')}}
-        </button>
+        @method('delete')
+        <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> @lang('site.delete')</button>
     </form>
 </div>
 {{-- @endif --}}

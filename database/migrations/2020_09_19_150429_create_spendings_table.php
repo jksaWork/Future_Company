@@ -15,10 +15,11 @@ class CreateSpendingsTable extends Migration
     {
         Schema::create('spendings', function (Blueprint $table) {
             $table->id();
-            $table->string('spending_name')->nullable();
+            $table->string('spending_name');
             $table->text('description')->nullable();
-            $table->integer('spending_value')->nullable();
+            $table->integer('spending_value');
             $table->date('month');
+            $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();

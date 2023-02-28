@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label>{{__('translation.month')}}  :</label>
-                                    <input class="form-control fc-datepicker" name="month" placeholder="YYYY-MM-DD"
+                                    <input class="form-control fc-datepicker form-control-solid" name="month" placeholder="YYYY-MM-DD"
                                     type="date" value="{{$spendings->month}}" required>
                                         @error('advances_Date')
                                             <span class="text-danger">
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
                                         </label>
-                                        <select class="form-control" name="section_id" id="categories_id"
+                                        <select class="form-control form-control-solid" name="section_id" id="categories_id"
                                             class="form-control" >
 
                                             @foreach ($sections as $section)
@@ -75,14 +75,14 @@
                                 </div>
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                                 </label>
-                                <textarea class="form-control form-control-solid" rows="1" value="{{$spendings->description}}" name="description"
-                                    placeholder="{{ __('translation.description') }}"></textarea>
+                                <textarea class="form-control form-control-solid" rows="1" value="" name="description"
+                                    placeholder="{{ __('translation.description') }}">{{$spendings->description}}</textarea>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{ __('translation.Save') }}
                                     </button>
                                     <a href='{{ route('Employee.spending.index')}}' class="btn btn-outline-danger">
-                                        Cancle
+                                        {{ __('translation.Cancle') }}
                                     </a>
                                 </div>
                             </div>

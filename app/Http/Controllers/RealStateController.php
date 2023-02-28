@@ -29,7 +29,10 @@ class RealStateController extends Controller
             ->typeScope()
             ->StatusScope()
             ->rentOrSaleScope();
+<<<<<<< HEAD
+=======
         // select * from users
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
 
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {

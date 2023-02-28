@@ -107,7 +107,7 @@
                                             @foreach ($employee_allowances as $allowances)
                                                 <option value="{{ $allowances->allowances_id }}"
 
-                                                    @if ($allowances->employee_id == $employees->id) selected disabled @endif> {{-- disabled --}}
+                                                    @if ($allowances->employee_id == $employees->id) selected  @endif> {{-- disabled --}}
                                                     {{ $allowances->Allowances_id->allowances_name }} (
                                                     {{ $allowances->Allowances_id->allowances_value }}$)
                                                 </option>

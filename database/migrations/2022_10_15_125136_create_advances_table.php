@@ -16,8 +16,11 @@ class CreateAdvancesTable extends Migration
         Schema::create('advances', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('advances_value');
-            $table->integer('month_number')->default(0);
+            $table->integer('year');
+            $table->integer('month_number');
+            $table->string('status')->default(1);
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();
         });

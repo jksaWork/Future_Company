@@ -108,6 +108,23 @@
                                             <th>{{ request()->type == 'sale' ? __('translation.is_saled') : __('translation.is_rented') }}
                                             </th> {{-- جاهز ولا م جاهز --}}
 
+<<<<<<< HEAD
+                                            <th>@lang('translation.created_at')</th>
+                                            <th>@lang('translation.action')</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div><!-- end of table responsive -->
+                        </div><!-- end of col -->
+                    </div><!-- end of row -->
+                    <!--end::Table-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Modals-->
+        </div>
+        <!--end::Container-->
+=======
                                         <th>@lang('translation.created_at')</th>
                                         <th>@lang('translation.action')</th>
                                     </tr>
@@ -126,6 +143,7 @@
 
         <!--end::Modal - New Card-->
         <!--end::Modals-->
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
     </div>
 @endsection
 @push('scripts')
@@ -135,10 +153,17 @@
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
             serverSide: true,
             processing: true,
             "language": {
@@ -215,6 +240,10 @@
                 $('#bulk-delete').attr('disabled', true);
             }
         });
+<<<<<<< HEAD
+
+=======
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
         $('#handelSearch').keyup(function() {
             rolesTable.search(this.value).draw();
         });
@@ -230,9 +259,19 @@
             rolesTable.ajax.reload();
         });
 
+<<<<<<< HEAD
+
+        $('#status').on('change', function() {
+            console.log('helllo');
+            status = $(this).val();
+            rolesTable.ajax.reload();
+        });
+    </script>
+=======
     $('#status').on('change' , function(){
         status = $(this).val();
         rolesTable.ajax.reload();
     });
 </script>
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
 @endpush

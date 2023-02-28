@@ -16,24 +16,31 @@
                         <form action="{{ route('Employee.employee_allowances.store') }}" method="post">
                             @csrf
                             <div class="row">
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
-                                    <input type="hidden" class="form-control form-control-solid" placeholder=""
-                                        name="employee_id" value=" {{ $employees->id }}" readonly />
-                                    <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="" value=" {{ $employees->name }}" readonly />
-                                    @error('employee_id')
-                                        <span class="text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
+                                        </label>
+                                        <select class="form-control form-control-solid" name="employee_id" class="form-control">
+                                            <option value="" selected disabled> {{ __('translation.Choose_employee_id') }}
+                                            </option>
+                                            @foreach ($employees as $employes)
+                                                <option value="{{ $employes->id }}">{{ $employes->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('employee_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
                                         </label>
-                                        <select class="form-control" name="allowances_id" class="form-control">
+                                        <select class="form-control form-control-solid" name="allowances_id" class="form-control">
                                             <option value="" selected disabled> {{ __('translation.Choose') }}
                                             </option>
                                             @foreach ($allowances as $allowancess)
@@ -52,7 +59,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
-                                        <select id='' class="form-control" name='month_number'>
+                                        <select id='' class="form-control form-control-solid" name='month_number'>
                                             <option value=''> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
                                                 <option value='{{ $i }}'>
@@ -69,10 +76,10 @@
                             </div>
                     <div class="mt-4">
                         <button class="btn btn-primary">
-                            Save
+                            {{ __('translation.Save') }}
                         </button>
                         <a href='{{ route('Employee.All_Employee.index') }}' class="btn btn-outline-danger">
-                            Cancle
+                            {{__('translation.Cancle')}}
                         </a>
                     </div>
                 </div>

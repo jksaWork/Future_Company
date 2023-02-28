@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\allowances;
+use App\Models\salaries;
 use App\Models\employee;
+use App\Models\Advances;
 use App\Models\section;
+use App\Models\spendings;
+use App\Models\Category;
+use App\Models\employee_allowances;
 use Yajra\DataTables\Facades\DataTables;
-
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use Exception;
@@ -19,28 +24,175 @@ class DataController extends Controller
     {
 
 
-        $query = section::with('section_name')->where('type' , 'section_name');
+        $query = section::query();
+        return  DataTables::of($query)->editColumn(
+            'actions',
+            'admin.Employee.section.data_table.actions'
+        )
+            ->rawColumns(['actions'])
+            ->toJson();
+    } //end of SectionhistoryData
+
+    public function spendinghistoryData(Request $request)
+    {
+
+
+        $query = spendings::query();
+        return  DataTables::of($query)->editColumn(
+            'actions',
+            'admin.Employee.spending.data_table.actions'
+        )->editColumn('section_id', function ($item) {
+            return "<span class='badge badge-success'>" . $item->section->section_name . "</span>";
+        })
+            ->editColumn('spending_value', function ($item) {
+                return number_format($item->spending_value, 2);
+            })
+            ->rawColumns(['actions', 'section_id'])
+            ->toJson();
+    } //end of spendinghistoryData
+    public function CategoryhistoryData(Request $request)
+    {
+
+
+        $query = Category::query();
+        return  DataTables::of($query)->editColumn(
+            'actions',
+            'admin.Employee.categories.data_table.actions'
+        )
+
+            ->rawColumns(['actions'])
+            ->toJson();
+    } //end of CategoryhistoryData
+    public function employeeshistoryData(Request $request)
+    {
+        $str = '';
+        $query = employee::query();
         return  DataTables::of($query)
+            ->addColumn('allowances_id', function ($item) use ($str) {
+                $allowancesS = employee_allowances::where(['employee_id' => $item->id,  'status' => 1])->get();
+                foreach ($allowancesS as $key => $allowances) {
+                    $str .= "<span class='badge badge-light-info'>" . $allowances->Allowances_id->allowances_name . ' ( ' . $allowances->Allowances_id->allowances_value  . ' ) ' . '</span>';
+                }
+                // DD($str);
+                return $str;
+            })
+            ->editColumn(
+                'actions',
+                'admin.Employee.All_Employee.data_table.actions'
+            )->editColumn('categories_id', function ($item) {
+                return "<span class='badge badge-light-info'>" . $item->Categorys->categories_name . "</span>";
+            })
+            ->editColumn('salary', function ($item) {
+                return number_format($item->salary, 2);
+            })
+            ->editColumn('categories_id', function ($item) {
+                return "<span class='badge badge-success'>" . $item->Categorys->categories_name . "</span>";
+            })
+            ->editColumn('status', function ($item) {
+                return $item->getStatusWithSpan();
+            })
+
+            ->rawColumns(['actions', 'categories_id', 'status', 'allowances_id'])
+            ->toJson();
+    } //end of employeeshistoryData
+
+
+
+
+    public function employee_allowanceshistoryData(Request $request)
+    {
+        $str = '';
+        $query = employee_allowances::query();
+        return  DataTables::of($query)
+            ->editColumn(
+                'actions',
+                'admin.Employee.employee_allowances.data_table.actions'
+            )
+
+            ->editColumn('allowances_id', function ($item) {
+                return "<span class='badge badge-light-info'>". $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';
+            })
+
+            ->editColumn('employee_id', function ($item) {
+                return  $item->employee->name;
+            })
             ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
             })
 
-
-
-            ->editColumn('section_name', function ($item) {
-                return  $item->CurrentOwner[0]->section_name;
-            })
-            ->editColumn('section_name', fn ($item) => $item->section_name ?? '')
+            ->rawColumns(['actions', 'employee_id', 'created_at', 'allowances_id'])
+            ->toJson();
+    } //end of employee_allowanceshistoryData
+    public function AdvanceshistoryData(Request $request)
+    {
+        $str = '';
+        $query = Advances::query();
+        return  DataTables::of($query)
             ->editColumn(
                 'actions',
-                'admin.Employee.section.data_table.actions'
+                'admin.Employee.Advances.data_table.actions'
             )
-            ->rawColumns(['actions', 'section_name', 'description'])
+            ->editColumn('employee_id', function ($item) {
+                return  $item->employee->name;
+            })
+            ->editColumn('advances_value', function ($item) {
+                return number_format($item->advances_value, 2) ;
+            })
+
+
+            ->editColumn('created_at', function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+
+            ->rawColumns(['actions', 'employee_id', 'created_at', 'advances_value'])
             ->toJson();
+    } //end of AdvanceshistoryData
 
+    public function salarieshistoryData(Request $request)
+    {
+        $str = '';
+        $query = salaries::query();
+        return  DataTables::of($query)
+            ->editColumn(
+                'actions',
+                'admin.Employee.salaries.data_table.actions'
+            )
+            ->editColumn('employee_id', function ($item) {
+                return  $item->employee->name;
+            })
+             ->editColumn('created_at', function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+            ->editColumn('status', function ($item) {
+                return "<span class='badge badge-success'>". $item->getActive() .'</span>';
+            })
 
+            ->rawColumns(['actions', 'employee_id', 'created_at','status'])
+            ->toJson();
+    } //end of salarieshistoryData
 
-    } //end of SectionhistoryData
+    public function allowanceshistoryData(Request $request)
+    {
+        $str = '';
+        $query = allowances::query();
+        return  DataTables::of($query)
+            ->editColumn(
+                'actions',
+                'admin.Employee.allowances.data_table.actions'
+            )
+             ->editColumn('created_at', function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+            ->editColumn('allowances_value', function ($item) {
+                return number_format($item->allowances_value, 2) ;
+            })
+            ->editColumn('status', function ($item) {
+                return "<span class='badge badge-success'>". $item->getActive() .'</span>';
+            })
+
+            ->rawColumns(['actions', 'allowances_value', 'created_at','status'])
+            ->toJson();
+    } //end of salarieshistoryData
 
 
     public function index(Request $request)
@@ -78,7 +230,7 @@ class DataController extends Controller
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -89,45 +241,44 @@ class DataController extends Controller
 
         $employees = employee::findorfail($id);
         // return $employees;
-        return view('admin.Employee.Advances.create',compact('employees'));
+        return view('admin.Employee.Advances.create', compact('employees'));
     }
 
 
     public function edit(Request $request, $id)
     {
-// return $id;
+        // return $id;
         // $Advancess = Advances::find($id);
-        return view('admin.Employee.Advances.edit', compact( 'Advancess'));
+        return view('admin.Employee.Advances.edit', compact('Advancess'));
     } //end of edit
 
     public function update(Request $request, Employee $employee)
     {
         // return $request;
-        try{
+        try {
 
             $request->validate([
                 'employee_id' => 'required',
                 'advances_value' => 'required|numeric',
                 'month_number' => 'required',
             ]);
-        // $Advancess = Advances::findOrFail($request->pro_id);
+            // $Advancess = Advances::findOrFail($request->pro_id);
 
-        // $Advancess->update([
-        //     'employee_id' => $request->employee_id,
-        //     'advances_value' => $request->advances_value,
-        //     'month_number' => $request->month_number,
-        // ]);
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('Employee.Advances.index');
-        }catch(Exception $e){
+            // $Advancess->update([
+            //     'employee_id' => $request->employee_id,
+            //     'advances_value' => $request->advances_value,
+            //     'month_number' => $request->month_number,
+            // ]);
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('Employee.Advances.index');
+        } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
-
     } //end of update
 
-    public function destroy( Request $request , $id)
+    public function destroy(Request $request, $id)
     {
         // return $id;
         // $Advances = Advances::findOrFail($id);
@@ -137,5 +288,10 @@ class DataController extends Controller
     } //end of destroy
 
 
-
+    public function ChangeStatus($id)
+    {
+        $employee = employee::findOrFail($id);
+        $employee->ChangeStatus();
+        return redirect()->back();
+    }
 }//end of controller

@@ -17,19 +17,24 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
-                                    <input type="hidden" class="form-control form-control-solid"
-                                    placeholder="" name="employee_id" value=" {{$Advancess->employee_id}}" readonly/>
-                                    <input type="hidden" class="form-control form-control-solid"
-                                    placeholder="" name="pro_id" value=" {{$Advancess->id}}" readonly/>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="" value=" {{ $Advancess->employee->name }}" readonly/>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
+                                        </label>
+                                        <select class="form-control form-control-solid" name="employee_id" class="form-control">
+                                            <option value="" selected > {{ __('translation.Choose_employee_id') }}
+                                            </option>
+                                            @foreach ($employees as $employes)
+                                                <option value="{{ $employes->id }}" @if ($Advancess->employee_id == $employes->id ) selected  @endif>{{ $employes->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         @error('employee_id')
                                             <span class="text-danger">
-                                                {{$message}}
+                                                {{ $message }}
                                             </span>
                                         @enderror
+                                    </div>
                                 </div>
 
                                 <div class="fv-row mb-7 col-md-6 ">
@@ -47,10 +52,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
-                                        <select id='' class="form-control" name='month_number'>
+                                        <select id='' class="form-control form-control-solid discounts" name='month_number'>
                                             <option value=''> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
-                                                <option value='{{$Advancess->month_number}}'  @if ($Advancess->month_number == $i) selected  @endif>
+                                                <option value='{{$i}}'  @if ($Advancess->month_number == $i) selected  @endif>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
                                                 </option>
                                             @endfor
@@ -61,13 +66,30 @@
                                         </span>
                                     @enderror
                                 </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
+                                        <select id='' class="form-control form-control-solid discounts"
+                                            name='year' readonly>
+                                            @for ($year = date('Y'); $year <= date('Y', strtotime('+5 year')); $year++)
+                                                <option value='{{$year}}' @if ($Advancess->month_number == $year) selected  @endif>{{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                        @error('year')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{ __('translation.Save') }}
                                     </button>
                                     <a href='{{ route('Employee.All_Employee.index') }}' class="btn btn-outline-danger">
-                                        Cancle
+                                        {{__('translation.Cancle')}}
                                     </a>
                                 </div>
                             </div>

@@ -17,7 +17,7 @@ class FinancialTreasuryTransactionHistorys extends Model
         "incentives" => "debit",
         'revenues' => "credit",
         'installment'  => "credit",
-        'main_treasury' => "credit"
+        'D' => "credit"
     ];
 
     public function genrateUrl()
@@ -128,6 +128,10 @@ class FinancialTreasuryTransactionHistorys extends Model
             return $q->where('created_at', ',=',  request()->to_date);
         });
     }
+<<<<<<< HEAD
+}
+=======
 
     // public function scope
 }
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0

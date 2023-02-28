@@ -3,7 +3,7 @@
         ? 'layouts.admin.admin'
         : 'layouts.agents.agent_layouts'
 )
-@section('main-head', __('translation.Add_a_new_salary') )
+@section('main-head', __('translation.Add_a_new_salary'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -71,12 +71,13 @@
                                                                         class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
 
                                                                         <th class="">
-                                                                            {{ __('translation.employee_name') }}</th>
+                                                                            {{ __('translation.employees_name') }}</th>
                                                                         <th class="">
                                                                             {{ __('translation.advances_value') }}</th>
                                                                         <th class="">
                                                                             {{ __('translation.month_number') }}</th>
-                                                                        <th class="">{{ __('translation.created_at') }}
+                                                                        <th class="">
+                                                                            {{ __('translation.created_at') }}
                                                                         </th>
                                                                     </tr>
                                                                     <!--end::Table row-->
@@ -102,11 +103,11 @@
                                                                         <?php $sum_advances_value += $Advancess->advances_value; ?>
                                                                     @empty
                                                                         <td colspan="4">
-                                                                            <div class="text-center">No Data Was Found</div>
+                                                                            <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
                                                                         </td>
                                                                     @endforelse
                                                                     <tr>
-                                                                        <td colspan="1">المجموع:</td>
+                                                                        <td colspan="1">{{ __('translation.total') }}:</td>
 
                                                                         <td class="pt-6 text-dark fw-boldest">
                                                                             {{ number_format($sum_advances_value, 2) }}</td>
@@ -124,7 +125,7 @@
                                                     <!--begin::Col-->
                                                     <div class="col-lg-6">
                                                         <!--begin::Tab Pane-->
-                                                        <h1 class="mb-3">{{ __('translation.employee_allowances') }}</h1>
+                                                        <h1 class="mb-3">{{ __('translation.allowances_id') }}</h1>
                                                         <table class="table table-hover" id="kt_customers_table">
                                                             <!--begin::Table head-->
                                                             <thead>
@@ -132,39 +133,41 @@
                                                                 <tr
                                                                     class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
 
-                                                                    <th class="">{{ __('translation.employee_name') }} </th>
-                                                                    <th class="">{{ __('translation.value') }}</th>
-                                                                    <th class="">{{ __('translation.allowances_name') }}</th>
-                                                                    <th class="">{{ __('translation.month_number') }}</th>
-                                                                    <th class="">{{ __('translation.created_at') }}</th>
+                                                                    <th class="">{{ __('translation.employees_name') }}
+                                                                    </th>
+                                                                    <th class="">{{ __('translation.allowances_value') }}</th>
+                                                                    <th class="">
+                                                                        {{ __('translation.salary') }}</th>
+                                                                    <th class="">{{ __('translation.created_at') }}
+                                                                    </th>
                                                                 </tr>
                                                                 <!--end::Table row-->
                                                             </thead>
                                                             <!--end::Table head-->
                                                             <!--begin::Table body-->
                                                             <tbody class="fw-bold text-gray-600">
-                                                                <?php $sum_allowances_value = 0; ?>
-                                                                @forelse ($employee_allowancess as $index=>$employee_allowancess)
+                                                                 <?php $sum_allowances_value = 0; ?>
+                                                                {{-- @forelse ($employees as $index=>$employee) --}}
                                                                     <tr class="fw-bolder fs-6 text-gray-800">
 
 
-                                                                        <td>{!!$employee_allowancess->employee->name !!}</td>
-                                                                        <td>{!!number_format($employee_allowancess->Allowances_id->allowances_value, 2) !!}</td>
-                                                                        <td>{!!$employee_allowancess->Allowances_id->allowances_name !!}</td>
-                                                                        <td>{!!$employee_allowancess->month_number !!}</td>
-                                                                        <td>{!!$employee_allowancess->created_at->toFormattedDateString() !!}</td>
+                                                                        <td>{!! $employees->name!!}</td>
+
+                                                                        <td>@forelse ($allowances as $index=>$allowanc){!! $allowanc->allowances_name !!} ( {{number_format($allowanc->allowances_value ,2)}})@empty{{ __('translation.No_Data_Was_Found') }} @endforelse</td>
+                                                                        <td>{!!   number_format($employees->salary,2)!!}</td>
+                                                                        <td>{!! $employees->created_at->toFormattedDateString() !!}</td>
                                                                     </tr>
-                                                                    <?php $sum_allowances_value += $employee_allowancess->Allowances_id->allowances_value; ?>
-                                                                @empty
-                                                                    <td colspan="4">
-                                                                        <div class="text-center">No Data Was Found</div>
-                                                                    </td>
-                                                                @endforelse
+                                                                    <?php $sum_allowances_value += $allowanc->allowances_value; ?>
+                                                                {{-- @empty --}}
+
+                                                                {{-- @endforelse --}}
                                                                 <tr>
-                                                                    <td colspan="1">المجموع:</td>
+                                                                    <td colspan="1">{{ __('translation.total') }}:</td>
 
                                                                     <td class="pt-6 text-dark fw-boldest">
                                                                         {{ number_format($sum_allowances_value, 2) }}</td>
+                                                                        <td class="pt-6 text-dark fw-boldest">
+                                                                            {{ number_format($employees->salary, 2) }}</td>
 
                                                                 </tr>
                                                             </tbody>
@@ -213,6 +216,8 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+
+                    @include('layouts.includes.session')
                     <!--begin::Col-->
                     <form action="{{ route('Employee.salaries.store') }}" method="post">
                         @csrf
@@ -221,6 +226,10 @@
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
                                 <input type="hidden" class="form-control form-control-solid" placeholder=""
                                     name="employee_id" value="{{ $employees->id }}" required />
+                                    <input type="hidden" class="form-control form-control-solid" placeholder=""
+                                    name="month_number" value="{{ $q }}" required />
+                                    <input type="hidden" class="form-control form-control-solid" placeholder=""
+                                    name="year" value="{{ $y }}" required />
                                 <input type="text" class="form-control form-control-solid" placeholder=""
                                     value="{{ $employees->name }}" readonly />
                                 @error('employee_id')
@@ -246,22 +255,10 @@
                             <div class="fv-row mb-7 col-md-6 ">
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowancess_fixed') }}</label>
                                 <input type="number" class="form-control form-control-solid" placeholder=""
-                                   step="0.01" name="allowancess_fixed" value="{{$allowancess_sum}}"
+                                    step="0.01" name="allowancess_fixed" value="{{$sum_allowances_value}}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     readonly />
                                 @error('allowancess_fixed')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="fv-row mb-7 col-md-6 ">
-                                <label class=" fs-6 fw-bold mb-2">{{ __('translation.allownacees_salary') }}</label>
-                                <input type="number" class="form-control form-control-solid" placeholder=""
-                                    step="0.01" name="allownacees_salary" value="{{ $sum_allowances_value }}"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    readonly />
-                                @error('allownacees_salary')
                                     <span class="text-danger">
                                         {{ $message }}
                                     </span>
@@ -271,7 +268,7 @@
                             <div class="fv-row mb-7 col-md-6 ">
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.advances') }}</label>
                                 <input type="number" class="form-control form-control-solid" placeholder=""
-                                    step="0.01" name="advances" value="{{ $sum_advances_value }}"
+                                    step="0.01" name="advances" value="{{ $sum_advances_value}}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     readonly />
                                 @error('advances')
@@ -283,9 +280,9 @@
 
                             <div class="fv-row mb-7 col-md-6 ">
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.totle_salaries') }}</label>
-                                <input type="number" class="form-control form-control-solid totle_salaries" placeholder=""
-                                    step="0.01" id="totle_salaries" name="totle_salaries"
-                                    value="{{ $employees->salary + $sum_allowances_value + $allowancess_sum - $sum_advances_value }}"
+                                <input type="number" class="form-control form-control-solid totle_salaries"
+                                    placeholder="" step="0.01" id="totle_salaries" name="totle_salaries"
+                                    value="{{ $employees->salary + $sum_allowances_value  - $sum_advances_value }}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     readonly />
                                 @error('totle_salaries')
@@ -300,37 +297,13 @@
                                 <input type="number" class="form-control form-control-solid discounts" placeholder=""
                                     step="1" min="0" name="discounts" value="0" id="discounts"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                     onchange="Discounts()" />
+                                    onchange="Discounts()" />
                                 @error('discounts')
                                     <span class="text-danger">
                                         {{ $message }}
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
-                                    <select id='' class="form-control form-control-solid discounts" name='month_number'  value='{{$Advancess->month_number}}' readonly>
-
-                                        <option value='{{$Advancess->month_number}}'> {{$Advancess->month_number . '  --   ' . date('F', mktime(null, null, null,$Advancess->month_number , 1)) }}</option>
-                                       
-                                    </select>
-                                    @error('month_number')
-                                    <span class="text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-                            </div>
-
-
-
-
-
-
-
-                            <div class='col-md-6'>
-                                <x:status-filed name='status'  class="form-control form-control-solid discounts"/>
                             </div>
                             <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                             </label>
@@ -340,7 +313,7 @@
                                 <a href="#" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_upgrade_plan">{{ __('translation.information') }}</a>
                                 <button class="btn btn-primary">
-                                    {{__('translation.save')}}
+                                    {{ __('translation.save') }}
                                 </button>
                                 <a href='{{ route('Employee.salaries.index') }}' class="btn btn-outline-danger">
                                     Cancle
@@ -369,23 +342,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <script>
-
-
         function Discounts() {
 
 
             var totle_salaries = parseFloat(document.getElementById("totle_salaries").value);
             var advances = parseFloat(document.querySelector('input[name="advances"]').value);
-            var allownacees_salary = parseFloat(document.querySelector('input[name="allownacees_salary"]').value);
             var fixed_salary = parseFloat(document.querySelector('input[name="fixed_salary"]').value);
             var allowancess_fixed = parseFloat(document.querySelector('input[name="allowancess_fixed"]').value);
             var discounts = parseFloat(document.getElementById("discounts").value);
 
 
-            var capital_totle = allownacees_salary + fixed_salary + allowancess_fixed - advances - discounts;
-            if (typeof totle_salaries === 'undefined') {
+            var capital_totle =   fixed_salary + allowancess_fixed - advances - discounts;
+            if ( capital_totle < 0) {
 
-                alert('يرجى التاكد من  البيانات ');
+                alert('قيمة الخصم اكبر من مجموع الراتب');
 
             } else {
                 document.getElementById("totle_salaries").value = capital_totle;

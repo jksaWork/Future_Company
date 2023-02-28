@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\Traits\HasStatus;
 use Astrotomic\Translatable\Translatable;
 
 
@@ -9,7 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class employee extends Model
 {
+    use HasStatus;
     protected $guarded = [];
+
+    /**
+     * Class constructor.
+     */
 
    public function Categorys()
    {
@@ -18,6 +25,7 @@ class employee extends Model
 
    public function employee_allowances()
     {
+
         return $this->belongsTo(employee_allowances::class ,'allowances_id');
 
     }

@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\spendings;
 use App\Models\section;
 use Illuminate\Support\Facades\Validator;
+use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\SpendingRequest;
+use App\Http\Requests\updataSpendingRequest;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -33,12 +35,10 @@ class SpendingController extends Controller
 
     public function store(SpendingRequest $request)
     {
-        // return  $request;
-
-        $list_spending = $request->list_spending;
         DB::beginTransaction();
+
         try {
-            $DATA = spendings::create([
+            $spendings = spendings::create([
                 'section_id' => $request->section_id,
                 'spending_name' => $request->spending_name,
                 'month' => $request->month,
@@ -46,13 +46,22 @@ class SpendingController extends Controller
                 'description' => $request->description,
 
             ]);
-            //    return  $DATA;
+            // return $spendings;
+            $spendingses = spendings::findOrFail($spendings->id);
+            //    return  $spendingses->spending_value;
+            $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spendingses->spending_value , 'spending', $spendingses->spending_name . '-'.$spendingses->section->section_name , $spendings->id);
+
+            $spendingses->update([
+                'Transaction_id' => $res->id,
+            ]);
+            DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.spending.index');
         } catch (Exception $e) {
-            DB::rollback();
-            //dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            // dd($e);
+            DB::rollBack();
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
+            // session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -74,9 +83,10 @@ class SpendingController extends Controller
         return view('admin.Employee.spending.edit', compact('spendings', 'sections'));
     } //end of edit
 
-    public function update(SpendingRequest $request)
+    public function update(updataSpendingRequest $request)
     {
         // return $request;
+        DB::beginTransaction();
         try{
 
         $id = section::where('section_name', $request->section_id)->first()->id;
@@ -90,11 +100,16 @@ class SpendingController extends Controller
             'section_id' => $id,
             'description' => $request->description,
         ]);
+        // return $spending->Transaction_id;
+        $res = FinancialTreasuryTransactionHistorys::EditTransaction( $spending->Transaction_id , $spending->spending_value );
+// return $res;
+        DB::commit();
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('Employee.spending.index');
         }catch(Exception $e){
-            //dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            // dd($e);
+            DB::rollBack();
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }
 

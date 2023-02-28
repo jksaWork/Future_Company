@@ -15,9 +15,10 @@ class CreateEmployeeAllowancesTable extends Migration
     {
         Schema::create('employee_allowances', function (Blueprint $table) {
             $table->id();
-            $table->integer('month_number')->default(0);
-            $table->string('status')->default(0);
+            $table->integer('month_number');
+            $table->string('status')->default(1);
             $table->unsignedBigInteger('allowances_id');
+            $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->unsignedBigInteger('employee_id');
             $table->foreign('allowances_id')->references('id')->on('allowances')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
