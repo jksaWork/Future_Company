@@ -424,4 +424,6 @@ return [
     'employee_ection_spneding' => 'منصرفات قسم الموظفين',
     'spending_ection_spneding_precntage' => 'من نسبه منصرفات المؤسسه تشمل منصرفات الاقسام و النسريات',
     'employee_ection_spneding_precntage' => 'من نسبه منصرفات المؤسسه تشمل الحوافز والسلفيات',
+    'assing_owner' => 'تعين المالك',
+    'assing_owner_back' => 'تراجع',
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\Owner;
 use App\Models\RealState;
 use Illuminate\Http\Request;
 use DB;
@@ -33,22 +34,29 @@ class RentController extends Controller
         $realstate =  $id ? RealState::find($id) : null;
         return  view('admin.realstate.assing', compact('realstate'));
     }
+
+    public function AssingStep2(RealState $realstate, $owner_id)
+    {
+        $owner = Owner::findOrFail($owner_id);
+        return view('admin.realstate.rent.assing_rent_2', compact('realstate', 'owner'));
+    }
     public function Asgin(Request $request)
     {
-        // return $request;
         $request->validate([
             'realstate_id' => 'required',
             'owner_id' => 'required',
             'type' => 'required|in:rent,sale',
         ]);
-        try {
+        // return $request;
 
+        try {
             $realstate = RealState::findOrFail($request->realstate_id);
 
             if ($realstate->status == 0 || $realstate->{'is_' . $request->type} == true) {
                 if ($realstate->status == 0)  return  redirect()->back()->withErrors(__('translation.rael_state_is_not_ready'));
                 if ($realstate->{'is_' . $request->type} == 1)  return  redirect()->back()->withErrors(__('translation.rael_state_is_under_opration'));
             }
+            if (!request()->has('verfied')) return $this->AssingStep2($realstate,  $request->owner_id);
 
             // dd('jksa');
             // $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
@@ -65,6 +73,7 @@ class RentController extends Controller
                     'type' => $request->type,
                 ]
             );
+            // dd('hello')
             session()->flash('success', __('translation.assgin_new_owner_was_done'));
             return redirect()->route('realstate.realstate.show', $realstate->id);
         } catch (\Throwable $th) {
@@ -194,6 +203,9 @@ class RentController extends Controller
                 't2.realstate_number',
             ]
         )
+            ->when(request()->id != null, function ($q) {
+                $q->where('rent_revenues.id', request()->id);
+            })
             ->when(request()->status != null, function ($q) {
                 $q->where('rent_revenues.status', request()->status);
             })
