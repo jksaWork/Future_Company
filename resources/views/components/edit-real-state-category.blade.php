@@ -2,7 +2,9 @@
     <!-- Live as if you were to die tomorrow.
         Learn as if you were to live forever.
         - Mahatma Gandhi -->
-        <a href='#' class="btn btn-light-info btn-icon btn-sm " data-bs-toggle="modal"
+        <a href='#'
+
+        class="btn btn-light-info btn-icon btn-sm " data-bs-toggle="modal"
         data-bs-target="#kt_modal_edit_customer_{{$item->id}}">
         <span class="svg-icon svg-icon-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -30,6 +32,7 @@
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div id="kt_modal_add_customer_close"
+                            data-bs-dismiss="modal" aria-label="Close"
                                 class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
@@ -62,6 +65,7 @@
                         <div class="modal-footer ">
                             <!--begin::Button-->
                             <button type="reset" id="kt_modal_add_customer_cancel"
+                            data-bs-dismiss="modal" aria-label="Close"
                                 class="btn btn-light me-3">{{__('translation.cancel')}}</button>
                             <!--end::Button-->
                             <!--begin::Button-->

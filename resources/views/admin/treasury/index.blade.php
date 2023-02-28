@@ -229,6 +229,7 @@
                             <h2 class="fw-bolder">{{ __('translation.add_real_state_category') }}</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                             <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
@@ -241,8 +242,11 @@
                                             rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
+
                                 <!--end::Svg Icon-->
                             </div>
+                        </div>
+
                             <!--end::Close-->
                         </div>
                         <!--end::Modal header-->
@@ -262,7 +266,8 @@
                         <!--begin::Modal footer-->
                         <div class="modal-footer ">
                             <!--begin::Button-->
-                            <button type="reset" id="kt_modal_add_customer_cancel"
+                            <button type="reset"
+                            data-bs-dismiss="modal" aria-label="Close"
                                 class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
                             <!--end::Button-->
                             <!--begin::Button-->
