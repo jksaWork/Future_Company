@@ -9,6 +9,7 @@ use App\Models\allowances;
 use App\Models\Image;
 use App\Models\employee_allowances;
 use App\Models\Advances;
+use App\Models\salaries;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class AllEmployeeController extends Controller
         $employees = employee::all();
         $allowns = employee_allowances::where('status', 1)->get();
 
-        return view('admin.Employee.All_Employee.index', compact('employees', 'Categorys','allowns'));
+        return view('admin.Employee.All_Employee.index', compact('employees', 'Categorys', 'allowns'));
     } //end of index
 
 
@@ -73,7 +74,7 @@ class AllEmployeeController extends Controller
             return redirect()->route('Employee.All_Employee.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -84,13 +85,26 @@ class AllEmployeeController extends Controller
         // return $id;
         $images = Image::all();
         // return $images;
+        $d = 1;
+        $z=0;
+        $employee_allowances = employee_allowances::where([
+            ['status', $d],
+            ['employee_id',  $id],
+        ])->get();
+        // return $employee_allowances;
+        $allowances_id = employee_allowances::where([
+            ['status', $z],
+            ['employee_id',  $id],])->get();
 
-        $allowances_id = employee_allowances::where('employee_id', [$id])->get();
+
+            $salaries = salaries::where(
+                'employee_id',  $id)->get();
+            // return $salaries;
         // return $allowances_id;
         $Advances_id = Advances::where('employee_id', [$id])->get();
         // return $Advances_id;
         $employees = employee::findorfail($id);
-        return view('admin.Employee.All_Employee.show', compact('employees', 'images', 'Advances_id', 'allowances_id'));
+        return view('admin.Employee.All_Employee.show', compact('employees', 'images', 'Advances_id', 'allowances_id' ,'employee_allowances','salaries'));
     }
 
 
@@ -139,23 +153,32 @@ class AllEmployeeController extends Controller
 
             $allowances_prvent =  collect($request->data);
 
-            if (!$allowances_prvent) {
+            // if (!$allowances_prvent) {
 
-                foreach ($allowances_prvent as $allowances) {
-
-                    employee_allowances::create([
-                        'employee_id' => $request->pro_id,
-                        'status' => 1,
-                        'month_number' => Carbon::now(),
-                        'allowances_id' => $allowances,
-                    ]);
-                }
+            $allowns = employee_allowances::where([
+                ['status', 1],
+                ['employee_id',  $request->pro_id],
+            ])->get();
+            foreach ($allowns as $key => $value) {
+                $employee_allowances = employee_allowances::findOrFail($value->id);
+                $employee_allowances->delete();
             }
+            // return $allowns;
+            foreach ($allowances_prvent as $allowances) {
+
+                employee_allowances::create([
+                    'employee_id' => $request->pro_id,
+                    'status' => 1,
+                    'month_number' => Carbon::now(),
+                    'allowances_id' => $allowances,
+                ]);
+            }
+            // }
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.All_Employee.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of update
@@ -168,11 +191,15 @@ class AllEmployeeController extends Controller
             ['status', 1],
             ['employee_id',  $id],
         ])->get();
+        foreach ($employee_allowances as $key => $value) {
+            $employee_allowances = employee_allowances::findOrFail($value->id);
+            $employee_allowances->delete();
+        }
         $employee->delete();
-        $employee_allowances->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('Employee.All_Employee.index');
     } //end of destroy
+
 
 
 

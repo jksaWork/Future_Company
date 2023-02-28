@@ -17,7 +17,7 @@ class FinancialTreasuryTransactionHistorys extends Model
         "incentives" => "debit",
         'revenues' => "credit",
         'installment'  => "credit",
-        'main_treasury' => "credit"
+        'D' => "credit"
     ];
     // this function to make new Record On  Transacation hisotry
     public const  STATUS = ['primary',  'secondary', 'success', 'info', 'warning', 'danger', 'dark'];

@@ -24,7 +24,7 @@ class CategoiresRequest extends FormRequest
     public function rules()
     {
         $roles =  [
-            'categories_name' => 'required',
+            'categories_name' => 'required|string|max:100',
 
         ];
 

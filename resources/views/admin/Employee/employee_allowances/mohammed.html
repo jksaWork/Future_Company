@@ -236,3 +236,9 @@
                 $spendings->description = $list_spendings['description'];
                 $spendings->save();
             }
+
+
+            employee_allowances
+            <td>{!!$employee->employee->name!!}</td>
+            <td>{!!$employee->Allowances_id->allowances_name!!}</td>
+            <td>{!!$employee->created_at->toFormattedDateString()!!}</td>

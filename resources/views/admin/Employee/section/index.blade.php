@@ -1,8 +1,5 @@
-@extends(
-    auth()->guard('admin')->check()
-        ? 'layouts.admin.admin'
-        : 'layouts.agents.agent_layouts'
-)
+{{-- @extends('layouts.admin.admin') --}}
+@extends('layouts.admin.admin')
 @section('main-head', __('translation.Expense_sections'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -13,10 +10,11 @@
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
-                    <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    {{-- <div class="card-title"> --}}
+                    <!--begin::Search-->
+                    <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <div class="col-md-6  d-flex align-items-center position-relative my-1 ">
                             <span class="svg-icon svg-icon-1 position-absolute ms-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -30,20 +28,20 @@
                             <!--end::Svg Icon-->
                             {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
-                                class="form-control form-control-solid w-350px ps-15"
+                                class="form-control form-control-solid  ps-15"
                                 placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
-                            {{-- </form> --}}
+
                         </div>
-                        <!--end::Search-->
+                        {{-- </form> --}}
+
+
                     </div>
-                    <!--begin::Card title-->
-                    <!--begin::Card toolbar-->
+
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                           
-                                <a href='{{ route('Employee.section.create', ['type' => request()->type]) }}'
-                                class="btn btn-primary">{{ __('translation.Add') }}</a>
+                            <a href='{{ route('Employee.section.create', ['type' => request()->type]) }}'
+                                class="btn btn-primary">{{ __('translation.Add_section') }}</a>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -70,112 +68,24 @@
                                     id="roles-table" style="width: 100%;">
                                     <thead>
                                         <tr>
-
-                                            <th class="min-w-125px">#</th>
-                                            <th class="">{{ __('translation.name') }}</th>
-                                            <th class="">{{ __('translation.description') }}</th>
+                                            <th>{{ __('translation.id') }}</th>
+                                            <th>{{ __('translation.section_name') }}</th>
+                                            <th>{{ __('translation.description') }}</th>
+                                            <th>@lang('translation.action')</th>
                                         </tr>
                                     </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        {{-- <tbody class="fw-bold text-gray-600">
-                            @forelse ($section as $index=>$sections)
-                                <tr>
-
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="{{ $sections->id }}" />
-
-                                        </div>
-                                    </td>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $sections->section_name }}</td>
-                                    <td>{{ $sections->description }}</td>
-                                    <td></td>
-
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ __('translation.Actions') }}
-                                        </a>
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                        <span class="svg-icon svg-icon-5 m-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                    fill="black"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="{{ route('Employee.section.edit', $sections->id) }}"
-                                                    class="menu-link bg-light-info px-3">{{ __('translation.edit') }}</a>
-
-                                            </div>
-
-                                            <div class="menu-item px-3">
-                                                <form action="{{ route('Employee.section.destroy', $sections->id) }}" method="post" id='{{'owner_delete_from_' . $sections->id}}'>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="#" onclick="document.getElementById('owner_delete_from_{{$sections->id}}').submit()" class="menu-link px-3 bg-light-danger "
-                                                        data-kt-menu-trigger="click"
-                                                        >{{ __('translation.Delete') }}
-                                                </a>
-                                                </form>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                </tr>
-                            @empty
-                                <td colspan="4">
-                                    <div class="text-center">No Data Was Found</div>
-                                </td>
-                            @endforelse
-                        </tbody> --}}
-                        <!--end::Table body-->
-                    </table>
+                                </table>
+                            </div><!-- end of table responsive -->
+                        </div><!-- end of col -->
+                    </div><!-- end of row -->
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
             </div>
-            <!--end::Card-->
-
+            <!--end::Modals-->
         </div>
         <!--end::Container-->
     </div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function DeleteApp(val) {
-            console.log();
-            Swal.fire({
-                title: " @lang('هل أنت واثق؟')",
-                text: " @lang('لن تتمكن من التراجع عن هذا!')",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: " @lang('نعم ، احذفها!')",
-                cancelButtonText: " @lang('إلغاء')"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        " @lang('تم الحذف')",
-                        " @lang('تم حذف ملفك.')",
-                        " @lang('النجاح')"
-                    );
-                    document.getElementById(val).submit();
-                }
-            });
-        }
-    </script>
 @endsection
 @push('scripts')
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
@@ -184,9 +94,14 @@
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
-        let role;
+
+        let type = @json(request()->type);
+        let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
             serverSide: true,
             processing: true,
             "language": {
@@ -194,18 +109,33 @@
             },
             ajax: {
                 url: '{{ route('Section.Section.hitory.data') }}',
+                data: function(d) {
+                    d.type = type;
+                    d.status = status;
+                    d.is_rent = is_rent;
+                    d.is_sale = is_sale;
+                }
             },
             columns: [{
                     data: 'id',
-                    name: 'id',
-                    searchable: false,
-                    sortable: false
+                    name: 'id'
                 },
                 {
                     data: 'section_name',
-                    name: 'section_name',
+                    name: 'section_name'
+                },
+
+                {
+                    data: 'description',
+                    name: 'description'
+                },
+
+                {
+                    data: 'actions',
+                    name: 'actions',
                     searchable: false,
-                    sortable: false
+                    sortable: false,
+                    width: '20%'
                 },
             ],
             order: [
@@ -221,11 +151,23 @@
 
         $('#handelSearch').keyup(function() {
             rolesTable.search(this.value).draw();
-            // role = $(this).val();
-            // rolesTable.ajax.reload();
         });
-        $('#roles').on('change', function() {
-            role = $(this).val();
+
+
+        $('#rent_status').on('change', function() {
+            is_rent = $(this).val();
+            rolesTable.ajax.reload();
+        });
+
+        $('#sale_status').on('change', function() {
+            is_sale = $(this).val();
+            rolesTable.ajax.reload();
+        });
+
+
+        $('#status').on('change', function() {
+            console.log('helllo');
+            status = $(this).val();
             rolesTable.ajax.reload();
         });
     </script>

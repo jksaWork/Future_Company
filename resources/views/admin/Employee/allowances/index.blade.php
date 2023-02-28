@@ -1,8 +1,5 @@
-@extends(
-    auth()->guard('admin')->check()
-        ? 'layouts.admin.admin'
-        : 'layouts.agents.agent_layouts'
-)
+{{-- @extends('layouts.admin.admin') --}}
+@extends('layouts.admin.admin')
 @section('main-head', __('translation.Allowances_and_incentives'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -13,10 +10,11 @@
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
-                    <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    {{-- <div class="card-title"> --}}
+                    <!--begin::Search-->
+                    <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <div class="col-md-6  d-flex align-items-center position-relative my-1 ">
                             <span class="svg-icon svg-icon-1 position-absolute ms-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -28,27 +26,22 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
+                            {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
+                            <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
+                                class="form-control form-control-solid  ps-15"
+                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
 
                         </div>
-                        <!--end::Search-->
+                        {{-- </form> --}}
+
+
                     </div>
-                    <!--begin::Card title-->
-                    <!--begin::Card toolbar-->
+
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-
-                            <!--begin::Menu 1-->
-
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
-                            <!--begin::Export-->
-
-                            <!--end::Export-->
-                            <!--begin::Add customer-->
-                            <a href='{{ route('Employee.allowances.create') }}'
-                                class="btn btn-primary">{{ __('translation.Add') }}</a>
-                            <!--end::Add customer-->
+                            <a href='{{ route('Employee.allowances.create', ['type' => request()->type]) }}'
+                                class="btn btn-primary">{{ __('translation.Add_expenses') }}</a>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->
@@ -68,123 +61,123 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     @include('layouts.includes.session')
-                    <table class="table gs-7 gy-7 gx-7" id="kt_customers_table">
-                        <!--begin::Table head-->
-                        <thead>
-                            <!--begin::Table row-->
-                            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
-                                    </div>
-                                </th>
-                                <th class="min-w-125px">#</th>
-                                <th class="">{{ __('translation.allowances_name') }}</th>
-                                <th class="">{{ __('translation.status') }}</th>
-                                <th class="">{{ __('translation.allowances_value') }}</th>
-                            </tr>
-                            <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        <tbody class="fw-bold text-gray-600">
-                            @forelse ($allowancess as $index=>$allowances)
-                                <tr class="fw-bolder fs-6 text-gray-800">
-
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="{{ $allowances->id }}" />
-
-                                        </div>
-                                    </td>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $allowances->allowances_name }}</td>
-                                    <td>{!! $allowances->getActive() !!}</td>
-                                    <td>{{ $allowances->allowances_value }}</td>
-
-                                        <td class=" text-end">
-                                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm show menu-dropdown" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                                                {{ __('translation.Actions') }}
-                                                <span class="svg-icon svg-icon-5 m-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                            <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                            <!--begin::Menu-->
-                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4 show" data-kt-menu="true" style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-79px, 392px, 0px);" data-popper-placement="bottom-end">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="{{ route('Employee.allowances.edit', $allowances->id) }}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                                        {{ __('translation.edit') }}
-                                                    </a>
-                                                </div>
-                                                <!--end::Menu item-->
-
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <form action="{{ route('Employee.allowances.destroy', $allowances->id) }}" method="post" id='{{'owner_delete_from_' . $allowances->id}}'>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a href="#" onclick="document.getElementById('owner_delete_from_{{$allowances->id}}').submit()" class="menu-link px-3 bg-light-danger "
-                                                            data-kt-menu-trigger="click"
-                                                            >{{ __('translation.Delete') }}
-                                                    </a>
-                                                </form>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu-->
-                                        </td>
-                                        <!--end::Menu-->
-                                    {{-- </td> --}}
-                                </tr>
-                            @empty
-                                <td colspan="4">
-                                    <div class="text-center">No Data Was Found</div>
-                                </td>
-                            @endforelse
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                    id="roles-table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ __('translation.id') }}</th>
+                                            <th class="">{{ __('translation.allowances_name') }}</th>
+                                            <th class="">{{ __('translation.allowances_value') }}</th>
+                                            <th class="">{{ __('translation.status') }}</th>
+                                            <th class="">{{ __('translation.created_at') }}</th>
+                                            <th>@lang('translation.action')</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div><!-- end of table responsive -->
+                        </div><!-- end of col -->
+                    </div><!-- end of row -->
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
             </div>
-            <!--end::Card-->
-
+            <!--end::Modals-->
         </div>
         <!--end::Container-->
     </div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function DeleteApp(val) {
-            console.log();
-            Swal.fire({
-                title: " @lang('هل أنت واثق؟')",
-                text: " @lang('لن تتمكن من التراجع عن هذا!')",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: " @lang('نعم ، احذفها!')",
-                cancelButtonText: " @lang('إلغاء')"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        " @lang('تم الحذف')",
-                        " @lang('تم حذف ملفك.')",
-                        " @lang('النجاح')"
-                    );
-                    document.getElementById(val).submit();
-                }
-            });
-        }
-    </script>
 @endsection
+@push('scripts')
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.js') }}"></script>
+    <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+    <script>
+        let type = @json(request()->type);
+        let status, is_rent, is_sale;
+        let rolesTable = $('#roles-table').DataTable({
+            dom: "tiplr",
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            serverSide: true,
+            processing: true,
+            "language": {
+                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
+            ajax: {
+                url: '{{ route('Section.allowances.hitory.data') }}',
+                data: function(d) {
+                    d.type = type;
+                    d.status = status;
+                    d.is_rent = is_rent;
+                    d.is_sale = is_sale;
+                }
+            },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'allowances_name',
+                    name: 'allowances_name'
+                },
+
+                {
+                    data: 'allowances_value',
+                    name: 'allowances_value'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                },
+
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    searchable: false,
+                    sortable: false,
+                    width: '20%'
+                },
+            ],
+            order: [
+                [2, 'desc']
+            ],
+            drawCallback: function(settings) {
+                $('.record__select').prop('checked', false);
+                $('#record__select-all').prop('checked', false);
+                $('#record-ids').val();
+                $('#bulk-delete').attr('disabled', true);
+            }
+        });
+
+        $('#handelSearch').keyup(function() {
+            rolesTable.search(this.value).draw();
+        });
+
+
+        $('#rent_status').on('change', function() {
+            is_rent = $(this).val();
+            rolesTable.ajax.reload();
+        });
+
+        $('#sale_status').on('change', function() {
+            is_sale = $(this).val();
+            rolesTable.ajax.reload();
+        });
+
+
+        $('#status').on('change', function() {
+            console.log('helllo');
+            status = $(this).val();
+            rolesTable.ajax.reload();
+        });
+    </script>
+@endpush

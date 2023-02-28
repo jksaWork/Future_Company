@@ -17,6 +17,7 @@ class spendings extends Model
         'spending_value',
         'month',
         'section_id',
+        'Transaction_id',
     ];
 
    public function section()

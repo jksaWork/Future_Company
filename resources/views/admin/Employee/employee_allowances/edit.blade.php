@@ -17,33 +17,58 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="fv-row mb-7 col-md-6 ">
-                                    <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
-                                    <input type="hidden" class="form-control form-control-solid" value="{{$employee_allowances->id}}"
-                                    placeholder="" name="pro_id"  readonly/>
-                                    <input type="hidden" class="form-control form-control-solid" value="{{$employee_allowances->employee_id}}"
-                                    placeholder="" name="employee_id"  readonly/>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="" value=" {{$employee_allowances->employee->name}}" readonly/>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
+                                        </label>
+                                        <select class="form-control form-control-solid" name="employee_id" class="form-control">
+                                            <option value="" selected disabled> {{ __('translation.Choose_employee_id') }}
+                                            </option>
+                                            @foreach ($employees as $employes)
+                                                <option value="{{ $employes->id }}" @if ($employee_allowances->employee_id == $employes->id) selected  @endif >
+                                                    {{ $employes->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         @error('employee_id')
                                             <span class="text-danger">
-                                                {{$message}}
+                                                {{ $message }}
                                             </span>
                                         @enderror
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
+                                        </label>
+                                        <select class="form-control form-control-solid" name="allowances_id" class="form-control">
+                                            <option value="" selected disabled> {{ __('translation.Choose') }}
+                                            </option>
+                                            @foreach ($allowances as $allowancess)
+                                                <option value="{{ $allowancess->id }}" @if ($employee_allowances->allowances_id  == $allowancess->id) selected  @endif>{{ $allowancess->allowances_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('allowances_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
-                                        <select id='' class="form-control" name='month'>
+                                        <select id='' class="form-control form-control-solid" name='month_number'>
                                             <option value=''> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
-                                                <option value='{{ $i }}'>
+                                                <option value='{{ $i }}'  @if ($employee_allowances->month_number  == $i) selected  @endif>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
                                                 </option>
                                             @endfor
                                         </select>
-                                        @error('month')
+                                        @error('month_number')
                                         <span class="text-danger">
                                             {{ $message }}
                                         </span>

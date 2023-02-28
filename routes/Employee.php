@@ -45,6 +45,7 @@ Route::group(
               Route::resource('section', SectionController::class);
               Route::resource('spending', SpendingController::class);
             //   Route::resource('EmployeeSalaries', EmployeeSalariesController::class);
+            Route::get('EmployeeSalaries', [SalariesController::class , 'EmployeeSalaries'])->name('EmployeeSalaries');
               Route::post('salaries_show', [SalariesController::class ,'salaries_show'])->name('salaries_show');
 
               Route::resource('Upload_attachment', AttachmentController::class);
@@ -56,6 +57,15 @@ Route::group(
 
 
                 Route::get('Section-history-data', [DataController::class , 'SectionhistoryData'])->name('Section.hitory.data');
+                Route::get('spending-history-data', [DataController::class , 'spendinghistoryData'])->name('spending.hitory.data');
+                Route::get('Category-history-data', [DataController::class , 'CategoryhistoryData'])->name('Category.hitory.data');
+                Route::get('employees-history-data', [DataController::class , 'employeeshistoryData'])->name('employees.hitory.data');
+                Route::get('employee_allowances-history-data', [DataController::class , 'employee_allowanceshistoryData'])->name('employee_allowances.hitory.data');
+                Route::get('Advances-history-data', [DataController::class , 'AdvanceshistoryData'])->name('Advances.hitory.data');
+                Route::get('salaries-history-data', [DataController::class , 'salarieshistoryData'])->name('salaries.hitory.data');
+                Route::get('allowances-history-data', [DataController::class , 'allowanceshistoryData'])->name('allowances.hitory.data');
         });
+        Route::get('employees-status/{id}', [DataController::class , 'ChangeStatus'])->name('employees.status');
+
     }
 );

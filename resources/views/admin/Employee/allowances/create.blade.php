@@ -39,7 +39,7 @@
                                 </div>
                                 <div class='col-md-6'>
                                     <label for="" class="fs-6 fw-bold mb-2"> {{__('translation.status')}} </label>
-                                    <select class="form-control" name="status"  >
+                                    <select class="form-control form-control-solid" name="status"  >
                                         <option value="1">{{__('translation.proven')}}</option>
                                         <option value="0">{{__('translation.not_fixed')}}</option>
                                     </select>

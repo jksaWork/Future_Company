@@ -22,8 +22,8 @@
                                     <input type="hidden" class="form-control form-control-solid"
                                         placeholder="" name="pro_id" value='{{$allowancess->id}}'/>
                                     <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="allowances_name" value='{{$allowancess->allowances_name}}'  required/>
-                                        @error('name')
+                                        placeholder="" name="allowances_name" value='{{$allowancess->allowances_name}}'  />
+                                        @error('allowances_name')
                                             <span class="text-danger">
                                                 {{$message}}
                                             </span>
@@ -38,22 +38,35 @@
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowances_value') }}</label>
                                     <input type="number" class="form-control form-control-solid"
                                         placeholder="" step="0.01" name="allowances_value" value='{{$allowancess->allowances_value}}'  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required />
-                                        @error('salary')
+                                         />
+                                        @error('allowances_value')
                                             <span class="text-danger">
                                                 {{$message}}
                                             </span>
                                         @enderror
                                 </div>
 
-                                <x:select-options name='status' :options='["proven" , "not_fixed"]' :value='$allowancess->status' class='col-md-6' />
+                                  <div class='col-md-6'>
+                                        <div class="form-group">
+                                            <label for="" class="fs-6 fw-bold mb-2"> {{ __('translation.status') }}
+                                            </label>
+                                            <select class="form-control" name="status" id="status">
 
+                                                <option>
+                                                   {{$allowancess-> getActive()}}
+                                                </option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">
-                                        Save
+                                        {{ __('translation.Save') }}
                                     </button>
                                     <a href='{{ route('Employee.allowances.index')}}' class="btn btn-outline-danger">
-                                        Cancle
+                                        {{__('translation.Cancle')}}
                                     </a>
                                 </div>
                             </div>

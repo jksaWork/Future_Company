@@ -7,6 +7,7 @@ use App\Models\salaries;
 use App\Models\employee;
 use App\Models\advances;
 use App\Models\employee_allowances;
+use App\Models\allowances;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -21,46 +22,33 @@ class SalariesController extends Controller
 
     public function index(Request $request)
     {
-            $month_number = $request->month_number;
-            $employee_id = $request->employee_id;
-        $employee_allowancess = employee_allowances::where([['employee_id', $employee_id],
-        ['month_number', $month_number],
-        ['status', 0],
-        ])->get();
+        //     $month_number = $request->month_number;
+        //     $employee_id = $request->employee_id;
+        // $employee_allowancess = employee_allowances::where([['employee_id', $employee_id],
+        // ['month_number', $month_number],
+        // ['status', 0],
+        // ])->get();
 
-<<<<<<< HEAD
-         $allowancess_fixed = employee_allowances::where([['employee_id', $employee_id],
-        ['status', 1],
-        ])->get();
-
-        $employee_advances = advances::where([['employee_id', $employee_id],
-        ['month_number', $month_number],
-        ])->get();
-        $allowancess_sum = 0;
-        foreach($allowancess_fixed as  $q){
-            $allowancess_sum += $q->Allowances_id->allowances_value;
-        }
-        // return $allowancess_sum;
-        $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees','employee_advances','employee_allowancess','allowancess_sum'));
-=======
         // being sreach date and id employee employee allowances
-        $employee_allowancess = employee_allowances::where('employee_id', $employee_id)->whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+        // $employee_allowancess = employee_allowances::where('employee_id', $employee_id)->whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
         // end employee allowances
         // being sreach date and id employee employee advances
-        $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
+        // $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
         // end employee advances;
         // return $employee_advances;
-        $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
->>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
+        $salaries = salaries::all();
+        return view('admin.Employee.salaries.index', compact('salaries'));
+
+        // $employees = employee::findorfail($employee_id);
+        // return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
     } //end of index
 
 
     public function create(Request $request)
     {
-        $salaries = salaries::all();
-        return view('admin.Employee.salaries.index', compact('salaries'));
+        $employees = employee::where('status', 1)->get();
+        // return $employees;
+        return view('admin.Employee.salaries.create', compact('employees'));
     } //end of create
 
 
@@ -71,47 +59,41 @@ class SalariesController extends Controller
         $request->validate([
             'employee_id' => 'required',
             'fixed_salary' => 'required|numeric',
-            'allownacees_salary' => 'required|numeric',
             'advances' => 'required|numeric',
             'totle_salaries' => 'required|numeric',
             'discounts' => 'required|numeric',
-            'month_number' => 'required|numeric',
             'allowancess_fixed' => 'required|numeric',
-            'status' => 'required',
         ]);
-
+        DB::beginTransaction();
 
         try {
-<<<<<<< HEAD
-            // return $request;
-=======
-            $employee =  employee::findOrFail($request->employee_id);
->>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
             $DATA = salaries::create([
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
                 'allowancess_fixed'=> $request->allowancess_fixed,
-                'allownacees_salary' => $request->allownacees_salary,
+                'year'=> $request->year,
                 'advances' => $request->advances,
                 'totle_salaries' => $request->totle_salaries,
                 'discounts' => $request->discounts,
                 'month_number' => $request->month_number,
-                'status' => $request->status,
+                'status' => 1,
                 'discrption' => $request->discrption,
             ]);
             //    return  $DATA;
-<<<<<<< HEAD
-            session()->flash('success', __('site.added_successfully'));
-=======
-            FinancialTreasuryTransactionHistorys::MakeTransacaion($request->Installment->totle_salaries, 'salries',  __('translation.employee_salary') . ' - ' . $employee->name, $DATA->id);
+               $salaries = salaries::findOrFail($DATA->id);
+               $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries , 'salries', $salaries->employee->name . '-'. __('translation.add_salaries')  , $salaries->id);
 
-            session()->flash('success', __('site.deleted_successfully'));
->>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
-            return redirect()->route('Employee.salaries.create');
+               $salaries->update([
+                   'Transaction_id' => $res->id,
+               ]);
+               DB::commit();
+            session()->flash('success', __('site.added_successfully'));
+            return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
-            dd($e);
-            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
-            return redirect()->back();
+            // dd($e);
+            DB::rollBack();
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->route('Employee.salaries.index');
         }
     } //end of store
 
@@ -137,13 +119,11 @@ class SalariesController extends Controller
             'employee_id' => 'required',
             'fixed_salary' => 'required|numeric',
             'allowancess_fixed' => 'required|numeric',
-            'allownacees_salary' => 'required|numeric',
             'advances' => 'required|numeric',
             'totle_salaries' => 'required|numeric',
             'discounts' => 'required|numeric',
-            'month_number' => 'required|numeric',
-            'status' => 'required',
         ]);
+        DB::beginTransaction();
         try {
             $salaries = salaries::findOrFail($id);
 
@@ -151,19 +131,19 @@ class SalariesController extends Controller
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
                 'allowancess_fixed' => $request->allowancess_fixed,
-                'allownacees_salary' => $request->allownacees_salary,
                 'advances' => $request->advances,
                 'totle_salaries' => $request->totle_salaries,
                 'discounts' => $request->discounts,
-                'month_number' => $request->month_number,
-                'status' => $request->status,
                 'discrption' => $request->discrption,
             ]);
+            $res = FinancialTreasuryTransactionHistorys::EditTransaction( $salaries->Transaction_id , $request->totle_salaries );
             session()->flash('success', __('site.updated_successfully'));
-            return redirect()->route('Employee.salaries.create');
+            return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
-            //dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+            // dd($e);
+            DB::rollBack();
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
+            session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }
     } //end of update
@@ -178,28 +158,39 @@ class SalariesController extends Controller
     } //end of destroy
 
 
-    public function salaries_show(Request $request)
+    public function EmployeeSalaries(Request $request)
     {
-        $month = $request->month;
-        $employee_id = $request->employee_id;
-        $end_month = $request->end_month;
 
-        // being sreach date and id employee employee allowances
-        $employee_allowances = employee_allowances::whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-        foreach ($employee_allowances as $list_allowancess) {
-            $employee_allowancess = $list_allowancess->where('employee_id', $employee_id)->get();
+        $request->validate([
+            'employee_id' => 'required',
+            'month_number' => 'required|numeric',
+            'year' => 'required|numeric',
+        ]);
+
+        $m = $request->employee_id;
+        $q = $request->month_number;
+        $y = $request->year;
+
+        $s  = salaries::where([
+            ['employee_id',$m ] ,
+            ['month_number',$q ],
+            ['year',$y ]])->get();
+        // return $s->count();
+        $r = $s->count();
+
+        if ($r === 0) {
+            $allowances = allowances::where('status', 1)->get();
+                    $employees = employee::findorfail($m);
+                    $employee_advances  = advances::where([['employee_id', $m ] ,['month_number', $q ],['year', $y ]])->get();
+                    // $salaries = salaries::find($id);
+                    // return $employee_advances;
+                    return view('admin.Employee.salaries.salaries_show', compact('employee_advances','employees','q','y','allowances'));
+        } else {
+            session()->flash('error' ,  __('site.Salary_has_already_been_submitted'));
+        return redirect()->back();
         }
-        // end employee allowances
-        // being sreach date and id employee employee advances
-        $advances = advances::whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-        foreach ($advances as $list_advances) {
-            $employee_advances = $list_advances->where('employee_id', $employee_id)->get();
-        } // end employee advances;
-        $employees = employee::findorfail($employee_id);
-        return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
-    } //end of salaries_show
 
-
+    }
 
 
 }//end of controller

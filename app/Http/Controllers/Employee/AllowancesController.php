@@ -76,13 +76,12 @@ class AllowancesController extends Controller
         $allowances->update([
             'allowances_name' => $request->allowances_name,
             'allowances_value' => $request->allowances_value,
-            'status'=>$request->status,
         ]);
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.allowances.index');
         }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  'Some Thing Went Worng ');
+            // dd($e);
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 

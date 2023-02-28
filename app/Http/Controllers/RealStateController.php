@@ -26,16 +26,9 @@ class RealStateController extends Controller
     public function data()
     {
         $query = RealState::with('Category')
-<<<<<<< HEAD
-                // ->typeScope()
-                ->StatusScope();
-                // ->rentOrSaleScope();
-                // select * from users
-=======
             ->typeScope()
             ->StatusScope()
             ->rentOrSaleScope();
->>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
 
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {

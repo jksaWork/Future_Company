@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\employee;
 use App\Models\Advances;
 use App\Models\FinancialTreasuryTransactionHistorys;
+use Illuminate\Support\Facades\DB;
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use Exception;
@@ -24,7 +25,8 @@ class AdvancesController extends Controller
 
     public function create()
     {
-        return view('admin.Employee.Advances.create', compact('Category'));
+        $employees = employee::all();
+        return view('admin.Employee.Advances.create', compact('employees'));
     } //end of create
 
 
@@ -33,33 +35,34 @@ class AdvancesController extends Controller
         $request->validate([
             'employee_id' => 'required',
             'advances_value' => 'required|numeric',
-            'month_number' => 'required',
+            'month_number' => 'required|numeric',
+            'year' => 'required|numeric',
         ]);
-
+        DB::beginTransaction();
         try {
-            $employee = employee::select('name')->findOrFail($request->employee_id);
-            // $employee = Advances::select('name')->findOrFail($request->employee_id);
             $advance = Advances::create([
                 'employee_id' => $request->employee_id,
+                'year'=> $request->year,
                 'advances_value' => $request->advances_value,
-<<<<<<< HEAD
                 'month_number' => $request->month_number,
-
             ]);
-            //    return  $DATA;
+
+            $advances = Advances::findOrFail($advance->id);
+            //    return  $advances->employee->name;
+            $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+
+            $advances->update([
+                'Transaction_id' => $res->id,
+            ]);
+            DB::commit();
             session()->flash('success', __('site.added_successfully'));
-=======
-                'advances_Date' => $request->advances_Date,
-            ]);
-
-            FinancialTreasuryTransactionHistorys::MakeTransacaion($request->advances_value, 'advance', __('translation.employee_advances')  . ' - ' . $employee->name, $advance->id);
-
-            session()->flash('success', __('site.deleted_successfully'));
->>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+
+            DB::rollBack();
+
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }
     } //end of store
@@ -77,49 +80,42 @@ class AdvancesController extends Controller
     public function edit(Request $request, $id)
     {
         // return $id;
+        $employees=employee::all();
         $Advancess = Advances::find($id);
-        return view('admin.Employee.Advances.edit', compact('Advancess'));
+        return view('admin.Employee.Advances.edit', compact('Advancess','employees'));
     } //end of edit
 
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request,  $id)
     {
-        // return $request;
+        $request->validate([
+            'employee_id' => 'required',
+            'advances_value' => 'required|numeric',
+            'month_number' => 'required|numeric',
+            'year' => 'required|numeric',
+        ]);
+        DB::beginTransaction();
         try {
 
-<<<<<<< HEAD
-            $request->validate([
-                'employee_id' => 'required',
-                'advances_value' => 'required|numeric',
-                'month_number' => 'required',
-            ]);
-        $Advancess = Advances::findOrFail($request->pro_id);
-
-        $Advancess->update([
-            'employee_id' => $request->employee_id,
-            'advances_value' => $request->advances_value,
-            'month_number' => $request->month_number,
-        ]);
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('Employee.Advances.index');
-        }catch(Exception $e){
-            dd($e);
-            session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
-=======
             // $id = Category::where('categories_name', $request->categories_id)->first()->id;
             //    return $id;
-            $Advancess = Advances::findOrFail($request->pro_id);
+            $Advancess = Advances::findOrFail($id);
 
             $Advancess->update([
                 'employee_id' => $request->employee_id,
                 'advances_value' => $request->advances_value,
-                'advances_Date' => $request->advances_Date,
+                'year'=> $request->year,
+                'month_number' => $request->month_number,
             ]);
-            session()->flash('success', __('site.deleted_successfully'));
+// return  $Advancess->advances_value;
+           $res = FinancialTreasuryTransactionHistorys::EditTransaction( $Advancess->Transaction_id , $Advancess->advances_value );
+
+        DB::commit();
+        session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
             dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
->>>>>>> c25ff6551f0d2ac202169e82e6399e841c9931a3
+            DB::rollBack();
+            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }
     } //end of update
