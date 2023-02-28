@@ -20,6 +20,7 @@
                         <form action='{{ route('realstate.assignOwnerToRalstate') }}' method='post'>
                             @csrf
                             <input type='hidden' name='type' value='rent' />
+                            {{-- @dd($realstate) --}}
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -27,9 +28,15 @@
                                             <div class="form-group">
                                                 <label for=""
                                                     style='font-size:20px'>{{ __('translation.realstate') }}</label>
-                                                <select id='realstate' style='width:100%' name='realstate_id'>
-                                                    <option value='0'> {{ __('translation.chose_your_owner') }}
+                                                <select id='realstate' style='width:100%' name='realstate_id'
+                                                {{!$realstate ?:'readonly'}}
+                                                >
+                                                    @if($realstate)
+                                                    <option value='{{$realstate->id}}'> {{ $realstate->title }}</option>
+                                                    @endif
+                                                <option value='0'> {{ __('translation.chose_your_realstate') }}
                                                     </option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -96,9 +103,13 @@
                     dataType: 'json',
                     delay: 250,
                     data: function(params) {
-                        return {
-                            search: params.term // search term
+                        let term =  {
+                            search: params.term,
+                            type: 'rent' ,
+                            is_rent: '1',
                         };
+                        console.log(term, params);
+                        return term;
                     },
                     processResults: function(response) {
                         return {

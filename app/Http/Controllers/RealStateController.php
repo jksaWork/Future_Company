@@ -229,34 +229,27 @@ class RealStateController extends Controller
     {
 
         $search = $request->search;
+        $type = $request->type;
+        $is_rent = $request->is_rent;
+        $is_sale = $request->is_sale;
 
-        if ($search == '') {
-            $employees = RealState::when(request()->has('type'), function ($q) {
-                return $q->where('type', request()->type);
-            })->when(request()->has('is_sale'), function ($q) {
-                return $q->where('is_sale', 1);
-            })->when(request()->has('is_rent'), function ($q) {
-                return $q->where('is_rent', 1);
+        $employees = RealState::where('status',  1)
+            ->when($search, function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('address', 'like', '%' . $search . '%')
+                    ->orWhere('realstate_number', 'like', '%' . $search . '%');
             })
-                ->orderby('title', 'asc')->select('id', 'title')
-                ->limit(5)
-                ->get();
-        } else {
-            $employees = RealState::where('status',  1)
-                ->where('is_rent',  0)
-                ->where('is_sale',  0)
-                ->when(request()->type, function ($q) {
-                    return $q->where('type', request()->type);
-                })
-                ->when($search, function ($q) use ($search) {
-                    return $q->where('title', 'like', '%' . $search . '%')
-                        ->orWhere('address', 'like', '%' . $search . '%')
-                        ->orWhere('realstate_number', 'like', '%' . $search . '%');
-                })
-                ->orderby('title', 'asc')->select('id', 'title')
-                ->limit(5)->get();
-        }
-
+            ->when($is_sale, function ($q) {
+                $q->where('is_sale', 0);
+            })->when($is_rent, function ($q) {
+                $q->where('is_rent', 0);
+            })
+            ->when($type, function ($q) {
+                $q->where('type', request()->type);
+            })
+            ->orderby('title', 'asc')->select('id', 'title')
+            ->limit(5)->get();
+        //  Return Reponose
         $response = array();
         foreach ($employees as $employee) {
             $response[] = array(

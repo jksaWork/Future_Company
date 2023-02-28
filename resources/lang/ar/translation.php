@@ -426,4 +426,6 @@ return [
     'employee_ection_spneding_precntage' => 'من نسبه منصرفات المؤسسه تشمل الحوافز والسلفيات',
     'assing_owner' => 'تعين المالك',
     'assing_owner_back' => 'تراجع',
+    'chose_your_realstate' => 'اختار العقار',
+    'owner_sale_info' => 'بيانات المالك',
 ];

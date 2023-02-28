@@ -64,7 +64,8 @@
 
                         <div class="card-header border-0 pt-6">
                             <!--begin::Card title-->
-                            <h3 style='font-size:20px'>{{__('translation.owner_info')}} </h3>
+                            {{-- @dd($realstate->type); --}}
+                            <h3 style='font-size:20px'>{{$realstate->type == 'rent'?__('translation.owner_info'): (__('translation.owner_sale_info'))}} </h3>
                         </div>
                         <div class="pt-7">
                             <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
@@ -78,8 +79,8 @@
                                         <th class="">{{ __('translation.name') }}</th>
                                         <th class="">{{ __('translation.email') }}</th>
                                         <th class="">{{ __('translation.phone') }}</th>
-                                        <th class="">{{ __('translation.identification_number') }}</th>
                                         <th class="">{{ __('translation.identification_type') }}</th>
+                                        <th class="">{{ __('translation.identification_number') }}</th>
                                         <th class="">{{ __('translation.status') }}</th>
                                     </tr>
                                     <!--end::Table row-->
