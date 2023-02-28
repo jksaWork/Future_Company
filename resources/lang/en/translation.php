@@ -95,6 +95,7 @@ return [
     'Salary_has_already_been_submitted'=>'Salary has already been submitted',
     'No_Data_Was_Found'=>'No Data Was Found',
     'Add_an_incentive'=>'Add an incentive',
+    'Number_of_Employees'=>'Number of Employees ',
     'submit' => 'submit',
     'Download' => 'Download',
     'allowances' => 'allowances' ,

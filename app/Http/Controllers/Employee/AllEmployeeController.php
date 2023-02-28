@@ -196,7 +196,7 @@ class AllEmployeeController extends Controller
             $employee_allowances->delete();
         }
         $employee->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('error', __('site.deleted_successfully'));
         return redirect()->route('Employee.All_Employee.index');
     } //end of destroy
 

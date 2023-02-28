@@ -17,6 +17,7 @@ class CreateSectionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('section_name');
             $table->text('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

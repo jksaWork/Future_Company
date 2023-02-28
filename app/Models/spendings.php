@@ -3,12 +3,14 @@
 namespace App\Models;
 use Astrotomic\Translatable\Translatable;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
 
 class spendings extends Model
 {
+    use SoftDeletes;
     protected $guarded = [];
 
     protected $fillable = [

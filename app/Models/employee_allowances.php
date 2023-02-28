@@ -6,9 +6,12 @@ use Astrotomic\Translatable\Translatable;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class employee_allowances extends Model
 {
+
+    use SoftDeletes;
     protected $guarded = [];
 
    public function Allowances_id()

@@ -19,6 +19,7 @@ class CreateSpendingsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('spending_value');
             $table->date('month');
+            $table->softDeletes();
             $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');

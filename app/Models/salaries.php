@@ -4,12 +4,13 @@ namespace App\Models;
 use Astrotomic\Translatable\Translatable;
 
 use App\Traits\HasStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
 
 class salaries extends Model
-{
+{ use SoftDeletes;
     use HasStatus;
     protected $guarded = [];
 

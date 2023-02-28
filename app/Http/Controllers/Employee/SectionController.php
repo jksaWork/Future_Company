@@ -81,7 +81,7 @@ class SectionController extends Controller
     {
         // return $section;
         $section->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('error', __('site.deleted_successfully'));
         return redirect()->route('Employee.section.index');
 
     }//end of destroy

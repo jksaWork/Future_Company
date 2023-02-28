@@ -153,7 +153,7 @@ class SalariesController extends Controller
         // return $id;
         $salaries = salaries::findOrFail($id);
         $salaries->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('error', __('site.deleted_successfully'));
         return redirect()->route('Employee.salaries.create');
     } //end of destroy
 
@@ -182,8 +182,6 @@ class SalariesController extends Controller
             $allowances = allowances::where('status', 1)->get();
                     $employees = employee::findorfail($m);
                     $employee_advances  = advances::where([['employee_id', $m ] ,['month_number', $q ],['year', $y ]])->get();
-                    // $salaries = salaries::find($id);
-                    // return $employee_advances;
                     return view('admin.Employee.salaries.salaries_show', compact('employee_advances','employees','q','y','allowances'));
         } else {
             session()->flash('error' ,  __('site.Salary_has_already_been_submitted'));

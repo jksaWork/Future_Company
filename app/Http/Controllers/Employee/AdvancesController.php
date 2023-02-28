@@ -125,7 +125,7 @@ class AdvancesController extends Controller
         // return $id;
         $Advances = Advances::findOrFail($id);
         $Advances->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('error', __('site.deleted_successfully'));
         return redirect()->route('Employee.Advances.index');
     } //end of destroy
 

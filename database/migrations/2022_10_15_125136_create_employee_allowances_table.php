@@ -20,6 +20,7 @@ class CreateEmployeeAllowancesTable extends Migration
             $table->unsignedBigInteger('allowances_id');
             $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->unsignedBigInteger('employee_id');
+            $table->softDeletes();
             $table->foreign('allowances_id')->references('id')->on('allowances')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();

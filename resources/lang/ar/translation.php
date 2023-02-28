@@ -386,6 +386,7 @@ return [
     'installment_order_6' => "القصد السادس",
     'finanical_treasury' => 'الخزينه الماليه',
     'treasury' => 'الخزينه',
+    'Number_of_Employees'=>'عدد الموظفين',
     'current_treasury' => 'الخزينه الحاليه',
     'trans_type' => 'نوع العمليه',
     'transaction_type' => 'قسم العمليه',
