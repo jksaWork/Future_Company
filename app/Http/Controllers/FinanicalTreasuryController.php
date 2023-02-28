@@ -42,7 +42,7 @@ class FinanicalTreasuryController extends Controller
         ]);
         try {
             FinancialTreasuryTransactionHistorys::EditTransaction($id, $request->amount);
-            session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+            session()->flash('success', __('translation.Edit_pay_to_Treasury_was_done_success'));
             return redirect()->back();
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(__('translation.6'));
@@ -72,7 +72,10 @@ class FinanicalTreasuryController extends Controller
             })
             ->editColumn(
                 'actions',
-                'admin.treasury.data_table.actions'
+                fn ($i) => view(
+                    'admin.treasury.data_table.actions',
+                    ['item' => $i]
+                )
             )
             ->rawColumns(['actions', 'transaction_type', 'type'])
             ->toJson();
@@ -101,15 +104,15 @@ class FinanicalTreasuryController extends Controller
         $Treasury =  DB::table(
             'financial_treasuries'
         )->select(
-            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and  transaction_type ="revenues") as revenues_total '),
-            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="installment") as installment_total '),
-            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" and transaction_type ="main_treasury") as main_treasury'),
-            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "credit" ) as total '),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "debit"  and  transaction_type in ("incentives" , "salries" , "advance" ) ) as employee_section'),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "debit" and transaction_type ="spending") as spending_section'),
+            DB::raw('(select sum(amount) from financial_treasury_transaction_historys where type = "debit" ) as total '),
         )->get();
         $Treasury = $Treasury[0];
-        foreach (['revenues_total', 'main_treasury', 'installment_total'] as  $value) {
+        foreach (['employee_section', 'spending_section'] as  $value) {
             $data[$value] = $this->getPrecetage($Treasury, $value);
         }
+        // dd($data);
         return view('admin.treasury.spending', $data);
     }
 

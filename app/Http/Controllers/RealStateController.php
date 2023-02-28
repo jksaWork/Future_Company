@@ -29,6 +29,10 @@ class RealStateController extends Controller
             ->typeScope()
             ->StatusScope()
             ->rentOrSaleScope();
+<<<<<<< HEAD
+=======
+        // select * from users
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
 
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
@@ -88,15 +92,17 @@ class RealStateController extends Controller
         //    return $request;
 
         try {
-
+            // return $request;
             $data = array_merge(
                 $request->except('_token', 'category_idd', 'attachments', 'installment'),
                 [
                     'category_id' => $request->category_idd,
-                    'type' => $request->type
+                    'type' => $request->type,
+                    'status' => $request->status == 'ready',
                 ]
             );
             // dd($data);
+
             $realstate  = RealState::create($data);
             Attachments::AttachMUltiFIleFiles($request->attachments, $realstate, 'realstate/attachments');
             //  Check If The Request Comming By Sale Type
@@ -228,8 +234,12 @@ class RealStateController extends Controller
         $search = $request->search;
 
         if ($search == '') {
-            $employees = RealState::when(request()->type, function ($q) {
+            $employees = RealState::when(request()->has('type'), function ($q) {
                 return $q->where('type', request()->type);
+            })->when(request()->has('is_sale'), function ($q) {
+                return $q->where('is_sale', 1);
+            })->when(request()->has('is_rent'), function ($q) {
+                return $q->where('is_rent', 1);
             })
                 ->orderby('title', 'asc')->select('id', 'title')
                 ->limit(5)

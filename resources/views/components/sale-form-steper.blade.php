@@ -87,15 +87,9 @@
                                                 <label class="form-label">{{__('translation.aqsat_date')}}:</label>
                                                 <input type="date" name='date' rendonly class="form-control mb-2 mb-md-0" placeholder="Enter contact number">
                                             </div>
-                                            <div class="col-md-1">
-                                                <div class="form-check form-check-custom form-check-solid mt-2 mt-md-11">
-                                                    <input class="form-check-input" name='is_payed' type="checkbox" value="1" id="form_checkbox">
-                                                    <label class="form-check-label"  for="form_checkbox">{{ __('translation.pay_done')}}</label>
-                                                </div>
-                                            </div>
                                             <div class="col-md-2">
                                                 <a href="javascript:;" data-repeater-delete="" class="btn btn-sm btn-light-danger mt-3 mt-md-9">
-                                                <i class="la la-trash-o fs-3"></i>Delete</a>
+                                                <i class="la la-trash-o fs-3"></i>{{ __('translation.delete') }}</a>
                                             </div>
                                         </div>
                                     </div>

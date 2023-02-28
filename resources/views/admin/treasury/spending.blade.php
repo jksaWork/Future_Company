@@ -8,21 +8,21 @@
             <!--begin::Card-->
             <div class="row g-5 g-xl-8">
 
-                <div class="col-xl-4">
+                <div class="col-xl-6">
                     <!--begin: Statistics Widget 6-->
                     <div class="card bg-light-warning card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body my-3">
                             <a href="#"
-                                class="card-title fw-bolder text-warning fs-5 mb-3 d-block">{{ __('translation.main_treasury') }}</a>
+                                class="card-title fw-bolder text-warning fs-5 mb-3 d-block">{{ __('translation.speding_from_spending') }}</a>
                             <div class="py-1">
-                                <span class="text-dark fs-1 fw-bolder me-2">{{ $main_treasury }}%</span>
+                                <span class="text-dark fs-1 fw-bolder me-2">{{ $spending_section }}%</span>
                                 <span class="fw-bold text-muted fs-7">{{ 23 }}
-                                    {{ __('translation.main_treasury_total') }}</span>
+                                    {{ __('translation.spending_ection_spneding_precntage') }}</span>
                             </div>
                             <div class="progress h-7px bg-warning bg-opacity-50 mt-7">
                                 <div class="progress-bar bg-warning" role="progressbar"
-                                    style="width: {{ $main_treasury . '%' }}" aria-valuenow="50" aria-valuemin="0"
+                                    style="width: {{ $spending_section . '%' }}" aria-valuenow="50" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -30,21 +30,21 @@
                     </div>
                     <!--end: Statistics Widget 6-->
                 </div>
-                <div class="col-xl-4">
+                <div class="col-xl-6">
                     <!--begin: Statistics Widget 6-->
                     <div class="card bg-light-success card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body my-3">
                             <a href="#"
-                                class="card-title fw-bolder text-success fs-5 mb-3 d-block">{{ __('translation.installments') }}</a>
+                                class="card-title fw-bolder text-success fs-5 mb-3 d-block">{{ __('translation.employee_ection_spneding') }}</a>
                             <div class="py-1">
-                                <span class="text-dark fs-1 fw-bolder me-2">{{ $installment_total }}%</span>
+                                <span class="text-dark fs-1 fw-bolder me-2">{{ $employee_section }}%</span>
                                 <span
-                                    class="fw-bold text-muted fs-7">{{ __('translation.installment_total_precntage') }}</span>
+                                    class="fw-bold text-muted fs-7">{{ __('translation.employee_ection_spneding_precntage') }}</span>
                             </div>
                             <div class="progress h-7px bg-success bg-opacity-50 mt-7">
                                 <div class="progress-bar bg-success" role="progressbar"
-                                    style="width: {{ $installment_total . '%' }}" aria-valuenow="50" aria-valuemin="0"
+                                    style="width: {{ $employee_section . '%' }}" aria-valuenow="50" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -52,27 +52,7 @@
                     </div>
                     <!--end: Statistics Widget 6-->
                 </div>
-                <div class="col-xl-4">
-                    <!--begin: Statistics Widget 6-->
-                    <div class="card bg-light-primary card-xl-stretch mb-5 mb-xl-8">
-                        <!--begin::Body-->
-                        <div class="card-body my-3">
-                            <a href="#"
-                                class="card-title fw-bolder text-primary fs-5 mb-3 d-block">{{ __('translation.revenue_income') }}</a>
-                            <div class="py-1">
-                                <span class="text-dark fs-1 fw-bolder me-2">{{ $revenues_total }}%</span>
-                                <span class="fw-bold text-muted fs-7">{{ __('translation.revenues_total') }}</span>
-                            </div>
-                            <div class="progress h-7px bg-primary bg-opacity-50 mt-7">
-                                <div class="progress-bar bg-primary" role="progressbar"
-                                    style="width: {{ $revenues_total . '%' }}" aria-valuenow="50" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <!--end:: Body-->
-                    </div>
-                    <!--end: Statistics Widget 6-->
-                </div>
+
             </div>
             <div class="card">
                 <!--begin::Card header-->

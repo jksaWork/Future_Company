@@ -13,10 +13,20 @@ class SaleController extends Controller
 {
     public function receptInstallment(Request $request)
     {
-        $Installment = RealstateInstallment::findOrFail($request->installment_id);
-        $Installment->is_payed = true;
-        $Installment->save();
+        // return ($request);
+        $request->validate([
+            'realstate_id' => 'required',
+            'installment_id' => 'required',
+        ]);
+        try {
+            DB::beginTransaction();
+            $realstate = RealState::with('CurrentOwner')->findOrFail($request->realstate_id);
+            // Check It Is Has Oowner OR Not;
+            if (!$realstate->is_sale) {
+                return redirect()->back()->withErrors(__('translation.this_real_State_not_have_owner'));
+            }
 
+<<<<<<< HEAD
         $owner_id = $Installment->RealState->CurrentOwner[0]->id;
         $owner_name = $Installment->RealState->CurrentOwner[0]->name;
         $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($Installment->amount, 'installment', $owner_name . '-' . __('translation.installment_order_' . $Installment->order_number, $id));
@@ -32,6 +42,40 @@ class SaleController extends Controller
 
         session()->flash('success', __('translation.installment_sucess'));
         return redirect()->route('realstate.realstate.show', $Installment->realstate_id);
+=======
+
+            $Installment = RealstateInstallment::findOrFail($request->installment_id);
+            $Installment->is_payed = true;
+            $Installment->save();
+
+            $owner_id = $realstate->CurrentOwner[0]->id;
+            $owner_name = $realstate->CurrentOwner[0]->name;
+            // dd($owner_id, $owner_name);
+            $id =  DB::table('installments_history')
+                ->insertGetId([
+                    'realstate_id' => $Installment->realstate_id,
+                    'owner_id' => $owner_id,
+                    'amount' => $Installment->amount,
+                    'order_number' => $Installment->order_number,
+                ]);
+            // dd('here is cood');
+            //  Make Transaction To Save Install Ment
+            $note = $owner_name . '-' . __('translation.installment_order_' . $Installment->order_number);
+            $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($Installment->amount, 'installment', $note, $id);
+            // Update Refernce Id
+            DB::table('installments_history')
+                ->where('id', $id)
+                ->update(['transaction_id' => $transaction->id]);
+
+            session()->flash('success', __('translation.installment_sucess'));
+            DB::commit();
+            return redirect()->route('realstate.realstate.show', $Installment->realstate_id);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $th;
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
+>>>>>>> 19d0d92d355a7874040741a2d444549ca57aa8b0
     }
 
     public function getRealStateInstallments()
@@ -103,7 +147,11 @@ class SaleController extends Controller
                 't2.address',
                 't2.realstate_number',
             ]
+
         )
+            ->when(request()->id != null, function ($q) {
+                $q->where('installments_history.id', request()->id);
+            })
             ->when(request()->realstate_id != null, function ($q) {
                 $q->where('installments_history.realstate_id', request()->realstate_id);
             })

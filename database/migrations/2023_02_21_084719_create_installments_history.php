@@ -19,8 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->double('amount', 15, 8)->nullable();
             $table->integer('order_number')->nullable();
-            $table->foreign('realstate_id') -> references('id') -> on('real_states');
-            $table->foreign('owner_id') -> references('id') -> on('owners');
+            $table->foreign('realstate_id')->references('id')->on('real_states');
+            $table->foreign('owner_id')->references('id')->on('owners');
+            $table->unsignedBigInteger('transaction_id')->nullable();
             $table->timestamps();
         });
     }

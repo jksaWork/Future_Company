@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\Owner;
 use App\Models\RealState;
 use Illuminate\Http\Request;
 use DB;
@@ -33,22 +34,38 @@ class RentController extends Controller
         $realstate =  $id ? RealState::find($id) : null;
         return  view('admin.realstate.assing', compact('realstate'));
     }
+
+    public function AssingStep2(RealState $realstate, $owner_id)
+    {
+        $owner = Owner::findOrFail($owner_id);
+        return view('admin.realstate.rent.assing_rent_2', compact('realstate', 'owner'));
+    }
     public function Asgin(Request $request)
     {
-        // return $request;
         $request->validate([
             'realstate_id' => 'required',
             'owner_id' => 'required',
             'type' => 'required|in:rent,sale',
         ]);
+        // return $request;
+
         try {
             $realstate = RealState::findOrFail($request->realstate_id);
+
             if ($realstate->status == 0 || $realstate->{'is_' . $request->type} == true) {
-                return  redirect()->back()->withErrors(__('translation.this_realstate_under_opration_or_not_ready'));
+                if ($realstate->status == 0)  return  redirect()->back()->withErrors(__('translation.rael_state_is_not_ready'));
+                if ($realstate->{'is_' . $request->type} == 1)  return  redirect()->back()->withErrors(__('translation.rael_state_is_under_opration'));
             }
+            if (!request()->has('verfied')) return $this->AssingStep2($realstate,  $request->owner_id);
+
+            // dd('jksa');
+            // $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
+            // //  If Is Exist the Spesfic Month And And RealState ID
+            // if ($is_payed[0]->c != 0) return 'Hello';
+
             $realstate->{'is_' . $request->type} = true;
             $realstate->save();
-
+            //  Begin transactino
             DB::table('owners_realstates')->insert(
                 [
                     'owner_id' => $request->owner_id,
@@ -56,6 +73,7 @@ class RentController extends Controller
                     'type' => $request->type,
                 ]
             );
+            // dd('hello')
             session()->flash('success', __('translation.assgin_new_owner_was_done'));
             return redirect()->route('realstate.realstate.show', $realstate->id);
         } catch (\Throwable $th) {
@@ -126,11 +144,7 @@ class RentController extends Controller
         ]);
         //  Fecth Payment Is Exist Or Not
         try {
-<<<<<<< HEAD
             $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id,  $request->month_number]);
-=======
-            $is_payed = DB::select('select count(id) as c from rent_revenues where realstate_id = ? and month_number = ?', [$request->realstate_id, $request->month_number]);
->>>>>>> 85c59e68c762b5b716ce0ed2f857d9d66a792519
             //  If Is Exist the Spesfic Month And And RealState ID
             if ($is_payed[0]->c != 0)
                 return redirect()->back()->withErrors(__('translation.the_select_month_was_payed'));
@@ -139,6 +153,7 @@ class RentController extends Controller
             // IF esle INsert The Renveu To DataBase
             $realstate = RealState::findOrFail($request->realstate_id);
             // insert The New Row
+            DB::beginTransaction();
             $id = DB::table('rent_revenues')->insertGetId(
                 [
                     'owner_id' => $request->owner_id,
@@ -149,9 +164,18 @@ class RentController extends Controller
                 ]
             );
             // Add Money To History
-            FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
+            $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
+            DB::table('rent_revenues')
+                ->where('id', $id)
+                ->update(['transaction_id' => $transaction->id]);
+
+            session()->flash('success',  __('translation.recept_revenues_success_fule'));
+
+            DB::commit();
+
             return redirect()->route('realstate.realstate.show', $request->realstate_id);
         } catch (\Throwable $th) {
+            DB::rollback();
             return redirect()->back()->withErrors($th->getMessage());
         }
     }
@@ -179,6 +203,9 @@ class RentController extends Controller
                 't2.realstate_number',
             ]
         )
+            ->when(request()->id != null, function ($q) {
+                $q->where('rent_revenues.id', request()->id);
+            })
             ->when(request()->status != null, function ($q) {
                 $q->where('rent_revenues.status', request()->status);
             })
