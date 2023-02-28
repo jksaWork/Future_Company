@@ -420,4 +420,8 @@ return [
     'rael_state_is_not_ready' => 'هذا العقار غير  جاهز للبيع او الايجار',
     'rael_state_is_under_opration' => 'هذا العقار غير تحت عمليه بيع او ايجار',
     'Status  Was Change Succesfuly' => 'بنجاح تم تعديل حاله العنصر',
+    'speding_from_spending' => 'منصرفات اقسام المنشاءت',
+    'employee_ection_spneding' => 'منصرفات قسم الموظفين',
+    'spending_ection_spneding_precntage' => 'من نسبه منصرفات المؤسسه تشمل منصرفات الاقسام و النسريات',
+    'employee_ection_spneding_precntage' => 'من نسبه منصرفات المؤسسه تشمل الحوافز والسلفيات',
 ];
