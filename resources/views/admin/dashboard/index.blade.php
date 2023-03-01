@@ -364,7 +364,7 @@
 
 
         
-            <div class="row gy-5 g-xl-8 mt-4">
+            {{-- <div class="row gy-5 g-xl-8 mt-4">
                 <!--end::Col-->
                 <!--begin::Col-->
 
@@ -617,7 +617,7 @@
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder fs-3 mb-1">{{ __('translation.Latest_offer')}}</span>
-                                {{-- <span class="text-muted mt-1 fw-bold fs-7">More than 400 new products</span> --}}
+                                <span class="text-muted mt-1 fw-bold fs-7">More than 400 new products</span>
                             </h3>
                             <div class="card-toolbar">
                                 <ul class="nav">
@@ -678,37 +678,37 @@
                                                         <th class="text-center">{{__('translation.name')}} </th>
                                                         <th class="text-center">{{__('translation.phone')}}</th> --}}
                                                         {{-- <th class="text-center">{{__('translation.roles')}}</th> --}}
-                                                        <th class="text-center">{{__('translation.title')}}</th>
+                                                        {{-- <th class="text-center">{{__('translation.title')}}</th> --}}
                                                         {{-- @admin --}}
                                                         {{-- @if (auth()->guard('admin')->check())
                                                             <th class="text-center">{{__('translation.agent')}}</th>
                                                         @endif --}}
                                                         {{-- @endAdmin --}}
-                                                        <th class="text-center">{{__('translation.areas')}}</th>
+                                                        {{-- <th class="text-center">{{__('translation.areas')}}</th> --}}
                                                         {{-- <th class="text-center">{{__('translation.service')}}</th> --}}
-                                                        <th class="text-center">{{__('translation.type_idd')}}</th>
+                                                        {{-- <th class="text-center">{{__('translation.type_idd')}}</th> --}}
                                                         {{-- <th class="text-center">{{__('translation.description')}}</th>
                                                         <th class="text-center">{{__('translation.client')}}</th>
                                                         <th class="text-center">{{__('translation.owner')}}</th> --}}
-                                                        <th class="text-center">{{__('translation.location')}}</th>
-                                                        <th class="text-center">{{__('translation.status')}}</th>
+                                                        {{-- <th class="text-center">{{__('translation.location')}}</th> --}}
+                                                        {{-- <th class="text-center">{{__('translation.status')}}</th> --}}
                                                         {{-- <th class="text-center">{{__('translation.date')}}</th> --}}
-                                                        <th class="text-center">{{__('translation.action')}}</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                    </div>
+                                                        {{-- <th class="text-center">{{__('translation.action')}}</th> --}}
+                                                    {{-- </tr> --}}
+                                                {{-- </thead> --}}
+                                            {{-- </table> --}}
+                                        {{-- </div>/// --}}
+                                    {{-- </div> --}}
                                     <!--end::Table-->
-                                </div>
+                                {{-- </div> --}}
                                 <!--end::Tap pane-->
-                            </div>
-                        </div>
+                            {{-- </div> --}}
+                        {{-- </div> --}}
                         <!--end::Body-->
-                    </div>
+                    {{-- </div> --}}
                     <!--end::Tables Widget 5-->
-                </div>
-            </div>
+                {{-- </div> --}}
+            {{-- </div> --}} 
             <!--end::Row-->
 
             <!--end::Row-->
