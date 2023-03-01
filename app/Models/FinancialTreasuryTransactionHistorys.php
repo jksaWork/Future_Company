@@ -128,8 +128,4 @@ class FinancialTreasuryTransactionHistorys extends Model
             return $q->where('created_at', ',=',  request()->to_date);
         });
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4d97ca59a7b164548e7b622b2161a2c26d6b34eb

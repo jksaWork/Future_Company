@@ -54,6 +54,8 @@ return [
      'March'=>'March',
      'April'=>'April',
      'May'=>'May',
+     'total'=>'spendings total ',
+     'spendings_Graph'=>'spendings Graph',
      'June'=>'June',
      'July'=>'July',
      'August'=>'August',

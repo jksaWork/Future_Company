@@ -19,6 +19,7 @@ return [
     'Salary_has_already_been_submitted'=>'تم تسليم المرتب سابقا',
     'confirm_delete' => 'Confirm deletion',
     'yes' => 'Yes',
+   
     'no' => 'No',
     'choose' => 'Choose',
     'change' => 'Change',

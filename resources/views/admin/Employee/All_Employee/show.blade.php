@@ -216,7 +216,7 @@
                                                     </tr>
                                                 @empty
                                                     <td colspan="4">
-                                                        <div class="text-center">No Data Was Found</div>
+                                                        <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
                                                     </td>
                                                 @endforelse
                                             </tbody>
@@ -270,7 +270,7 @@
                                                     </tr>
                                                 @empty
                                                     <td colspan="4">
-                                                        <div class="text-center">No Data Was Found</div>
+                                                        <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
                                                     </td>
                                                 @endforelse
                                             </tbody>
@@ -330,7 +330,7 @@
                                                     </tr>
                                                 @empty
                                                     <td colspan="4">
-                                                        <div class="text-center">No Data Was Found</div>
+                                                        <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
                                                     </td>
                                                 @endforelse
                                             </tbody>
