@@ -24,6 +24,7 @@ class CreateSalariesTable extends Migration
             $table->string('status')->default(1);
             $table->bigInteger('fixed_salary');
             $table->bigInteger('allowancess_fixed');
+            $table->softDeletes();
             $table->unsignedBigInteger('Transaction_id')->nullable();
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');

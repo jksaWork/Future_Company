@@ -76,7 +76,9 @@ Route::group(
         Route::prefix('admin')->middleware('guest:admin')->group(function () {
             Route::get('login', [AdminAuthController::class, 'getlogin'])->name('admin.get_login');
             Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login');
+            
         });
+        
 
         Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
             Route::get('role/data', [RoleController::class, 'data'])->name('roles.data');

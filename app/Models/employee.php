@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasStatus;
 use Astrotomic\Translatable\Translatable;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class employee extends Model
 {
     use HasStatus;
+    use SoftDeletes;
     protected $guarded = [];
 
     /**

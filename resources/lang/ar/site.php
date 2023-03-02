@@ -17,8 +17,10 @@ return [
     'Some_Thing_Went_Worng'=>'هناك خطأ ما',
     'There_is_no_amount_available_in_the_safe'=>'لا يوجد مبلغ متوفر في خزينة',
     'Salary_has_already_been_submitted'=>'تم تسليم المرتب سابقا',
+    'total'=>'مجموع المنصرفات',
     'confirm_delete' => 'Confirm deletion',
     'yes' => 'Yes',
+   
     'no' => 'No',
     'choose' => 'Choose',
     'change' => 'Change',

@@ -52,11 +52,11 @@ class EmployeeSalariesController extends Controller
                 'description' => $request->description,
             ]);
             //    return  $DATA;
-            session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
             // //dd($e);
-            session()->flash('error',  'Some Thing Went Worng ');
+        session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store

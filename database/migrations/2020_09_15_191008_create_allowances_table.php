@@ -18,6 +18,7 @@ class CreateAllowancesTable extends Migration
             $table->bigInteger('allowances_value');
             $table->string('status')->default(1);
             $table->string('allowances_name')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
