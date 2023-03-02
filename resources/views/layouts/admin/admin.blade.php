@@ -70,6 +70,13 @@ License: For each use you must have a valid license purchased only from above li
             font-family: 'El Messiri', sans-serif;
         }
     </style>
+
+
+
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css' />
+    <link href='https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css' />
+    <link href='https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap4.min.css' />
     @stack('links')
 </head>
 <!--end::Head-->
@@ -3367,6 +3374,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
     <script src="{{ asset('datatable/sweetalert.js') }}"></script>
     <!-- Script -->
+
     {{-- <script src="{{ asset('datatable/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     @stack('scripts')

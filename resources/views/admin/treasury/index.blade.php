@@ -191,6 +191,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 pt-5">
+                        <div class='dataTables_wrapper dt-bootstrap4 no-footer' >
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
                                     id="roles-table" style="width: 100%;">
@@ -211,6 +212,7 @@
                     </div><!-- end of row -->
                     <!--end::Table-->
                 </div>
+            </div>
                 <!--end::Card body-->
             </div>
         </div>
@@ -295,6 +297,9 @@
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
 
     <script>
+
+        $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
+        $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
         let stauts, type, transaction_type, from_date;
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
