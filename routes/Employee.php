@@ -15,6 +15,7 @@ use App\Http\Controllers\Employee\DataController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Employee\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,17 @@ Route::group(
                 Route::get('salaries-history-data', [DataController::class , 'salarieshistoryData'])->name('salaries.hitory.data');
                 Route::get('allowances-history-data', [DataController::class , 'allowanceshistoryData'])->name('allowances.hitory.data');
         });
+        
+        // Route::prefix('reports')->name('reports.')->group(function () {
+            Route::prefix('reports')->name('reports.')->middleware(['auth:admin'])->group(function () {
+
+            Route::get('report_spending', [ReportController::class , 'report_spending'])->name('spending.report');
+            Route::get('report_employee', [ReportController::class , 'report_employee'])->name('employee.report');
+            Route::get('report_employee_allowances', [ReportController::class , 'report_employee_allowances'])->name('employee_allowances.report');
+        });
+
+
+
         Route::get('employees-status/{id}', [DataController::class , 'ChangeStatus'])->name('employees.status');
 
     }

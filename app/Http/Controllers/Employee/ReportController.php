@@ -7,60 +7,71 @@ use App\Models\allowances;
 use App\Models\salaries;
 use App\Models\employee;
 use App\Models\Advances;
-use App\Models\section;
+use App\Models\spending;
 use App\Models\spendings;
 use App\Models\Category;
 use App\Models\employee_allowances;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
+// use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use Exception;
 
-class DataController extends Controller
+class ReportController extends Controller
 {
 
 
-    public function SectionhistoryData(Request $request)
+    public function report_spending(Request $request)
     {
-
-
-        $query = section::query();
-        return  DataTables::of($query)->editColumn(
-            'actions',
-            'admin.Employee.section.data_table.actions'
-        )
-            ->rawColumns(['actions'])
-            ->toJson();
+        $e = $request->end_month;
+        $b = $request->being_month;
+        if ($b == null OR $e ==null) {
+            $spendings = spendings::all();
+            return view('admin.Employee.Repoet.index', compact('spendings'));
+        } else {
+            $spendings = spendings::whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
+            return view('admin.Employee.Repoet.index', compact('spendings'));
+        }
+       
     } //end of SectionhistoryData
 
-    public function spendinghistoryData(Request $request)
+    public function report_employee(Request $request)
     {
 
-
-        $query = spendings::query();
-        return  DataTables::of($query)->editColumn(
-            'actions',
-            'admin.Employee.spending.data_table.actions'
-        )->editColumn('section_id', function ($item) {
-            return "<span class='badge badge-success'>" . $item->section->section_name . "</span>";
-        })
-            ->editColumn('spending_value', function ($item) {
-                return number_format($item->spending_value, 2);
-            })
-            ->rawColumns(['actions', 'section_id'])
-            ->toJson();
+        $e = $request->end_month;
+        $b = $request->being_month;
+        if ($b == null OR $e ==null) {
+         
+            $employee = employee::all();
+            $allowancesS = employee_allowances::where('status' ,1)->get();
+            return view('admin.Employee.Repoet.employee', compact('employee','allowancesS'));
+        
+            
+            
+        } else {
+            $employee = employee::whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
+            $allowancesS = employee_allowances::where('status' ,1)->get();
+            return view('admin.Employee.Repoet.employee', compact('employee','allowancesS'));
+        }
     } //end of spendinghistoryData
-    public function CategoryhistoryData(Request $request)
+    public function report_employee_allowances(Request $request)
     {
 
 
-        $query = Category::query();
-        return  DataTables::of($query)->editColumn(
-            'actions',
-            'admin.Employee.categories.data_table.actions'
-        )
-
-            ->rawColumns(['actions'])
-            ->toJson();
+        $e = $request->end_month;
+        $b = $request->being_month;
+        if ($b == null OR $e ==null) {
+         
+            $employee_allowances = employee_allowances::where('status' ,0)->get();
+            return view('admin.Employee.Repoet.employee_allowances', compact('employee_allowances'));
+        
+            
+            
+        } else {
+            $employee_allowances = employee_allowances::where('status' ,0)->whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
+            
+            return view('admin.Employee.Repoet.employee_allowances', compact('employee_allowances'));
+        }
     } //end of CategoryhistoryData
     public function employeeshistoryData(Request $request)
     {
@@ -101,7 +112,7 @@ class DataController extends Controller
     public function employee_allowanceshistoryData(Request $request)
     {
         $str = '';
-        $query = employee_allowances::query()->where('status', 0);
+        $query = employee_allowances::query();
         return  DataTables::of($query)
             ->editColumn(
                 'actions',
@@ -109,7 +120,7 @@ class DataController extends Controller
             )
 
             ->editColumn('allowances_id', function ($item) {
-                return "<span class='badge badge-light-info'>". $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';
+                return "<span class='badge badge-light-info'>" . $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';
             })
 
             ->editColumn('employee_id', function ($item) {
@@ -135,7 +146,7 @@ class DataController extends Controller
                 return  $item->employee->name;
             })
             ->editColumn('advances_value', function ($item) {
-                return number_format($item->advances_value, 2) ;
+                return number_format($item->advances_value, 2);
             })
 
 
@@ -159,14 +170,14 @@ class DataController extends Controller
             ->editColumn('employee_id', function ($item) {
                 return  $item->employee->name;
             })
-             ->editColumn('created_at', function ($item) {
+            ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
             })
             ->editColumn('status', function ($item) {
-                return "<span class='badge badge-success'>". $item->getActive() .'</span>';
+                return "<span class='badge badge-success'>" . $item->getActive() . '</span>';
             })
 
-            ->rawColumns(['actions', 'employee_id', 'created_at','status'])
+            ->rawColumns(['actions', 'employee_id', 'created_at', 'status'])
             ->toJson();
     } //end of salarieshistoryData
 
@@ -179,20 +190,20 @@ class DataController extends Controller
                 'actions',
                 'admin.Employee.allowances.data_table.actions'
             )
-             ->editColumn('created_at', function ($item) {
+            ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
             })
             ->editColumn('allowances_value', function ($item) {
-                return number_format($item->allowances_value, 2) ;
+                return number_format($item->allowances_value, 2);
             })
             ->editColumn('status', function ($item) {
-                return "<span class='badge badge-success'>". $item->getActive() .'</span>';
+                return "<span class='badge badge-success'>" . $item->getActive() . '</span>';
             })
 
-            ->rawColumns(['actions', 'allowances_value', 'created_at','status'])
+            ->rawColumns(['actions', 'allowances_value', 'created_at', 'status'])
             ->toJson();
     } //end of salarieshistoryData
 
 
- 
+
 }//end of controller
