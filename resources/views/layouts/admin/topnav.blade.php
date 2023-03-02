@@ -59,7 +59,7 @@
                 <!--begin::Toolbar wrapper-->
                 <div class="d-flex align-items-stretch flex-shrink-0">
                     <!--begin::Search-->
-                  
+
                     <!--end::Quick links-->
                     <!--begin::User-->
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
@@ -160,7 +160,7 @@
                             <div class="menu-item px-5" data-kt-menu-trigger="hover"
                                 data-kt-menu-placement="left-start">
                                 <a href="#" class="menu-link px-5">
-                                    <span class="menu-title position-relative">Language
+                                    <span class="menu-title position-relative">{{ __('translation.language') }}
                                         {{-- <span
                                             class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
                                             <img class="w-15px h-15px rounded-1 ms-2"
@@ -184,6 +184,13 @@
                                     <!--begin::Menu item-->
                                     <!--end::Menu item-->
                                 </div>
+                                <!--end::Menu sub-->
+                            </div>
+
+                            <div class="menu-item px-5" >
+                                <a href="{{ route('Employee.setting') }}" class="menu-link px-5">
+                                    <span class="menu-title position-relative"> {{ __('translation.setting') }}
+                                </a>
                                 <!--end::Menu sub-->
                             </div>
                             <!--end::Menu item-->
@@ -225,7 +232,7 @@
                         <!--end::Menu wrapper-->
                     </div>
                     <!--end::User -->
-                    
+
                     <!--begin::Heaeder menu toggle-->
                     <div class="d-flex align-items-center d-lg-none ms-2 me-n3"
                         title="Show header menu">

@@ -438,5 +438,6 @@ return [
     'chose_your_realstate' => 'اختار العقار',
     'owner_sale_info' => 'بيانات المالك',
     'speding' => 'المنصرفات',
+    'language' => 'اختار الغه',
     // 'date_is_required' => ,
 ];
