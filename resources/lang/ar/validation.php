@@ -97,8 +97,8 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
-    'required' => 'هذه  الحقل مطلوب ',
+    'required' => 'حقل ال  :attribute  مطلوب لاكمال الاجراء.',
+    // 'required' => 'هذه  الحقل مطلوب ',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -132,9 +132,20 @@ return [
     */
 
     'custom' => [
+        'address' => 'العنوان',
+        'installment.*.date' => [
+            'required' => 'حقول تاريخ القصد مطلوبه',
+        ],
+        'installment.*.amount' => [
+            'required' => 'حقول مبلغ القصد مطلوبه',
+        ],
+        'installment.0.precentage' => [
+            'required' => 'حقول نسه القصد مطلوبه لاكمال الاجراء'
+        ],
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
         'categories_id' => [
             'categories_id.exists'  => 'القسم غير موجود ',
         ],
@@ -168,7 +179,7 @@ return [
         'employee_id' => [
             'in' => 'القيم المدخلة غير صحيحة ',
         ],
-        'categories_name'=> [
+        'categories_name' => [
             'string' => ' العنوان لابد ان يكون حروف او حروف وارقام  ',
             'max'  => 'هذا الحقل طويل',
         ],
@@ -181,6 +192,7 @@ return [
             'date_format'  => 'يجب التاكد من التاريخ',
 
         ],
+
     ],
 
     /*
@@ -196,8 +208,11 @@ return [
 
     'attributes' => [
         'name'  => 'الاسم ',
-
-
+        "address" => 'العنوان',
+        'realstate_number' => 'رقم العقار',
+        'price' => 'السعر',
+        'description' => 'الوصف',
+        'title' => 'العنوان',
     ],
 
 ];

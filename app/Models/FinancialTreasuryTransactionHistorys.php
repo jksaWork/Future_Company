@@ -42,11 +42,12 @@ class FinancialTreasuryTransactionHistorys extends Model
 
     public function getTransactionType()
     {
-        return "<span class='badge badge-" .  self::getStatus()[$this->transaction_type]   ?? 'danger' . "'>" . __('translation.' . $this->transaction_type)  . "</span>";
+        return "<span class='badge badge-" .  self::getStatus()[$this->transaction_type] . "'>" . __('translation.' . $this->transaction_type)  . "</span>";
     }
     public static function MakeTransacaion($amount, $transaction_type, $note, $ref = 1)
     {
         // dd('first line');
+        // dd($amount);
         $Treasury = FinancialTreasury::getInstance();
         $json = $Treasury->toJson();
         $type = self::TYPES[$transaction_type];
