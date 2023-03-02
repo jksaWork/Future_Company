@@ -113,9 +113,9 @@
                     </div>
                 </div>
 
-                
-               
-                <div class="menu-item">
+
+
+                {{-- <div class="menu-item">
                     <a class="menu-link {{ route('Employee.setting', ['service_id' => 1]) }}" href="/admin/dashboard">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -129,6 +129,12 @@
                         </span>
                         <span class="menu-title">{{ __('translation.setting') }}</span>
                     </a>
+                </div> --}}
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span
+                            class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.speding') }}</span>
+                    </div>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">

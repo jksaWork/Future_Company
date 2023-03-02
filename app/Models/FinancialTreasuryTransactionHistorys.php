@@ -47,6 +47,7 @@ class FinancialTreasuryTransactionHistorys extends Model
     public static function MakeTransacaion($amount, $transaction_type, $note, $ref = 1)
     {
         // dd('first line');
+        // dd($amount);
         $Treasury = FinancialTreasury::getInstance();
         $json = $Treasury->toJson();
         $type = self::TYPES[$transaction_type];

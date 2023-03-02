@@ -180,12 +180,14 @@ let eventHandler =() => ( $('.precentage_value').on('keyup',function(){
 $('.precentage_value').each((index , el) =>{
     // console.log(el, index);
     price_value = $('input[name="price"]').val();
-    let precentage  = price_value * $(this).val() / 100 ;
 
-    $(el).on('change' , function(){
-        $($('.precentage_amount')[index]).val(precentage);
-        console.log('Hello Form Hell', index , $(this).val());
-    });
+    if($(this).val() <= 100){
+        let precentage  = price_value * $(this).val() / 100 ;
+        $(el).on('keydown' , function(){
+            $($('.precentage_amount')[index]).val(precentage);
+            console.log('Hello Form Hell', index , $(this).val());
+        });
+    }
     // console.log('hello');
 });
 

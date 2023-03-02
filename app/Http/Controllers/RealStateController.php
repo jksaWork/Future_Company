@@ -70,7 +70,7 @@ class RealStateController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('hello');
+
         $request->validate([
             'title' => 'required',
             'price' => 'required|numeric',
