@@ -439,5 +439,6 @@ return [
     'owner_sale_info' => 'بيانات المالك',
     'speding' => 'المنصرفات',
     'language' => 'اختار الغه',
+    'log_out' => 'تسجيل الخروج',
     // 'date_is_required' => ,
 ];
