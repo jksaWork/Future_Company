@@ -14,6 +14,7 @@ use App\Http\Controllers\Employee\EmployeeSalariesController;
 use App\Http\Controllers\Employee\DataController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::group(
         // being Employee
        Route::prefix('Employee')->name('Employee.')->middleware(['auth:admin'])->group(function () {
         //category routes
+
+        
+        Route::get('setting', [SettingController::class, 'index'])->name('setting');
+        Route::post('setting', [SettingController::class, 'Store'])->name('setting.store');
               Route::resource('categories', CategoiresController::class)->except(['show']);
               Route::resource('All_Employee', AllEmployeeController::class);
               Route::resource('allowances', AllowancesController::class)->except(['show']);

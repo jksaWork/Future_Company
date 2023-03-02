@@ -13,6 +13,7 @@ class SettingController extends Controller
     }
 
     public function store(Request $request){
+        // return $request;
         $ValidatedDated = $request->except('_token');
         if($request->has('logo')){
             $request->logo->store('public/uploads');

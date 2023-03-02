@@ -16,6 +16,7 @@ return [
     'deleted_successfully' => 'Record deleted successfully',
     'Some_Thing_Went_Worng'=>'Some Thing Went Worng',
     'confirm_delete' => 'Confirm deletion',
+    'total'=>'spendings total ',
     'yes' => 'Yes',
     'no' => 'No',
     'choose' => 'Choose',

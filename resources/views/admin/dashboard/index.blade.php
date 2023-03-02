@@ -713,6 +713,10 @@
 
             <!--end::Row-->
               {{-- <div class="row"> --}}
+                <div class="padding: 10px 0px 0px 0px;" style="
+                padding: 18px;
+            ">
+                <div class="row g-5 g-xl-8">
                 <div class="box box-solid">
 
                     <div class="box-header">
@@ -720,7 +724,7 @@
                     </div>
                     <div class="box-body border-radius-none">
                         <div class="chart" id="spendings_data" style="height: 250px;"></div>
-                    </div>
+                    </div></div></div>
                     <!-- /.box-body -->
                 {{-- </div> --}}
     
@@ -1705,7 +1709,7 @@
                                         <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black"></path>
                                     </svg>
                                 </span>
-                                <div class="fs-6" data-kt-calendar="event_location"></div>
+                                <div class="fs-6" data-kt-calendar="event_location"></div>--}}
                             </div>
                         </div>
                     </div>
@@ -1713,7 +1717,7 @@
             </div>
         </div>
     </div>
-</div>--}}
+</div>
 @endsection 
 
 {{-- @push('scripts');
