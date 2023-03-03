@@ -87,11 +87,11 @@
                                                 </td>
                                            
                                                 <td>{{ $employees->Categorys->categories_name }}</td>
-                                               <td> -@forelse ($allowancesS as $inde=>$allowanc)
+                                               <td> @forelse ($allowancesS as $inde=>$allowanc)
                                                 @if ($allowanc->employee_id == $employees->id)
                                                 <?php $sum_allowances_value += $allowanc->Allowances_id->allowances_value; ?>
                                                {{ $allowanc->Allowances_id->allowances_name }}
-                                                ({{ number_format($allowanc->Allowances_id->allowances_value, 2) }})
+                                                ({{ number_format($allowanc->Allowances_id->allowances_value, 2) }})<br>
                                                 @endif
                                                 
                                                 @empty{{ __('translation.No_Data_Was_Found') }} @endforelse

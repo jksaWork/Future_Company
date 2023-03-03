@@ -11,6 +11,8 @@ return [
     'categories_name' => 'categories Name ',
     'Add_a_new_employee' => 'Add a new employee',
     'salary' => 'salary',
+    "spending_list"=>'spending list',
+    'created_at'=>'created_at',
     'address' => 'address',
     'Category' => 'Category',
     'Choose' => 'Select a section',

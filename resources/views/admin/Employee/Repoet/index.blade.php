@@ -1,9 +1,9 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
 @section('title')
-   {{__('translation.Staff_list')}}
+   {{__('translation.spending_list')}}
 @stop
-@section('main-head', __('translation.employee'))
+@section('main-head', __('translation.spending_report'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -29,7 +29,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <form action="{{ route('reports.employee.report') }}"  >
+                    <form action="{{ route('reports.spending.report') }}"  >
                         <div class="form-group row" >
                        
                             <div class="col-md-3">

@@ -21,9 +21,9 @@
 
                 <div class="col-lg-8">
                     <!--begin::Image input-->
-                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image:url('{{Storage::url('uploads/' . setting('logo'))}}')">
+                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image:url('{{ asset('uploads/' . setting('logo'))}}')">
                         <!--begin::Preview existing avatar-->
-                        <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image:url({{ Storage::url('uploads/' . setting('logo'))}})"></div>
+                        <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image:url({{ asset('uploads/' . setting('logo') )}})"></div>
                         <!--end::Preview existing avatar-->
                         <!--begin::Label-->
                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label>@lang('settings.fav_icon')</label>
                     <input type="file" name="fav_icon" class="form-control load-image">
-                    <img src="{{ Storage::url('uploads/' . setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
+                    <img src="{{ asset('uploads/'. setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
                 </div>
                 <div class="fv-row mb-7 col-md-12 ">
                     <label class=" fs-6 fw-bold mb-2">@lang('settings.title')</label>

@@ -99,7 +99,7 @@
                                        {{number_format($FinancialTreasury[0]->sum, 2)}}
                                        @endif
                                     </div>
-                                    <div class="fw-bold text-white fs-4">الخزينه الحاليه</div>
+                                    <div class="fw-bold text-white fs-4">{{ __('translation.current_treasury') }}</div>
                                 </div>
                             </div>
                         </div>
