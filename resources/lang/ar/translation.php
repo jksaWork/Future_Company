@@ -464,4 +464,6 @@ return [
     'chart_of_bar_chart' => 'المخطط النسبي للمنصرفات ',
     'Some Thing Went Worng When We Send Email' => 'حدث خطاء اثناء ارسال الايميل تاكد من بيانات المستقبل و اعد المحاوله',
     // 'date_is_required' => ,
+    'export_As_exel' => 'تصدير ك ملف اكسيل',
+    'realstates' => 'سجلات العقار',
 ];

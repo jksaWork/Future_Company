@@ -107,12 +107,35 @@
     <script>
         let role;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "tiplr",
+            dom: "Bfrtip",
             serverSide: true,
             processing: true,
             "language": {
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
+            buttons: [
+                'copy', {
+                    extend:'excel',
+                    text:'{{ __('translation.export_As_exel') }}' ,
+                },
+
+                { extend: 'print',
+                        title: '@lang('translation.owners')',
+                        className: 'btn btn-default',
+                        autoPrint: true,
+
+                        customize: function (win) {
+                            $(win.document.body).css('direction', 'rtl');
+                            $(win.document.body).find('th').addClass('display').css('text-align', 'center');
+                            $(win.document.body).find('table').addClass('display').css('font-size', '16px');
+                            $(win.document.body).find('table').addClass('display').css('text-align', 'center');
+                            $(win.document.body).find('tr:nth-child(odd) td').each(function (index) {
+                                $(this).css('background-color', '#D0D0D0');
+                            });
+                            $(win.document.body).find('h1').css('text-align', 'center');
+                        }}
+
+            ]  ,
             ajax: {
                 url: '{{ route('owners.data') }}',
 

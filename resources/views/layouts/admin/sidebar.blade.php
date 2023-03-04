@@ -599,30 +599,7 @@
 
 
 {{-- ssssssssssssssssssssssssssss --}}
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('report.agent') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.agent_offer_report') }}</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('report.offer_status_report') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.offer_status_report') }}</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('report.system_usage_monthly') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.system_usage_monthly') }}</span>
-                            </a>
-                        </div>
+
                         {{-- <div class="menu-item">
                             <a class="menu-link" href="{{route('admin.roles.index') }}">
                                 <span class="menu-bullet">
