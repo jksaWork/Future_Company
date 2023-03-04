@@ -19,7 +19,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
                                     <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="spending_name"   />
+                                        placeholder="" value="{{ old('spending_name') }}" name="spending_name"   />
                                         @error('spending_name')
                                             <span class="text-danger">
                                                 {{$message}}
@@ -29,8 +29,8 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label>{{__('translation.month')}}  :</label>
                                     <input class="form-control fc-datepicker" name="month" value="{{ date('Y-m-d') }}"
-                                    type="date"  required>
-                                        @error('advances_Date')
+                                    type="date"  value="{{ old('month') }}" >
+                                        @error('month')
                                             <span class="text-danger">
                                                 {{$message}}
                                             </span>
@@ -43,7 +43,7 @@
 
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.spending_value') }}</label>
-                                    <input type="number" class="form-control form-control-solid"
+                                    <input type="number" class="form-control form-control-solid" value="{{ old('spending_value') }}"
                                         placeholder="" step="0.01" name="spending_value" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                          />
                                         @error('spending_value')
@@ -73,7 +73,7 @@
                                 </div>
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                                 </label>
-                                <textarea class="form-control form-control-solid" rows="1"  name="description"
+                                <textarea class="form-control form-control-solid" rows="1"  name="description" value="{{ old('description') }}"
                                     placeholder="{{ __('translation.description') }}"></textarea>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">

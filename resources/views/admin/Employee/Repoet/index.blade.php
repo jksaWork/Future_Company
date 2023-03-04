@@ -1,5 +1,17 @@
-{{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
+@section('css')
+    <style>
+        @media print {
+            #print_Button {
+                display: none;
+            }
+            #form{
+                display: none;
+            }
+        }
+
+    </style>
+@endsection
 @section('title')
    {{__('translation.spending_list')}}
 @stop
@@ -9,7 +21,7 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div class="card">
+            <div class="card" id="print">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
@@ -29,7 +41,15 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <form action="{{ route('reports.spending.report') }}"  >
+                    <div class="d-flex flex-stack pb-10">
+                        <!--begin::Logo-->
+                        <a href="#"> </a>
+                        <!--end::Logo-->
+                        <!--begin::Action-->
+                        <a href="#" class="btn btn-sm btn-success" id="print_Button" onclick="printDiv()">{{ __('translation.print') }}</a>
+                        <!--end::Action-->
+                    </div>
+                    <form action="{{ route('reports.spending.report') }}"  id='form'>
                         <div class="form-group row" >
                        
                             <div class="col-md-3">
@@ -118,78 +138,17 @@
     </div>
 @endsection
 @push('scripts')
- <!-- jQuery -->
 
 
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-<script src="{{ asset('datatable/jquery.js') }}"></script>
-<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+<script type="text/javascript">
+    function printDiv() {
+        var printContents = document.getElementById('print').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    }
 
-<!-- DataTables  & Plugins -->
-<script src="{{URL::asset('datatable/js/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-bs4/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/jszip/jszip.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.print.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.colVis.min.js')}}"></script>
-
-<!-- AdminLTE App -->
-
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
 </script>
-<script>
-$('#example1').dataTable({
-    buttons: [
-        {
-            extend: 'pdfHtml5',
-            text: 'PDF',
-            exportOptions: {
-                columns: ':visible',
-                modifier: {order: 'index'},
-                format: {
-                    body: function (data, row, column, node) {
-                        const arabic = /[\u0600-\u06FF]/;
-
-                        if (arabic.test(data)) {
-                            return data.split(' ').reverse().join(' ');
-                        }
-                        return data;
-                    },
-                    header: function (data, row, column, node) {
-                        const arabic = /[\u0600-\u06FF]/;
-
-                        if (arabic.test(data)) {
-                            return data.split(' ').reverse().join(' ');
-                        }
-                        return data;
-                    }
-                }
-            }
-        }
-    ],
-})
-    </script>
 @endpush
