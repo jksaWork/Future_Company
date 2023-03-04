@@ -8,7 +8,7 @@ use App\Models\section;
 use Illuminate\Support\Facades\Validator;
 use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\SpendingRequest;
+use App\Http\Requests\spendingRequest as SpendingRequest;
 use App\Http\Requests\updataSpendingRequest;
 use Illuminate\Http\Request;
 use Exception;

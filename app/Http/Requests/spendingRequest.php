@@ -4,11 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpendingRequest extends FormRequest
+class spendingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
+     * Hello Jsa
      * @return bool
      */
     public function authorize()
@@ -25,13 +25,10 @@ class SpendingRequest extends FormRequest
     public function rules()
     {
         return [
-            'spending_name' =>'required|string|max:100',
-            'section_id'=>'required|exists:sections,id',
-            'month'=>'required|date_format:Y-m-d',
-            'spending_value'=>'required|min:0|numeric',
+            'spending_name' => 'required|string|max:100',
+            'section_id' => 'required|exists:sections,id',
+            'month' => 'required|date_format:Y-m-d',
+            'spending_value' => 'required|min:0|numeric',
         ];
     }
-
-
-
 }
