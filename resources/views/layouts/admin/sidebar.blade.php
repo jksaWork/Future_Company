@@ -5,7 +5,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <a href="/">
-            <img alt="Logo" src="{{ asset('uploads/' . setting('logo') )}}" class="h-200px logo" />
+            <img alt="Logo" src="{{ asset('uploads/' . setting('logo') )}}" class="h-50px logo" style='max-width:50px;' />
         </a>
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
@@ -113,9 +113,9 @@
                     </div>
                 </div>
 
-                
-               
-              
+
+
+
 
                 <div class="menu-item">
                     <div class="menu-content pb-2">
@@ -631,7 +631,7 @@
                                 <span class="menu-title">Roles</span>
                             </a>
                         </div> --}}
-                 
+
                     </div>
                     <div class="menu-item">
                         <a class="menu-link"  href="{{ route('Employee.setting', ['service_id' => 1]) }}">
@@ -651,7 +651,7 @@
                 </div>
             </div>
 
-        
+
 
         </div>
     </div>
