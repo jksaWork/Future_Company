@@ -99,7 +99,7 @@
                                        {{number_format($FinancialTreasury[0]->sum, 2)}}
                                        @endif
                                     </div>
-                                    <div class="fw-bold text-white fs-4">الخزينه الحاليه</div>
+                                    <div class="fw-bold text-white fs-4">{{ __('translation.current_treasury') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -568,8 +568,8 @@
             ">
 
             <div class="row mb-3">
-                <div class="col-xl-6 col-lg-6 col-6">
-                    <div class="card pull-up">
+                <div class="col-xl-6 col-lg-6 col-12">
+                    <div class="card pull-up mt-2">
                         <div class="card-content">
                             <div class="card-body">
                                 <canvas id="myChart" width="600" height="400"></canvas>
@@ -577,11 +577,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-6">
-                    <div class="card pull-up">
+                <div class="col-xl-6 col-lg-6 col-12">
+                    <div class="card pull-up mt-2">
                         <div class="card-content">
                             <div class="card-body" style='d-flex justify-content-center'>
-                                <div class="chart-container" style="position: relative; height:50vh; width:350px;">
+                                <div class="chart-container" style="position: relative; height:50vh; max-width:350px;">
                                 <canvas id="myChart2" width="600" height="400"></canvas>
                                 </div>
                             </div>

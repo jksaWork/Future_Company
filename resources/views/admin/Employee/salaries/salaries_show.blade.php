@@ -155,7 +155,7 @@
 
                                                                         <td>@forelse ($allowances as $index=>$allowanc){!! $allowanc->allowances_name !!} ( {{number_format($allowanc->allowances_value ,2)}})@empty{{ __('translation.No_Data_Was_Found') }} @endforelse</td>
                                                                         <td>{!!   number_format($employees->salary,2)!!}</td>
-                                                                        <td>{!! $employees->created_at->toFormattedDateString() !!}</td>
+                                                                        <td>{!! $employees->created_at !!}</td>
                                                                     </tr>
                                                                     <?php $sum_allowances_value += $allowanc->allowances_value; ?>
                                                                 {{-- @empty --}}

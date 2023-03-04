@@ -16,11 +16,11 @@ class SettingController extends Controller
         // return $request;
         $ValidatedDated = $request->except('_token');
         if($request->has('logo')){
-            $request->logo->store('public/uploads');
+            $request->logo->store('uploads');
             $ValidatedDated['logo'] = $request->logo->hashName();
         }
         if($request->hasFile('fav_icon')){
-            $request->fav_icon->store('public/uploads');
+            $request->fav_icon->store('uploads');
             $ValidatedDated['fav_icon'] = $request->fav_icon->hashName();
         }
 

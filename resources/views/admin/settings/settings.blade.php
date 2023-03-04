@@ -1,8 +1,11 @@
+
 @extends('layouts.admin.admin')
+@section('title' , __('translation.setting'))
+@section('main-head', __('translation.setting'))
 @section('content')
 
 
-  
+
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -12,25 +15,25 @@
                     @csrf
                     @method('post')
                     {{--logo--}}
-          
+
 
             <div class="row">
-             
+
 
 
 
                 <div class="col-lg-8">
                     <!--begin::Image input-->
-                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image:url('{{Storage::url('uploads/' . setting('logo'))}}')">
+                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image:url('{{ asset('uploads/' . setting('logo'))}}')">
                         <!--begin::Preview existing avatar-->
-                        <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image:url({{ Storage::url('uploads/' . setting('logo'))}})"></div>
+                        <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image:url({{ asset('uploads/' . setting('logo') )}})"></div>
                         <!--end::Preview existing avatar-->
                         <!--begin::Label-->
                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                             <i class="bi bi-pencil-fill fs-7"></i>
                             <!--begin::Inputs-->
                             <input type="file" name="logo" accept=".png, .jpg, .jpeg">
-                            
+
                             <!--end::Inputs-->
                         </label>
                         <!--end::Label-->
@@ -53,10 +56,10 @@
                 <div class="form-group">
                     <label>@lang('settings.fav_icon')</label>
                     <input type="file" name="fav_icon" class="form-control load-image">
-                    <img src="{{ Storage::url('uploads/' . setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
+                    <img src="{{ asset('uploads/'. setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
                 </div>
                 <div class="fv-row mb-7 col-md-12 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('settings.title')</label>
+                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.title')</label>
                     <input type="text" class="form-control form-control-solid" name="title" value="{{ setting('title') }}"
                          />
                         @error('title')
@@ -70,28 +73,20 @@
                 </label>
                 <textarea class="form-control form-control-solid" rows="1"  name="description"
                     placeholder="{{ __('translation.description') }}">{{ setting('description') }}</textarea>
-                <div class="fv-row mb-7 col-md-6 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('settings.keywords')</label>
-                    <input type="text" class="form-control form-control-solid"  value="{{ setting('keywords')}}" name="keywords" />
-                        @error('keywords')
-                            <span class="text-danger">
-                                {{$message}}
-                            </span>
-                        @enderror
-                </div>
-                <div class="fv-row mb-7 col-md-6 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('users.email')</label>
+
+                <div class="fv-row mb-7 col-md-12 ">
+                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.email')</label>
                     <input type="text" class="form-control form-control-solid" value="{{ setting('email') }}" name="email"/>
-                         
+
                         @error('email')
                             <span class="text-danger">
                                 {{$message}}
                             </span>
                         @enderror
                 </div>
-             
-              
-                
+
+
+
                 <div class="mt-4">
                     <button class="btn btn-primary">
                         {{ __('translation.Save') }}
