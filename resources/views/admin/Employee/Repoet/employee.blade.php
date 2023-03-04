@@ -84,7 +84,7 @@
                                                 <td>{{ $employees->address }}</td> 
                                                 <td><span class='badge badge-warning'>{{ number_format($employees->salary, 2) }}</span>
                                                    
-                                                </td>
+                                            </td>
                                            
                                                 <td>{{ $employees->Categorys->categories_name }}</td>
                                                <td> @forelse ($allowancesS as $inde=>$allowanc)

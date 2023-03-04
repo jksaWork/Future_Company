@@ -7,8 +7,10 @@
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             <a href="/" class="mb-12">
-                <img alt="Logo" src="/admin_login2.png" class="h-90px" />
+                <img alt="Logo" src="{{ asset('uploads/' . setting('logo'))}}" class="h-90px" />
             </a>
+            <small value="{{ setting('title') }}" style="
+            color: white;">{{ setting('title') }}</small>
             <!--end::Logo-->
             <!--begin::Wrapper-->
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">

@@ -76,6 +76,7 @@ License: For each use you must have a valid license purchased only from above li
     <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css' />
     <link href='https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css' />
     <link href='https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap4.min.css' />
+    @yield('css')
     @stack('links')
 </head>
 <!--end::Head-->

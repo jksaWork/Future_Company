@@ -50,7 +50,8 @@ Route::group(
               Route::resource('salaries', SalariesController::class);
               Route::resource('section', SectionController::class);
               Route::resource('spending', SpendingController::class);
-            //   Route::resource('EmployeeSalaries', EmployeeSalariesController::class);
+              Route::get('print_spending/{id?}', [SpendingController::class , 'print_spending'])->name('spending.print');
+              Route::get('print_salaries/{id?}', [SalariesController::class , 'print_salaries'])->name('salaries.print');
             Route::get('EmployeeSalaries', [SalariesController::class , 'EmployeeSalaries'])->name('EmployeeSalaries');
               Route::post('salaries_show', [SalariesController::class ,'salaries_show'])->name('salaries_show');
 

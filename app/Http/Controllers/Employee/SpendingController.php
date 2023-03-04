@@ -124,6 +124,12 @@ class SpendingController extends Controller
         return redirect()->route('Employee.spending.index');
     } //end of destroy
 
+    public function print_spending($id)
+    {
+        $spending = spendings::findOrFail($id);
+        return view('admin.Employee.spending.print', compact('spending'));
+    } //end of destroy
+
 
 
 }//end of controller

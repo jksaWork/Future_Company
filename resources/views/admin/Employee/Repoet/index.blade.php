@@ -160,4 +160,36 @@
         });
     });
 </script>
+<script>
+$('#example1').dataTable({
+    buttons: [
+        {
+            extend: 'pdfHtml5',
+            text: 'PDF',
+            exportOptions: {
+                columns: ':visible',
+                modifier: {order: 'index'},
+                format: {
+                    body: function (data, row, column, node) {
+                        const arabic = /[\u0600-\u06FF]/;
+
+                        if (arabic.test(data)) {
+                            return data.split(' ').reverse().join(' ');
+                        }
+                        return data;
+                    },
+                    header: function (data, row, column, node) {
+                        const arabic = /[\u0600-\u06FF]/;
+
+                        if (arabic.test(data)) {
+                            return data.split(' ').reverse().join(' ');
+                        }
+                        return data;
+                    }
+                }
+            }
+        }
+    ],
+})
+    </script>
 @endpush
