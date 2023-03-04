@@ -16,6 +16,7 @@ use Carbon\Carbon;
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use Exception;
+use PhpParser\Node\Stmt\Return_;
 
 class ReportController extends Controller
 {
@@ -37,21 +38,25 @@ class ReportController extends Controller
 
     public function report_employee(Request $request)
     {
-
+// return $request;
         $e = $request->end_month;
         $b = $request->being_month;
+
         if ($b == null OR $e ==null) {
-         
-            $employee = employee::all();
+        
+            $employee = employee::where('status' ,1)->get();
             $allowancesS = employee_allowances::where('status' ,1)->get();
+            // return  $employee;
             return view('admin.Employee.Repoet.employee', compact('employee','allowancesS'));
         
-            
+           
             
         } else {
-            $employee = employee::whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
+            // dd('ok');
+            $employee = employee::where('status' ,1)->whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
             $allowancesS = employee_allowances::where('status' ,1)->get();
             return view('admin.Employee.Repoet.employee', compact('employee','allowancesS'));
+            return  $employee;
         }
     } //end of spendinghistoryData
     public function report_employee_allowances(Request $request)

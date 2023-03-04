@@ -29,7 +29,7 @@
                             {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
                                 class="form-control form-control-solid  ps-15"
-                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
+                                placeholder="{{ __('translation.search_with_number_or_name_description_month_spending_value') }}" />
 
                         </div>
                         {{-- </form> --}}
@@ -91,11 +91,11 @@
     </div>
 @endsection
 @push('scripts')
-    {{-- <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('datatable/jquery.js') }}"></script>
     <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script> --}}
+    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
     <script>
         let type = @json(request()->type);
         let status, is_rent, is_sale;

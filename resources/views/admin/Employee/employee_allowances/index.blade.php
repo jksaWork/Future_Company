@@ -29,7 +29,7 @@
                             {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
                                 class="form-control form-control-solid  ps-15"
-                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
+                                placeholder="{{ __('translation.search_with_created_at') }}" />
 
                         </div>
                         {{-- </form> --}}
@@ -71,6 +71,7 @@
                                             <th>{{ __('translation.id') }}</th>
                                              <th class="">{{ __('translation.employee_name') }}</th>
                                             <th class="">{{ __('translation.allowances_name') }}</th>
+                                            <th class="">{{ __('translation.month_number') }}</th>
                                             <th class="">{{ __('translation.created_at') }}</th>
                                             <th>@lang('translation.action')</th>
                                         </tr>
@@ -128,6 +129,10 @@
                 {
                     data: 'allowances_id',
                     name: 'allowances_id'
+                },
+                {
+                    data: 'month_number',
+                    name: 'month_number'
                 },
                 {
                     data: 'created_at',

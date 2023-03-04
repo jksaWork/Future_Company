@@ -29,7 +29,7 @@
                             {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
                                 class="form-control form-control-solid  ps-15"
-                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
+                                placeholder="{{ __('translation.search') }}" />
 
                         </div>
                         {{-- </form> --}}
@@ -75,6 +75,7 @@
                                             <th class="">{{ __('translation.advances') }}</th>
                                             <th class="">{{ __('translation.discounts') }}</th>
                                             <th class="">{{ __('translation.totle_salaries') }}</th>
+                                            <th class="">{{ __('translation.month_number') }}</th>
                                             <th class="">{{ __('translation.month') }}</th>
                                             <th class="">{{ __('translation.status') }}</th>
                                             <th>@lang('translation.action')</th>
@@ -153,6 +154,10 @@
                 {
                     data: 'totle_salaries',
                     name: 'totle_salaries'
+                },
+                {
+                    data: 'month_number',
+                    name: 'month_number'
                 },
                 {
                     data: 'created_at',

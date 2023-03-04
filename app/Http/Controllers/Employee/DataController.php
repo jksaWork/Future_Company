@@ -40,7 +40,9 @@ class DataController extends Controller
         return  DataTables::of($query)->editColumn(
             'actions',
             'admin.Employee.spending.data_table.actions'
-        )->editColumn('section_id', function ($item) {
+        )
+        
+        ->editColumn('section_id', function ($item) {
             return "<span class='badge badge-success'>" . $item->section->section_name . "</span>";
         })
             ->editColumn('spending_value', function ($item) {
@@ -109,8 +111,6 @@ class DataController extends Controller
             )
             ->editColumn('employee_id', function ($item) {
                 return  $item->employee->name;
-
-               
             })
             ->editColumn('allowances_id', function ($item) {
                 return "<span class='badge badge-light-info'>". $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';

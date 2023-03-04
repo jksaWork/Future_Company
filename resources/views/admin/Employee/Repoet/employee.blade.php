@@ -16,7 +16,7 @@
 @section('title')
    {{__('translation.Staff_list')}}
 @stop
-@section('main-head', __('translation.employees'))
+@section('main-head', __('translation.employees_report'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -137,9 +137,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td> 
-                                    <td>{{ number_format($sum_employees_value, 2) }}</td>
+                                    <td><span class='badge badge-success'>{{ number_format($sum_employees_value, 2) }}</span></td>
                                     <td></td>
-                                    <td>{{ number_format($sum_allowances_value, 2) }}</td>
+                                    <td><span class='badge badge-success'>{{ number_format($sum_allowances_value, 2) }}</span></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -181,48 +181,6 @@
 @endsection
 @push('scripts')
  <!-- jQuery -->
-
-{{-- 
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-<script src="{{ asset('datatable/jquery.js') }}"></script>
-<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
-
-<!-- DataTables  & Plugins -->
-<script src="{{URL::asset('datatable/js/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-bs4/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/jszip/jszip.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.print.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.colVis.min.js')}}"></script> --}}
-
-<!-- AdminLTE App -->
-
-{{-- <script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script> --}}
-
 <script type="text/javascript">
     function printDiv() {
         var printContents = document.getElementById('print').innerHTML;

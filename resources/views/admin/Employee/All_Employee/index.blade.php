@@ -29,7 +29,7 @@
                             {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
                                 class="form-control form-control-solid  ps-15"
-                                placeholder="{{ __('translation.search_with_number_or_name_email') }}" />
+                                placeholder="{{ __('translation.search_with_number_or_name_phone_salary') }}" />
 
                         </div>
                         {{-- </form> --}}

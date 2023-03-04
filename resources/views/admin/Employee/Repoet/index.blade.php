@@ -81,11 +81,11 @@
                                         <tr>
                                             <th>{{ __('translation.id') }}</th>
                                             <th class="">{{ __('translation.spending_name') }}</th>
-                                            <th class="">{{ __('translation.spending_value') }}</th>
                                             <th class="">{{ __('translation.section_id') }}</th>
                                             <th class="">{{ __('translation.month') }}</th>
                                             <th class="">{{ __('translation.created_at') }}</th>
                                             <th class="">{{ __('translation.description') }}</th>
+                                            <th class="">{{ __('translation.spending_value') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-bold text-gray-600">
@@ -94,11 +94,11 @@
                                             <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;">
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $spendings->spending_name }}</td>
-                                                <td>{{ $spendings->spending_value}}</td>
                                                 <td>{{ $spendings->section->section_name }}</td>
                                                 <td>{{ $spendings->month}}</td> 
                                                 <td>{{ $spendings->created_at}}</td>
                                                 <td>{{ $spendings->description}}</td>
+                                                <td>{{ $spendings->spending_value}}</td>
                                             </tr>
 
                                             <?php $sum_spendings_value += $spendings->spending_value; ?>
@@ -112,13 +112,13 @@
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;">
                                             
 
-                                                <td>{{ __('translation.total') }}:</td>
                                             <td></td>
-                                            <td><span class='badge badge-success'>{{ number_format($sum_spendings_value, 2) }}</span></td>
                                             <td></td>
                                             <td></td> 
                                             <td></td>
                                             <td></td>
+                                            <td>{{ __('translation.total') }}:</td>
+                                            <td><span class='badge badge-success'>{{ number_format($sum_spendings_value, 2) }}</span></td>
 
                                         </tr>
                                     </tbody>
