@@ -466,4 +466,5 @@ return [
     // 'date_is_required' => ,
     'export_As_exel' => 'تصدير ك ملف اكسيل',
     'realstates' => 'سجلات العقار',
+    'wellcome_back' => 'اهلا بعودتك',
 ];
