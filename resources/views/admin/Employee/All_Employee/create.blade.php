@@ -19,7 +19,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.name') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="name" value=""  />
+                                        name="name"  value="{{ old('name') }}" />
                                     @error('name')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -29,7 +29,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.email') }}</label>
                                     <input type="email" class="form-control form-control-solid" placeholder=""
-                                        name="email" value=""  />
+                                        name="email"  value="{{ old('email') }}" />
                                     @error('email')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -40,7 +40,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="phone" value=""  />
+                                        name="phone" value=""  value="{{ old('phone') }}" />
                                     @error('phone')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -51,7 +51,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.address') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="address" value=""  />
+                                        name="address"  value="{{ old('address') }}"  />
                                     @error('address')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -62,7 +62,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.salary') }}</label>
                                     <input type="number" class="form-control form-control-solid" placeholder=""
-                                        step="0.01" name="salary" value=""
+                                        step="0.01" name="salary" value="{{ old('salary') }}"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                          />
                                     @error('salary')
@@ -118,7 +118,7 @@
                                 </div>
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                                 </label>
-                                <textarea class="form-control form-control-solid" rows="3" name="description"
+                                <textarea class="form-control form-control-solid" rows="3" name="description" value="{{ old('description') }}"
                                     placeholder="{{ __('translation.description') }}"></textarea>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">

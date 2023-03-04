@@ -79,6 +79,7 @@ Route::group(
             Route::get('report_spending', [ReportController::class , 'report_spending'])->name('spending.report');
             Route::get('report_employee', [ReportController::class , 'report_employee'])->name('employee.report');
             Route::get('report_employee_allowances', [ReportController::class , 'report_employee_allowances'])->name('employee_allowances.report');
+            Route::get('report_salaries', [ReportController::class , 'report_salaries'])->name('salaries.report');
         });
 
 

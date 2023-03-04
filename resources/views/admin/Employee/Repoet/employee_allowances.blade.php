@@ -1,7 +1,21 @@
-{{-- @extends('layouts.admin.admin') --}}
+
 @extends('layouts.admin.admin')
+@section('css')
+    <style>
+        @media print {
+            #print_Button {
+                display: none;
+            }
+            #form{
+                display: none;
+            }
+        }
+
+    </style>
+@endsection
 @section('title')
-   {{__('translation.Staff_list')}}
+
+   {{__('translation.employee_allowances_list')}}
 @stop
 @section('main-head', __('translation.employees'))
 @section('content')
@@ -9,7 +23,7 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div class="card">
+            <div class="card" id="print">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
@@ -29,7 +43,15 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <form action="{{ route('reports.employee_allowances.report') }}"  >
+                    <div class="d-flex flex-stack pb-10">
+                        <!--begin::Logo-->
+                        <a href="#"> </a>
+                        <!--end::Logo-->
+                        <!--begin::Action-->
+                        <a href="#" class="btn btn-sm btn-success" id="print_Button" onclick="printDiv()">{{ __('translation.print') }}</a>
+                        <!--end::Action-->
+                    </div>
+                    <form action="{{ route('reports.employee_allowances.report') }}" id='form' >
                         <div class="form-group row" >
                        
                             <div class="col-md-3">
@@ -115,7 +137,7 @@
 @push('scripts')
  <!-- jQuery -->
 
-
+{{-- 
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 <script src="{{ asset('datatable/jquery.js') }}"></script>
 <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
@@ -154,5 +176,17 @@
             "responsive": true,
         });
     });
+</script> --}}
+
+<script type="text/javascript">
+    function printDiv() {
+        var printContents = document.getElementById('print').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    }
+
 </script>
 @endpush

@@ -19,7 +19,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowances_name') }}</label>
                                     <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="allowances_name" value="" />
+                                        placeholder="" name="allowances_name" value="{{ old('allowances_name') }}" />
                                         @error('allowances_name')
                                             <span class="text-danger">
                                                 {{$message}}
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.allowances_value') }}</label>
-                                    <input type="number" class="form-control form-control-solid"
+                                    <input type="number" class="form-control form-control-solid" value="{{ old('allowances_value') }}"
                                         placeholder="" step="0.01" name="allowances_value" value="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                          />
                                          @error('allowances_value')

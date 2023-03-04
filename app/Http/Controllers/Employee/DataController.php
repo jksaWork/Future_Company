@@ -193,6 +193,11 @@ class DataController extends Controller
             ->toJson();
     } //end of salarieshistoryData
 
-
+    public function ChangeStatus($id)
+    {
+        $employee = employee::findOrFail($id);
+        $employee->ChangeStatus();
+        return redirect()->back();
+    }
  
 }//end of controller

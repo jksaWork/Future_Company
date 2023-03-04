@@ -91,19 +91,19 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('datatable/jquery.js') }}"></script>
     <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script> --}}
     <script>
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "tiplr",
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
+            // dom: "Bfrtip",
+            // buttons: (
+            //     Button:make('copy'), Button:make('pdf'),  Button:make('excel'),  Button:make('print'),  Button:make('csv'),
+            // );
             serverSide: true,
             processing: true,
             "language": {
