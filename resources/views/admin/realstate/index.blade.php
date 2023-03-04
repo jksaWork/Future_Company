@@ -142,7 +142,7 @@
                 },
 
                 { extend: 'print',
-                        title: '@lang('translation.realstate')',
+                        title: '@lang('translation.realstates')',
                         className: 'btn btn-default',
                         autoPrint: true,
 

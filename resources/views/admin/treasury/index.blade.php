@@ -323,7 +323,7 @@
                             $(win.document.body).find('h1').css('text-align', 'center');
                         }}
 
- ],
+            ]  ,
               ajax: {
                 url: '{{ route('admin.finanical.data') }}',
                 data: function(q) {

@@ -26,7 +26,7 @@
     </head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" class="bg-dark">
+	<body id="kt_body" class="bg-light">
 		<!--begin::Main-->
 		<!--begin::Root-->
         <x:notify-messages />
