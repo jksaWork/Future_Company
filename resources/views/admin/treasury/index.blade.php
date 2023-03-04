@@ -299,7 +299,7 @@
             processing: true,
             distroy: true,
             "language": {
-                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}" 
             },
             buttons: [
                 'copy', {

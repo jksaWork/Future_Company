@@ -90,34 +90,59 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-    <script src="{{ asset('datatable/jquery.js') }}"></script>
-    <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
-    <script>
-        let type = @json(request()->type);
-        let status, is_rent, is_sale;
-        let rolesTable = $('#roles-table').DataTable({
-            dom: "tiplr",
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            serverSide: true,
-            processing: true,
-            "language": {
-                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
-            ajax: {
-                url: '{{ route('Section.allowances.hitory.data') }}',
-                data: function(d) {
-                    d.type = type;
-                    d.status = status;
-                    d.is_rent = is_rent;
-                    d.is_sale = is_sale;
-                }
-            },
-            columns: [{
+   
+    
+
+<script src="{{ asset('datatable/select2.min.js') }}"></script>
+ 
+<script>
+
+   $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
+   $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
+   let stauts, type, transaction_type, from_date, id = @json(request()->id);
+   let rolesTable = $('#roles-table').DataTable({
+       dom: "Bfrtip",
+       serverSide: true,
+       processing: true,
+       distroy: true,
+       "language": {
+           "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}" 
+       },
+       buttons: [
+           'copy', {
+               extend:'excel',
+               text:'{{ __('translation.export_As_exel') }}' ,
+           },
+
+           { extend: 'print',
+                   title: '@lang('translation.Allowances_and_incentives')',
+                   className: 'btn btn-default',
+                   autoPrint: true,
+
+                   customize: function (win) {
+                       $(win.document.body).css('direction', 'rtl');
+                       $(win.document.body).find('th').addClass('display').css('text-align', 'center');
+                       $(win.document.body).find('table').addClass('display').css('font-size', '16px');
+                       $(win.document.body).find('table').addClass('display').css('text-align', 'center');
+                       $(win.document.body).find('tr:nth-child(odd) td').each(function (index) {
+                           $(this).css('background-color', '#D0D0D0');
+                       });
+                       $(win.document.body).find('h1').css('text-align', 'center');
+                   }}
+
+       ]  ,
+         ajax: {
+            url: '{{ route('Section.allowances.hitory.data') }}',
+           data: function(q) {
+               q.type = type;
+               q.transaction_type = transaction_type;
+               q.from_date = from_date;
+               q.id = id;
+
+           },
+       },
+
+       columns: [{
                     data: 'id',
                     name: 'id'
                 },
@@ -146,38 +171,31 @@
                     sortable: false,
                     width: '20%'
                 },
-            ],
-            order: [
-                [2, 'desc']
-            ],
-            drawCallback: function(settings) {
-                $('.record__select').prop('checked', false);
-                $('#record__select-all').prop('checked', false);
-                $('#record-ids').val();
-                $('#bulk-delete').attr('disabled', true);
-            }
-        });
+            ],       order: [
+           [2, 'desc']
+       ]
 
-        $('#handelSearch').keyup(function() {
-            rolesTable.search(this.value).draw();
-        });
+   });
 
+   $('#handelSearch').keyup(function() {
+       rolesTable.search(this.value).draw();
 
-        $('#rent_status').on('change', function() {
-            is_rent = $(this).val();
-            rolesTable.ajax.reload();
-        });
+   });
 
-        $('#sale_status').on('change', function() {
-            is_sale = $(this).val();
-            rolesTable.ajax.reload();
-        });
-
-
-        $('#status').on('change', function() {
-            console.log('helllo');
-            status = $(this).val();
-            rolesTable.ajax.reload();
-        });
-    </script>
+   $('#realstate').on('change', function() {
+       type = $(this).val();
+       rolesTable.ajax.reload();
+   });
+   $('#owner').on('change', function() {
+       transaction_type = $(this).val();
+       console.log(transaction_type);
+       rolesTable.ajax.reload();
+   });
+   $('#from_date').on('change', function() {
+       from_date = $(this).val();
+       console.log(from_date);
+       rolesTable.ajax.reload();
+   });
+   $('input[name="amount"]').attr('type', 'number');
+</script>
 @endpush

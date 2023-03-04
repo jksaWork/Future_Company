@@ -138,10 +138,7 @@ class EmployeeAllowancesController extends Controller
         DB::beginTransaction();
         try{
 
-        // $id = allowances::where('categories_name', $request->categories_id)->first()->id;
-        //    return $id;
         $employee = employee_allowances::findOrFail($id);
-// return  $employee->Transaction_id  ;
         $employee->update([
 
             'employee_id'   => $request->employee_id,
@@ -150,9 +147,8 @@ class EmployeeAllowancesController extends Controller
             'status' => 0,
             'month_number' => $request->month_number,
         ]);
-        // return $employee;
         $res = FinancialTreasuryTransactionHistorys::EditTransaction( $employee->Transaction_id , $employee->Allowances_id->allowances_value );
-// return $res;
+
         DB::commit();
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
@@ -162,7 +158,6 @@ class EmployeeAllowancesController extends Controller
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));
                 return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             }
             DB::rollBack();
             if ($e->getCode() == 50) {

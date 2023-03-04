@@ -80,9 +80,7 @@ class DataController extends Controller
             ->editColumn(
                 'actions',
                 'admin.Employee.All_Employee.data_table.actions'
-            )->editColumn('categories_id', function ($item) {
-                return "<span class='badge badge-light-info'>" . $item->Categorys->categories_name . "</span>";
-            })
+            )
             ->editColumn('salary', function ($item) {
                 return number_format($item->salary, 2);
             })

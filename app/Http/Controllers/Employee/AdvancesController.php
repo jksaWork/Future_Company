@@ -25,7 +25,7 @@ class AdvancesController extends Controller
 
     public function create()
     {
-        $employees = employee::all();
+        $employees = employee::where([['status', 1],])->get();
         return view('admin.Employee.Advances.create', compact('employees'));
     } //end of create
 
@@ -87,7 +87,7 @@ class AdvancesController extends Controller
     public function edit(Request $request, $id)
     {
         // return $id;
-        $employees=employee::all();
+        $employees=employee::where([['status', 1],])->get();
         $Advancess = Advances::find($id);
         return view('admin.Employee.Advances.edit', compact('Advancess','employees'));
     } //end of edit

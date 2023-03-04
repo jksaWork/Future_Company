@@ -482,4 +482,11 @@ return [
     'export_As_exel' => 'تصدير ك ملف اكسيل',
     'realstates' => 'سجلات العقار',
     'wellcome_back' => 'اهلا بعودتك',
+    
+    'Are_you_sure'=>"'هل أنت واثق؟'",
+    'You_will_not_be_able_to_back_down_from_this'=>'لن تتمكن من التراجع عن هذا!',
+    'YES_Delete_it'=>'نعم ، احذفها!',
+    'Deleted'=>'تم الحذف',
+    'Your_file_has_been_deleted'=>'تم حذف ملفك.',
+    'success'=>'النجاح',
 ];

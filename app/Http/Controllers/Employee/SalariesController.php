@@ -155,7 +155,7 @@ class SalariesController extends Controller
         $salaries = salaries::findOrFail($id);
         $salaries->delete();
         session()->flash('error', __('site.deleted_successfully'));
-        return redirect()->route('Employee.salaries.create');
+        return redirect()->route('Employee.salaries.index');
     } //end of destroy
 
 
