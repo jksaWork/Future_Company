@@ -24,7 +24,7 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="{{asset('admin_login.png')}}" class="h-30px" />
+                <img alt="Logo" src="{{asset('admin_login.png')}}" class="h-30px"  />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -234,7 +234,7 @@
                     <!--end::User -->
 
                     <!--begin::Heaeder menu toggle-->
-                    <div class="d-flex align-items-center d-lg-none ms-2 me-n3"
+                    {{-- <div class="d-flex align-items-center d-lg-none ms-2 me-n3"
                         title="Show header menu">
                         <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
                             id="kt_header_menu_mobile_toggle">
@@ -252,7 +252,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </div>
-                    </div>
+                    </div> --}}
                     <!--end::Heaeder menu toggle-->
                 </div>
                 <!--end::Toolbar wrapper-->

@@ -5,7 +5,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <a href="/">
-            <img alt="Logo" src="{{ asset('/admin_login.png') }}" class="h-200px logo" />
+            <img alt="Logo" src="{{ asset('uploads/' . setting('logo') )}}" class="h-200px logo" />
         </a>
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"

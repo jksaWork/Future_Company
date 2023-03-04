@@ -22,25 +22,8 @@ class SalariesController extends Controller
 
     public function index(Request $request)
     {
-        //     $month_number = $request->month_number;
-        //     $employee_id = $request->employee_id;
-        // $employee_allowancess = employee_allowances::where([['employee_id', $employee_id],
-        // ['month_number', $month_number],
-        // ['status', 0],
-        // ])->get();
-
-        // being sreach date and id employee employee allowances
-        // $employee_allowancess = employee_allowances::where('employee_id', $employee_id)->whereBetween('month', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-        // end employee allowances
-        // being sreach date and id employee employee advances
-        // $employee_advances = advances::where('employee_id', $employee_id)->whereBetween('advances_Date', [$month, Carbon::parse($end_month)->endOfDay(),])->get();
-        // end employee advances;
-        // return $employee_advances;
         $salaries = salaries::all();
         return view('admin.Employee.salaries.index', compact('salaries'));
-
-        // $employees = employee::findorfail($employee_id);
-        // return view('admin.Employee.salaries.salaries_show', compact('employees', 'employee_advances', 'employee_allowancess'));
     } //end of index
 
 
@@ -187,8 +170,13 @@ class SalariesController extends Controller
             session()->flash('error' ,  __('site.Salary_has_already_been_submitted'));
         return redirect()->back();
         }
-
     }
+        public function print_salaries(Request $request, $id)
+       {
+        // dd('ok');
+        $salaries = salaries::findOrFail($id);
+        return view('admin.Employee.salaries.print', compact('salaries'));
+       }
 
 
 }//end of controller
