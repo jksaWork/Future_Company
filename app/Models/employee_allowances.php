@@ -19,9 +19,9 @@ class employee_allowances extends Model
    return $this->belongsTo('App\Models\allowances','allowances_id');
    }
 
-   public function Employee()
+   public function employee()
    {
-   return $this->belongsTo(employee::class,'employee_id');
+   return $this->belongsTo('App\Models\employee','employee_id');
    }
 
 

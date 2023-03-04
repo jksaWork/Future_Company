@@ -107,19 +107,22 @@ class DataController extends Controller
                 'actions',
                 'admin.Employee.employee_allowances.data_table.actions'
             )
+            ->editColumn('employee_id', function ($item) {
+                return  $item->employee->name;
 
+               
+            })
             ->editColumn('allowances_id', function ($item) {
                 return "<span class='badge badge-light-info'>". $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';
             })
 
-            ->editColumn('employee_id', function ($item) {
-                return  $item->employee->name;
-            })
-            ->editColumn('created_at', function ($item) {
+       
+            
+            ->editColumn('created_at', function ($item) { 
                 return $item->created_at->format('Y-m-d');
             })
 
-            ->rawColumns(['actions', 'employee_id', 'created_at', 'allowances_id'])
+            ->rawColumns(['actions', 'employee_id', 'allowances_id' , 'created_at'])
             ->toJson();
     } //end of employee_allowanceshistoryData
     public function AdvanceshistoryData(Request $request)

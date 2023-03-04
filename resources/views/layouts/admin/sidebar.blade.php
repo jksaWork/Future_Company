@@ -607,21 +607,7 @@
 
 
 
-<<<<<<< HEAD
                  
-=======
-{{-- ssssssssssssssssssssssssssss --}}
-
-                        {{-- <div class="menu-item">
-                            <a class="menu-link" href="{{route('admin.roles.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Roles</span>
-                            </a>
-                        </div> --}}
-
->>>>>>> 8e5bad220cfea023647b375b65facce40f7dde00
                     </div>
                     <div class="menu-item">
                         <a class="menu-link"  href="{{ route('Employee.setting', ['service_id' => 1]) }}">

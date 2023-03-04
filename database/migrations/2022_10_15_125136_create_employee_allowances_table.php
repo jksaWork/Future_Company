@@ -16,6 +16,7 @@ class CreateEmployeeAllowancesTable extends Migration
         Schema::create('employee_allowances', function (Blueprint $table) {
             $table->id();
             $table->integer('month_number');
+            $table->integer('year');
             $table->string('status')->default(1);
             $table->unsignedBigInteger('allowances_id');
             $table->unsignedBigInteger('Transaction_id')->nullable();

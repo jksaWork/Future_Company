@@ -47,6 +47,7 @@ return [
     'Add_an_employee'=>'Add an employee',
     'phone' => 'phone',
     'salary' => 'salary',
+    'Add_expensess'=>'Add expenses',
     'proven'=>'proven',
     'insert_record'=>'insert record',
     'salaries_list'=>' list salaries',

@@ -25,7 +25,7 @@
                                             <option value="" selected disabled> {{ __('translation.Choose_employee_id') }}
                                             </option>
                                             @foreach ($employees as $employes)
-                                                <option value="{{ $employes->id }}" @if ($employee_allowances->employee_id == $employes->id) selected  @endif >
+                                                <option value="{{ $employes->id }}" @if ($employee_allowances->employee_id === $employes->id) selected  @endif >
                                                     {{ $employes->name }}
                                                 </option>
                                             @endforeach
@@ -73,6 +73,23 @@
                                             {{ $message }}
                                         </span>
                                     @enderror
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
+                                        <select id='' class="form-control form-control-solid discounts"
+                                            name='year' readonly>
+                                            @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
+                                                <option value='{{$year}}' @if ($employee_allowances->year == $year) selected  @endif>{{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                        @error('year')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mt-4">
                                     <button class="btn btn-primary">

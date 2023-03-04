@@ -67,7 +67,10 @@ class SpendingController extends Controller
             }
 
             DB::rollBack();
-            if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            if ($e->getCode() == 50) {
+                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->back();
+            }
             session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
@@ -118,12 +121,16 @@ class SpendingController extends Controller
 
             if ($e->getCode() == 51) {
                 DB::commit();
-                session()->flash('success', __('site.added_successfully'));
+                 session()->flash('success', __('site.updated_successfully'));
                 return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
                 // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             }
             DB::rollBack();
-            if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            if ($e->getCode() == 50) {
+                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->back();
+            }
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of update

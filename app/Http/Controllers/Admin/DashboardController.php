@@ -54,8 +54,8 @@ class DashboardController extends Controller
 
 
         $spendings_data = spendings::select(
-            DB::raw('YEAR(created_at) as year'),
-            DB::raw('MONTH(created_at) as month'),
+            DB::raw('YEAR(month) as year'),
+            DB::raw('MONTH(month) as month'),
             DB::raw('SUM(spending_value) as sum')
         )->groupBy('month')->get();
         // dd($spendings_data[2]->month);
