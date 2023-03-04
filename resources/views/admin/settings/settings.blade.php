@@ -10,6 +10,7 @@
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
             <div class="card-header border-0 pt-6">
+
                 <div class="card-body pt-0">
                 <form method="post" action="{{ route('Employee.setting.store') }}" enctype="multipart/form-data">
                     @csrf
