@@ -300,7 +300,7 @@
 
         $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
         $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
-        let stauts, type, transaction_type, from_date;
+        let stauts, type, transaction_type, from_date, id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
             serverSide: true,
@@ -315,6 +315,8 @@
                     q.type = type;
                     q.transaction_type = transaction_type;
                     q.from_date = from_date;
+                    q.id = id;
+
                 },
             },
 

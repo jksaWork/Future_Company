@@ -12,6 +12,7 @@ use Exception;
 
 class FinanicalTreasuryController extends Controller
 {
+    // jksa_jksaa
     public function finanical()
     {
         $Treasury = FinancialTreasury::getInstance();
@@ -24,11 +25,18 @@ class FinanicalTreasuryController extends Controller
     {
         $data = $request->validate(['amount' => 'required']);
         try {
+            DB::beginTransaction();
             FinancialTreasuryTransactionHistorys::MakeTransacaion($request->amount, 'main_treasury', $request->note);
             session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+            DB::commit();
             return redirect()->back();
         } catch (\Throwable $th) {
-            // dd($th);
+            if ($th->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+                return redirect()->back()->withErrors(__('translation.' . $th->getMessage()));
+            }
+            DB::rollback();
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -42,10 +50,20 @@ class FinanicalTreasuryController extends Controller
             'amount' => 'required',
         ]);
         try {
+            DB::beginTransaction();
             FinancialTreasuryTransactionHistorys::EditTransaction($id, $request->amount);
             session()->flash('success', __('translation.Edit_pay_to_Treasury_was_done_success'));
+            DB::commit();
+
             return redirect()->back();
         } catch (\Throwable $th) {
+            if ($th->getCode() == 51) {
+
+                DB::commit();
+                session()->flash('success', __('translation.pay_to_Treasury_was_done_success'));
+                return redirect()->back()->withErrors(__('translation.' . $th->getMessage()));
+            }
+            DB::rollback();
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -55,6 +73,7 @@ class FinanicalTreasuryController extends Controller
         $query = FinancialTreasuryTransactionHistorys::whenType()
             ->whenTransactionType()
             ->WhenFromDate()
+            ->when(request()->id != null, fn ($q) => $q->where('id', request()->id))
             ->orderBy('id', 'desc');
         // dd($query->get());
         return  DataTables::of($query)

@@ -401,7 +401,7 @@ return [
     'credit' => 'ايراد',
     'advance' => 'سلفه ',
     'note' => 'ملحوظه',
-    'add_amount_from_main' => 'اضافه مال الي الخزينه',
+    'add_amount_from_main' => 'اضافه مبلغ',
     'pay_to_Treasury_was_done_success' => 'تم ايراد الدفعيه في الخزينه بنجاح',
     'main_treasury' => 'ايراد من الخزنه الرئسيه',
     'add_to_trnsury' => 'اضافه للخزينه',
@@ -440,5 +440,8 @@ return [
     'speding' => 'المنصرفات',
     'language' => 'اختار الغه',
     'log_out' => 'تسجيل الخروج',
+    'chart_of_spending' => 'المخطط البياني للمنصرفات',
+    'chart_of_bar_chart' => 'المخطط النسبي للمنصرفات ',
+    'Some Thing Went Worng When We Send Email' => 'حدث خطاء اثناء ارسال الايميل تاكد من بيانات المستقبل و اعد المحاوله',
     // 'date_is_required' => ,
 ];

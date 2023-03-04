@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\EditTransaactionMail;
+use App\Mail\withDrowalFromTuresy;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+
 
 class FinancialTreasuryTransactionHistorys extends Model
 {
@@ -70,6 +74,14 @@ class FinancialTreasuryTransactionHistorys extends Model
             FinancialTreasury::IncreamntToTreasury($amount);
         else
             FinancialTreasury::DecreamtnFromTreasury($amount);
+
+
+        try {
+            $mail = setting('email') ?? 'jksa.work.1@gmail.com';
+            Mail::to($mail)->send(new withDrowalFromTuresy($amount, $type, $instance->id));
+        } catch (\Throwable $th) {
+            throw new Exception("Some Thing Went Worng When We Send Email", 51);
+        }
         return $instance;
     }
 
@@ -87,6 +99,13 @@ class FinancialTreasuryTransactionHistorys extends Model
 
         if ($oldInstance->type == 'debit') {
             FinancialTreasury::debitTransactionEdit($old_amount, $new_amount);
+        }
+
+        try {
+            $mail = setting('email') ?? 'jksa.work.1@gmail.com';
+            Mail::to($mail)->send(new EditTransaactionMail($oldInstance->amount, $new_amount, $oldInstance->type, $oldInstance->id));
+        } catch (\Throwable $th) {
+            throw new Exception("Some Thing Went Worng When We Send Email", 51);
         }
     }
 
