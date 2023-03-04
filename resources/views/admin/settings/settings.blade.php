@@ -1,8 +1,11 @@
+
 @extends('layouts.admin.admin')
+@section('title' , __('translation.setting'))
+@section('main-head', __('translation.setting'))
 @section('content')
 
 
-  
+
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl">
         <div class="card">
@@ -12,10 +15,10 @@
                     @csrf
                     @method('post')
                     {{--logo--}}
-          
+
 
             <div class="row">
-             
+
 
 
 
@@ -30,7 +33,7 @@
                             <i class="bi bi-pencil-fill fs-7"></i>
                             <!--begin::Inputs-->
                             <input type="file" name="logo" accept=".png, .jpg, .jpeg">
-                            
+
                             <!--end::Inputs-->
                         </label>
                         <!--end::Label-->
@@ -56,7 +59,7 @@
                     <img src="{{ asset('uploads/'. setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
                 </div>
                 <div class="fv-row mb-7 col-md-12 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('settings.title')</label>
+                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.title')</label>
                     <input type="text" class="form-control form-control-solid" name="title" value="{{ setting('title') }}"
                          />
                         @error('title')
@@ -70,28 +73,20 @@
                 </label>
                 <textarea class="form-control form-control-solid" rows="1"  name="description"
                     placeholder="{{ __('translation.description') }}">{{ setting('description') }}</textarea>
-                <div class="fv-row mb-7 col-md-6 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('settings.keywords')</label>
-                    <input type="text" class="form-control form-control-solid"  value="{{ setting('keywords')}}" name="keywords" />
-                        @error('keywords')
-                            <span class="text-danger">
-                                {{$message}}
-                            </span>
-                        @enderror
-                </div>
-                <div class="fv-row mb-7 col-md-6 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('users.email')</label>
+
+                <div class="fv-row mb-7 col-md-12 ">
+                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.email')</label>
                     <input type="text" class="form-control form-control-solid" value="{{ setting('email') }}" name="email"/>
-                         
+
                         @error('email')
                             <span class="text-danger">
                                 {{$message}}
                             </span>
                         @enderror
                 </div>
-             
-              
-                
+
+
+
                 <div class="mt-4">
                     <button class="btn btn-primary">
                         {{ __('translation.Save') }}

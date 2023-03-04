@@ -5,7 +5,10 @@ use App\Http\Controllers\Owenr\OwnerDashbaord;
 use App\Http\Controllers\Owenr\OwnerOfferController;
 use App\Http\Controllers\Owner\OwnerMapController;
 use App\Http\Controllers\OwnerAuthController;
+use App\Mail\EditTransaactionMail;
+use App\Mail\withDrowalFromTuresy;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('admin'  , fn() => view('layouts.admin.admin'));
+Route::get('admin', fn () => view('layouts.admin.admin'));
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(
@@ -29,18 +32,23 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-Route::prefix('owners')->group(function () {
-    // Auth Route
-    Route::get('login' , [OwnerAuthController::class , 'index'])->name('get.login');
-    Route::post('login' , [OwnerAuthController::class , 'login'])->name('owner.login');
-    Route::get('register' , [OwnerAuthController::class , 'getRegister'])->name('owner.register');
-    Route::post('register' , [OwnerAuthController::class , 'register'])->name('owner_register');
-    Route::middleware('auth:owner')->name('owner.')->group(function () {
-        Route::get('dashboard' , [OwnerDashbaord::class, 'index'])->name('dashboard');
-        Route::resource('offers', OwnerOfferController::class);
-        Route::get('offers-ajax', [OwnerOfferController::class , 'getAjaxData'])->name('offer.ajax');
-        Route::get('owner-map', [OwnerMapController::class , 'Map'])->name('map');
-    });
-        // Route
-    });
+        Route::prefix('owners')->group(function () {
+            // Auth Route
+            Route::get('login', [OwnerAuthController::class, 'index'])->name('get.login');
+            Route::post('login', [OwnerAuthController::class, 'login'])->name('owner.login');
+            Route::get('register', [OwnerAuthController::class, 'getRegister'])->name('owner.register');
+            Route::post('register', [OwnerAuthController::class, 'register'])->name('owner_register');
+            Route::middleware('auth:owner')->name('owner.')->group(function () {
+                Route::get('dashboard', [OwnerDashbaord::class, 'index'])->name('dashboard');
+                Route::resource('offers', OwnerOfferController::class);
+                Route::get('offers-ajax', [OwnerOfferController::class, 'getAjaxData'])->name('offer.ajax');
+                Route::get('owner-map', [OwnerMapController::class, 'Map'])->name('map');
+            });
+            // Route
+        });
+    }
+);
+
+Route::get('test', function () {
+    Mail::to('jksa.work.1@gmail.com')->send(new EditTransaactionMail(1000, 10001, 'debit'));
 });

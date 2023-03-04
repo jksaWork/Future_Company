@@ -203,7 +203,7 @@
                                     <form action="{{ route('logout') }}" method="post">
                                     @csrf
                                     <button class='menu-link px-5'>
-                                        Sign Out
+                                        {{ __('translation.log_out') }}
                                     </button>
                                     </form>
                             </div>
