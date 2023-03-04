@@ -69,13 +69,6 @@ License: For each use you must have a valid license purchased only from above li
             font-family: 'El Messiri', sans-serif;
         }
     </style>
-
-
-
-
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css' />
-    <link href='https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css' />
-    <link href='https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap4.min.css' />
     @yield('css')
     @stack('links')
 </head>
@@ -164,26 +157,12 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Page Vendors Javascript-->
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{ asset('assets/js/custom/apps/customers/list/export.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/customers/add.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
     <script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
     <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script>
     <script src="{{ asset('assets/js/custom/modals/users-search.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
-    <!--end::form repeater Javascript-->
-    <!--end::Page Custom Javascript-->
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-    <script src="{{ asset('datatable/jquery.js') }}"></script>
-    <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('datatable/sweetalert.js') }}"></script>
-    <!-- Script -->
-
-    {{-- <script src="{{ asset('datatable/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     @stack('scripts')
 </body>

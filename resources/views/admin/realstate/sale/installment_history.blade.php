@@ -96,11 +96,11 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('datatable/jquery.js') }}"></script>
     <script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script> --}}
 
     {{-- <script src="{{ asset('datatable/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
