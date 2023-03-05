@@ -59,6 +59,7 @@ class AdvancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
+            
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
@@ -121,6 +122,7 @@ class AdvancesController extends Controller
         session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.Advances.index');
         } catch (Exception $e) {
+            dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));

@@ -66,8 +66,8 @@ class AllEmployeeController extends Controller
 
                     'employee_id' => $data->id,
                     'status' => 1,
-                    'month_number' => Carbon::now(),
-                    'year' => Carbon::now(),
+                    'month_number' => Carbon::now()->month,
+                    'year' => Carbon::now()->year,
                     'allowances_id' => $allowances,
                 ]);
             }
@@ -170,7 +170,8 @@ class AllEmployeeController extends Controller
                 employee_allowances::create([
                     'employee_id' => $request->pro_id,
                     'status' => 1,
-                    'month_number' => Carbon::now(),
+                    'month_number' => Carbon::now()->month,
+                    'year' => Carbon::now()->year,
                     'allowances_id' => $allowances,
                 ]);
             }

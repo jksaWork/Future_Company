@@ -134,6 +134,7 @@ return [
     'allowances_name' => 'allowances name',
     'allowances_value' => 'allowances value',
     'Add_a_new_allowances' => 'Add a new allowances',
+    'The_total_salary_value_is_less_than_zero'=>'The total salary value is less than zero',
     'categories_id' => 'employee categories',
     'status' => 'status',
     'show_employee_information' => 'View employee information',

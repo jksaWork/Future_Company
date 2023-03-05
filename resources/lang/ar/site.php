@@ -16,6 +16,7 @@ return [
     'updated_successfully' => 'تم تحديث السجل بنجاح',
     'deleted_successfully' => 'تم حذف السجل بنجاح',
     'has_been_transferred_successfully' => 'تم نقل السجل بنجاح',
+    'The_total_salary_value_is_less_than_zero'=>'قيمة مجموع الراتب اقل من صفر',
     'recovery_successfully' => 'تم استرجاع السجل بنجاح',
     'Some_Thing_Went_Worng'=>'هناك خطأ ما',
     'There_is_no_amount_available_in_the_safe'=>'لا يوجد مبلغ متوفر في خزينة',
