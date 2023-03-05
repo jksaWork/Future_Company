@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                <table class="table table-hover table-rounded table-striped border gy-7 gs-7"
                                 id="example1" >
                                 <thead>
                                     <tr>
@@ -93,7 +93,7 @@
                                     @forelse ($employee_allowances as $index=>$allowances)
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: -moz-right;">
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $allowances->employee->name }}</td>
+                                            {{-- <td>{{ $allowances->employee->name }}</td> --}}
                                              <td>{{ $allowances->created_at }}</td>
                                              <td> {{ $allowances->Allowances_id->allowances_name }} ({{ number_format($allowances->Allowances_id->allowances_value, 2) }})</td>
                                         </tr>

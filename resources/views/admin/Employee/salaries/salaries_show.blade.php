@@ -296,7 +296,7 @@
                             <div class="fv-row mb-7 col-md-6 ">
                                 <label class=" fs-6 fw-bold mb-2">{{ __('translation.discounts') }}</label>
                                 <input type="number" class="form-control form-control-solid discounts" placeholder=""
-                                    step="1" min="0" name="discounts" value="0" id="discounts"
+                                    step="1" min="0" name="discounts" value="0" id="discounts" value="{{ old('discounts') }}"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     onchange="Discounts()" />
                                 @error('discounts')

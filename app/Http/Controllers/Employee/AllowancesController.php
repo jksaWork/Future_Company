@@ -92,7 +92,7 @@ class AllowancesController extends Controller
         // return $id;
         $allowances = allowances::findOrFail($id);
         $allowances->delete();
-        session()->flash('error', __('site.deleted_successfully'));
+        session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.allowances.index');
     } //end of destroy
 

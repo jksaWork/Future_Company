@@ -110,7 +110,7 @@ class EmployeeSalariesController extends Controller
         // return $id;
         $employemployee_allowancesee = employee_allowances::findOrFail($id);
         $employemployee_allowancesee->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
     } //end of destroy
 

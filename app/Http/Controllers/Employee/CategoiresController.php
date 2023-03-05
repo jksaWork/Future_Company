@@ -81,7 +81,7 @@ class CategoiresController extends Controller
     {
         // return $category;
         $category->delete();
-        session()->flash('error', __('site.deleted_successfully'));
+        session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.categories.index');
 
     }//end of destroy

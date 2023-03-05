@@ -14,6 +14,8 @@ return [
     'added_successfully' => 'Record added successfully',
     'updated_successfully' => 'Record updated successfully',
     'deleted_successfully' => 'Record deleted successfully',
+    'has_been_transferred_successfully' => 'Record has been transferred successfully',
+    'recovery_successfully'=>'Record recovery successfully',
     'Some_Thing_Went_Worng'=>'Some Thing Went Worng',
     'confirm_delete' => 'Confirm deletion',
     'total'=>'spendings total ',

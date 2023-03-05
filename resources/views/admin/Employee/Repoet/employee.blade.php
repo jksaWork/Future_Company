@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                <table class="table table-hover table-rounded table-striped border gy-7 gs-7"
                                 id="example1" style="width: 100%;">
                                 <thead>
                                     <tr>
