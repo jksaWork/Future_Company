@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\Owner;
 use App\Models\RealState;
 use App\Models\RealstateInstallment;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class SaleController extends Controller
 
             session()->flash('success', __('translation.installment_sucess'));
             DB::commit();
-            return redirect()->route('realstate.realstate.show', $Installment->realstate_id);
+            return redirect()->route('realstate.sale_invoice', $id);
         } catch (\Throwable $th) {
             DB::rollback();
             return $th;
@@ -83,7 +84,7 @@ class SaleController extends Controller
 
     public function saleHistoryData()
     {
-        $query = RealState::with('CurrentOwner')->where('type', 'sale')->where('is_rent', 1);
+        $query = RealState::with('CurrentOwner')->where('type', 'sale')->where('is_sale', 1);
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
@@ -105,7 +106,7 @@ class SaleController extends Controller
             ->editColumn('category_id', fn ($item) => $item->Category->name ?? '')
             ->editColumn(
                 'actions',
-                'admin.realstate.sale.data_table.action'
+                'admin.realstate.sale.data_table_2.action'
             )
             ->rawColumns(['actions', 'sale_status',  'status', 'is_rent', 'is_sale', 'owner_phone', 'owner_name'])
             ->toJson();
@@ -147,9 +148,18 @@ class SaleController extends Controller
             ->editColumn('order_number', fn ($item) =>   "<span class='badge badge-light-info'> " . __('translation.installment_order_' . $item->order_number) . "</span>")
             ->editColumn(
                 'actions',
-                'admin.realstate.rent.reveune.actions'
+                'admin.realstate.sale.data_table.action'
             )
             ->rawColumns(['actions', 'order_number',  'status', 'is_rent', 'is_sale', 'owner_phone', 'owner_name'])
             ->toJson();
+    }
+
+    public function SaleInvoice($id)
+    {
+        $data = DB::table('installments_history')->find($id);
+        // dd($data);
+        $realstate = RealState::findOrFail($data->realstate_id);
+        $owner = Owner::findOrFail($data->owner_id);
+        return view('admin.realstate.sale.invoice', compact('data', 'realstate', 'owner'));
     }
 }

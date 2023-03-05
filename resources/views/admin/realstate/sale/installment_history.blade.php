@@ -253,4 +253,61 @@
             rolesTable.ajax.reload();
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+
+$("#realstate").select2({
+            ajax: {
+                url: "{{ route('realstate.ajax') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $("#owner").select2({
+            ajax: {
+                url: "{{ route('owners.ajax') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#realstate').on('change', function() {
+            realstate_id = $(this).val();
+            rolesTable.ajax.reload();
+            console.log(realstate_id);
+        });
+
+        $('#owner').on('change', function() {
+            owner_id = $(this).val();
+            rolesTable.ajax.reload();
+        });
+
+    </script>
 @endpush
