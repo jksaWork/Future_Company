@@ -53,7 +53,7 @@ class SaleController extends Controller
 
             session()->flash('success', __('translation.installment_sucess'));
             DB::commit();
-            return redirect()->route('realstate.realstate.show', $Installment->realstate_id);
+            return redirect()->route('realstate.sale_invoice', $id);
         } catch (\Throwable $th) {
             DB::rollback();
             return $th;

@@ -199,7 +199,7 @@
                         </div>
                         <div class="mt-3">
                             <a href="#" class="btn  btn-success mx-5" id="print_Button" onclick="printDiv()">{{ __('translation.print') }}</a>
-                            <a href="{{ route('realstate.recept_revenues.hitory') }}" class="btn  btn-light-danger "  onclick="">{{ __('translation.back_2') }}</a>
+                            <a href="{{ route('realstate.installment_hsitory') }}" class="btn  btn-light-danger "  onclick="">{{ __('translation.ok') }}</a>
                         </div>
                     </div>
 

@@ -18,7 +18,7 @@ class AdminAuthController extends Controller
     {
         if (Auth::guard('admin')->attempt(["email" => $request->email, 'password' => $request->password])) {
             // dd('The Admin Is Login');
-            drakify('sccuess');
+            // drakify('sccuess');
             $request->session()->regenerate();
             return redirect()->route('dashboard');
             // return redirect()->intended('admin/dashbaord');

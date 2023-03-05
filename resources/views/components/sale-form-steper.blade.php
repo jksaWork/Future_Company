@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">{{__('translation.aqsat_amount')}}:</label>
-                                                <input type="number"  name='amount' readonly class="form-control mb-2 mb-md-0 precentage_amount" placeholder="Enter contact number">
+                                                <input type="number"  name='amount'  class="form-control mb-2 mb-md-0 precentage_amount" placeholder="Enter contact number">
                                             </div>
 
                                             <div class="col-md-3">
@@ -175,7 +175,7 @@ $('#installment').repeater({
     }
 });
 
-let eventHandler =() => ( $('.precentage_value').on('keyup',function(){
+let eventHandler =() => ( $('.precentage_value').on('change keyup keydown',function(){
 
 $('.precentage_value').each((index , el) =>{
     // console.log(el, index);
