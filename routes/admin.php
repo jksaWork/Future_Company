@@ -139,6 +139,7 @@ Route::group(
 
                 // Rent Invoice
                 Route::get('rent-invoice/{id}', [RentController::class, 'RentInvoice'])->name('rent_invoice');
+                Route::get('sale-invoice/{id}', [SaleController::class, 'SaleInvoice'])->name('sale_invoice');
             });
             Route::get('finanical-treasury', [FinanicalTreasuryController::class, 'finanical'])->name('admin.finanical');
             Route::get('finanical-treasury-ajax', [FinanicalTreasuryController::class, 'data'])->name('admin.finanical.data');
