@@ -171,7 +171,7 @@ class RentController extends Controller
 
             DB::commit();
 
-            return redirect()->route('realstate.realstate.show', $request->realstate_id);
+            return redirect()->route('realstate.rent_invoice', $id);
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect()->back()->withErrors($th->getMessage());
@@ -227,5 +227,13 @@ class RentController extends Controller
             )
             ->rawColumns(['actions', 'status', 'is_rent', 'is_sale', 'owner_phone', 'owner_name'])
             ->toJson();
+    }
+
+    public function RentInvoice($id)
+    {
+        $data = DB::table('rent_revenues')->find($id);
+        $realstate = RealState::findOrFail($data->realstate_id);
+        $owner = Owner::findOrFail($data->owner_id);
+        return view('admin.realstate.rent.invoice', compact('data', 'realstate', 'owner'));
     }
 }
