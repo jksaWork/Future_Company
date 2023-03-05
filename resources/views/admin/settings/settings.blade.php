@@ -51,16 +51,16 @@
                     </div>
                     <!--end::Image input-->
                     <!--begin::Hint-->
-                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                    <div class="form-text"> {{__('translation.pdf')}}.</div>
                     <!--end::Hint-->
                 </div>
                 <div class="form-group">
-                    <label>@lang('settings.fav_icon')</label>
+                    <label>{{__('translation.fav_icon')}}</label>
                     <input type="file" name="fav_icon" class="form-control load-image">
                     <img src="{{ asset('uploads/'. setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
                 </div>
                 <div class="fv-row mb-7 col-md-12 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.title')</label>
+                    <label class=" fs-6 fw-bold mb-2">{{__('translation.title_name')}}</label>
                     <input type="text" class="form-control form-control-solid" name="title" value="{{ setting('title') }}"
                          />
                         @error('title')
@@ -76,7 +76,7 @@
                     placeholder="{{ __('translation.description') }}">{{ setting('description') }}</textarea>
 
                 <div class="fv-row mb-7 col-md-12 ">
-                    <label class=" fs-6 fw-bold mb-2">@lang('transaltion.email')</label>
+                    <label class=" fs-6 fw-bold mb-2">{{__('translation.email')}}</label>
                     <input type="text" class="form-control form-control-solid" value="{{ setting('email') }}" name="email"/>
 
                         @error('email')

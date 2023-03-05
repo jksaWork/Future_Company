@@ -14,13 +14,14 @@
     </a>
 
     <form action="{{ route('Employee.salaries.destroy', $id) }}"
-    id='delete_real_state'
+    id='delteForm'
 
 class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <button
-    class="btn btn-light-danger btn-sm delete btn-icon">
+    class="btn btn-light-danger btn-sm delete btn-icon" onclick="event.preventDefault();
+    DeleteApp('delteForm')">
         <span class="svg-icon svg-icon-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>

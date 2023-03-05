@@ -17,7 +17,7 @@
 
    {{__('translation.employee_allowances_list')}}
 @stop
-@section('main-head', __('translation.employees'))
+@section('main-head', __('translation.employee_allowances_report'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -83,8 +83,8 @@
                                     <tr>
                                         <th>{{ __('translation.id') }}</th>
                                         <th class="">{{ __('translation.employee_name') }}</th>
-                                        <th class="">{{ __('translation.allowances_name') }}</th>
                                         <th class="">{{ __('translation.created_at') }}</th>
+                                        <th class="">{{ __('translation.allowances_name') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-bold text-gray-600">
@@ -94,9 +94,8 @@
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: -moz-right;">
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $allowances->employee->name }}</td>
-                                            <td> {{ $allowances->Allowances_id->allowances_name }}
-                                             ({{ number_format($allowances->Allowances_id->allowances_value, 2) }})</td>
                                              <td>{{ $allowances->created_at }}</td>
+                                             <td> {{ $allowances->Allowances_id->allowances_name }} ({{ number_format($allowances->Allowances_id->allowances_value, 2) }})</td>
                                         </tr>
                                              <?php $sum_allowances_value += $allowances->Allowances_id->allowances_value; ?>
                                     @empty
@@ -108,11 +107,11 @@
                                     <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: -moz-right;">
 
 
-                                        <td>{{ __('translation.total') }}:</td>
                                     <td></td>
+                                    <td></td>
+                                    <td>{{ __('translation.total') }}:</td>
                                     <td><span class='badge badge-success'>{{ number_format($sum_allowances_value , 2) }}<span class='badge badge-success'> </td>
 
-                                    <td></td>
 
                                 </tr>
 

@@ -153,14 +153,15 @@
 
                                                                         <td>{!! $employees->name!!}</td>
 
-                                                                        <td>@forelse ($allowances as $index=>$allowanc){!! $allowanc->allowances_name !!} ( {{number_format($allowanc->allowances_value ,2)}})@empty{{ __('translation.No_Data_Was_Found') }} @endforelse</td>
+                                                                        <td>@forelse ($allowances as $index=>$allowanc)
+                                                                            <?php $sum_allowances_value += $allowanc->Allowances_id->allowances_value; ?>
+                                                                            {!! $allowanc->Allowances_id->allowances_name !!} ( {{number_format($allowanc->Allowances_id->allowances_value ,2)}})  
+                                                                            <br>@empty{{ __('translation.No_Data_Was_Found') }} @endforelse</td>
                                                                         <td>{!!   number_format($employees->salary,2)!!}</td>
                                                                         <td>{!! $employees->created_at !!}</td>
                                                                     </tr>
-                                                                    <?php $sum_allowances_value += $allowanc->allowances_value; ?>
-                                                                {{-- @empty --}}
-
-                                                                {{-- @endforelse --}}
+                                                                   
+                         
                                                                 <tr>
                                                                     <td colspan="1">{{ __('translation.total') }}:</td>
 

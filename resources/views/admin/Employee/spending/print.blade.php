@@ -123,20 +123,7 @@
                                                         <td class="pt-6"></td>
                                                         <td class="pt-6 text-dark fw-boldest">{{ number_format($spending->spending_value,2) }}</td>
                                                     </tr>
-                                                    {{-- <tr class="fw-bolder text-gray-700 fs-5 text-end">
-                                                        <td class="d-flex align-items-center">
-                                                        <i class="fa fa-genderless text-success fs-2 me-2"></i>Logo Design</td>
-                                                        <td>120</td>
-                                                        <td>$40.00</td>
-                                                        <td class="fs-5 text-dark fw-boldest">$4800.00</td>
-                                                    </tr>
-                                                    <tr class="fw-bolder text-gray-700 fs-5 text-end">
-                                                        <td class="d-flex align-items-center">
-                                                        <i class="fa fa-genderless text-primary fs-2 me-2"></i>Web Development</td>
-                                                        <td>210</td>
-                                                        <td>$60.00</td>
-                                                        <td class="fs-5 text-dark fw-boldest">$12600.00</td>
-                                                    </tr> --}}
+                                                   
                                                 </tbody>
                                             </table>
                                         </div>

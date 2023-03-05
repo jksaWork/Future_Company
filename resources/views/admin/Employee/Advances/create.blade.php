@@ -72,7 +72,7 @@
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
                                         <select id='' class="form-control form-control-solid discounts"
                                             name='year' readonly>
-                                            @for ($year = date('Y'); $year <= date('Y', strtotime('+5 year')); $year++)
+                                            @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
                                                 <option>{{ $year }}</option>
                                             @endfor
                                         </select>

@@ -9,8 +9,8 @@
             <a href="/" class="mb-12">
                 <img alt="Logo" src="{{ asset('uploads/' . setting('logo'))}}" class="h-90px" />
             </a>
-            <small value="{{ setting('title') }}" style="
-            color: white;">{{ setting('title') }}</small>
+            {{-- <small value="{{ setting('title') }}" style="
+            color: white;">{{ setting('title') }}</small> --}}
             <!--end::Logo-->
             <!--begin::Wrapper-->
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
@@ -20,7 +20,7 @@
                     <!--begin::Heading-->
                     <div class="text-center mb-10">
                         <!--begin::Title-->
-                        <h1 class="text-dark mb-3 fs-20">{{ __('translation.wellcome_back') }}</h1>
+                        <h1 class="text-dark mb-3 fs-20">{{ setting('title') }}</h1>
                         <!--end::Title-->
                         <!--begin::Link-->
                          <!--end::Link-->

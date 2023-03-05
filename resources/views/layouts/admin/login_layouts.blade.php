@@ -20,10 +20,23 @@ direction="{{ app()->getLocale() == 'en' ?: 'rtl' }} " dir="{{ app()->getLocale(
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&family=El+Messiri&display=swap"
         rel="stylesheet">
     <style>
-        * {
+       
+    
+	@media (max-width: 991.98px){
+		body, html {
+			font-size: 34px!important;
+    }
+    
+}
+	 
+	   * {
             font-family: 'Cairo', sans-serif;
             font-family: 'El Messiri', sans-serif;
         }
+
+
+     
+
     </style>
     </head>
 	<!--end::Head-->

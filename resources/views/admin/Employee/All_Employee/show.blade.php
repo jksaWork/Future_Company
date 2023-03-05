@@ -71,7 +71,7 @@
                                                     <td>
                                                         @forelse ($employee_allowances as $index=>$allowanc)
                                                             {{ $allowanc->Allowances_id->allowances_name }} .
-                                                            ({{ number_format($allowanc->Allowances_id->allowances_value, 2) }})
+                                                            ({{ number_format($allowanc->Allowances_id->allowances_value, 2) }})<br>
                                                             @empty{{ __('translation.No_Data_Was_Found') }}
                                                         @endforelse
                                                     </td>

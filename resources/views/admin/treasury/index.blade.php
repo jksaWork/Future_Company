@@ -294,7 +294,7 @@
         $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
         let stauts, type, transaction_type, from_date, id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
-            dom: "Bfrtip",
+            dom: "Brtip",
             serverSide: true,
             processing: true,
             distroy: true,

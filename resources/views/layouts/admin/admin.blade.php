@@ -164,6 +164,31 @@ License: For each use you must have a valid license purchased only from above li
 
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
+    <script>
+    
+        function DeleteApp(val) {
+             console.log();
+            Swal.fire({
+                title:"@lang('translation.Are_you_sure')",
+                text: "@lang('translation.You_will_not_be_able_to_back_down_from_this')",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "@lang('translation.YES_Delete_it')", 
+                cancelButtonText: "@lang('translation.cancel')"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        " @lang('translation.Deleted')",
+                        " @lang('translation.success')",
+                        " @lang('translation.Your_file_has_been_deleted.')"
+                    );
+                    document.getElementById(val).submit();
+                }
+    });
+        }
+    </script>
     @stack('scripts')
 </body>
 <!--end::Body-->

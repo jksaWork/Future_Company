@@ -67,6 +67,7 @@ class AllEmployeeController extends Controller
                     'employee_id' => $data->id,
                     'status' => 1,
                     'month_number' => Carbon::now(),
+                    'year' => Carbon::now(),
                     'allowances_id' => $allowances,
                 ]);
             }

@@ -40,7 +40,9 @@ class DataController extends Controller
         return  DataTables::of($query)->editColumn(
             'actions',
             'admin.Employee.spending.data_table.actions'
-        )->editColumn('section_id', function ($item) {
+        )
+        
+        ->editColumn('section_id', function ($item) {
             return "<span class='badge badge-success'>" . $item->section->section_name . "</span>";
         })
             ->editColumn('spending_value', function ($item) {
@@ -78,9 +80,7 @@ class DataController extends Controller
             ->editColumn(
                 'actions',
                 'admin.Employee.All_Employee.data_table.actions'
-            )->editColumn('categories_id', function ($item) {
-                return "<span class='badge badge-light-info'>" . $item->Categorys->categories_name . "</span>";
-            })
+            )
             ->editColumn('salary', function ($item) {
                 return number_format($item->salary, 2);
             })
@@ -107,19 +107,20 @@ class DataController extends Controller
                 'actions',
                 'admin.Employee.employee_allowances.data_table.actions'
             )
-
+            ->editColumn('employee_id', function ($item) {
+                return  $item->employee->name;
+            })
             ->editColumn('allowances_id', function ($item) {
                 return "<span class='badge badge-light-info'>". $item->Allowances_id->allowances_name . ' ( ' . $item->Allowances_id->allowances_value  . ' ) ' . '</span>';
             })
 
-            ->editColumn('employee_id', function ($item) {
-                return  $item->employee->name;
-            })
-            ->editColumn('created_at', function ($item) {
+       
+            
+            ->editColumn('created_at', function ($item) { 
                 return $item->created_at->format('Y-m-d');
             })
 
-            ->rawColumns(['actions', 'employee_id', 'created_at', 'allowances_id'])
+            ->rawColumns(['actions', 'employee_id', 'allowances_id' , 'created_at'])
             ->toJson();
     } //end of employee_allowanceshistoryData
     public function AdvanceshistoryData(Request $request)

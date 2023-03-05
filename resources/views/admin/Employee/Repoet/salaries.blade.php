@@ -15,7 +15,7 @@
 @section('title')
 {{__('translation.salaries_list')}}
 @stop
-@section('main-head', __('translation.salaries'))
+@section('main-head', __('translation.salaries_report'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
@@ -93,15 +93,15 @@
 
                                     <?php $sum_salaries = 0; ?>
                                     @forelse ($salaries as $index=>$salaries)
-                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;display: contents;" >
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $salaries->employee->name }}</td>
                                         <td> {{ number_format($salaries->fixed_salary,2) }}</td>
-                                        <td>{{ number_format($salaries->allownacees_salary, 2) }}</td>
+                                        <td>{{ number_format($salaries->allowancess_fixed, 2) }}</td>
                                         <td><span class='badge badge-danger'>{{ number_format($salaries->advances,2) }}</span></td>
                                         <td><span class='badge badge-danger'>{{ number_format($salaries->discounts, 2) }}</span></td>
                                         <td>{{ $salaries->getActive() }}</td>
-                                        <td>{{ $salaries->month_number}}</td>
+                                        <td>{{ __('translation.Month')}}-{{ $salaries->month_number}}</td>
                                     <td><span class='badge badge-success'>{{ number_format($salaries->totle_salaries, 2) }}</span></td>
                                     </tr>
                                     <?php $sum_salaries += $salaries->totle_salaries; ?>
@@ -114,14 +114,14 @@
                                     <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
 
 
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ __('translation.total') }}:</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                         <td><span class='badge badge-success'>{{ number_format($sum_salaries , 2) }}<span class='badge badge-success'> </td>
 
                                        

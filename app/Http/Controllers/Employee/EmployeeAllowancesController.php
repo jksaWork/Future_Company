@@ -48,30 +48,51 @@ class EmployeeAllowancesController extends Controller
     } //end of create
 
 
-    public function store(employee_allowancesRequest $request)
+    public function store(Request $request)
     {
-        // return  $request;
+        $request->validate([
+            'allowances_id' =>'required',
+            'employee_id' => 'required',
+            'month_number'=>'required',
+            'year'=>'required',
+        ]);
+
+
         DB::beginTransaction();
         try {
            $employee_allow = employee_allowances::create([
                 'employee_id'   => $request->employee_id,
                 'allowances_id' => $request->allowances_id,
+                'year'=> $request->year,
                 'status' => 0,
                 'month_number' => $request->month_number,
             ]);
             $employ_allow = employee_allowances::findOrFail($employee_allow->id);
             //    return  $spendingses->spending_value;
+            
             $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
-
-            $employ_allow->update([
+            
+           $d= $employ_allow->update([
                 'Transaction_id' => $res->id,
             ]);
+            
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.employee_allowances.index');
         } catch (Exception $e) {
+            
+            if ($e->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('site.added_successfully'));
+                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
             DB::rollBack();
-            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
+            if ($e->getCode() == 50) {
+                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->back();
+            }
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
     } //end of store
@@ -92,7 +113,8 @@ class EmployeeAllowancesController extends Controller
     public function edit(employee $employee, $id)
     {
         // return $id;
-        $employees = employee::wheare('status', 1);
+        $employees = employee::where([['status', 1],])->get();
+    
         $allowances =allowances::where([
             ['status',  0],
         ])->get();
@@ -102,33 +124,47 @@ class EmployeeAllowancesController extends Controller
         return view('admin.Employee.employee_allowances.edit', compact('allowances', 'employee_allowances','employees'));
     } //end of edit
 
-    public function update(employee_allowancesRequest $request,$id)
+    public function update(Request $request,$id)
     {
-        // return $request;
+        $request->validate([
+            'allowances_id' =>'required',
+            'employee_id' => 'required',
+            'month_number'=>'required',
+            'year'=>'required',
+        ]);
+
+
+
         DB::beginTransaction();
         try{
 
-        // $id = allowances::where('categories_name', $request->categories_id)->first()->id;
-        //    return $id;
         $employee = employee_allowances::findOrFail($id);
-// return  $employee->Transaction_id  ;
         $employee->update([
 
             'employee_id'   => $request->employee_id,
             'allowances_id' => $request->allowances_id,
+            'year'=> $request->year,
             'status' => 0,
             'month_number' => $request->month_number,
         ]);
-
         $res = FinancialTreasuryTransactionHistorys::EditTransaction( $employee->Transaction_id , $employee->Allowances_id->allowances_value );
-// return $res;
+
         DB::commit();
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
         }catch(Exception $e){
-           dd($e);
+            // dd($e);
+            if ($e->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('site.updated_successfully'));
+                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            }
             DB::rollBack();
-            if($e->getCode() == 50)   session()->flash('error' ,  __('site.There_is_no_amount_available_in_the_safe'));
+            if ($e->getCode() == 50) {
+                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->back();
+            }
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
 
