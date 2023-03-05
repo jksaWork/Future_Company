@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\employee;
 use App\Models\Advances;
+use App\Models\employee_allowances;
+use App\Models\salaries;
 use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Support\Facades\DB;
 // use App\Http\Requests\Request;
@@ -41,31 +43,74 @@ class AdvancesController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            $advance = Advances::create([
-                'employee_id' => $request->employee_id,
-                'year'=> $request->year,
-                'advances_value' => $request->advances_value,
-                'month_number' => $request->month_number,
-            ]);
+            $salaries  = salaries::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
+             $salaries =  $salaries->count();
+                  if ($salaries == 0) {
+// dd('ok');
 
-            $advances = Advances::findOrFail($advance->id);
-            //    return  $advances->employee->name;
-            $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
 
-            $advances->update([
-                'Transaction_id' => $res->id,
-            ]);
-            DB::commit();
-            session()->flash('success', __('site.added_successfully'));
-            return redirect()->route('Employee.Advances.index');
-        } catch (Exception $e) {
-            
-            if ($e->getCode() == 51) {
+            $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
+
+           
+            $allowances = employee_allowances::where([
+                ['status', 1],
+                ['employee_id', $request->employee_id]
+                ])->get();
+
+                $employee = employee::find($request->employee_id);
+
+                $sum_allowances = 0;
+                foreach ($allowances as $index => $allowances) {
+                    $sum_allowances += $allowances->Allowances_id->	allowances_value;
+                }
+ 
+
+                $sum_advances_value = 0;
+                foreach ($employee_advances as $index => $Advancess) {
+                    $sum_advances_value += $Advancess->advances_value;
+                }
+
+
+                
+                $sum_advances = $sum_advances_value + $request->advances_value;
+                $sum_employee = $employee->salary + $sum_allowances;
+                // return $sum_employee;
+                // return  $sum_advances ;
+
+            if ($sum_advances  <= $sum_employee) {
+                $advance = Advances::create([
+                    'employee_id' => $request->employee_id,
+                    'year' => $request->year,
+                    'advances_value' => $request->advances_value,
+                    'month_number' => $request->month_number,
+                ]);
+
+                $advances = Advances::findOrFail($advance->id);
+                $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+
+                $advances->update([
+                    'Transaction_id' => $res->id,
+                ]);
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
-                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->route('Employee.Advances.index');
+            } else {
+                session()->flash('error',  __('site.You_have_exceeded_the_salary_imit'));
+                return redirect()->back();
             }
+        } else {
+            session()->flash('error',  __('site.This_month_salary_was_delivered_earlier'));
+                return redirect()->back();
+        }
+
+        } catch (Exception $e) {
+            // dd($e);
+            // if ($e->getCode() == 51) {
+            //     DB::commit();
+            //     session()->flash('success', __('site.added_successfully'));
+            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            // }
             DB::rollBack();
             if ($e->getCode() == 50) {
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
@@ -89,9 +134,9 @@ class AdvancesController extends Controller
     public function edit(Request $request, $id)
     {
         // return $id;
-        $employees=employee::where([['status', 1],])->get();
+        $employees = employee::where([['status', 1],])->get();
         $Advancess = Advances::find($id);
-        return view('admin.Employee.Advances.edit', compact('Advancess','employees'));
+        return view('admin.Employee.Advances.edit', compact('Advancess', 'employees'));
     } //end of edit
 
     public function update(Request $request,  $id)
@@ -104,25 +149,54 @@ class AdvancesController extends Controller
         ]);
         DB::beginTransaction();
         try {
+            $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
 
-            // $id = Category::where('categories_name', $request->categories_id)->first()->id;
-            //    return $id;
+           
+            $allowances = employee_allowances::where([
+                ['status', 1],
+                ['employee_id', $request->employee_id]
+                ])->get();
+
+                $employee = employee::find($request->employee_id);
+
+                $sum_allowances = 0;
+                foreach ($allowances as $index => $allowances) {
+                    $sum_allowances += $allowances->Allowances_id->	allowances_value;
+                }
+ 
+
+                $sum_advances_value = 0;
+                foreach ($employee_advances as $index => $Advancess) {
+                    $sum_advances_value += $Advancess->advances_value;
+                }
+
+
+                // return  $allowances ;
+                $sum_advances = $sum_advances_value + $request->advances_value;
+                $sum_employee = $employee->salary + $sum_allowances;
+                
+
+            if ($sum_advances  <= $sum_employee) {
             $Advancess = Advances::findOrFail($id);
 
             $Advancess->update([
                 'employee_id' => $request->employee_id,
                 'advances_value' => $request->advances_value,
-                'year'=> $request->year,
+                'year' => $request->year,
                 'month_number' => $request->month_number,
             ]);
-// return  $Advancess->advances_value;
-           $res = FinancialTreasuryTransactionHistorys::EditTransaction( $Advancess->Transaction_id , $Advancess->advances_value );
+            // return  $Advancess->advances_value;
+            $res = FinancialTreasuryTransactionHistorys::EditTransaction($Advancess->Transaction_id, $Advancess->advances_value);
 
-        DB::commit();
-        session()->flash('success', __('site.updated_successfully'));
+            DB::commit();
+            session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.Advances.index');
+        } else {
+            session()->flash('error',  __('site.You_have_exceeded_the_salary_imit'));
+            return redirect()->back();
+        }
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));

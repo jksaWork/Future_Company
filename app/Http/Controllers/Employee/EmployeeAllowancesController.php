@@ -80,13 +80,13 @@ class EmployeeAllowancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.employee_allowances.index');
         } catch (Exception $e) {
-            
-            if ($e->getCode() == 51) {
-                DB::commit();
-                session()->flash('success', __('site.added_successfully'));
-                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            }
+            dd('$e');
+            // if ($e->getCode() == 51) {
+            //     DB::commit();
+            //     session()->flash('success', __('site.added_successfully'));
+            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            // }
             DB::rollBack();
             if ($e->getCode() == 50) {
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
