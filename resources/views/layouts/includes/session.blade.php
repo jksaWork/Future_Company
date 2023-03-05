@@ -25,8 +25,8 @@
             toastr.success("Are you the six fingered man?");
         </script>
         {{ session()->forget('success') }}
-
-    @elseif (session()->has('error'))
+        @endif
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             {{-- <div class="h1"> --}}
                 <h1 class="mb-1 text-dark">{{ session()->get('error')}}</h1>

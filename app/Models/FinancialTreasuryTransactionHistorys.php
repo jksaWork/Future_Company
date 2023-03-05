@@ -81,7 +81,7 @@ class FinancialTreasuryTransactionHistorys extends Model
             $mail = setting('email') ?? 'jksa.work.1@gmail.com';
             Mail::to($mail)->send(new withDrowalFromTuresy($amount, $type, $instance->id));
         } catch (\Throwable $th) {
-            session()->flash('error', "Some Thing Went Worng When We Send Email");
+            session()->flash('error', __('translation.Some Thing Went Worng When We Send Email'));
             return $instance;
         }
         return $instance;
