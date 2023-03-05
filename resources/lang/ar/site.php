@@ -19,6 +19,7 @@ return [
     'The_total_salary_value_is_less_than_zero'=>'قيمة مجموع الراتب اقل من صفر',
     'recovery_successfully' => 'تم استرجاع السجل بنجاح',
     'Some_Thing_Went_Worng'=>'هناك خطأ ما',
+    'You_have_exceeded_the_salary_imit'=>'لقد قمت بتجاوز الحد المسموح للراتب ',
     'There_is_no_amount_available_in_the_safe'=>'لا يوجد مبلغ متوفر في خزينة',
     'Salary_has_already_been_submitted'=>'تم تسليم المرتب سابقا',
     'total'=>'مجموع المنصرفات',

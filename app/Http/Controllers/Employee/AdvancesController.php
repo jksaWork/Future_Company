@@ -41,25 +41,40 @@ class AdvancesController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            $advance = Advances::create([
-                'employee_id' => $request->employee_id,
-                'year'=> $request->year,
-                'advances_value' => $request->advances_value,
-                'month_number' => $request->month_number,
-            ]);
+            $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
 
-            $advances = Advances::findOrFail($advance->id);
-            //    return  $advances->employee->name;
-            $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+            $sum_advances_value = 0;
+            foreach ($employee_advances as $index => $Advancess) {
+                $sum_advances_value += $Advancess->advances_value;
+            }
+            $sum = $sum_advances_value + $request->advances_value;
+            $employee = employee::find($request->employee_id);
+            $sum_employee = $employee->salary;
 
-            $advances->update([
-                'Transaction_id' => $res->id,
-            ]);
-            DB::commit();
-            session()->flash('success', __('site.added_successfully'));
-            return redirect()->route('Employee.Advances.index');
+            if ($sum  < $sum_employee) {
+                $advance = Advances::create([
+                    'employee_id' => $request->employee_id,
+                    'year' => $request->year,
+                    'advances_value' => $request->advances_value,
+                    'month_number' => $request->month_number,
+                ]);
+
+                $advances = Advances::findOrFail($advance->id);
+                   return  $advances->employee->name;
+                $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+
+                $advances->update([
+                    'Transaction_id' => $res->id,
+                ]);
+                DB::commit();
+                session()->flash('success', __('site.added_successfully'));
+                return redirect()->route('Employee.Advances.index');
+            } else {
+                session()->flash('error',  __('site.You_have_exceeded_the_salary_imit'));
+                return redirect()->back();
+            }
         } catch (Exception $e) {
-            
+dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
@@ -89,9 +104,9 @@ class AdvancesController extends Controller
     public function edit(Request $request, $id)
     {
         // return $id;
-        $employees=employee::where([['status', 1],])->get();
+        $employees = employee::where([['status', 1],])->get();
         $Advancess = Advances::find($id);
-        return view('admin.Employee.Advances.edit', compact('Advancess','employees'));
+        return view('admin.Employee.Advances.edit', compact('Advancess', 'employees'));
     } //end of edit
 
     public function update(Request $request,  $id)
@@ -104,23 +119,35 @@ class AdvancesController extends Controller
         ]);
         DB::beginTransaction();
         try {
+            $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
 
-            // $id = Category::where('categories_name', $request->categories_id)->first()->id;
-            //    return $id;
+            $sum_advances_value = 0;
+            foreach ($employee_advances as $index => $Advancess) {
+                $sum_advances_value += $Advancess->advances_value;
+            }
+            $sum = $sum_advances_value + $request->advances_value;
+            $employee = employee::find($request->employee_id);
+            $sum_employee = $employee->salary;
+
+            if ($sum  < $sum_employee) {
             $Advancess = Advances::findOrFail($id);
 
             $Advancess->update([
                 'employee_id' => $request->employee_id,
                 'advances_value' => $request->advances_value,
-                'year'=> $request->year,
+                'year' => $request->year,
                 'month_number' => $request->month_number,
             ]);
-// return  $Advancess->advances_value;
-           $res = FinancialTreasuryTransactionHistorys::EditTransaction( $Advancess->Transaction_id , $Advancess->advances_value );
+            // return  $Advancess->advances_value;
+            $res = FinancialTreasuryTransactionHistorys::EditTransaction($Advancess->Transaction_id, $Advancess->advances_value);
 
-        DB::commit();
-        session()->flash('success', __('site.updated_successfully'));
+            DB::commit();
+            session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.Advances.index');
+        } else {
+            session()->flash('error',  __('site.You_have_exceeded_the_salary_imit'));
+            return redirect()->back();
+        }
         } catch (Exception $e) {
             dd($e);
             if ($e->getCode() == 51) {

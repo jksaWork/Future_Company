@@ -17,6 +17,7 @@ return [
     'has_been_transferred_successfully' => 'Record has been transferred successfully',
     'The_total_salary_value_is_less_than_zero'=>'The total salary value is less than zero',
     'recovery_successfully'=>'Record recovery successfully',
+    'You_have_exceeded_the_salary_imit'=>'You have exceeded the salary imit',
     'Some_Thing_Went_Worng'=>'Some Thing Went Worng',
     'confirm_delete' => 'Confirm deletion',
     'total'=>'spendings total ',
