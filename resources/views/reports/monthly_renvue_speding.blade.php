@@ -14,6 +14,7 @@
                         <div class="form-group col-md-6">
                             <label for="">{{ __('translation.chose_year') }}</label>
                             <select class="form-control col-md-6" name="" id="year_number">
+                                <option value=''>{{ __('translation.chose_year') }}</option>
                                 @foreach ([23, 24,25, 26, 25] as $year)
                                 <option value='20{{ $year }}'>20{{ $year }}</option>
                                 @endforeach
@@ -23,6 +24,7 @@
                         <div class="form-group ">
                             <label for="">{{ __('translation.chose_month') }}</label>
                             <select class="form-control " name="" id="month_number">
+                                <option value=''>{{ __('translation.chose_month') }}</option>
                                 @for ($i = 1; $i < 13; $i++)
                                             <option value='{{$i}}'> {{$i . '  --   ' . date("F", mktime(null, null, null, $i, 1));}}</option>
                                 @endfor
@@ -37,7 +39,7 @@
                     <div class="row">
                          <div class="col-md-12">
                               <div class="table-responsive">
-                                   <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                   <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable "
                                         id="roles-table" style="width: 100%;">
                                         <thead>
                                              <tr>
@@ -48,6 +50,14 @@
                                                   <th>{{ __('translation.total') }}</th>
                                              </tr>
                                         </thead>
+                                        <tfoot>
+                                            <tr class='table-success'>
+                                                <th colspan="2" style="text-align:center">{{ __('translation.total') }} : </th>
+                                                <th id='credit_total' style="font-weight:bolder">0</th>
+                                                <th id='debit_total' style="font-weight:bolder">0</th>
+                                                <th id='total_total' style="font-weight:bolder">0</th>
+                                            </tr>
+                                        </tfoot>
                                    </table>
                               </div><!-- end of table responsive -->
                          </div><!-- end of col -->
@@ -81,7 +91,7 @@ let rolesTable = $('#roles-table').DataTable({
 
           {
                extend: 'print',
-               title: "@lang('translation.owners')",
+               title: "@lang('translation.MonthlyRealstateRenvueAndSpending_2')",
                className: 'btn btn-default',
                autoPrint: true,
                customize: function(win) {
@@ -137,7 +147,46 @@ let rolesTable = $('#roles-table').DataTable({
           $('#record__select-all').prop('checked', false);
           $('#record-ids').val();
           $('#bulk-delete').attr('disabled', true);
-     }
+     },
+     footerCallback: function (row, data, start, end, display) {
+            var api = this.api();
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+            };
+
+            // Total over all pages
+            total = api
+                .column(2)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Total over this page
+            pageTotal = api
+                .column(2, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+                pageTotal2 = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+                console.log(pageTotal, 'credit   --------------');
+                console.log(pageTotal2, 'debit   --------------');
+            // Update footer
+
+            $(api.column(4).footer()).html(`${new Intl.NumberFormat().format(pageTotal - pageTotal2)}`);
+            $(api.column(2).footer()).html(`${new Intl.NumberFormat().format(pageTotal)}`);
+            $(api.column(3).footer()).html(`${new Intl.NumberFormat().format(pageTotal2)}`);
+        },
 });
 
 $('#handelSearch').keyup(function() {

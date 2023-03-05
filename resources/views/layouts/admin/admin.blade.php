@@ -16,7 +16,7 @@ License: For each use you must have a valid license purchased only from above li
 
 <head>
     <base href="">
-    <title> @yield("title") </title>
+    <title> @yield("title", setting('title'))  </title>
     <meta charset="utf-8" />
     <meta name="description"
         content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -165,7 +165,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     <script>
-    
+
         function DeleteApp(val) {
              console.log();
             Swal.fire({
@@ -175,7 +175,7 @@ License: For each use you must have a valid license purchased only from above li
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: "@lang('translation.YES_Delete_it')", 
+                confirmButtonText: "@lang('translation.YES_Delete_it')",
                 cancelButtonText: "@lang('translation.cancel')"
                 }).then((result) => {
                 if (result.isConfirmed) {
