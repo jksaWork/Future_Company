@@ -134,7 +134,7 @@
         let type = @json(request()->type);
         let status, is_rent, is_sale;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "Bfrtip",
+            dom: "Brtip",
             buttons: [
                 'copy', {
                     extend:'excel',

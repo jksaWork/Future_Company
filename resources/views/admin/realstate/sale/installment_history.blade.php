@@ -108,7 +108,7 @@
     <script>
         let stauts, realstate_id, owner_id, installment_id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
-            dom: "Bfrtip",
+            dom: "Brtip",
             buttons: [
                 'copy', {
                     extend:'excel',

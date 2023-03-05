@@ -518,6 +518,7 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
@@ -534,6 +535,16 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
+
+
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('reports.MonthlyRealstateRenvueAndSpending') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.MonthlyRealstateRenvueAndSpending') }}</span>
+                            </a>
+                        </div>
                         <div class="menu-item">
                             <a class="menu-link" href="{{ route('reports.spending.report') }}">
                                 <span class="menu-bullet">
@@ -570,7 +581,7 @@
 
 
 
-                 
+
                     </div>
 
 
@@ -683,6 +694,8 @@
                             <span class="menu-title">{{ __('translation.setting') }}</span>
                         </a>
                     </div>
+
+
                 </div>
             </div>
 
