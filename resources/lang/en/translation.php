@@ -130,6 +130,7 @@ return [
     'edite_employee_allowances' => 'edite employee allowances ',
     'employee_name' => 'employees name',
     'salaries' => 'salaries',
+    'edit_employee_Advances'=>'edit employee Advances',
     'edite_allowances' => 'edite allowances',
     'allowances_name' => 'allowances name',
     'allowances_value' => 'allowances value',

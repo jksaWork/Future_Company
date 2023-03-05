@@ -150,8 +150,8 @@ class AdvancesController extends Controller
         DB::beginTransaction();
         try {
             $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
+            $Advancess = Advances::findOrFail($id);
 
-           
             $allowances = employee_allowances::where([
                 ['status', 1],
                 ['employee_id', $request->employee_id]
@@ -172,7 +172,9 @@ class AdvancesController extends Controller
 
 
                 // return  $allowances ;
-                $sum_advances = $sum_advances_value + $request->advances_value;
+                $sum_advances = $sum_advances_value + $request->advances_value - $Advancess->advances_value;
+              
+        //    return   $sum_advances;
                 $sum_employee = $employee->salary + $sum_allowances;
                 
 
@@ -217,6 +219,7 @@ class AdvancesController extends Controller
     {
         // return $id;
         $Advances = Advances::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $Advances->Transaction_id);
         $Advances->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.Advances.index');

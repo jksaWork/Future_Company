@@ -161,6 +161,7 @@ class SalariesController extends Controller
     {
         // return $id;
         $salaries = salaries::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $salaries->Transaction_id);
         $salaries->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.salaries.index');

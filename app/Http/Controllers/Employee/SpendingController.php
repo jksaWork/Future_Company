@@ -139,6 +139,7 @@ class SpendingController extends Controller
     {
         // return $id;
         $spending = spendings::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $spending->Transaction_id);
         $spending->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.spending.index');
