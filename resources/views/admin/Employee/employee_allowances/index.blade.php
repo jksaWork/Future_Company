@@ -41,7 +41,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                             <a href='{{ route('Employee.employee_allowances.create', ['type' => request()->type]) }}'
-                                class="btn btn-primary">{{ __('translation.employee_allowances') }}</a>
+                                class="btn btn-primary">{{ __('translation.add_employee_allowances') }}</a>
                         </div>
                         <!--end::Toolbar-->
                         <!--begin::Group actions-->

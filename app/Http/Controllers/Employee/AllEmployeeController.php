@@ -131,7 +131,15 @@ class AllEmployeeController extends Controller
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        // return $request;
+        $request->validate([
+            'name' =>'required',
+            'email' => 'required|exists:employees,email',
+            'phone' =>'required',
+            'address' =>'required|string|max:500',
+            'salary' =>'required|nullable|numeric',
+            'categories_id' =>'required',
+            'data'=>'required',
+        ]);
         try {
 
             $id = Category::where('categories_name', $request->categories_id)->first()->id;

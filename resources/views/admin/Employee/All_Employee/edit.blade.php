@@ -22,7 +22,7 @@
                                     <input type="hidden" class="form-control form-control-solid" placeholder=""
                                         name="pro_id" value='{{ $employees->id }}' />
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="name" value='{{ $employees->name }}' required />
+                                        name="name" value='{{ $employees->name }}'  />
                                     @error('name')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -32,7 +32,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.email') }}</label>
                                     <input type="email" class="form-control form-control-solid" placeholder=""
-                                        name="email" value='{{ $employees->email }}' required />
+                                        name="email" value='{{ $employees->email }}'  />
                                     @error('email')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -43,7 +43,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="phone" value='{{ $employees->phone }}' required />
+                                        name="phone" value='{{ $employees->phone }}'  />
                                     @error('phone')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -54,7 +54,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.address') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="address" value='{{ $employees->address }}' required />
+                                        name="address" value='{{ $employees->address }}'  />
                                     @error('address')
                                         <span class="text-danger">
                                             {{ $message }}

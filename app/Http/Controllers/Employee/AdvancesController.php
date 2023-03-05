@@ -38,7 +38,7 @@ class AdvancesController extends Controller
         $request->validate([
             'employee_id' => 'required',
             'advances_value' => 'required|numeric',
-            'month_number' => 'required|numeric',
+            'month_number' => 'required',
             'year' => 'required|numeric',
         ]);
         DB::beginTransaction();

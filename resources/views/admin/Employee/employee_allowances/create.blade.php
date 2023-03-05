@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin')
 @section('main-head')
-    {{ __('translation.Add_a_new_employee_allowances') }}
+    {{ __('translation.add_employee_allowances') }}
     <small> - {{ __('translation.employees_management') }} </small>
 @endsection
 @section('content')
