@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\employee;
 use App\Models\Advances;
+use App\Models\employee_allowances;
+use App\Models\salaries;
 use App\Models\FinancialTreasuryTransactionHistorys;
 use Illuminate\Support\Facades\DB;
 // use App\Http\Requests\Request;
@@ -41,17 +43,41 @@ class AdvancesController extends Controller
         ]);
         DB::beginTransaction();
         try {
+            $salaries  = salaries::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
+             $salaries =  $salaries->count();
+                  if ($salaries == 0) {
+// dd('ok');
+
+
             $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
 
-            $sum_advances_value = 0;
-            foreach ($employee_advances as $index => $Advancess) {
-                $sum_advances_value += $Advancess->advances_value;
-            }
-            $sum = $sum_advances_value + $request->advances_value;
-            $employee = employee::find($request->employee_id);
-            $sum_employee = $employee->salary;
+           
+            $allowances = employee_allowances::where([
+                ['status', 1],
+                ['employee_id', $request->employee_id]
+                ])->get();
 
-            if ($sum  < $sum_employee) {
+                $employee = employee::find($request->employee_id);
+
+                $sum_allowances = 0;
+                foreach ($allowances as $index => $allowances) {
+                    $sum_allowances += $allowances->Allowances_id->	allowances_value;
+                }
+ 
+
+                $sum_advances_value = 0;
+                foreach ($employee_advances as $index => $Advancess) {
+                    $sum_advances_value += $Advancess->advances_value;
+                }
+
+
+                
+                $sum_advances = $sum_advances_value + $request->advances_value;
+                $sum_employee = $employee->salary + $sum_allowances;
+                // return $sum_employee;
+                // return  $sum_advances ;
+
+            if ($sum_advances  <= $sum_employee) {
                 $advance = Advances::create([
                     'employee_id' => $request->employee_id,
                     'year' => $request->year,
@@ -60,7 +86,6 @@ class AdvancesController extends Controller
                 ]);
 
                 $advances = Advances::findOrFail($advance->id);
-                   return  $advances->employee->name;
                 $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
 
                 $advances->update([
@@ -73,14 +98,19 @@ class AdvancesController extends Controller
                 session()->flash('error',  __('site.You_have_exceeded_the_salary_imit'));
                 return redirect()->back();
             }
+        } else {
+            session()->flash('error',  __('site.This_month_salary_was_delivered_earlier'));
+                return redirect()->back();
+        }
+
         } catch (Exception $e) {
-dd($e);
-            if ($e->getCode() == 51) {
-                DB::commit();
-                session()->flash('success', __('site.added_successfully'));
-                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            }
+            // dd($e);
+            // if ($e->getCode() == 51) {
+            //     DB::commit();
+            //     session()->flash('success', __('site.added_successfully'));
+            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            // }
             DB::rollBack();
             if ($e->getCode() == 50) {
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
@@ -121,15 +151,32 @@ dd($e);
         try {
             $employee_advances  = advances::where([['employee_id', $request->employee_id], ['month_number', $request->month_number], ['year', $request->year]])->get();
 
-            $sum_advances_value = 0;
-            foreach ($employee_advances as $index => $Advancess) {
-                $sum_advances_value += $Advancess->advances_value;
-            }
-            $sum = $sum_advances_value + $request->advances_value;
-            $employee = employee::find($request->employee_id);
-            $sum_employee = $employee->salary;
+           
+            $allowances = employee_allowances::where([
+                ['status', 1],
+                ['employee_id', $request->employee_id]
+                ])->get();
 
-            if ($sum  < $sum_employee) {
+                $employee = employee::find($request->employee_id);
+
+                $sum_allowances = 0;
+                foreach ($allowances as $index => $allowances) {
+                    $sum_allowances += $allowances->Allowances_id->	allowances_value;
+                }
+ 
+
+                $sum_advances_value = 0;
+                foreach ($employee_advances as $index => $Advancess) {
+                    $sum_advances_value += $Advancess->advances_value;
+                }
+
+
+                // return  $allowances ;
+                $sum_advances = $sum_advances_value + $request->advances_value;
+                $sum_employee = $employee->salary + $sum_allowances;
+                
+
+            if ($sum_advances  <= $sum_employee) {
             $Advancess = Advances::findOrFail($id);
 
             $Advancess->update([
@@ -149,7 +196,7 @@ dd($e);
             return redirect()->back();
         }
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));
