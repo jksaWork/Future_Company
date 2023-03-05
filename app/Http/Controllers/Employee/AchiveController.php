@@ -229,6 +229,7 @@ class AchiveController extends Controller
     {
         // $id = $request->invoice_id;
         $flight = employee::withTrashed()->where('id', $id)->restore();
+        $flight = employee_allowances::withTrashed()->where([['employee_id', $id],['status', 1]])->restore();
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.employee.Achive');
         

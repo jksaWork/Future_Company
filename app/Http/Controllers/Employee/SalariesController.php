@@ -50,6 +50,9 @@ class SalariesController extends Controller
         DB::beginTransaction();
 
         try {
+            if ($request->totle_salaries > 0) {
+               
+           
             $DATA = salaries::create([
                 'employee_id' => $request->employee_id,
                 'fixed_salary' => $request->fixed_salary,
@@ -72,6 +75,11 @@ class SalariesController extends Controller
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.salaries.index');
+        }else{
+            DB::commit();
+            session()->flash('error', __('site.The_total_salary_value_is_less_than_zero'));
+            return redirect()->route('Employee.salaries.index');
+        }
         } catch (Exception $e) {
             if ($e->getCode() == 51) {
                 DB::commit();
