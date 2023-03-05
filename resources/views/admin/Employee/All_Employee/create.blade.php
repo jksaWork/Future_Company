@@ -40,7 +40,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="phone" value=""  value="{{ old('phone') }}" />
+                                        name="phone"  value="{{ old('phone') }}" />
                                     @error('phone')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -76,11 +76,11 @@
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
                                         </label>
                                         <select class="form-control" name="categories_id" id="categories_id"
-                                            >
-                                            <option value="" selected disabled> {{ __('translation.Choose') }}
+                                        value="{{ old('categories_id') }}" >
+                                            <option  selected disabled> {{ __('translation.Choose') }}
                                             </option>
                                             @foreach ($Category as $categoryres)
-                                                <option value="{{ $categoryres->id }}">{{ $categoryres->categories_name }}
+                                                <option  value="{{ $categoryres->id }}">{{ $categoryres->categories_name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -96,7 +96,7 @@
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.allowances_id') }}
                                         </label>
-                                        <select  class="form-select form-select-solid is-valid" data-control="select2" name="data[]" data-allow-clear="true" multiple="multiple"  style="display: block;width: 100%;padding: 0.75rem 1rem;font-size: 1.1rem;font-weight: 500;line-height: 1.5;color: #181C32;background-color: #ffffff;background-clip: padding-box;border: 1px solid #E4E6EF;appearance: none;border-radius: 0.475rem;box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">
+                                        <select  class="form-select form-select-solid is-valid"  value="{{ old('select2') }}" data-control="select2" name="data[]" data-allow-clear="true" multiple="multiple"  style="display: block;width: 100%;padding: 0.75rem 1rem;font-size: 1.1rem;font-weight: 500;line-height: 1.5;color: #181C32;background-color: #ffffff;background-clip: padding-box;border: 1px solid #E4E6EF;appearance: none;border-radius: 0.475rem;box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">
                                             <option  selected disabled> --{{ __('translation.Choose_allowances') }}--
                                             </option>
                                             @foreach ($allowances as $allowances_id)

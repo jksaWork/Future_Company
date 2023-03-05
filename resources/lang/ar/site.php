@@ -15,6 +15,8 @@ return [
     'added_successfully' => 'تمت إضافة السجل بنجاح',
     'updated_successfully' => 'تم تحديث السجل بنجاح',
     'deleted_successfully' => 'تم حذف السجل بنجاح',
+    'has_been_transferred_successfully' => 'تم نقل السجل بنجاح',
+    'recovery_successfully' => 'تم استرجاع السجل بنجاح',
     'Some_Thing_Went_Worng'=>'هناك خطأ ما',
     'There_is_no_amount_available_in_the_safe'=>'لا يوجد مبلغ متوفر في خزينة',
     'Salary_has_already_been_submitted'=>'تم تسليم المرتب سابقا',

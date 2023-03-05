@@ -20,11 +20,11 @@
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
                                         </label>
-                                        <select class="form-control form-control-solid" name="employee_id" class="form-control">
+                                        <select class="form-control form-control-solid" value="{{ old('employees_name') }}" name="employee_id" class="form-control">
                                             <option value="" selected disabled> {{ __('translation.Choose_employee_id') }}
                                             </option>
                                             @foreach ($employees as $employes)
-                                                <option value="{{ $employes->id }}">{{ $employes->name }}
+                                                <option  value="{{ $employes->id }}">{{ $employes->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -52,10 +52,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
-                                        <select id='' class="form-control" name='month_number'>
-                                            <option value=''> {{ __('translation.chose_month_number') }}</option>
+                                        <select id='' class="form-control" name='month_number'  value="{{ old('month_number') }}">
+                                            <option> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
-                                                <option value='{{ $i }}'>
+                                                <option   value='{{ $i }}'>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
                                                 </option>
                                             @endfor
@@ -70,7 +70,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
-                                        <select id='' class="form-control form-control-solid discounts"
+                                        <select id='' class="form-control form-control-solid discounts"  value="{{ old('year') }}"
                                             name='year' readonly>
                                             @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
                                                 <option>{{ $year }}</option>

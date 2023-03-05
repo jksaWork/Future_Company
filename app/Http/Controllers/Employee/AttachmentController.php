@@ -46,7 +46,7 @@ class AttachmentController extends Controller
 
         // Delete in data
         image::where('id',$request->id)->where('filename',$request->filename)->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('success', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.All_Employee.show',$request->employees_id);
     }
 

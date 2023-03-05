@@ -32,6 +32,7 @@ class AdvancesController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'employee_id' => 'required',
             'advances_value' => 'required|numeric',
@@ -141,7 +142,7 @@ class AdvancesController extends Controller
         // return $id;
         $Advances = Advances::findOrFail($id);
         $Advances->delete();
-        session()->flash('error', __('site.deleted_successfully'));
+        session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.Advances.index');
     } //end of destroy
 

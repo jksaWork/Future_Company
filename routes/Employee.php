@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Employee\ReportController;
+use App\Http\Controllers\Employee\AchiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,9 +82,50 @@ Route::group(
             Route::get('report_employee_allowances', [ReportController::class , 'report_employee_allowances'])->name('employee_allowances.report');
             Route::get('report_salaries', [ReportController::class , 'report_salaries'])->name('salaries.report');
         });
+        Route::prefix('Achive')->name('Achive.')->middleware(['auth:admin'])->group(function () {
+
+            Route::get('Achive_section', [AchiveController::class , 'Achive_section'])->name('section.Achive');
+            Route::get('Section-Achive', [AchiveController::class , 'SectionAchive'])->name('Section.Achives');
+            Route::get('Section-Achive_feedback/{id}', [AchiveController::class , 'SectionAchiveFeedback'])->name('Section.Achives.feedback');
 
 
+            Route::get('Achive_spending', [AchiveController::class , 'Achive_spending'])->name('spending.Achive');
+            Route::get('spending-Achive', [AchiveController::class , 'spendingAchive'])->name('spending.Achives');
+            Route::get('spending-Achive_feedback/{id}', [AchiveController::class , 'spendingAchiveFeedback'])->name('spending.Achives.feedback');
+        
 
+            Route::get('Achive_Category', [AchiveController::class , 'Achive_Category'])->name('Category.Achive');
+            Route::get('Category-Achive', [AchiveController::class , 'CategoryAchive'])->name('Category.Achives');
+            Route::get('Category-Achive_feedback/{id}', [AchiveController::class , 'CategoryAchiveFeedback'])->name('Category.Achives.feedback');
+        
+        
+            Route::get('Achive_allowances', [AchiveController::class , 'Achive_allowances'])->name('allowances.Achive');
+            Route::get('allowances-Achive', [AchiveController::class , 'allowancesAchive'])->name('allowances.Achives');
+            Route::get('allowances-Achive_feedback/{id}', [AchiveController::class , 'allowancesAchiveFeedback'])->name('allowances.Achives.feedback');
+        
+
+            
+            Route::get('Achive_employee', [AchiveController::class , 'Achive_employee'])->name('employee.Achive');
+            Route::get('employee-Achive', [AchiveController::class , 'employeeAchive'])->name('employee.Achives');
+            Route::get('employee-Achive_feedback/{id}', [AchiveController::class , 'employeeAchiveFeedback'])->name('employee.Achives.feedback');
+        
+        
+            
+            Route::get('Achive_employee_allowances', [AchiveController::class , 'Achive_employee_allowances'])->name('employee_allowances.Achive');
+            Route::get('employee_allowances-Achive', [AchiveController::class , 'employee_allowancesAchive'])->name('employee_allowances.Achives');
+            Route::get('employee_allowances-Achive_feedback/{id}', [AchiveController::class , 'employee_allowancesAchiveFeedback'])->name('employee_allowances.Achives.feedback');
+        
+         
+            Route::get('Achive_Advances', [AchiveController::class , 'Achive_Advances'])->name('Advances.Achive');
+            Route::get('Advances-Achive', [AchiveController::class , 'AdvancesAchive'])->name('Advances.Achives');
+            Route::get('Advances-Achive_feedback/{id}', [AchiveController::class , 'AdvancesAchiveFeedback'])->name('Advances.Achives.feedback');
+        
+
+            Route::get('Achive_salaries', [AchiveController::class , 'Achive_salaries'])->name('salaries.Achive');
+            Route::get('salaries-Achive', [AchiveController::class , 'salariesAchive'])->name('salaries.Achives');
+            Route::get('salaries-Achive_feedback/{id}', [AchiveController::class , 'salariesAchiveFeedback'])->name('salaries.Achives.feedback');
+        
+        });
         Route::get('employees-status/{id}', [DataController::class , 'ChangeStatus'])->name('employees.status');
 
     }

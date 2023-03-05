@@ -20,7 +20,7 @@
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
                                         </label>
-                                        <select class="form-control form-control-solid" name="employee_id" class="form-control">
+                                        <select class="form-control form-control-solid" name="employee_id" class="form-control" value="{{ old('employee_id') }}">
                                             <option value="" selected disabled> {{ __('translation.Choose_employee_id') }}
                                             </option>
                                             @foreach ($employees as $employes)
@@ -39,8 +39,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
-                                        </label>
-                                        <select class="form-control form-control-solid" name="allowances_id" class="form-control">
+                                        </label> 
+                                        <select class="form-control form-control-solid" name="allowances_id" class="form-control" value="{{ old('allowances_id') }}">
                                             <option value="" selected disabled> {{ __('translation.Choose') }}
                                             </option>
                                             @foreach ($allowances as $allowancess)
@@ -60,7 +60,7 @@
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
                                         <select id='' class="form-control form-control-solid" name='month_number'>
-                                            <option value=''> {{ __('translation.chose_month_number') }}</option>
+                                            <option value="{{ old('month_number') }}"> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
                                                 <option value='{{ $i }}'>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
@@ -77,7 +77,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
-                                    <select id='' class="form-control form-control-solid discounts"
+                                    <select id='' class="form-control form-control-solid discounts" value="{{ old('year') }}"
                                         name='year' readonly>
                                         @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
                                             <option value='{{$year}}' >{{ $year }}</option>
