@@ -69,10 +69,10 @@
                                         <thead>
                                             <!--begin::Table row-->
                                             <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase ">
-                                                <th class="">{{ __('translation.logo') }}</th>
-                                                <th class="">{{ __('translation.name') }}</th>
-                                                <th class="">{{ __('translation.phone') }}</th>
-                                                <th class="">{{ __('translation.email') }}</th>
+                                                <th class="">{{ __('translation.title') }}</th>
+                                                <th class="">{{ __('translation.realstate_number') }}</th>
+                                                <th class="">{{ __('translation.address') }}</th>
+                                                <th class="">{{ __('translation.price') }}</th>
                                                 {{-- <th class="">{{ __('translation.location')}}</th>
                                         <th class="">{{__('translation.description')}}</th> --}}
                                                 <th class="">{{ __('translation.status') }}</th>
@@ -86,12 +86,12 @@
                                                 <tr>
                                                     <td>
                                                         <div class="text-center">
-                                                            <img src="{{ $realsate->logo }}" width='70' alt="">
+                                                            {{ $realsate->title }}
                                                         </div>
                                                     </td>
-                                                    <td> {{ $realsate->realsate }}</td>
+                                                    <td> {{ $realsate->realstate_number }}</td>
+                                                    <td> {{ $realsate->address }}</td>
                                                     <td> {{ $realsate->price }}</td>
-                                                    <td> {{ $realsate->email }}</td>
                                                     {{-- <td> {{$agent->description}}</td> --}}
                                                     <td> {!! $realsate->getStatusWithSpan() !!}</td>
                                                 </tr>
@@ -134,9 +134,7 @@
                                                                 <i class="fa fa-download"></i>
                                                             </a>
 
-                                                            {{-- <a href="{{ route('agent.show', ['status' => true , 'agent' => $attachment->id]) }}" class="btn btn-light-success btn-sm btn-icon">
-                                                            <i class="fa fa-toggle-on"></i>
-                                                             </a> --}}
+
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -70,14 +70,8 @@
             </div><!-- end of col -->
         </div>
     </div><!-- end of row -->
-
     @endsection
-
     @push('scripts');
-    <script src="{{ asset('admin_assets/js/custom/index.js')}}"></script>
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
         let role;
         let rolesTable = $('#roles-table').DataTable({
@@ -89,7 +83,6 @@
             },
             ajax: {
                 url: '{{ route('admin.user.data') }}',
-
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},

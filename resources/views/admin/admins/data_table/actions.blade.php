@@ -1,6 +1,6 @@
 {{-- @if (auth()->user()->hasPermission('update_admins')) --}}
     <div style="min-width: 100px">
-        <a href="{{ route('users.edit', $id) }}" class="btn btn-light-info btn-sm btn-icon me-1">
+        <a href="{{ route('users.show', ['status' => true , 'user' => $id]) }}" class="btn btn-light-info btn-sm btn-icon me-1">
             <span class="svg-icon svg-icon-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black"></path>
@@ -9,7 +9,7 @@
             </span>
         </a>
 
-            <a href="{{ route('users.show', ['status' => true , 'user' => $id]) }}"
+            <a href="{{ route('users.edit', $id) }}"
                  class="btn btn-light-success btn-sm btn-icon me-1">
                  <span class="svg-icon svg-icon-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
