@@ -80,7 +80,7 @@ class EmployeeAllowancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.employee_allowances.index');
         } catch (Exception $e) {
-            dd('$e');
+            dd($e);
             // if ($e->getCode() == 51) {
             //     DB::commit();
             //     session()->flash('success', __('site.added_successfully'));
