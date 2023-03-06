@@ -14,7 +14,6 @@
                         <div class="form-group col-md-6">
                             <label for="">{{ __('translation.chose_year') }}</label>
                             <select class="form-control col-md-6" name="" id="year_number">
-                                <option value=''>{{ __('translation.chose_year') }}</option>
                                 @foreach ([23, 24,25, 26, 25] as $year)
                                 <option value='20{{ $year }}'>20{{ $year }}</option>
                                 @endforeach
@@ -24,9 +23,8 @@
                         <div class="form-group ">
                             <label for="">{{ __('translation.chose_month') }}</label>
                             <select class="form-control " name="" id="month_number">
-                                <option value=''>{{ __('translation.chose_month') }}</option>
                                 @for ($i = 1; $i < 13; $i++)
-                                            <option value='{{$i}}'> {{$i . '  --   ' . date("F", mktime(null, null, null, $i, 1));}}</option>
+                                            <option value='{{$i}}'> {{$i . ' -- '. __('translation.'. date("M", mktime(null, null, null, $i, 1)));}}</option>
                                 @endfor
                             </select>
                     </div>

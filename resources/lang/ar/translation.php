@@ -500,8 +500,8 @@ return [
     'month' => 'الشهر',
     'credit_total' => 'مجموع الايراد',
     'debit_total' => "مجموع المنصرف",
-    'chose_year' => "فلتره حسب السنه",
-    'chose_month' => 'فلتره حسب الشهر',
+    'chose_year' => "السنه",
+    'chose_month' => 'الشهر',
 
     'Are_you_sure' => "'هل أنت واثق؟'",
     'You_will_not_be_able_to_back_down_from_this' => 'أن تريد نقل سجل واحدة الى سلة المحذوفات',
