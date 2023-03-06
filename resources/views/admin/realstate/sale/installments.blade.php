@@ -10,7 +10,7 @@
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
-                <h3 style='font-size:20px'>{{__('translation.receipt_of_revenues')}} </h3>
+                <h3 style='font-size:20px'>{{__('translation.recept_installment')}} </h3>
             </div>
             <!--begin::Card body-->
             <div class="card-body pt-0">
@@ -44,7 +44,7 @@
                                 </div>
                             <div class='pt-10'>
                             <button class="btn btn-primary">
-                                {{__('translation.receipt_of_revenue')}}
+                                {{__('translation.recept_installment')}}
                             </button></div>
 
                             </div>

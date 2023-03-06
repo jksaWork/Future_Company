@@ -161,6 +161,13 @@ class RentController extends Controller
                     'status' => 1,
                 ]
             );
+            // Increment Month Count
+            // $data =  DB::table('owners_realstates')->where(
+            //     [
+            //         'owner_id' => $request->owner_id,
+            //         'realstate_id' => $request->realstate_id,
+            //     ]
+            // )->first();
             // Add Money To History
             $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
             DB::table('rent_revenues')
@@ -168,9 +175,7 @@ class RentController extends Controller
                 ->update(['transaction_id' => $transaction->id]);
 
             session()->flash('success',  __('translation.recept_revenues_success_fule'));
-
             DB::commit();
-
             return redirect()->route('realstate.rent_invoice', $id);
         } catch (\Throwable $th) {
             DB::rollback();
