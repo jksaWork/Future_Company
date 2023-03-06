@@ -538,4 +538,6 @@ return [
     'assing_renter' => 'تعين مستاجر',
     'assing_saller' => 'تعين مالك',
     'search_with_number_title_and_place' => 'رقم العقار \ العنوان \ المكان',
+    'you_must_chose_the_real_state' => 'عليك اختار العقار اولا ثم اختيار الشهر',
+    'month_name' => 'الشهر',
 ];

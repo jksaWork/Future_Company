@@ -77,7 +77,7 @@
                 <div class="card-body pt-0">
                     @include('layouts.includes.session')
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-7">
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
                                     id="roles-table" style="width: 100%;">
@@ -89,7 +89,7 @@
                                             <th>{{ __('translation.real_state_title') }}</th>
                                             <th>{{ __('translation.address') }}</th>
                                             <th>{{ __('translation.price') }}</th>
-                                            <th>{{ __('translation.month_count') }}</th>
+                                            <th>{{ __('translation.month_name') }}</th>
                                             <th>{{ __('translation.form_date') }}</th>
                                             <th>{{ __('translation.status') }}</th>
                                             <th>@lang('translation.action')</th>

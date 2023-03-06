@@ -43,7 +43,7 @@
                                           <select id=''  style='width:100%' name='month_number'>
                                             <option value=''> {{__('translation.chose_month_number')}}</option>
                                             @for ($i = 1; $i < 13; $i++)
-                                            <option value='{{$i}}'> {{$i . '  --   ' . date("F", mktime(null, null, null, $i, 1));}}</option>
+                                            <option value='{{$i}}'> {{$i . '  --   ' . __('translation.' .date("M", mktime(null, null, null, $i, 1)));}}</option>
                                             @endfor
                                         </select>
                                         </div>

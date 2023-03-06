@@ -129,10 +129,15 @@ class RentController extends Controller
 
     public function receiptRevenueSetp2(Request $request)
     {
-        $realstate = RealState::with('CurrentOwner')->find($request->realstate_id);
-        $month_number = $request->month_number;
-        if (count($realstate->CurrentOwner) == 0) throw new Exception(__('translation.has_no_current_user'));
-        return view('admin.realstate.rent.setp_2', compact('realstate', 'month_number'));
+        try {
+
+            $realstate = RealState::with('CurrentOwner')->findOrFail($request->realstate_id);
+            $month_number = $request->month_number;
+            if (count($realstate->CurrentOwner) == 0) throw new Exception(__('translation.has_no_current_user'));
+            return view('admin.realstate.rent.setp_2', compact('realstate', 'month_number'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.you_must_chose_the_real_state'));
+        }
     }
     public function handelRevenue(Request $request)
     {
@@ -162,12 +167,13 @@ class RentController extends Controller
                 ]
             );
             // Increment Month Count
-            // $data =  DB::table('owners_realstates')->where(
-            //     [
-            //         'owner_id' => $request->owner_id,
-            //         'realstate_id' => $request->realstate_id,
-            //     ]
-            // )->first();
+            DB::table('owners_realstates')->where(
+                [
+                    'owner_id' => $request->owner_id,
+                    'realstate_id' => $request->realstate_id,
+                ]
+            )->increment('month_count', 1);
+            // dd($data->fresh());
             // Add Money To History
             $transaction = FinancialTreasuryTransactionHistorys::MakeTransacaion($realstate->price, 'revenues', $realstate->title . '-' . $realstate->address, $id);
             DB::table('rent_revenues')
@@ -226,6 +232,10 @@ class RentController extends Controller
                 if ($item->status) return  "<span class='badge badge-light-success'>" . __('translation.revened') . "</span>";
                 else return "<span class='badge badge-light-danger'> " . __('translation.unrevened') . "</span>";
             })
+            ->editColumn('month_number', function ($item) {
+                return  $item->month_number == 0 ? "-" : __('translation.' . date("M", mktime(1, null, null, $item->month_number, 1)));
+            })
+
             ->editColumn(
                 'actions',
                 'admin.realstate.rent.reveune.actions'
