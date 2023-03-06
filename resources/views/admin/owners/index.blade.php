@@ -107,7 +107,7 @@
     <script>
         let role;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "Brtip",
+            dom: "Brtp",
             serverSide: true,
             processing: true,
             "language": {

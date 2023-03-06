@@ -75,7 +75,7 @@
 <script>
 let role, year, month;
 let rolesTable = $('#roles-table').DataTable({
-     dom: "Brtip",
+     dom: "Brtp",
      serverSide: true,
      processing: true,
      "language": {

@@ -101,7 +101,7 @@
     <script>
         let role;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "Brtip",
+            dom: "Brtp",
             buttons: [
                 'copy', {
                     extend:'excel',
