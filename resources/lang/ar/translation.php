@@ -320,7 +320,7 @@ return [
     'type' => 'النوع',
     'real_state_categories' => "انواع العقارات",
     'no_data_found' => 'لايوجد بيانات في الوقت الحالي',
-    'add_real_state_category' => 'اضافه نوع جديد',
+    'add_real_state_category' => 'اضافه عقار جديد',
     'rent_realstate' => 'عقارات الايجار',
     'Add Realstate' => 'اضافه عقار',
     'show_real_state' => 'عرض العقارات',
