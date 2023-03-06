@@ -92,7 +92,7 @@ return [
     'submit' => 'تاكيد',
     'created_at' => 'التاريخ',
     'Add_a_new_department_for_an_employee' => 'اضافة قسم جديد لموظف',
-    'Add_sections_for_employees' => 'اضافة اقسام لموظفين',
+    'Add_sections_for_employees' => 'اضافة قسم للموظفين',
     'Add_an_employee' => 'اضافة موظف',
     'filename' => 'اسم الملف',
     'add_salaries' => 'اضافة راتب',

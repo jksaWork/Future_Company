@@ -96,9 +96,10 @@
                                     <div class="form-group">
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.allowances_id') }}
                                         </label>
-                                        <select  class="form-select form-select-solid is-valid"  value="{{ old('select2') }}" data-control="select2" name="data[]" data-allow-clear="true" multiple="multiple"  style="display: block;width: 100%;padding: 0.75rem 1rem;font-size: 1.1rem;font-weight: 500;line-height: 1.5;color: #181C32;background-color: #ffffff;background-clip: padding-box;border: 1px solid #E4E6EF;appearance: none;border-radius: 0.475rem;box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">
-                                            <option  selected disabled> --{{ __('translation.Choose_allowances') }}--
-                                            </option>
+                                        {{-- <select  class="form-select form-select-solid is-valid"   data-control="select2"  data-allow-clear="true" multiple="multiple"  style="display: block;width: 100%;padding: 0.75rem 1rem;font-size: 1.1rem;font-weight: 500;line-height: 1.5;color: #181C32;background-color: #ffffff;background-clip: padding-box;border: 1px solid #E4E6EF;appearance: none;border-radius: 0.475rem;box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;"> --}}
+                                            <select class="form-select form-select-solid " data-control="select2" name="data[]"   multiple="multiple">
+                                            {{-- <option  selected disabled> --{{ __('translation.Choose_allowances') }}--
+                                            </option> --}}
                                             @foreach ($allowances as $allowances_id)
                                             <option value="{{ $allowances_id->id}}">{{ $allowances_id->allowances_name }} ( {{ $allowances_id->allowances_value }}$)
                                             </option>
