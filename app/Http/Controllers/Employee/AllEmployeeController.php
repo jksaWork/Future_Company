@@ -75,7 +75,7 @@ class AllEmployeeController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.All_Employee.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }

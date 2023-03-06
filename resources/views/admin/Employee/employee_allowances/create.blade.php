@@ -38,7 +38,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category_allowances') }}
                                         </label> 
                                         <select class="form-control form-control-solid" name="allowances_id" class="form-control" value="{{ old('allowances_id') }}">
                                             <option value="" selected disabled> {{ __('translation.Choose') }}

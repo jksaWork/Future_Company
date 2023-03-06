@@ -12,6 +12,7 @@ return [
     'Add_a_new_employee' => 'Add a new employee',
     'salary' => 'salary',
     "spending_list"=>'spending list',
+    'Category_allowances'=>' Type allomances',
     'spending_add'=>'  add spending',
     'Print_outgoing_invoice'=>' Outgoing bill',
     'Invoice'=>'Invoice',
@@ -220,6 +221,7 @@ return [
     'users_account' => "users account",
     'Mangements' => "Mangements",
     'add_new_users' => "add new users",
+    'Admin_Mangement' => 'edite users',
     'users_mangement' => 'users mangement',
     // 'rent_offer' => 'عرث'
     'rent_offer' => 'rent offer',
