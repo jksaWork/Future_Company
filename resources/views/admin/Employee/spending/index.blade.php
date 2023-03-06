@@ -72,7 +72,7 @@
                                             <th class="">{{ __('translation.spending_name') }}</th>
                                             <th class="">{{ __('translation.spending_value') }}</th>
                                             <th class="">{{ __('translation.section_id') }}</th>
-                                            <th class="">{{ __('translation.month') }}</th>
+                                            <th class="">{{ __('translation.created_at') }}</th>
                                             <th class="">{{ __('translation.description') }}</th>
                                             <th>@lang('translation.action')</th>
                                         </tr>

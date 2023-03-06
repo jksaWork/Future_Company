@@ -139,12 +139,13 @@ class RealStateController extends Controller
      */
     public function show($realStat_id)
     {
-
+// return $realStat_id;
         try {
             $rel = RealState::with('attachments', 'Category', 'Owners', 'CurrentOwner', 'Installments.Owner')->findOrFail($realStat_id);
             if (request()->has('status')) return $this->handelStatus($rel);
             else return $this->HandelShow($rel);
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->withErrors(__('translation.Some Thing Went Worng'));
         }
     }

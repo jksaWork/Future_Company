@@ -23,6 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->date('month_number');
             $table->text('description')->nullable();
             $table->string('status')->default(1);
+            $table->date('month');
             $table->softDeletes();
             $table->unsignedBigInteger('categories_id');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');

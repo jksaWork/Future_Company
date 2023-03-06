@@ -134,21 +134,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class='col-md-6'>
-                                    <div class="form-group">
-                                        <label for="" class="fs-6 fw-bold mb-2"> {{ __('translation.status') }}
-                                        </label>
-                                        <select class="form-control" name="status" id="status">
-
-                                            <option value="1" @if ($employees->status == 1) selected @endif>
-                                                {{ __('translation.active') }}
-                                            </option>
-                                            <option value="0" @if ($employees->status == 0) selected @endif>
-                                                {{ __('translation.in_active') }}
-                                            </option>
-
-                                        </select>
-                                    </div>
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label>{{__('translation.created_at')}}  :</label>
+                                    <input class="form-control fc-datepicker form-control-solid" name="month" placeholder="YYYY-MM-DD"
+                                    type="date" value="{{$employees->month}}" required>
+                                        @error('advances_Date')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
                                 </div>
                             </div>
                             <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}

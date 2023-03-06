@@ -30,8 +30,8 @@ class EmployeeRequest extends FormRequest
             'address' =>'required|string|max:500',
             'salary' =>'required|nullable|numeric',
             'categories_id' =>'required|exists:categories,id',
+            'month'=>'required|date_format:Y-m-d',
             'data'=>'required',
-            'status' =>'required|in:1,0',
         ];
 
     }

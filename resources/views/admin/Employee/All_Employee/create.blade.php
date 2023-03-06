@@ -113,8 +113,15 @@
                                 </div>
 
 
-                                <div class='col-md-6'>
-                                    <x:status-filed name='status' />
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label>{{__('translation.created_at')}}  :</label>
+                                    <input class="form-control fc-datepicker" name="month" value="{{ date('Y-m-d') }}"
+                                    type="date"  value="{{ old('month') }}" >
+                                        @error('month')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
                                 </div>
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                                 </label>

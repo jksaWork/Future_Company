@@ -135,7 +135,7 @@
 
                                                                     <th class="">{{ __('translation.employees_name') }}
                                                                     </th>
-                                                                    <th class="">{{ __('translation.allowances_value') }}</th>
+                                                                    <th class="">{{ __('translation.allowancess_fixed') }}</th>
                                                                     <th class="">
                                                                         {{ __('translation.salary') }}</th>
                                                                     <th class="">{{ __('translation.created_at') }}
@@ -158,7 +158,7 @@
                                                                             {!! $allowanc->Allowances_id->allowances_name !!} ( {{number_format($allowanc->Allowances_id->allowances_value ,2)}})  
                                                                             <br>@empty{{ __('translation.No_Data_Was_Found') }} @endforelse</td>
                                                                         <td>{!!   number_format($employees->salary,2)!!}</td>
-                                                                        <td>{!! $employees->created_at !!}</td>
+                                                                        <td>{!! $employees->month!!}</td>
                                                                     </tr>
                                                                    
                          

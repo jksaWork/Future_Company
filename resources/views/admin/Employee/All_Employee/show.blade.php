@@ -74,7 +74,9 @@
                                                             ({{ number_format($allowanc->Allowances_id->allowances_value, 2) }})<br>
                                                             @empty{{ __('translation.No_Data_Was_Found') }}
                                                         @endforelse
-                                                    </td>
+                                                    </td> 
+                                                     <th scope="row">{{ __('translation.created_at') }}</th>
+                                                    <td>{{ $employees->month }}</td>
                                                 </tr>
                                             </thead>
 
