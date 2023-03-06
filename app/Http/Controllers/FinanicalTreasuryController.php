@@ -23,7 +23,7 @@ class FinanicalTreasuryController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['amount' => 'required']);
+        $data = $request->validate(['amount' => 'required|numeric|min:0']);
         try {
             DB::beginTransaction();
             FinancialTreasuryTransactionHistorys::MakeTransacaion($request->amount, 'main_treasury', $request->note);

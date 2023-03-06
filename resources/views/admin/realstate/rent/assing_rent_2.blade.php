@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
-@section('main-head' , __('translation.realstate_mangements') . '-' . __('translation.receipt_of_revenues') )
+@section('main-head' , __('translation.realstate_mangements') . ' - ' . __('translation.show_opration_info') )
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->

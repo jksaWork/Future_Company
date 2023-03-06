@@ -55,7 +55,7 @@
                                     </div>
                                     <div class='pt-10'>
                                         <button class="btn btn-primary">
-                                            {{ __('translation.assing') }}
+                                            {{ request()->type  == 'sale' ? __('translation.assing_saller'): __('translation.assing_renter') }}
                                         </button>
                                     </div>
 
