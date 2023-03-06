@@ -410,6 +410,7 @@ return [
     'done' => 'تم الدفع',
     'is_payed' => 'حاله دفع القسط',
     'recept_installment' => 'استلام القسط',
+    'recept_installment_sidebar' => 'استلام الاقساط',
     'sale_realstate' => 'عقارات البيع',
     'saleowner_history' => 'سجلات البيع',
     'saleowner_name' => 'اسم المشتري',

@@ -194,12 +194,17 @@
                 {
                     data: 'month_number',
                     name: 'month_number',
+
                     searchable: false
+                    sortable: false
+
                 },
                 {
                     data: 'created_at',
                     name: 'created_at',
                     searchable: false
+                    sortable: false
+
                 },
                 {
                     data: 'status',

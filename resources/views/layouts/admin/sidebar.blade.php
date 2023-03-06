@@ -287,7 +287,7 @@
                         <span class="menu-title">{{ __('translation.real_state_categories') }}</span>
                     </a>
                 </div>
-           
+
 
 
                 <div class="menu-item">
@@ -418,7 +418,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">{{ __('translation.recept_installment') }}</span>
+                                <span class="menu-title">{{ __('translation.recept_installment_sidebar') }}</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -628,7 +628,7 @@
                             </div> --}}
 
 
-                            
+
                             {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.allowances.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
@@ -639,7 +639,7 @@
                             </div> --}}
 
 
-                               
+
                             {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.employee.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
@@ -675,7 +675,7 @@
                                     <span class="menu-title">{{ __('translation.salaries') }}</span>
                                 </a>
                             </div>
-                
+
                     </div>
 
 
