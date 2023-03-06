@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\employee;
-use App\Models\image;
+use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\EmployeeRequest;
@@ -23,7 +23,7 @@ class AttachmentController extends Controller
             $file->storeAs('attachments/employeess/'.$request->employees_name, $file->getClientOriginalName(),'upload_attachments');
 
             // insert in image_table
-            $images= new image();
+            $images= new Image();
             $images->filename=$name;
             $images->imageable_id = $request->employees_id;
             $images->imageable_type = 'App\Models\employees';
@@ -45,7 +45,7 @@ class AttachmentController extends Controller
         Storage::disk('upload_attachments')->delete('attachments/employeess/'.$request->employees_name.'/'.$request->filename);
 
         // Delete in data
-        image::where('id',$request->id)->where('filename',$request->filename)->delete();
+        Image::where('id',$request->id)->where('filename',$request->filename)->delete();
         session()->flash('success', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.All_Employee.show',$request->employees_id);
     }

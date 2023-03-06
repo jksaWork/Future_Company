@@ -67,12 +67,12 @@ class EmployeeAllowancesController extends Controller
                 'status' => 0,
                 'month_number' => $request->month_number,
             ]);
-            $employ_allow = employee_allowances::findOrFail($employee_allow->id);
+            $employee_allow = employee_allowances::findOrFail($employee_allow->id);
             //    return  $spendingses->spending_value;
             
             $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
             
-           $d= $employ_allow->update([
+           $d= $employee_allow->update([
                 'Transaction_id' => $res->id,
             ]);
             
@@ -80,7 +80,7 @@ class EmployeeAllowancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.employee_allowances.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             // if ($e->getCode() == 51) {
             //     DB::commit();
             //     session()->flash('success', __('site.added_successfully'));
@@ -173,7 +173,10 @@ class EmployeeAllowancesController extends Controller
     public function destroy( Employee $employee , $id)
     {
         // return $id;
-        $employemployee_allowancesee = employee_allowances::findOrFail($id);
+        $employemployee_allowancesee = employee_allowances::findOrFail($id);  
+        // return $employemployee_allowancesee->Transaction_id;
+        $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $employemployee_allowancesee->Transaction_id);
+ 
         $employemployee_allowancesee->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.employee_allowances.index');

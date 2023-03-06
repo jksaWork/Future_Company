@@ -83,6 +83,7 @@
                                     <tr>
                                         <th>{{ __('translation.id') }}</th>
                                         <th class="">{{ __('translation.employee_name') }}</th>
+                                        <th class="">{{ __('translation.month') }}</th>
                                         <th class="">{{ __('translation.created_at') }}</th>
                                         <th class="">{{ __('translation.allowances_name') }}</th>
                                     </tr>
@@ -93,7 +94,8 @@
                                     @forelse ($employee_allowances as $index=>$allowances)
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: -moz-right;">
                                             <td>{{ $index + 1 }}</td>
-                                            {{-- <td>{{ $allowances->employee->name }}</td> --}}
+                                            <td>{{ $allowances->employee->name }}</td>
+                                            <td>{{ __('translation.Month')}}-{{ $allowances->month_number}}</td>
                                              <td>{{ $allowances->created_at }}</td>
                                              <td> {{ $allowances->Allowances_id->allowances_name }} ({{ number_format($allowances->Allowances_id->allowances_value, 2) }})</td>
                                         </tr>
@@ -107,6 +109,7 @@
                                     <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: -moz-right;">
 
 
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td>{{ __('translation.total') }}:</td>

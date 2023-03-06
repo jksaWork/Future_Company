@@ -70,7 +70,7 @@ class CategoiresController extends Controller
         return redirect()->route('Employee.categories.index');
 
     }catch(Exception $e){
-        dd($e);
+        // dd($e);
         session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
         return redirect()->back();
     }

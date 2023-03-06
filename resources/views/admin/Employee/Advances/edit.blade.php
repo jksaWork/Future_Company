@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin')
 @section('main-head')
-    {{ __('translation.Add_a_new_employee') }}
+    {{ __('translation.edit_employee_Advances') }}
     <small> - {{ __('translation.employees_management') }} </small>
 @endsection
 @section('content')
@@ -22,7 +22,7 @@
                                         <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.employees_name') }}
                                         </label>
                                         <select class="form-control form-control-solid" name="employee_id" class="form-control">
-                                            <option value="" selected > {{ __('translation.Choose_employee_id') }}
+                                            <option selected disabled > {{ __('translation.Choose_employee_id') }}
                                             </option>
                                             @foreach ($employees as $employes)
                                                 <option value="{{ $employes->id }}" @if ($Advancess->employee_id == $employes->id ) selected  @endif>{{ $employes->name }}
@@ -53,7 +53,7 @@
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
                                         <select id='' class="form-control form-control-solid discounts" name='month_number'>
-                                            <option value=''> {{ __('translation.chose_month_number') }}</option>
+                                            <option selected disabled> {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
                                                 <option value='{{$i}}'  @if ($Advancess->month_number == $i) selected  @endif>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}

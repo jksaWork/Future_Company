@@ -74,6 +74,7 @@
                                             <th class="">{{ __('translation.salary') }}</th>
                                             <th class="">{{ __('translation.categories_id') }}</th>
                                             <th class="">{{ __('translation.allowances_id') }}</th>
+                                            <th class="">{{ __('translation.created_at') }}</th>
                                             <th class="">{{ __('translation.status') }}</th>
                                             <th>@lang('translation.action')</th>
                                         </tr>
@@ -168,6 +169,10 @@
                 {
                     data: 'allowances_id',
                     name: 'allowances_id'
+                },
+                 {
+                    data: 'month',
+                    name: 'month'
                 },
                 {
                     data: 'status',

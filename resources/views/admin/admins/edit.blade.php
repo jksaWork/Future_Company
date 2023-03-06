@@ -1,7 +1,7 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
 
-@section('main-head' ,  'Admin Mangement')
+@section('main-head' , __('translation.Admin_Mangement'))
 @section('content')
 
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -22,7 +22,7 @@
                     <x:text-input class="col-md-6" name='phone' value='{{ $admin->phone }}'  />
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Roles</label>
+                            <label for="">{{__('translation.Roles')}}</label>
                             <select class="form-control" name="role_id" id="" >
                                 @foreach ($roles as $item)
                                 <option value="{{$item->id}}"> {{$item->name}}</option>
@@ -37,10 +37,10 @@
                     </div>
                     <div class="mt-3">
                         <button class="btn-primary btn">
-                            Save
+                            {{__('translation.Save')}}
                         </button>
                         <a href="javascript::back()" class="btn btn-light-danger">
-                            Back
+                            {{__('translation.cancel')}}
                         </a>
                     </div>
                 </div>

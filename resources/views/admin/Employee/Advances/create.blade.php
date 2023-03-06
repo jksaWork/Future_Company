@@ -53,7 +53,7 @@
                                     <div class="form-group">
                                         <label class=" fs-6 fw-bold mb-2">{{ __('translation.month_number') }}</label>
                                         <select id='' class="form-control" name='month_number'  value="{{ old('month_number') }}">
-                                            <option> {{ __('translation.chose_month_number') }}</option>
+                                            <option selected disabled >  {{ __('translation.chose_month_number') }}</option>
                                             @for ($i = 1; $i < 13; $i++)
                                                 <option   value='{{ $i }}'>
                                                     {{ $i . '  --   ' . date('F', mktime(null, null, null, $i, 1)) }}
@@ -73,7 +73,7 @@
                                         <select id='' class="form-control form-control-solid discounts"  value="{{ old('year') }}"
                                             name='year' readonly>
                                             @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
-                                                <option>{{ $year }}</option>
+                                                <option>{{ $year  }}</option>
                                             @endfor
                                         </select>
                                         @error('year')

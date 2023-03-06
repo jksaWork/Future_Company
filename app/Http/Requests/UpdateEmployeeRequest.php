@@ -30,7 +30,7 @@ class UpdateEmployeeRequest extends FormRequest
             'address' =>'required|string|max:500',
             'salary' =>'required|nullable|numeric',
             'categories_id' =>'required',
-            'status' =>'required|in:1,0',
+            'data'=>'required',
         ];
 
 

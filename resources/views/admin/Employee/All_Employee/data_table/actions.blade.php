@@ -23,7 +23,7 @@
             </span>
         </a>
 
-        <form action="{{ route('Employee.All_Employee.destroy', $id) }}"
+        {{-- <form action="{{ route('Employee.All_Employee.destroy', $id) }}"
         id='delteForm'
 
     class="my-1 my-xl-0" method="post" style="display: inline-block;">
@@ -40,7 +40,7 @@
                 </svg>
             </span>
         </button>
-    </form>
+    </form> --}}
 </div>
 
 {{-- @endif --}}

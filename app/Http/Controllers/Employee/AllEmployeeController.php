@@ -53,9 +53,10 @@ class AllEmployeeController extends Controller
                 'phone' => $request->phone,
                 'month_number' => Carbon::now(),
                 'address' => $request->address,
+                'month' => $request->month,
                 'salary' => $request->salary,
                 'categories_id' => $request->categories_id,
-                'status' => $request->status,
+                'status' => 1,
                 'description' => $request->description,
             ]);
             // return $data->id;
@@ -74,7 +75,7 @@ class AllEmployeeController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.All_Employee.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
@@ -131,7 +132,16 @@ class AllEmployeeController extends Controller
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        // return $request;
+        $request->validate([
+            'name' =>'required',
+            'email' => 'required|exists:employees,email',
+            'phone' =>'required',
+            'address' =>'required|string|max:500',
+            'salary' =>'required|nullable|numeric',
+            'month'=>'required|date_format:Y-m-d',
+            'categories_id' =>'required',
+            'data'=>'required',
+        ]);
         try {
 
             $id = Category::where('categories_name', $request->categories_id)->first()->id;
@@ -146,9 +156,9 @@ class AllEmployeeController extends Controller
                 'month_number' => Carbon::now(),
                 'phone' => $request->phone,
                 'address' => $request->address,
+                'month' => $request->month,
                 'salary' => $request->salary,
                 'categories_id' => $id,
-                'status' => $request->status,
                 'description' => $request->description,
             ]);
 

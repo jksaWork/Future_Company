@@ -22,7 +22,7 @@
                                     <input type="hidden" class="form-control form-control-solid" placeholder=""
                                         name="pro_id" value='{{ $employees->id }}' />
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="name" value='{{ $employees->name }}' required />
+                                        name="name" value='{{ $employees->name }}'  />
                                     @error('name')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -32,7 +32,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.email') }}</label>
                                     <input type="email" class="form-control form-control-solid" placeholder=""
-                                        name="email" value='{{ $employees->email }}' required />
+                                        name="email" value='{{ $employees->email }}'  />
                                     @error('email')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -43,7 +43,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.phone') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="phone" value='{{ $employees->phone }}' required />
+                                        name="phone" value='{{ $employees->phone }}'  />
                                     @error('phone')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -54,7 +54,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.address') }}</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="address" value='{{ $employees->address }}' required />
+                                        name="address" value='{{ $employees->address }}'  />
                                     @error('address')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -134,21 +134,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class='col-md-6'>
-                                    <div class="form-group">
-                                        <label for="" class="fs-6 fw-bold mb-2"> {{ __('translation.status') }}
-                                        </label>
-                                        <select class="form-control" name="status" id="status">
-
-                                            <option value="1" @if ($employees->status == 1) selected @endif>
-                                                {{ __('translation.active') }}
-                                            </option>
-                                            <option value="0" @if ($employees->status == 0) selected @endif>
-                                                {{ __('translation.in_active') }}
-                                            </option>
-
-                                        </select>
-                                    </div>
+                                <div class="fv-row mb-7 col-md-6 ">
+                                    <label>{{__('translation.created_at')}}  :</label>
+                                    <input class="form-control fc-datepicker form-control-solid" name="month" placeholder="YYYY-MM-DD"
+                                    type="date" value="{{$employees->month}}" required>
+                                        @error('advances_Date')
+                                            <span class="text-danger">
+                                                {{$message}}
+                                            </span>
+                                        @enderror
                                 </div>
                             </div>
                             <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}

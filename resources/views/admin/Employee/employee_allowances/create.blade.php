@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin')
 @section('main-head')
-    {{ __('translation.Add_a_new_employee_allowances') }}
+    {{ __('translation.add_employee_allowances') }}
     <small> - {{ __('translation.employees_management') }} </small>
 @endsection
 @section('content')
@@ -38,7 +38,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.Category_allowances') }}
                                         </label> 
                                         <select class="form-control form-control-solid" name="allowances_id" class="form-control" value="{{ old('allowances_id') }}">
                                             <option value="" selected disabled> {{ __('translation.Choose') }}

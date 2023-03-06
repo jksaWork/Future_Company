@@ -599,15 +599,15 @@
                             <span class="menu-title">{{ __('translation.Achive') }}</span>
                             <span class="menu-arrow"></span>
                         </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
+                         <div class="menu-sub menu-sub-accordion menu-active-bg">
+                          {{--  <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.section.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Expense_sections') }}</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.spending.Achive', ['service_id' => 1])}}">
@@ -618,36 +618,36 @@
                                 </a>
                             </div>
 
-                            <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.Category.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Categoires') }}</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
 
                             
-                            <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.allowances.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Allowances_and_incentives') }}</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
 
                                
-                            <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.employee.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.all_employees') }}</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.employee_allowances.Achive', ['service_id' => 1])}}">
@@ -658,14 +658,14 @@
                                 </a>
                             </div>
 
-                            <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.Advances.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Advancess') }}</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.salaries.Achive', ['service_id' => 1])}}">

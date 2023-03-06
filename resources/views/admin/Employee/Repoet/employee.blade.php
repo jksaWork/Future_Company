@@ -88,6 +88,7 @@
                                         <th scope="row">{{ __('translation.salary') }}</th>
                                         <th scope="row"> {{ __('translation.Category') }}</th>
                                         <th scope="row"> {{ __('translation.allowances_id') }}</th>
+                                        <th class="">{{ __('translation.created_at') }}</th>
                                         <th class="">{{ __('translation.status') }}</th>
                                         <th scope="row">{{ __('translation.description') }}</th>
                                     </tr>
@@ -117,6 +118,7 @@
                                                 
                                                 @empty{{ __('translation.No_Data_Was_Found') }} @endforelse
                                                </td>
+                                               <td>{{ $employees->month }}</td>
                                             <td>{{ $employees->getActive() }}</td>
 
                                                 <td>{{ $employees->description }}</td>

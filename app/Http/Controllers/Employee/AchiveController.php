@@ -11,6 +11,7 @@ use App\Models\spendings;
 use App\Models\Category;
 use App\Models\section;
 use App\Models\employee_allowances;
+use App\Models\FinancialTreasuryTransactionHistorys;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 // use App\Http\Requests\Request;
@@ -91,8 +92,11 @@ class AchiveController extends Controller
 
     public function spendingAchiveFeedback(Request $request, $id)
     {
-        // $id = $request->invoice_id;
+    //    return $id;
         $flight = spendings::withTrashed()->where('id', $id)->restore();
+        $spending = spendings::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->section->section_name, $spending->id);
+
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.spending.Achive');
         
@@ -277,8 +281,10 @@ class AchiveController extends Controller
 
     public function employee_allowancesAchiveFeedback(Request $request, $id)
     {
-        // $id = $request->invoice_id;
         $flight = employee_allowances::withTrashed()->where('id', $id)->restore();
+        $employee_allow = employee_allowances::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
+        
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.employee_allowances.Achive');
         
@@ -325,8 +331,11 @@ class AchiveController extends Controller
 
     public function AdvancesAchiveFeedback(Request $request, $id)
     {
-        // $id = $request->invoice_id;
+        // return $id;
         $flight = Advances::withTrashed()->where('id', $id)->restore();
+        $advances = Advances::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.Advances.Achive');
         
@@ -374,6 +383,9 @@ class AchiveController extends Controller
     {
         // $id = $request->invoice_id;
         $flight = salaries::withTrashed()->where('id', $id)->restore();
+        $salaries = salaries::findOrFail($id);
+        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
+
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.salaries.Achive');
         
