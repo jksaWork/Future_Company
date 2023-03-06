@@ -14,6 +14,7 @@ return [
     'added_successfully' => 'Record added successfully',
     'updated_successfully' => 'Record updated successfully',
     'deleted_successfully' => 'Record deleted successfully',
+    'You_cannot_delete_this_field'=>'You cannot delete this field',
     'has_been_transferred_successfully' => 'Record has been transferred successfully',
     'The_total_salary_value_is_less_than_zero'=>'The total salary value is less than zero',
     'recovery_successfully'=>'Record recovery successfully',

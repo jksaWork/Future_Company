@@ -95,8 +95,8 @@ class AchiveController extends Controller
     //    return $id;
         $flight = spendings::withTrashed()->where('id', $id)->restore();
         $spending = spendings::findOrFail($id);
-        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->section->section_name, $spending->id);
-
+        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->section->section_name, $spending->id);
+        $res = FinancialTreasuryTransactionHistorys::EditTransaction( $spending->Transaction_id , $spending->spending_value);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.spending.Achive');
         

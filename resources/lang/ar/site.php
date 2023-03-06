@@ -13,6 +13,7 @@ return [
     'no_data_found' => 'Sorry no data found',
     'Are_you_sure'=>"'هل أنت واثق؟'",
     'added_successfully' => 'تمت إضافة السجل بنجاح',
+    'You_cannot_delete_this_field'=>'لا يمكنك حذف هذه الحقل ',
     'updated_successfully' => 'تم تحديث السجل بنجاح',
     'deleted_successfully' => 'تم حذف السجل بنجاح',
     'has_been_transferred_successfully' => 'تم نقل السجل بنجاح',
