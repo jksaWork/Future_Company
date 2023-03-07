@@ -99,11 +99,7 @@
                                         <label for="" class=" fs-6 fw-bold mb-2">
                                             {{ __('translation.allowances_id') }}
                                         </label>
-                                        <select class="form-select form-select-solid is-valid form-control-solid"
-                                            data-control="select2" name="data[]" data-allow-clear="true"
-                                            multiple="multiple"
-                                            style="display: block;width: 100%;padding: 0.75rem 1rem;font-size: 1.1rem;font-weight: 500;line-height: 1.5;color: #181C32;background-color: #ffffff;background-clip: padding-box;border: 1px solid #E4E6EF;appearance: none;border-radius: 0.475rem;box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">
-                                            {{-- @if (!$employee_allowances) --}}
+                                        <select class="form-select form-select-solid " data-control="select2" name="data[]"   multiple="multiple">
                                             @foreach ($employee_allowances as $allowances)
                                                 <option value="{{ $allowances->allowances_id }}"
 
@@ -144,12 +140,12 @@
                                             </span>
                                         @enderror
                                 </div>
-                            </div>
+                                <div class="fv-row mb-7 col-md-12 ">
                             <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                             </label>
                             <textarea class="form-control form-control-solid" value='{{ $employees->description }}' rows="3"
                                 name="description">{{ $employees->description }}</textarea>
-
+                                </div>
 
                             <div class="mt-4">
                                 <button class="btn btn-primary">

@@ -188,8 +188,9 @@ class EmployeeAllowancesController extends Controller
             return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
         }
-        DB::commit();  
+         
         if ($e->getCode() == 50) {
+            DB::commit(); 
             session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }

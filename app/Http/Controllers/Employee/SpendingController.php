@@ -117,7 +117,7 @@ class SpendingController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('Employee.spending.index');
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
 
             // if ($e->getCode() == 51) {
             //     DB::commit();
@@ -145,14 +145,16 @@ class SpendingController extends Controller
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.spending.index');
     } catch (Exception $e) {
+        dd($e);
         if ($e->getCode() == 51) {
             DB::commit();
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
         }
-        DB::commit();  
+       
         if ($e->getCode() == 50) {
+            DB::commit();  
             session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             return redirect()->back();
         }

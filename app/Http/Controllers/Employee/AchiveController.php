@@ -13,6 +13,8 @@ use App\Models\section;
 use App\Models\employee_allowances;
 use App\Models\FinancialTreasuryTransactionHistorys;
 use Yajra\DataTables\Facades\DataTables;
+
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
@@ -92,14 +94,36 @@ class AchiveController extends Controller
 
     public function spendingAchiveFeedback(Request $request, $id)
     {
-    //    return $id;
+    try{
         $flight = spendings::withTrashed()->where('id', $id)->restore();
         $spending = spendings::findOrFail($id);
         // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->section->section_name, $spending->id);
-        $res = FinancialTreasuryTransactionHistorys::EditTransaction( $spending->Transaction_id , $spending->spending_value);
-        session()->flash('success', __('site.recovery_successfully'));
+        $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->Allowances_id->allowances_value , 'incentives', $spending->employee->name . '-'.$spending->Allowances_id->allowances_name , $spending->id);
+        $spending->update([
+            'Transaction_id' => $res->id,
+        ]);
+         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.spending.Achive');
+    } catch (Exception $e) {
+        dd($e);
+        // if ($e->getCode() == 51) {
+        //     DB::commit();
+        //     session()->flash('success', __('site.updated_successfully'));
+        //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+        //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+        // }
         
+        if ($e->getCode() == 50) {
+            DB::commit();  
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
+   
+
        
     } //end of SectionhistoryData
 
@@ -147,6 +171,7 @@ class AchiveController extends Controller
         // return $allowances;
 
         return view('admin.Employee.Achive.allowances.allowances', compact('categories'));
+   
         
        
     } //end of allowanceshistoryData
@@ -175,10 +200,22 @@ class AchiveController extends Controller
 
     public function allowancesAchiveFeedback(Request $request, $id)
     {
+        try{
         // $id = $request->invoice_id;
         $flight = allowances::withTrashed()->where('id', $id)->restore();
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.allowances.Achive');
+
+    } catch (Exception $e) {
+        if ($e->getCode() == 50) {
+            DB::commit();  
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
         
        
     } //end of SectionhistoryData
@@ -281,12 +318,25 @@ class AchiveController extends Controller
 
     public function employee_allowancesAchiveFeedback(Request $request, $id)
     {
+        try{
         $flight = employee_allowances::withTrashed()->where('id', $id)->restore();
         $employee_allow = employee_allowances::findOrFail($id);
         $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
-        
+        $employee_allow->update([
+            'Transaction_id' => $res->id,
+        ]);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.employee_allowances.Achive');
+    } catch (Exception $e) {
+        if ($e->getCode() == 50) {
+            DB::commit();  
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
         
        
     } //end of SectionhistoryData
@@ -335,7 +385,9 @@ class AchiveController extends Controller
         $flight = Advances::withTrashed()->where('id', $id)->restore();
         $advances = Advances::findOrFail($id);
         $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
-
+        $advances->update([
+            'Transaction_id' => $res->id,
+        ]);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.Advances.Achive');
         
@@ -381,13 +433,27 @@ class AchiveController extends Controller
 
     public function salariesAchiveFeedback(Request $request, $id)
     {
+        try{
         // $id = $request->invoice_id;
         $flight = salaries::withTrashed()->where('id', $id)->restore();
         $salaries = salaries::findOrFail($id);
         $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
-
+        $salaries->update([
+            'Transaction_id' => $res->id,
+        ]);
+        DB::commit();
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.salaries.Achive');
+    } catch (Exception $e) {
+        if ($e->getCode() == 50) {
+            DB::commit();  
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
         
        
     } //end of SectionhistoryData
