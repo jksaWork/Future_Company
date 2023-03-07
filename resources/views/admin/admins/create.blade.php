@@ -41,7 +41,7 @@
                         <button class="btn-primary btn">
                             {{__('translation.Save')}}
                         </button>
-                        <a href="javascript::back()" class="btn btn-light-danger">
+                        <a href="#" onclick="window.history.back()" class="btn btn-light-danger">
                             {{__('translation.cancel')}}
                         </a>
                     </div>

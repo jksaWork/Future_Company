@@ -18,26 +18,26 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $roles = Role::whereNotIn('name' , ['admin' , 'super_admin' , 'user'])->get();
-        return view('admin.admins.index' , compact('roles'));
+        $roles = Role::whereNotIn('name', ['admin', 'super_admin', 'user'])->get();
+        return view('admin.admins.index', compact('roles'));
     }
 
 
-    public function data(){
+    public function data()
+    {
         $query = User::whereRoleIs('admin')->whenHasRole(request()->role_id);
 
-    return  DataTables::of($query)
-        ->addColumn('record_select', 'admin.admins.data_table.record_select')
-        ->editColumn('created_at', function (User $user) {
-            return $user->created_at->format('Y-m-d');
-        })
-        ->addColumn('actions', 'admin.admins.data_table.actions')
-        ->addColumn('roles' , function(User $admin){
-            return view('admin.admins.data_table.roles', compact('admin'));
-        })
-        ->rawColumns(['record_select', 'actions' , 'roles'])
-        ->toJson();
-
+        return  DataTables::of($query)
+            ->addColumn('record_select', 'admin.admins.data_table.record_select')
+            ->editColumn('created_at', function (User $user) {
+                return $user->created_at->format('Y-m-d');
+            })
+            ->addColumn('actions', 'admin.admins.data_table.actions')
+            ->addColumn('roles', function (User $admin) {
+                return view('admin.admins.data_table.roles', compact('admin'));
+            })
+            ->rawColumns(['record_select', 'actions', 'roles'])
+            ->toJson();
     }
     /**
      * Show the form for creating a new resource.
@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $roles = Role::whereNotIn('name' , ['admin' , 'super_admin' , 'user'])->get();
+        $roles = Role::whereNotIn('name', ['admin', 'super_admin', 'user'])->get();
         return view('admin.admins.create', compact('roles'));
     }
 
@@ -58,11 +58,11 @@ class AdminController extends Controller
      */
     public function store(AdminRequest $request)
     {
-         $requestData = $request->validated();
+        $requestData = $request->validated();
         $requestData['password'] = bcrypt($request->password);
         $admin = User::create($request->all());
         $admin->attachRoles(['admin', $request->role_id]);
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('translation.3'));
         return Redirect()->route('admin.admin.index');
     }
 
@@ -74,7 +74,6 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -85,9 +84,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::whereNotIn('name' , ['admin' , 'super_admin' , 'user'])->get();
+        $roles = Role::whereNotIn('name', ['admin', 'super_admin', 'user'])->get();
         $user = User::find($id);
-        return view('admin.admins.edit' , compact('user','roles'));
+        return view('admin.admins.edit', compact('user', 'roles'));
     }
 
     /**
@@ -103,7 +102,7 @@ class AdminController extends Controller
         $admin = User::find($id);
         $admin->update($request->validated());
         $admin->syncRoles(['admin', $request->role_id]);
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('translation.4'));
         return Redirect()->route('admin.admin.index');
     }
 
@@ -112,8 +111,7 @@ class AdminController extends Controller
         $this->delete($admin);
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('admin.admin.index');
-
-    }// end of destroy
+    } // end of destroy
 
 
 
@@ -123,16 +121,15 @@ class AdminController extends Controller
 
             $admin = User::FindOrFail($recordId);
             $this->delete($admin);
-
-        }//end of for each
+        } //end of for each
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
-    }// end of bulkDelete
+    } // end of bulkDelete
 
     private function delete(User $admin)
     {
         $admin->delete();
-    }// end of delete
+    } // end of delete
 
 }
