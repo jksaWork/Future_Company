@@ -512,7 +512,7 @@ return [
     'Your_file_has_been_deleted' => 'تم نقل ملفك.',
     'success' => 'النجاح',
     'Achive' => 'سلة المحذوفات',
-    'back' => ' انتقال الى صفحة مرسل ',
+    // 'back' => ' انتقال الى صفحة مرسل ',
     'feedback' => 'استرجاع البيانات',
     'Expense_sections_recovery' => ' سلة المحذوفات لقسام المصروفات',
     'spending_recovery' => 'سلة المحذوفات  المصروفات',
