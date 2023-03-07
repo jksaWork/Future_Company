@@ -170,6 +170,7 @@ License: For each use you must have a valid license purchased only from above li
     <script>
 
         function DeleteApp(val) {
+            // console('ffddf');
             Swal.fire({
                 title:"@lang('translation.Are_you_sure')",
                 text: "@lang('translation.You_will_not_be_able_to_back_down_from_this')",

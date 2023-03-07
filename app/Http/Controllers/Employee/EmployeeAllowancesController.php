@@ -173,6 +173,7 @@ class EmployeeAllowancesController extends Controller
     public function destroy( Employee $employee , $id)
     {
         // return $id;
+        try{
         $employemployee_allowancesee = employee_allowances::findOrFail($id);  
         // return $employemployee_allowancesee->Transaction_id;
         $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $employemployee_allowancesee->Transaction_id);
@@ -180,6 +181,22 @@ class EmployeeAllowancesController extends Controller
         $employemployee_allowancesee->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.employee_allowances.index');
+    } catch (Exception $e) {
+        if ($e->getCode() == 51) {
+            DB::commit();
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+        }
+        DB::commit();  
+        if ($e->getCode() == 50) {
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
     } //end of destroy
 
 

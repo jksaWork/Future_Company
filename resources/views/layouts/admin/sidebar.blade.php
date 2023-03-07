@@ -628,15 +628,20 @@
                             </div> --}}
 
 
+<<<<<<< HEAD
 
                             {{-- <div class="menu-item">
+=======
+                            
+                            <div class="menu-item">
+>>>>>>> bde5fa6a615816cddfe4730419995e23f9388736
                                 <a class="menu-link" href="{{ route('Achive.allowances.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Allowances_and_incentives') }}</span>
                                 </a>
-                            </div> --}}
+                            </div>
 
 
 

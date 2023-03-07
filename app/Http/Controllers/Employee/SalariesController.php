@@ -160,11 +160,29 @@ class SalariesController extends Controller
     public function destroy($id)
     {
         // return $id;
+        try {
         $salaries = salaries::findOrFail($id);
         $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $salaries->Transaction_id);
+        // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
         $salaries->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.salaries.index');
+    } catch (Exception $e) {
+        if ($e->getCode() == 51) {
+            DB::commit();
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+        }
+        DB::commit();  
+        if ($e->getCode() == 50) {
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
     } //end of destroy
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\allowances;
 use App\Models\Category;
+use App\Models\employee_allowances;
 
 use App\Http\Requests\allowancesRequest;
 use Illuminate\Http\Request;
@@ -89,11 +90,29 @@ class AllowancesController extends Controller
 
     public function destroy( allowances $allowances , $id)
     {
-        // return $id;
+
+        try{
+        $s  = employee_allowances::where([
+            ['allowances_id', $id],
+        ])->get();
+       $d= $s->count();
+       if ($d == 0) {
         $allowances = allowances::findOrFail($id);
         $allowances->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('Employee.allowances.index');
+   
+ 
+       } else {
+        session()->flash('error', __('site.You_cannot_delete_this_field'));
+        return redirect()->route('Employee.allowances.index');
+       }
+    }catch(Exception $e){
+        // dd($e);
+        session()->flash('error' ,  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
+      
     } //end of destroy
 
 }//end of controller
