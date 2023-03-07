@@ -77,7 +77,8 @@ class FinancialTreasury extends Model
     public static function DestoryDebitTransaction($old_amount)
     {
         $treasury = self::getInstance();
-        if ($treasury->total < $old_amount) throw new Exception('The Treasury Is Less Than Amount', 50);
+        // Remove THe Exception ON Debit Cuase This Is Credit
+        // if ($treasury->total < $old_amount) throw new Exception('The Treasury Is Less Than Amount', 50);
         $treasury->total = $treasury->total + $old_amount;
         $treasury->total_debit = $treasury->total_debit - $old_amount;
         $treasury->save();

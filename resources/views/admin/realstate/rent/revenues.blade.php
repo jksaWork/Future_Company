@@ -25,9 +25,9 @@
                         <div class="col-md-4">
                             <div class="">
                                 <div class="form-group">
-                                    <label class='form-lable'> {{ __('translation.owner') }}</label>
+                                    <label class='form-lable'> {{ __('translation.renter') }}</label>
                                     <select id='owner' style='width:100%' name='owner_id'>
-                                        <option value='0'> {{ __('translation.chose_your_real_state') }}</option>
+                                        <option value='0'> {{ __('translation.chose_renter') }}</option>
                                     </select>
                                 </div>
                             </div>
