@@ -88,7 +88,7 @@ class AllEmployeeController extends Controller
         $images = Image::all();
         // return $images;
         $d = 1;
-        $z=0;
+        $z = 0;
         $employee_allowances = employee_allowances::where([
             ['status', $d],
             ['employee_id',  $id],
@@ -96,17 +96,20 @@ class AllEmployeeController extends Controller
         // return $employee_allowances;
         $allowances_id = employee_allowances::where([
             ['status', $z],
-            ['employee_id',  $id],])->get();
+            ['employee_id',  $id],
+        ])->get();
 
 
-            $salaries = salaries::where(
-                'employee_id',  $id)->get();
-            // return $salaries;
+        $salaries = salaries::where(
+            'employee_id',
+            $id
+        )->get();
+        // return $salaries;
         // return $allowances_id;
         $Advances_id = Advances::where('employee_id', [$id])->get();
         // return $Advances_id;
         $employees = employee::findorfail($id);
-        return view('admin.Employee.All_Employee.show', compact('employees', 'images', 'Advances_id', 'allowances_id' ,'employee_allowances','salaries'));
+        return view('admin.Employee.All_Employee.show', compact('employees', 'images', 'Advances_id', 'allowances_id', 'employee_allowances', 'salaries'));
     }
 
 
@@ -133,14 +136,14 @@ class AllEmployeeController extends Controller
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $request->validate([
-            'name' =>'required',
+            'name' => 'required',
             'email' => 'required|exists:employees,email',
-            'phone' =>'required',
-            'address' =>'required|string|max:500',
-            'salary' =>'required|nullable|numeric',
-            'month'=>'required|date_format:Y-m-d',
-            'categories_id' =>'required',
-            'data'=>'required',
+            'phone' => 'required',
+            'address' => 'required|string|max:500',
+            'salary' => 'required|nullable|numeric',
+            'month' => 'required|date_format:Y-m-d',
+            'categories_id' => 'required',
+            'data' => 'required',
         ]);
         try {
 
