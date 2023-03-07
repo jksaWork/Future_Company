@@ -336,7 +336,7 @@ return [
     'saled' => 'تم البيع',
     'rented' => 'تم الاستاجار',
     'insaled' => 'لم يتم بيعه',
-    'inrented' => 'لم يتم استاجاره',
+    'inrented' => "غير مستاجره",
     'realstate_mangements' => 'اداره العقارات',
     'add_realstate' => 'اضافه عقارات',
     'show_real_state_detalis' => 'عرض بيانات العقارات',
