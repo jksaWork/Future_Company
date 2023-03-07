@@ -28,7 +28,8 @@ class RealStateController extends Controller
         $query = RealState::with('Category')
             ->typeScope()
             ->StatusScope()
-            ->rentOrSaleScope();
+            ->rentOrSaleScope()
+            ->where('deleted_at', null);
 
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
@@ -139,7 +140,7 @@ class RealStateController extends Controller
      */
     public function show($realStat_id)
     {
-// return $realStat_id;
+        // return $realStat_id;
         try {
             $rel = RealState::with('attachments', 'Category', 'Owners', 'CurrentOwner', 'Installments.Owner')->findOrFail($realStat_id);
             if (request()->has('status')) return $this->handelStatus($rel);
@@ -196,6 +197,7 @@ class RealStateController extends Controller
             'description' => 'required',
             'realstate_number' => 'required',
             'address' => 'required',
+            'price' => 'required',
         ]);
         try {
             $realState = RealState::find($realState);
@@ -217,9 +219,11 @@ class RealStateController extends Controller
     public function destroy($realState)
     {
         try {
-            RealState::findOrFail($realState)->delete();
+            // dd($realState);
+            $realstate = RealState::findOrFail($realState);
+            $realstate->delete();
             session()->flash('success', __('translation.5'));
-            return  redirect()->route('realstate.realstate.index', ['type' => $realState->type]);
+            return  redirect()->route('realstate.realstate.index', ['type' => $realstate->type]);
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors($th->getMessage());
         }

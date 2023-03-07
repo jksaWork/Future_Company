@@ -541,4 +541,7 @@ return [
     'search_with_number_title_and_place' => 'رقم العقار \ العنوان \ المكان',
     'you_must_chose_the_real_state' => 'عليك اختار العقار اولا ثم اختيار الشهر',
     'month_name' => 'الشهر',
+    'edit_realstate' => 'تعديل بينانات العقار',
+    'renter' => 'المستاجر',
+    'chose_renter' => 'اختر المستاجر',
 ];
