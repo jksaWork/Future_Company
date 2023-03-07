@@ -45,9 +45,9 @@
                                         <div class="">
                                             <div class="form-group">
                                                 <label for=""
-                                                    style='font-size:20px'>{{ __('translation.owner') }}</label>
+                                                    style='font-size:20px'>{{ __('translation.renter') }}</label>
                                                 <select id='selUser' style='width:100%' name='owner_id'>
-                                                    <option value='0'> {{ __('translation.chose_your_owner') }}
+                                                    <option value='0'> {{ __('translation.chose_renter') }}
                                                     </option>
                                                 </select>
                                             </div>

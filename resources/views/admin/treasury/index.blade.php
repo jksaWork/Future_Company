@@ -228,7 +228,7 @@
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_add_customer_header">
                             <!--begin::Modal title-->
-                            <h2 class="fw-bolder">{{ __('translation.add_real_state_category') }}</h2>
+                            <h2 class="fw-bolder">{{ __('translation.add_amount_from_main') }}</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">

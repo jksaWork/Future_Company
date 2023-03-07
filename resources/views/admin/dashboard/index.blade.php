@@ -214,7 +214,7 @@
 
 
 
-        
+
                 <div class="padding: 10px 0px 0px 0px;" style="
                 padding: 18px;
             ">
@@ -258,7 +258,7 @@
                 </div>
                 </div>
                     <!-- /.box-body -->
-              
+
             </div>
             <!--begin::Row-->
             <!--begin::Modal - New Product-->
@@ -274,7 +274,7 @@
 
 
    <script src="{{ asset('datatable/chart.js') }}"></script>
-  
+
 
 
 
@@ -343,6 +343,7 @@
                 const  array = @json($charttwo);
                 // cahrt tow option -----------------------------------------
                 const labels2 =  array.map(item => item.label);
+                console.log(array, labels2);
                 const CartData2 = {
                 labels: labels2,
                 datasets: [{

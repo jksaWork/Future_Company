@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends('layouts.admin.admin')
-@section('main-head' , __('translation.realstate_mangements') . '-' . __('translation.receipt_of_revenues') )
+@section('main-head' , __('translation.realstate_mangements') . '-' . __('translation.recept_installment_sidebar') )
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
@@ -10,7 +10,7 @@
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
-                <h3 style='font-size:20px'>{{__('translation.recept_installment')}} </h3>
+                <h3 style='font-size:20px'>{{__('translation.recept_installment_sidebar')}} </h3>
             </div>
             <!--begin::Card body-->
             <div class="card-body pt-0">

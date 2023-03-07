@@ -6,7 +6,7 @@
 {{-- @endif --}}
 @section('main-head')
     {{__('translation.realstate_mangements')}}
-    <small> - {{__('translation.add_realstate')}} </small>
+    <small> - {{__('translation.edit_realstate')}} </small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -25,7 +25,7 @@
                                 <x:text-input name='title' class='col-md-6' :value='$realState->title' />
                                 <x:text-input name='realstate_number' class='col-md-6' :value='$realState->realstate_number' />
                                 <x:text-input name='address' class='col-md-6' :value='$realState->address' />
-                                <x:text-input name='price' class='col-md-6'  :value='$realState->price' :disabled='true' />
+                                <x:text-input name='price' class='col-md-6'  :value='$realState->price' />
 
                                 <x:select-options name='category_idd' :options='$categories'  :value='$realState->category_id' class='col-md-6' />
                                 <x:select-options name='status' :options='["ready" , "inready"]'   :value='$realState->category_id' class='col-md-6' />

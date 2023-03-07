@@ -51,35 +51,35 @@ class SalariesController extends Controller
 
         try {
             if ($request->totle_salaries > 0) {
-               
-           
-            $DATA = salaries::create([
-                'employee_id' => $request->employee_id,
-                'fixed_salary' => $request->fixed_salary,
-                'allowancess_fixed' => $request->allowancess_fixed,
-                'year' => $request->year,
-                'advances' => $request->advances,
-                'totle_salaries' => $request->totle_salaries,
-                'discounts' => $request->discounts,
-                'month_number' => $request->month_number,
-                'status' => 1,
-                'discrption' => $request->discrption,
-            ]);
-            //    return  $DATA;
-            $salaries = salaries::findOrFail($DATA->id);
-            $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
 
-            $salaries->update([
-                'Transaction_id' => $res->id,
-            ]);
-            DB::commit();
-            session()->flash('success', __('site.added_successfully'));
-            return redirect()->route('Employee.salaries.index');
-        }else{
-            DB::commit();
-            session()->flash('error', __('site.The_total_salary_value_is_less_than_zero'));
-            return redirect()->route('Employee.salaries.index');
-        }
+
+                $DATA = salaries::create([
+                    'employee_id' => $request->employee_id,
+                    'fixed_salary' => $request->fixed_salary,
+                    'allowancess_fixed' => $request->allowancess_fixed,
+                    'year' => $request->year,
+                    'advances' => $request->advances,
+                    'totle_salaries' => $request->totle_salaries,
+                    'discounts' => $request->discounts,
+                    'month_number' => $request->month_number,
+                    'status' => 1,
+                    'discrption' => $request->discrption,
+                ]);
+                //    return  $DATA;
+                $salaries = salaries::findOrFail($DATA->id);
+                $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
+
+                $salaries->update([
+                    'Transaction_id' => $res->id,
+                ]);
+                DB::commit();
+                session()->flash('success', __('site.added_successfully'));
+                return redirect()->route('Employee.salaries.index');
+            } else {
+                DB::commit();
+                session()->flash('error', __('site.The_total_salary_value_is_less_than_zero'));
+                return redirect()->route('Employee.salaries.index');
+            }
         } catch (Exception $e) {
             // if ($e->getCode() == 51) {
             //     DB::commit();
@@ -87,7 +87,7 @@ class SalariesController extends Controller
             //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             // }
-            DB::commit();  
+            // DB::commit();
             if ($e->getCode() == 50) {
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
                 return redirect()->back();
@@ -138,6 +138,7 @@ class SalariesController extends Controller
                 'discrption' => $request->discrption,
             ]);
             $res = FinancialTreasuryTransactionHistorys::EditTransaction($salaries->Transaction_id, $request->totle_salaries);
+            DB::commit();
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('Employee.salaries.index');
         } catch (Exception $e) {
@@ -161,15 +162,21 @@ class SalariesController extends Controller
     {
         // return $id;
         try {
-        $salaries = salaries::findOrFail($id);
-        $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $salaries->Transaction_id);
-        // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
-        $salaries->delete();
-        session()->flash('error', __('site.has_been_transferred_successfully'));
-        return redirect()->route('Employee.salaries.index');
-    } catch (Exception $e) {
-        if ($e->getCode() == 51) {
+            $salaries = salaries::findOrFail($id);
+            $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
+            // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
+            $salaries->delete();
+            session()->flash('error', __('site.has_been_transferred_successfully'));
+            return redirect()->route('Employee.salaries.index');
+        } catch (Exception $e) {
+            if ($e->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('site.updated_successfully'));
+                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
             DB::commit();
+<<<<<<< HEAD
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
@@ -177,12 +184,16 @@ class SalariesController extends Controller
         if ($e->getCode() == 50) {
             DB::commit(); 
             session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+=======
+            if ($e->getCode() == 50) {
+                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+                return redirect()->back();
+            }
+            DB::rollBack();
+            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+>>>>>>> 05f667e48a28f7ef8db7ccad21f4624a0f179af0
             return redirect()->back();
         }
-        DB::rollBack();
-        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
-        return redirect()->back();
-    }
     } //end of destroy
 
 
@@ -209,8 +220,8 @@ class SalariesController extends Controller
 
         if ($r === 0) {
             $allowances = employee_allowances::where([
-            ['status', 1],
-            ['employee_id', $m]
+                ['status', 1],
+                ['employee_id', $m]
             ])->get();
             $employees = employee::findorfail($m);
             $employee_advances  = advances::where([['employee_id', $m], ['month_number', $q], ['year', $y]])->get();
