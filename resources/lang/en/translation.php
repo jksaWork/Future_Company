@@ -32,6 +32,7 @@ return [
     'realstate_revenues'=>'realstate revenues',
     'category'=>'category',
     'inrented'=>'inrented',
+    'log_out'=>'log out',
     'Attach'=>'Attach',
     'owner_and_real_state_history'=>'owner and real state history',
     'assing_new_owner'=>'assing new owner',

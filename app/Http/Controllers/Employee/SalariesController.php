@@ -176,24 +176,19 @@ class SalariesController extends Controller
                 // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             }
             DB::commit();
-<<<<<<< HEAD
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-        } 
-        if ($e->getCode() == 50) {
-            DB::commit(); 
-            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-=======
+           
             if ($e->getCode() == 50) {
+                DB::commit(); 
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
                 return redirect()->back();
             }
-            DB::rollBack();
-            session()->flash('error',  __('site.Some_Thing_Went_Worng'));
->>>>>>> 05f667e48a28f7ef8db7ccad21f4624a0f179af0
-            return redirect()->back();
-        }
+       
+        } 
+      
+        
     } //end of destroy
 
 

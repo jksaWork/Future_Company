@@ -658,14 +658,14 @@
                                 </a>
                             </div>
 
-                            {{-- <div class="menu-item">
+                            <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.Advances.Achive', ['service_id' => 1])}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.Advancess') }}</span>
                                 </a>
-                            </div> --}}
+                            </div>
 
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('Achive.salaries.Achive', ['service_id' => 1])}}">

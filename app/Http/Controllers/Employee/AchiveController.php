@@ -382,6 +382,7 @@ class AchiveController extends Controller
     public function AdvancesAchiveFeedback(Request $request, $id)
     {
         // return $id;
+        try{
         $flight = Advances::withTrashed()->where('id', $id)->restore();
         $advances = Advances::findOrFail($id);
         $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
@@ -390,6 +391,16 @@ class AchiveController extends Controller
         ]);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('Achive.Advances.Achive');
+    } catch (Exception $e) {
+        if ($e->getCode() == 50) {
+            DB::commit();  
+            session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            return redirect()->back();
+        }
+        DB::rollBack();
+        session()->flash('error',  __('site.Some_Thing_Went_Worng'));
+        return redirect()->back();
+    }
         
        
     } //end of SectionhistoryData
