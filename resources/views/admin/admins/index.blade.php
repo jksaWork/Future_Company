@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> search </label>
+                                <label> {{ __('translation.search') }} </label>
                                 <input type="text" id="data-table-search" class="form-control" autofocus
                                     placeholder="@lang('site.search')">
                             </div>
@@ -41,7 +41,7 @@
                     @if(auth()->guard('admin')->check())
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Roles</label>
+                                <label for="">{{ __('translation.roles') }}</label>
                                 <select class="form-control" name="roles" id="roles">
                                     @foreach ($roles as $role )
                                     <option value="{{$role->id}}"> {{$role->name}}</option>
@@ -113,7 +113,7 @@
         console.log(usersColumns);
             let role;
         let rolesTable = $('#roles-table').DataTable({
-            dom: "tiplr",
+            dom: "tplr",
             serverSide: true,
             processing: true,
             "language": {
