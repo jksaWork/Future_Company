@@ -24,6 +24,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RealStateCategoryController;
 use App\Http\Controllers\RealStateController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SchoolDashboardController;
 use App\Http\Controllers\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -154,5 +155,8 @@ Route::group(
         Route::get('show_attachments/{attachment}', [AttachmentsController::class, 'show'])->name('show_attachments');
         Route::get('download_attachments/{attachment}', [AttachmentsController::class, 'download'])->name('download_attachments');
         Route::post('attachments', [AttachmentsController::class, 'store'])->name('attachments.store');
+        Route::prefix('school')->name('school.')->group(function () {
+            Route::get('dashboard', [SchoolDashboardController::class, 'index'])->name('dashboard');
+        });
     }
 );

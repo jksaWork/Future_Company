@@ -22,7 +22,7 @@
                 </svg>
             </span>
             </a>
-    <form action="{{ route('realstate.realstate.destroy', $id) }}"
+    {{-- <form action="{{ route('realstate.realstate.destroy', $id) }}"
         id='delete_real_state'
 
     class="my-1 my-xl-0" method="post" style="display: inline-block;">
@@ -38,6 +38,6 @@
                 </svg>
             </span>
         </button>
-    </form>
+    </form> --}}
 </div>
 {{-- @endif --}}
