@@ -25,7 +25,10 @@ use App\Http\Controllers\RealStateCategoryController;
 use App\Http\Controllers\RealStateController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SchoolDashboardController;
+use App\Http\Controllers\SchoolFinanicalControoler;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StudentRevenueController;
+use App\Models\StudentRevenue;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -155,8 +158,19 @@ Route::group(
         Route::get('show_attachments/{attachment}', [AttachmentsController::class, 'show'])->name('show_attachments');
         Route::get('download_attachments/{attachment}', [AttachmentsController::class, 'download'])->name('download_attachments');
         Route::post('attachments', [AttachmentsController::class, 'store'])->name('attachments.store');
-        Route::prefix('school')->name('school.')->group(function () {
-            Route::get('dashboard', [SchoolDashboardController::class, 'index'])->name('dashboard');
+        Route::middleware('auth:web')->group(function () {
+            Route::prefix('school')->name('school.')->group(function () {
+                Route::get('dashboard', [SchoolDashboardController::class, 'index'])->name('dashboard');
+                Route::get('finanical-treasury-history', [SchoolFinanicalControoler::class, 'index'])->name('finincal.index');
+                Route::post('finanical-treasury-store', [SchoolFinanicalControoler::class, 'store'])->name('finincal.store');
+                Route::put('finanical-treasury-update/{id}', [SchoolFinanicalControoler::class, 'update'])->name('finincal.update');
+                Route::get('finanical-treasury-revenues', [SchoolFinanicalControoler::class, 'revenues'])->name('finincal.revenues');
+                Route::get('finanical-treasury-spending', [SchoolFinanicalControoler::class, 'spending'])->name('finincal.spending');
+                Route::get('finanical-treasury-data', [SchoolFinanicalControoler::class, 'data'])->name('finincal.data');
+                Route::prefix('students')->name('students.')->group(function () {
+                    Route::resource('revenues', StudentRevenueController::class);
+                });
+            });
         });
     }
 );

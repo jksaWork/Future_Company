@@ -1,5 +1,5 @@
 {{-- @extends('layouts.admin.admin') --}}
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
 @section('main-head', __('translation.treasury') . ' - ' . __('translation.spending'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -14,11 +14,11 @@
                         <!--begin::Body-->
                         <div class="card-body my-3">
                             <a href="#"
-                                class="card-title fw-bolder text-warning fs-5 mb-3 d-block">{{ __('translation.speding_from_spending') }}</a>
+                                class="card-title fw-bolder text-warning fs-5 mb-3 d-block">{{ __('translation.speding_from_spending_school') }}</a>
                             <div class="py-1">
                                 <span class="text-dark fs-1 fw-bolder me-2">{{ $spending_section }}%</span>
-                                <span class="fw-bold text-muted fs-7">{{ 23 }}
-                                    {{ __('translation.spending_ection_spneding_precntage') }}</span>
+                                <span class="fw-bold text-muted fs-7">
+                                    {{ __('translation.spending_ection_spneding_precntage_and_transffer') }}</span>
                             </div>
                             <div class="progress h-7px bg-warning bg-opacity-50 mt-7">
                                 <div class="progress-bar bg-warning" role="progressbar"
@@ -36,11 +36,11 @@
                         <!--begin::Body-->
                         <div class="card-body my-3">
                             <a href="#"
-                                class="card-title fw-bolder text-success fs-5 mb-3 d-block">{{ __('translation.employee_ection_spneding') }}</a>
+                                class="card-title fw-bolder text-success fs-5 mb-3 d-block">{{ __('translation.spending_for_techer_section') }}</a>
                             <div class="py-1">
                                 <span class="text-dark fs-1 fw-bolder me-2">{{ $employee_section }}%</span>
                                 <span
-                                    class="fw-bold text-muted fs-7">{{ __('translation.employee_ection_spneding_precntage') }}</span>
+                                    class="fw-bold text-muted fs-7">{{ __('translation.spending_for_techer_section_desc') }}</span>
                             </div>
                             <div class="progress h-7px bg-success bg-opacity-50 mt-7">
                                 <div class="progress-bar bg-success" role="progressbar"
@@ -206,6 +206,7 @@
     </div>
 @endsection
 @push('scripts')
+
     <script>
         let stauts, type = 'debit',
             transaction_type, from_date, to_date;
@@ -218,7 +219,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.finanical.data') }}',
+                url: '{{ route('school.finincal.data') }}',
                 data: function(q) {
                     q.type = type;
                     q.transaction_type = transaction_type;

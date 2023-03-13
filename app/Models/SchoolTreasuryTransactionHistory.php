@@ -31,8 +31,8 @@ class SchoolTreasuryTransactionHistory extends Model
             'salries' => route('Employee.salaries.index', ['id' => $this->ref_id]),
             'spending' => route('Employee.spending.index', ['id' => $this->ref_id]),
             'incentives' => '',
-            'revenues' => route('realstate.recept_revenues.hitory', ['id' => $this->ref_id]),
-            'installment' => route('realstate.installment_hsitory', ['id' => $this->ref_id]),
+            'student_revenues' => "credit",
+            'transfer_revenues'  => "credit",
             'main_treasury' => '',
         ];
         return $urls[$this->transaction_type];
