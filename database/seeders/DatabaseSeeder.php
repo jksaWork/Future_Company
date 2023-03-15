@@ -9,6 +9,7 @@ use App\Models\FinancialTreasury;
 use App\Models\Owner;
 use App\Models\RealState;
 use App\Models\RealStateCategory;
+use App\Models\school_types;
 use App\Models\SchoolTreasury;
 use Illuminate\Database\Seeder;
 
@@ -51,6 +52,10 @@ class DatabaseSeeder extends Seeder
             'total' => 0,
             'total_debit' => 0,
             'total_credit' => 0,
+        ]);
+
+        \App\Models\school_types::create([
+            'school_name' => 'Omdramn School',
         ]);
     }
 }

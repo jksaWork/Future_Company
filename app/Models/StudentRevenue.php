@@ -19,6 +19,6 @@ class StudentRevenue extends Model
 
     public function School()
     {
-        return $this->belongsTo(Owner::class, 'school_id');
+        return $this->belongsTo(school_types::class, 'school_id');
     }
 }
