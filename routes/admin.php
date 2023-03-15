@@ -169,6 +169,7 @@ Route::group(
                 Route::get('finanical-treasury-data', [SchoolFinanicalControoler::class, 'data'])->name('finincal.data');
                 Route::prefix('students')->name('students.')->group(function () {
                     Route::resource('revenues', StudentRevenueController::class);
+                    Route::get('revenues-data', [StudentRevenueController::class, 'data'])->name('revenues.data');
                 });
             });
         });

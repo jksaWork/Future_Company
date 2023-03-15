@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('amount', 12, 3);
             $table->unsignedBigInteger('transaction_id')->nullable();
             $table->unsignedBigInteger('opration_id')->nullable();
-            $table->enum('revenue_type', ['student_renvue', 'transfer_renvue']);
-            $table->enum('opration_type', ['bank', 'cash', 'shek']);
+            $table->enum('revenue_type', ['student_revenues', 'transfer_revenues']);
+            $table->enum('opration_type', ['bank', 'cash', 'check']);
             $table->unsignedBigInteger('school_id')->nullable();
             $table->date('recept_date')->nullable();
             $table->softDeletes();

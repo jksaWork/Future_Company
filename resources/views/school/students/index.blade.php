@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
-@extends('layouts.admin.admin')
-@section('main-head', __('translation.realstate_mangements'))
+@extends('layouts.school.master')
+@section('main-head', $headings[request()->type] ?? '')
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -30,20 +30,8 @@
                             <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
                                 class="form-control form-control-solid  ps-15"
                                 placeholder="{{ __('translation.search_student_name_guard_amount') }}" />
-
-                        </div>
-
-                        <div class="d-flex ">
-                            <div class="form-group">
-                                <select class="form-control" name="" id="status">
-                                    <option> -- {{ __('translation.status') }} --</option>
-                                    <option value='1'>{{ __('translation.ready') }}</option>
-                                    <option value='0'>{{ __('translation.inready') }}</option>
-                                </select>
-                            </div>
                         </div>
                     </div>
-
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
@@ -61,12 +49,14 @@
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
-                                    id="roles-table" style="width: 100%;">
+                                    id="roles-table" >
                                     <thead>
                                         <tr>
 
+                                            <th>{{ __('translation.id') }}</th>
                                             <th>{{ __('translation.student_name') }}</th>
                                             <th>{{ __('translation.student_guard') }}</th>
+                                            <th>{{ __('translation.school_idd') }}</th>
                                             <th>{{ __('translation.amount') }}</th>
                                             <th>{{ __('translation.opration_type') }}</th>
                                             <th>{{ __('translation.opration_idd') }}</th>
@@ -90,11 +80,17 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('datatable/select2.min.js') }}"></script>
     <script>
-        let type = @json(request()->type);
-        let status, is_rent, is_sale;
+        let stauts, type, transaction_type, from_date, id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "Brtp",
+            serverSide: true,
+            processing: true,
+            distroy: true,
+            "language": {
+                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
             buttons: [
                 'copy', {
                     extend:'excel',
@@ -102,7 +98,7 @@
                 },
 
                 { extend: 'print',
-                        title: '@lang('translation.realstates')',
+                        title: '@lang('translation.main_treasury')',
                         className: 'btn btn-default',
                         autoPrint: true,
 
@@ -118,62 +114,58 @@
                         }}
 
             ]  ,
-            serverSide: true,
-            processing: true,
-            "language": {
-                "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+              ajax: {
+                url: '{{ route('school.students.revenues.data') }}',
+                data: function(q) {
+                    q.type = type;
+                    q.transaction_type = transaction_type;
+                    q.from_date = from_date;
+                    q.id = id;
+
+                },
             },
-            ajax: {
-                url: '{{ route('realstate.data') }}',
-                data: function(d) {
-                    d.type = type;
-                    d.status = status;
-                    d.is_rent = is_rent;
-                    d.is_sale = is_sale;
-                }
-            },
-            columns: [{
+
+            columns: [
+                {
                     data: 'id',
                     name: 'id'
                 },
                 {
-                    data: 'title',
-                    name: 'title'
+                    data: 'student_name',
+                    name: 'student_name'
                 },
                 {
-                    data: 'realstate_number',
-                    name: 'realstate_number'
+                    data: 'student_guard',
+                    name: 'student_guard'
+                },
+
+                {
+                    data: 'school_id',
+                    name: 'school_id',
                 },
                 {
-                    data: 'address',
-                    name: 'address'
+                    data: 'amount',
+                    name: 'amount',
                 },
                 {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'type',
-                    name: 'type'
-                },
-                {
-                    data: 'category_id',
-                    name: 'category_id',
+                    data: 'revenue_type',
+                    name: 'revenue_type',
                     searchable: false
                 },
                 {
-                    data: 'status',
-                    name: 'status',
-                    sortable: false
+                    data: 'opration_id',
+                    name: 'opration_id',
+                    searchable: false
                 },
                 {
-                    data: 'is_{{ request()->type }}',
-                    name: 'is_{{ request()->type }}',
-                    sortable: false
+                    data: 'recept_date',
+                    name: 'recept_date',
+                    // sortable: false
                 },
+
                 {
-                    data: 'created_at',
-                    name: 'created_at',
+                    data: 'recept_date',
+                    name: 'recept_date',
                     searchable: false
                 },
                 {
@@ -186,34 +178,30 @@
             ],
             order: [
                 [2, 'desc']
-            ],
-            drawCallback: function(settings) {
-                $('.record__select').prop('checked', false);
-                $('#record__select-all').prop('checked', false);
-                $('#record-ids').val();
-                $('#bulk-delete').attr('disabled', true);
-            }
+            ]
+
         });
+
         $('#handelSearch').keyup(function() {
             rolesTable.search(this.value).draw();
+
         });
 
-
-        $('#rent_status').on('change', function() {
-            is_rent = $(this).val();
+        $('#realstate').on('change', function() {
+            type = $(this).val();
             rolesTable.ajax.reload();
         });
-
-        $('#sale_status').on('change', function() {
-            is_sale = $(this).val();
+        $('#owner').on('change', function() {
+            transaction_type = $(this).val();
+            console.log(transaction_type);
             rolesTable.ajax.reload();
         });
-
-
-        $('#status').on('change', function() {
-            console.log('helllo');
-            status = $(this).val();
+        $('#from_date').on('change', function() {
+            from_date = $(this).val();
+            console.log(from_date);
             rolesTable.ajax.reload();
         });
+        $('input[name="amount"]').attr('type', 'number');
     </script>
 @endpush
+

@@ -567,4 +567,10 @@ return [
     'transfer_renvue' => 'ايرادات رسوم التراحيل',
     'transfer_renvue_precntage' => 'نسبه ايرادات رسوم التراحيل',
     'student_renvue_precntage' => 'نسيه ايرادات الرسوم الدراسيه',
+    'bank' => 'تحويله بنكيه',
+    'cash' => 'كاش',
+    'check' => 'شيك بنكي',
+    'opration_idd' => 'رقم العمليه',
+    'payment_attachment' => 'مرفقات الدفعيه',
+    'school_idd' => 'المدرسه',
 ];

@@ -146,7 +146,7 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('school.students.revenues.index' , ['type' => 'student_renvue']) }}">
+                            <a class="menu-link" href="{{ route('school.students.revenues.index' , ['type' => 'student_revenues']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -154,7 +154,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('school.students.revenues.create' , ['type' => 'transfer_renvue']) }}">
+                            <a class="menu-link" href="{{ route('school.students.revenues.create' , ['type' => 'student_revenues']) }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>

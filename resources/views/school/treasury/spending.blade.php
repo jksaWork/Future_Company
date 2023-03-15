@@ -68,7 +68,7 @@
                                         <option value='0'>
                                             {{ __('translation.all_types') }}
                                         </option>
-                                        @foreach (\App\Models\FinancialTreasuryTransactionHistorys::TYPES as $transaction_type => $type)
+                                        @foreach (\App\Models\SchoolTreasuryTransactionHistory::TYPES as $transaction_type => $type)
                                             @if ($type == 'debit')
                                                 <option value='{{ $transaction_type }}'>
                                                     {{ __('translation.' . $transaction_type) }}
