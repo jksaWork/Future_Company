@@ -66,7 +66,7 @@ class SectionController extends Controller
     // return $section;
         try{
         $section->update($request->all());
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('Employee.section.index');
 
     }catch(Exception $e){

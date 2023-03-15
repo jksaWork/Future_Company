@@ -441,4 +441,29 @@ return [
     'create_account' => "create account",
     'password_confirmation' => "password confirmation",
 
+
+
+
+    'school_type'=>'School Type',
+    'show_data'=>'show data',
+    'school_name'=>'name school',
+    'Add_new_school'=>'Add new school',
+    'School_expenses'=>'School expenses',
+    'school_id'=>'type school',
+    'teachers_data'=>' Data Teachers ',
+    'teachers_management'=>'Management Teachers',
+    'edit_Categoires_teachers'=>'Edit Categoires Teachers',
+    'Add_new_allowances_or_incentives'=>'Add new allowances or incentives',
+    'Edite_allowances_or_incentives'=>' Edite allowances or incentives ',
+    'All_teachers'=>'All Teachers',
+    'teachers'=>'Teachers',
+    'Add_a_new_School'=>'Add a new teachers',
+    'created_ats'=>' created at',
+    'teachers_name'=>' Name Teachers',
+    'Choose_allowances'=>'Choose allowances',
+    'Choose_teachers'=>'Choose teachers',
+    'teachers_accounts'=>'teachers accounts',
+    'edite_Teachers_allowances'=>'edite Teachers allowances',
+    'edit_teachers_Advances'=>'edit teachers Advances',
+    'teachers_salaries'=>'Teachers Salaries ',
 ];
