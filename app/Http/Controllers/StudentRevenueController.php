@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachments;
 use App\Models\Owner;
 use App\Models\school_types;
 use App\Models\SchoolTreasuryTransactionHistory;
@@ -103,9 +104,17 @@ class StudentRevenueController extends Controller
                 'opration_type' => $request->opration_type,
                 'school_id' => $request->school_idd,
                 'revenue_type' => $request->type_id,
-                'recept_date' => $request->recept_date ?? date('y-m-d')
+                'recept_date' => $request->recept_date ?? date('y-m-d'),
+                'opration_id' => $request->opration_idd,
+
             ];
             $renvue = StudentRevenue::create($data);
+
+            // Upload Files
+            if ($request->hasFile('payment_attachment')) {
+                Attachments::AttachMUltiFIleFiles([$request->payment_attachment], $renvue, 'revenue/attachments');
+                // dd('Done');
+            }
 
             // return $request;
             $transaaction = SchoolTreasuryTransactionHistory::MakeTransacaion(
@@ -117,12 +126,21 @@ class StudentRevenueController extends Controller
             );
             $renvue->transaction_id = $transaaction->id;
             $renvue->save();
+
+
             session()->flash('success', __('translation.recept_revenues_success_fule'));
             DB::commit();
             return redirect()->route('school.students.revenues.index', ['type' => $request->type_id]);
-        } catch (\Throwable $th) {
-            DB::rollback();
+        } catch (\Throwable $e) {
+
+            if ($e->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('site.added_successfully'));
+                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
             // dd($th);
+            DB::rollback();
             return  redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -133,10 +151,13 @@ class StudentRevenueController extends Controller
      * @param  \App\Models\StudentRevenue  $studentRevenue
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentRevenue $studentRevenue)
+    public function show($studentRevenue)
     {
-        //
+        $studentRevenue = StudentRevenue::findOrFail($studentRevenue);
+        return view('school.students.show', compact('studentRevenue'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -184,6 +205,7 @@ class StudentRevenueController extends Controller
                 'student_guard' => $request->student_guard,
                 'amount' => $request->amount,
                 'opration_type' => $request->opration_type,
+                'opration_id' => $request->opration_idd,
                 'school_id' => $request->school_idd,
                 'revenue_type' => $request->type_id,
                 'recept_date' => $request->recept_date ?? date('y-m-d')
@@ -200,7 +222,13 @@ class StudentRevenueController extends Controller
             session()->flash('success', __('translation.recept_revenues_success_fule'));
             DB::commit();
             return redirect()->route('school.students.revenues.index', ['type' => $request->type_id]);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
+            if ($e->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('translation.revenues_edit_successfully'));
+                return redirect()->route('school.students.revenues.index', ['type' => $request->type_id])->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
             DB::rollback();
             dd($th);
         }
@@ -219,9 +247,9 @@ class StudentRevenueController extends Controller
             DB::beginTransaction();
             SchoolTreasuryTransactionHistory::DestoryTransaction($renvue->transaction_id);
             $renvue->delete();
-
             DB::commit();
-            session()->flash('success', __('translation.recept_revenues_success_fule'));
+            session()->flash('success', __('translation.recept_revenues_success_fule_was_delete'));
+            return redirect()->route('school.students.revenues.index', ['type' => $renvue->revenue_type]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();

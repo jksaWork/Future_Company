@@ -21,4 +21,9 @@ class StudentRevenue extends Model
     {
         return $this->belongsTo(school_types::class, 'school_id');
     }
+
+    public function attachments()
+    {
+        return $this->morphMany(Attachments::class, 'attachable');
+    }
 }

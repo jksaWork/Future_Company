@@ -572,6 +572,8 @@ return [
     'edit_teachers_Advances' => 'تعديل سلفية المعلمين',
     'teachers_salaries' => 'رواتب المعلمين',
     "recept_students_renvue" => 'استلام ايراد جديد',
+    'students_renvue' => ' ايرادات الرسوم الدراسيه',
+    'show_students_renvue' => ' عرض ايرادات الرسوم الدراسيه',
     'opration_type' => 'نوع العمليه',
     'opration_idd' => 'رقم العمليه',
     'revenue_type' => 'نوع الايراد',
@@ -597,5 +599,9 @@ return [
     'school_idd' => 'المدرسه',
     'edit_recept_revenues' => 'تعديل بيانات الايراد',
     'schools_empty' => 'لايوجد مدارس',
-    'recept_revenues_success_fule_was_delete' => 'تم حذف الايراد بنجاح'
+    'recept_revenues_success_fule_was_delete' => 'تم حذف الايراد بنجاح', 'show_students_transfeer_renvue' => 'عرض ايرادات رسوم الترحيل',
+    'revenues_edit_successfully' => 'تم تعديل بيانات الدفعيه بنجاح',
+    'show_students_renvue_details' => 'عرض بيانات الايراد',
+    'revnue_info' => 'معلومات الايراد',
+    'attachments' => 'المرفقات',
 ];

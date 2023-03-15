@@ -1,6 +1,6 @@
 {{-- @if (auth()->user()->hasPermission('update_admins')) --}}
 <div style="min-width: 200px">
-    <a href="{{ route('realstate.realstate.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
+    <a href="{{ route('school.students.revenues.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
         <i class="fa fa-eye"></i>
     </a>
 

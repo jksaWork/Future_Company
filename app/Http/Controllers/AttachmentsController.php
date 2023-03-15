@@ -14,28 +14,30 @@ class AttachmentsController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'attachments' => 'required',
-            'attachmentable' => 'required',
-            'type' => 'required',
-        ],
-        ['required' => __('translation.attachment_is_required')]
-    );
+        $request->validate(
+            [
+                'attachments' => 'required',
+                'attachmentable' => 'required',
+                'type' => 'required',
+            ],
+            ['required' => __('translation.attachment_is_required')]
+        );
 
+        // dd($request->type);
         $attachmentableArray = Attachments::getAttachableModel($request->type);
         // dd($attachmentableArray);
         // Get Attachable From And Route And Key From Function getAttachableModel
-        [$attachmentableClass , $route , $routeKey] = $attachmentableArray;
+        [$attachmentableClass, $route, $routeKey] = $attachmentableArray;
         $attachmentable = $attachmentableClass::find($request->attachmentable);
         // dd($attachmentableArray);
         foreach ($request->attachments  as $key => $file) {
             $file_name =  $file->hashName();
-            $file->store($routeKey.'/attachments',  'public');
+            $file->store($routeKey . '/attachments',  'public');
             $attachment = new Attachments();
             $attachment->url = $file_name;
             $attachmentable->attachments()->save($attachment);
         }
-            return redirect()->route($route, [$routeKey => $attachmentable->id])->with(['success' => __('translation.the_file_was_uploaded_success')]);
+        return redirect()->route($route, [$routeKey => $attachmentable->id])->with(['success' => __('translation.the_file_was_uploaded_success')]);
     }
 
     /**
@@ -73,16 +75,16 @@ class AttachmentsController extends Controller
     public  function show($id)
     {
         $file_name = Attachments::find($id)->url;
-        if(Str::startsWith($file_name, 'http://localhost:8000/'))
-        $file_name = Str::replaceFirst('http://localhost:8000/' ,  '' , $file_name);
+        if (Str::startsWith($file_name, 'http://localhost:8000/'))
+            $file_name = Str::replaceFirst('http://localhost:8000/',  '', $file_name);
         return response()->file(public_path($file_name));
     }
 
     public function download($id)
     {
         $file_name = Attachments::find($id)->url;
-        if(Str::startsWith($file_name, 'http://localhost:8000/'))
-            $file_name = Str::replaceFirst('http://localhost:8000/' ,  '' , $file_name);
+        if (Str::startsWith($file_name, 'http://localhost:8000/'))
+            $file_name = Str::replaceFirst('http://localhost:8000/',  '', $file_name);
         $pathToFile = public_path($file_name);
         return response()->download($pathToFile);
     }
