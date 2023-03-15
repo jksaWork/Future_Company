@@ -544,7 +544,6 @@ return [
     'edit_realstate' => 'تعديل بينانات العقار',
     'renter' => 'المستاجر',
     'chose_renter' => 'اختر المستاجر',
-<<<<<<< HEAD
 
 
 
@@ -573,35 +572,3 @@ return [
     'edit_teachers_Advances'=>'تعديل سلفية المعلمين',
     'teachers_salaries'=>'رواتب المعلمين',
 ];
-=======
-    'go_to_employee' => 'الذهاب الي نظام المنصرفات',
-    'student_renvue' => 'ايرادات رسوم  الطلاب',
-    'students_renvue' => 'الرسوم الدراسيه',
-    'transfer_renvue' => 'رسوم الترحايل',
-    'show_students_renvue' => 'عرض سجل الايرادات',
-    "recept_students_renvue" => 'استلام ايراد جديد',
-    'opration_type' => 'نوع العمليه',
-    'opration_idd' => 'رقم العمليه',
-    'revenue_type' => 'نوع الايراد',
-    'recept_date' => 'تاريخ المعامله',
-    'student_name' => 'اسم الطالب',
-    'student_guard' => 'المرحله الدراسيه',
-    'search_student_name_guard_amount' => 'الاسم \ المرحله الدراسيه \ المبلغ',
-    'student_revenues' => 'ايراد رسوم دراسيه',
-    'transfer_revenues' => 'ايراد رسوم ترحيل',
-    'speding_from_spending_school' => 'منصرقات المدارس',
-    'spending_ection_spneding_precntage_and_transffer' => 'من نسبه منصرفات المؤسسه تشمل منصرفات النسريات و الصيانه ومصروقات التراحيل',
-    'spending_for_techer_section' => 'منصرفات قسم المعلمين',
-    'spending_for_techer_section_desc' => ' من نسبه منصرفات المؤسسه في قسم المعلمين تشمل الحوافز والسلفيات',
-    'student_renvue' => 'ايرادات الرسوم الدراسيه',
-    'transfer_renvue' => 'ايرادات رسوم التراحيل',
-    'transfer_renvue_precntage' => 'نسبه ايرادات رسوم التراحيل',
-    'student_renvue_precntage' => 'نسيه ايرادات الرسوم الدراسيه',
-    'bank' => 'تحويله بنكيه',
-    'cash' => 'كاش',
-    'check' => 'شيك بنكي',
-    'opration_idd' => 'رقم العمليه',
-    'payment_attachment' => 'مرفقات الدفعيه',
-    'school_idd' => 'المدرسه',
-];
->>>>>>> f30d4080c1a3873818f50ba012ba620fc0e88b32
