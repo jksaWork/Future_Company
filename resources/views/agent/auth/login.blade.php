@@ -1,4 +1,4 @@
-@extends('layouts.agents.agent_login_layouts');
+@extends('layouts.school.school_layouts');
 @section('content')
 <div class="d-flex flex-column flex-root">
     <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/14-dark.png">
@@ -16,8 +16,7 @@
                             <h1 class="text-dark mb-3">{{__('translation.Welcome Back')}}</h1>
                             <!--end::Title-->
                             <!--begin::Link-->
-                            <div class="text-gray-400 fw-bold fs-4">{{__('translation.Are You Admin')}} ?
-                            <a href="{{ route('admin.get_login')}}" class="link-primary fw-bolder">{{ __('translation.Admin Login')}}</a></div>
+                            <div class="text-gray-400 fw-bold fs-4"><a href="{{ route('admin.get_login')}}" class="link-primary fw-bolder">{{ __('translation.go_to_employee')}}</a></div>
                             <!--end::Link-->
                         </div>
                     </div>
