@@ -1,10 +1,10 @@
 {{-- @if (auth()->user()->hasPermission('update_admins')) --}}
 <div style="min-width: 200px">
-    <a href="{{ route('realstate.realstate.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
+    <a href="{{ route('school.students.revenues.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
         <i class="fa fa-eye"></i>
     </a>
 
-    <a href="{{ route('realstate.realstate.edit', $id) }}" class="btn btn-light-info btn-sm btn-icon me-1">
+    <a href="{{ route('school.students.revenues.edit', $id) }}" class="btn btn-light-info btn-sm btn-icon me-1">
         <span class="svg-icon svg-icon-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
@@ -12,17 +12,7 @@
             </svg>
         </span>
     </a>
-
-        <a href="{{ route('realstate.realstate.show', ['status' => true , 'realstate' => $id]) }}"
-            class="btn btn-light-success btn-sm btn-icon me-1">
-            <span class="svg-icon svg-icon-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black"></path>
-                    <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black"></path>
-                </svg>
-            </span>
-            </a>
-    {{-- <form action="{{ route('realstate.realstate.destroy', $id) }}"
+ <form action="{{ route('school.students.revenues.destroy', $id) }}"
         id='delete_real_state'
 
     class="my-1 my-xl-0" method="post" style="display: inline-block;">
@@ -38,6 +28,6 @@
                 </svg>
             </span>
         </button>
-    </form> --}}
+    </form>
 </div>
 {{-- @endif --}}

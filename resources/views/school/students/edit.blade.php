@@ -1,7 +1,7 @@
 @extends('layouts.school.master')
 @section('main-head')
-    {{__('translation.recept_revenues')}}
-    <small>  -  {{$headings[request()->type] ?? ''}} </small>
+    {{__('translation.edit_recept_revenues')}}
+    <small>  -  {{$headings[$studentRevenue->revenue_type] ?? ''}} </small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -13,18 +13,19 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-body pt-0">
                         {{-- @include('layouts.includes.session') --}}
-                        <form action="{{ route('school.students.revenues.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('school.students.revenues.update', $studentRevenue->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row">
-                                <x:text-input name='type_id' class='col-md-6'  value='{{ request()->type }}'/>
-                                <x:text-input name='student_name' class='col-md-6' />
+                                <x:text-input name='type_id' class='col-md-6'  value='{{ $studentRevenue->revenue_type }}'/>
+                                <x:text-input name='student_name' class='col-md-6'  value='{{ $studentRevenue->student_name }}'/>
                                 {{-- <x:select-options name='school_idd' :options='$schooles'  class='col-md-6' /> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="">{{ __('translation.school_idd') }}</label>
                                       <select class="form-control" name="school_idd" id="">
                                         @forelse($schooles as $school )
-                                        <option value='{{ $school->id }}'>{{ $school->school_name }}</option>
+                                        <option value='{{ $school->id }}' {{$school ->id == $studentRevenue->school_id ?"selected":'' }}>{{ $school->school_name }}</option>
                                         @empty
                                         <option value=''>{{ __('translation.schools_empty') }}</option>
                                         @endforelse
@@ -36,21 +37,20 @@
                                       @enderror
                                     </div>
                                 </div>
-                                <x:text-input name='student_guard' class='col-md-6' />
-                                <x:text-input name='amount' class='col-md-6' />
+                                <x:text-input name='student_guard' class='col-md-6' value='{{ $studentRevenue->student_guard }}' />
+                                <x:text-input name='amount' class='col-md-6' value='{{ intval($studentRevenue->amount) }}' />
                                 @php
                                     $opration_type= ['bank', 'cash', 'check'];
                                     // $schooles= ['omdramn', 'kartom_school'];
                                 @endphp
                                 <x:select-options name='opration_type' :options='$opration_type'  class='col-md-6' />
-                                <x:text-input name='opration_idd' class='col-md-6' />
-
-                                <x:input-file name='payment_attachment' class='col-md-6'></x:input-file>
+                                <x:text-input name='opration_idd' class='col-md-6'  value='{{ $studentRevenue->opration_idd }}'  />
+                                {{-- <x:input-file name='payment_attachment' class='col-md-6'></x:input-file> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                       <label for="">{{ __('translation.recept_date') }}</label>
                                       <input type="date"
-                                        class="form-control" name="recept_date" >
+                                        class="form-control" name="recept_date" value='{{ $studentRevenue->recept_date }}'  >
                                         @error('recept_date')
                                              <small id="helpId" class="form-text text-muted">{{ $message }}</small>
                                         @enderror
