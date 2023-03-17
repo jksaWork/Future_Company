@@ -1,5 +1,5 @@
 {{-- @extends('layouts.admin.admin') --}}
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
 @section('main-head', __('translation.school_type'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">

@@ -35,10 +35,15 @@ class School_DataController extends Controller
 
     public function SectionhistoryData(Request $request)
     {
-
+return $request;
 
         $query = school_sections::query();
-        return  DataTables::of($query)->editColumn(
+        return  DataTables::of($query)
+        
+        
+        
+        
+        ->editColumn(
             'actions',
             'admin.School_teachers.school_section.data_table.actions'
         )

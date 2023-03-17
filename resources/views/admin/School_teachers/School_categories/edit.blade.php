@@ -1,4 +1,4 @@
-@extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
+@extends(auth()->guard('admin')->check() ?'layouts.school.master':'layouts.agents.agent_layouts')
 @section('main-head')
 {{__('translation.edit_Categoires_teachers')}}
     <small> - {{__('translation.teachers_management')}}</small>

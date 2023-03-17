@@ -1,4 +1,4 @@
-@extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
+@extends(auth()->guard('admin')->check() ?'layouts.school.master':'layouts.agents.agent_layouts')
 @section('main-head')
 {{__('translation.edit_section')}}
     <small> --- {{__('translation.School_expenses')}}</small>
@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_id') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_name') }}
                                         </label>
                                         <select class="form-control form-control-solid" value="{{ old('school_id') }}" name="school_id" class="form-control">
                                             <option value="" selected disabled> {{ __('translation.Choose_school_id') }}

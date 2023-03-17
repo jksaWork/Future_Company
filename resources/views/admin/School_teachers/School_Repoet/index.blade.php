@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
 @section('css')
     <style>
         @media print {

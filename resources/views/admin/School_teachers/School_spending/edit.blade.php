@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
 @section('main-head')
     {{ __('translation.edite_spending') }}
     <small> - {{ __('translation.Expenses_and_calculations') }} </small>

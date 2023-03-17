@@ -248,7 +248,7 @@
             is_sale = $(this).val();
             rolesTable.ajax.reload();
         });
-
+ 
 
         $('#status').on('change', function() {
             console.log('helllo');

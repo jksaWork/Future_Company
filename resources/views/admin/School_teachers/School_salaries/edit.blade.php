@@ -1,8 +1,8 @@
 {{-- @if (!) --}}
 {{-- @dd('jksa');
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
 @else --}}
-@extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
+@extends(auth()->guard('admin')->check() ?'layouts.school.master':'layouts.agents.agent_layouts')
 {{-- @endif --}}
 @section('main-head')
     {{__('translation.edite_salariesss')}}

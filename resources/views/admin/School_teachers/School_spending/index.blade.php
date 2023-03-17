@@ -1,5 +1,5 @@
-{{-- @extends('layouts.admin.admin') --}}
-@extends('layouts.admin.admin')
+{{-- @extends('layouts.school.master') --}}
+@extends('layouts.school.master')
 @section('main-head', __('translation.spending'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -71,7 +71,7 @@
                                             <th>{{ __('translation.id') }}</th>
                                             <th class="">{{ __('translation.spending_name') }}</th>
                                             <th class="">{{ __('translation.spending_value') }}</th>
-                                            <th class="">{{ __('translation.school_type') }}</th>
+                                            <th class="">{{ __('translation.school_name') }}</th>
                                             <th class="">{{ __('translation.section_id') }}</th>
                                             <th class="">{{ __('translation.created_at') }}</th>
                                             <th class="">{{ __('translation.description') }}</th>

@@ -466,4 +466,5 @@ return [
     'edite_Teachers_allowances'=>'edite Teachers allowances',
     'edit_teachers_Advances'=>'edit teachers Advances',
     'teachers_salaries'=>'Teachers Salaries ',
+    'edit_school'=> 'Edit School',
 ];

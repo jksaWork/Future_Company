@@ -15,8 +15,8 @@ class School_SectionController extends Controller
     public function index(Request $request)
     {
         
-
-        return view('admin.School_teachers.School_section.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_section.index', compact('school_id'));
 
     }//end of index
 

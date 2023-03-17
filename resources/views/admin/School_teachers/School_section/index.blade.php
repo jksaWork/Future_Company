@@ -1,5 +1,5 @@
-{{-- @extends('layouts.admin.admin') --}}
-@extends('layouts.admin.admin')
+{{-- @extends('layouts.school.master') --}}
+@extends('layouts.school.master')
 @section('main-head', __('translation.Expense_sections'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -35,8 +35,22 @@
                         {{-- </form> --}}
 
 
+                 
+                    
+                    <div class="d-flex mr-3">
+                        <div class="form-group">
+                            <select class="form-control" name="" id="section">
+                                <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
+                                </option>
+                                @foreach ($school_id as $school_id)
+                                    <option  value="{{ $school_id->id }}">{{ $school_id->school_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-
+              
+            </div>
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
@@ -54,10 +68,14 @@
                                 data-kt-customer-table-select="delete_selected">Delete Selected</button>
                         </div>
                         <!--end::Group actions-->
+                        
                     </div>
                     <!--end::Card toolbar-->
                 </div>
                 <!--end::Card header-->
+
+
+                
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     @include('layouts.includes.session')
@@ -69,7 +87,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{ __('translation.id') }}</th>
-                                            <th>{{ __('translation.school_id') }}</th>
+                                            <th>{{ __('translation.school_name') }}</th>
                                             <th>{{ __('translation.section_name') }}</th>
                                             <th>{{ __('translation.description') }}</th>
                                             <th>@lang('translation.action')</th>
@@ -179,7 +197,8 @@
             type = $(this).val();
             rolesTable.ajax.reload();
         });
-        $('#owner').on('change', function() {
+        $('#section').on('change', function() {
+            // console.log(transaction_type);
             transaction_type = $(this).val();
             console.log(transaction_type);
             rolesTable.ajax.reload();

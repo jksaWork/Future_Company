@@ -1,7 +1,7 @@
-@extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
+@extends(auth()->guard('admin')->check() ?'layouts.school.master':'layouts.agents.agent_layouts')
 @section('main-head')
-{{__('translation.edit_section')}}
-    <small> --- {{__('translation.Expenses_and_calculations')}}</small>
+{{__('translation.edit_school')}}
+    <small> --- {{__('translation.school_type')}}</small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">

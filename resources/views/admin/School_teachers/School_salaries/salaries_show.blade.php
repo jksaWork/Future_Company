@@ -1,6 +1,6 @@
 @extends(
     auth()->guard('admin')->check()
-        ? 'layouts.admin.admin'
+        ? 'layouts.school.master'
         : 'layouts.agents.agent_layouts'
 )
 @section('main-head', __('translation.Add_a_new_salary'))

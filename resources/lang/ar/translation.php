@@ -571,4 +571,5 @@ return [
     'teachers_accounts'=>'حسابات المعلمين',
     'edit_teachers_Advances'=>'تعديل سلفية المعلمين',
     'teachers_salaries'=>'رواتب المعلمين',
+    'edit_school'=> 'تعديل اسم المدرسة',
 ];
