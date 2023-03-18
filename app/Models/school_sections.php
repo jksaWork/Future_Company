@@ -23,4 +23,13 @@ class school_sections extends Model
     {
     return $this->belongsTo('App\Models\school_types','school_id');
     }
+    public function school_type($query)
+    {
+        
+        // if($query == null){
+        return $query->where('school_id', request()->section);
+        
+        
+    // }
+    }
 }

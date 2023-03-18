@@ -67,7 +67,7 @@
                                     <input type="number" class="form-control form-control-solid" placeholder=""
                                         step="0.01" name="salary" value='{{ $employees->salary }}'
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required />
+                                         />
                                     @error('salary')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -151,9 +151,9 @@
                                     </div>
                                 </div>
                                 <div class="fv-row mb-7 col-md-6 ">
-                                    <label>{{__('translation.created_at')}}  :</label>
+                                    <label>{{__('translation.created_ats')}}  :</label>
                                     <input class="form-control fc-datepicker form-control-solid" name="month" placeholder="YYYY-MM-DD"
-                                    type="date" value="{{$employees->month}}" required>
+                                    type="date" value="{{$employees->month}}" >
                                         @error('advances_Date')
                                             <span class="text-danger">
                                                 {{$message}}

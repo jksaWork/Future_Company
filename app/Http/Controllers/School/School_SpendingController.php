@@ -7,7 +7,7 @@ use App\Models\school_sections;
 use App\Models\school_types;
 use App\Models\school_spendings;
 use Illuminate\Support\Facades\Validator;
-use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\spendingRequest as SpendingRequest;
 use App\Http\Requests\updataSpendingRequest;
@@ -19,8 +19,8 @@ class School_SpendingController extends Controller
 
     public function index(Request $request)
     {
-      
-        return view('admin.School_teachers.School_spending.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_spending.index', compact('school_id'));
     } //end of index
 
 
@@ -56,13 +56,13 @@ class School_SpendingController extends Controller
 
             ]);
             // return $school_spendings;
-            // $spendingses = spendings::findOrFail($spendings->id);
-            // //    return  $spendingses->spending_value;
-            // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->section->section_name, $spendings->id);
+            $spendingses = school_spendings::findOrFail($school_spendings->id);
+            //    return  $spendingses->spending_value;
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $school_spendings->id);
 
-            // $spendingses->update([
-            //     'Transaction_id' => $res->id,
-            // ]);
+            $spendingses->update([
+                'Transaction_id' => $res->id,
+            ]);
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.spending.index');
@@ -109,7 +109,7 @@ class School_SpendingController extends Controller
         $request->validate([
             'school_id' =>'required|exists:school_types,id',
             'spending_name' => 'required|string|max:100',
-            'section_id' => 'required|exists:school_sections,id',
+            'section_id' => 'required',
             'month' => 'required|date_format:Y-m-d',
             'spending_value' => 'required|min:0|numeric',
         ]);
@@ -128,20 +128,20 @@ class School_SpendingController extends Controller
                 'description' => $request->description,
             ]);
             // return $spending->Transaction_id;
-            // $res = FinancialTreasuryTransactionHistorys::EditTransaction($spending->Transaction_id, $spending->spending_value);
+            $res = SchoolTreasuryTransactionHistory::EditTransaction($school_spendings->Transaction_id, $school_spendings->spending_value);
             // return $res;
             DB::commit();
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('School.spending.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
 
-            // if ($e->getCode() == 51) {
-            //     DB::commit();
-            //      session()->flash('success', __('site.updated_successfully'));
-            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            // }
+            if ($e->getCode() == 51) {
+                DB::commit();
+                 session()->flash('success', __('site.updated_successfully'));
+                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
             DB::rollBack();
             if ($e->getCode() == 50) {
                 session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
@@ -157,7 +157,7 @@ class School_SpendingController extends Controller
         // return $id;
         try{
         $school_spendings = school_spendings::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $spending->Transaction_id);
+        $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $school_spendings->Transaction_id);
         $school_spendings->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('School.spending.index');

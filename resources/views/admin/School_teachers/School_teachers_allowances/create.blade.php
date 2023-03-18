@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_id') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_name') }}
                                         </label>
                                         <select class="form-control form-control-solid" value="{{ old('school_id') }}" name="school_id" class="form-control" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">
@@ -48,7 +48,7 @@
                                                 </option>
                                             @endforeach --}}
                                         </select>
-                                        @error('employee_id')
+                                        @error('teachers_id')
                                             <span class="text-danger">
                                                 {{ $message }}
                                             </span>
@@ -97,7 +97,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.year') }}</label>
-                                    <select id='' class="form-control form-control-solid discounts" value="{{ old('year') }}"
+                                    <select id='' class="form-control form-control-solid discounts" 
                                         name='year' readonly>
                                         @for ($year = date('Y') - 1; $year <= date('Y', strtotime('+5 year')); $year++)
                                             <option value='{{$year}}' >{{ $year }}</option>

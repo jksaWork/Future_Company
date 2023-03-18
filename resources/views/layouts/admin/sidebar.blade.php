@@ -694,7 +694,6 @@
                             <span class="menu-title">{{ __('translation.setting') }}</span>
                         </a>
                     </div>
-                    @include('admin.School_teachers.sider')
 
                 </div>
             </div>

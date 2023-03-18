@@ -54,7 +54,7 @@
                                                 <th id='credit_total' style="font-weight:bolder">0</th>
                                                 <th id='debit_total' style="font-weight:bolder">0</th>
                                                 <th id='total_total' style="font-weight:bolder">0</th>
-                                            </tr>
+                                            </tr> 
                                         </tfoot>
                                    </table>
                               </div><!-- end of table responsive -->

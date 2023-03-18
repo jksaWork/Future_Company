@@ -1,7 +1,7 @@
 @extends('layouts.school.master')
 @section('main-head')
     {{ __('translation.edite_spending') }}
-    <small> - {{ __('translation.Expenses_and_calculations') }} </small>
+    <small> - {{ __('translation.School_expenses') }} </small>
 @endsection
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -22,7 +22,7 @@
                                     <input type="hidden" class="form-control form-control-solid"
                                         placeholder="" name="pro_id" value='{{$school_spendings->id}}'/>
                                     <input type="text" class="form-control form-control-solid"
-                                        placeholder="" name="spending_name" value='{{$school_spendings->spending_name}}'  required/>
+                                        placeholder="" name="spending_name" value='{{$school_spendings->spending_name}}'  />
                                         @error('spending_name')
                                             <span class="text-danger">
                                                 {{$message}}
@@ -32,7 +32,7 @@
                                 <div class="fv-row mb-7 col-md-6 ">
                                     <label>{{__('translation.month')}}  :</label>
                                     <input class="form-control fc-datepicker form-control-solid" name="month" placeholder="YYYY-MM-DD"
-                                    type="date" value="{{$school_spendings->month}}" required>
+                                    type="date" value="{{$school_spendings->month}}" >
                                         @error('advances_Date')
                                             <span class="text-danger">
                                                 {{$message}}
@@ -47,7 +47,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_id') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_name') }}
                                         </label>
                                         <select class="form-control form-control-solid" value="{{ old('school_id') }}" name="school_id" class="form-control" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">
@@ -73,7 +73,7 @@
                                             class="form-control" >
 
                                             @foreach ($school_sections as $section)
-                                                <option>{{ $section->section_name}}</option>
+                                                <option value={{$section->id}}>{{ $section->section_name}}</option>
                                             @endforeach
                                         </select>
                                         @error("section_id")
@@ -88,7 +88,7 @@
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.spending_value') }}</label>
                                     <input type="number" class="form-control form-control-solid"
                                         placeholder="" step="0.01" name="spending_value" value="{{$school_spendings->spending_value}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required />
+                                         />
                                         @error('spending_value')
                                             <span class="text-danger">
                                                 {{$message}}

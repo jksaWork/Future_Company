@@ -26,11 +26,8 @@ class School_AllteachersController extends Controller
 
     public function index(Request $request)
     {
-        // $Categorys = Category::all();
-        // $employees = employee::all();
-        // $allowns = employee_allowances::where('status', 1)->get();
-
-        return view('admin.School_teachers.School_teachers.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_teachers.index', compact('school_id'));
     } //end of index
 
 

@@ -1,217 +1,292 @@
+{{-- @extends('layouts.school.master') --}}
 @extends('layouts.school.master')
-@section('css')
-    <style>
-        @media print {
-            #print_Button {
-                display: none;
-            }
-            #form{
-                display: none;
-            }
-        }
-
-    </style>
-@endsection
-@section('title')
-{{__('translation.salaries_list')}}
-@stop
-@section('main-head', __('translation.salaries_report'))
+@section('main-head', __('translation.teachers_salaries'))
 @section('content')
-<div class="post d-flex flex-column-fluid" id="kt_post">
-    <!--begin::Container-->
-    <div id="kt_content_container" class="container-xxl">
-        <!--begin::Card-->
-        <div class="card" id="print">
-            <!--begin::Card header-->
-            <div class="card-header border-0 pt-6">
-                <!--begin::Card title-->
-                {{-- <div class="card-title"> --}}
-                <!--begin::Search-->
-                <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::Card-->
+            <div class="card">
+                <div class="p-2 m-2">
+                    <div class="row p-3 m-2">
+                        <div class="form-group col-md-6">
+                            <label for="">{{ __('translation.being_month') }}</label>
+                            <input type="date" name='being_month'  id ="being_month" class="form-control mb-2 mb-md-0" value="{{date('Y-M-D')}}"/>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="">{{ __('translation.end_month') }}</label>
+                            <input type="date" name='end_month' value="{{ date('Y-m-d') }}" id ="end_month" class="form-control mb-2 mb-md-0" placeholder="Enter contact number" />
+                     
+                    </div>
+               </div>
+                    </div>
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    {{-- <div class="card-title"> --}}
+                    <!--begin::Search-->
+                    <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <div class="col-md-6  d-flex align-items-center position-relative my-1 ">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
+                                        rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                    <path
+                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            {{-- <form action="{{ route('owners.index')}}" method="get"> --}}
+                            <input type="text" name='search' id="handelSearch" value="{{ request()->search }}"
+                                class="form-control form-control-solid  ps-15"
+                                placeholder="{{ __('translation.search') }}" />
 
-                    {{-- </form> --}}
-
-
-                </div>
-
-
-                <!--end::Card toolbar-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body pt-0" >
-                <div class="d-flex flex-stack pb-10">
-                    <!--begin::Logo-->
-                    <a href="#"> </a>
-                    <!--end::Logo-->
-                    <!--begin::Action-->
-                    <a href="#" class="btn btn-sm btn-success" id="print_Button" onclick="printDiv()">{{ __('translation.print') }}</a>
-                    <!--end::Action-->
-                </div>
-                <form action="{{ route('reports.salaries.report') }}" id='form'>
-                    <div class="form-group row">
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('translation.being_month') }}:</label>
-                            <input type="date" name='being_month' class="form-control mb-2 mb-md-0" value="{{date('Y-M-D')}}" />
                         </div>
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('translation.end_month') }}:</label>
-                            <input type="date" name='end_month' value="{{ date('Y-m-d') }}" class="form-control mb-2 mb-md-0" placeholder="Enter contact number" />
+                        {{-- </form> --}}
+                        <div class="d-flex mr-3" style="
+                        margin: auto;
+                    ">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="School_salaries">
+                                    <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
+                                    </option>
+                                    @foreach ($school_id as $school_id)
+                                        <option  value="{{ $school_id->id }}">{{ $school_id->school_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="col-md-6" style="
-                            text-align: -webkit-auto;
-                            padding: 26px;
-                        ">
-                            <button class="btn btn-primary"> {{ __('translation.search') }}
-                            </button>
-                        </div>
-
 
                     </div>
-                </form><br><br><br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-rounded table-striped border gy-7 gs-7"  >
-                                <thead>
-                                    <tr>
-                                        <th>{{ __('translation.id') }}</th>
-                                        <th class="">{{ __('translation.school_type') }}</th>
-                                        <th class="">{{ __('translation.employee_name') }}</th>
+
+                    <div class="card-toolbar">
+                        <!--begin::Toolbar-->
+                      
+                        <!--end::Toolbar-->
+                        <!--begin::Group actions-->
+                        <div class="d-flex justify-content-end align-items-center d-none"
+                            data-kt-customer-table-toolbar="selected">
+                            <div class="fw-bolder me-5">
+                                <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
+                            </div>
+                            <button type="button" class="btn btn-danger"
+                                data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                        </div>
+                        <!--end::Group actions-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    @include('layouts.includes.session')
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                    id="roles-table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ __('translation.id') }}</th>
+                                            <th class="">{{ __('translation.school_name') }}</th>
+                                            <th class="">{{ __('translation.teachers_name') }}</th>
                                             <th class="">{{ __('translation.fixed_salary') }}</th>
                                             <th class="">{{ __('translation.allownacees_salary') }}</th>
                                             <th class="">{{ __('translation.advances') }}</th>
                                             <th class="">{{ __('translation.discounts') }}</th>
-                                            <th class="">{{ __('translation.status') }}</th>
-                                            <th class="">{{ __('translation.month') }}</th>
                                             <th class="">{{ __('translation.totle_salaries') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fw-bold text-gray-600">
-
-                                    <?php $sum_salaries = 0; ?>
-                                    @forelse ($salaries as $index=>$salaries)
-                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $salaries->School->school_name }}</td>
-                                        <td>{{ $salaries->teachers->name }}</td>
-                                        <td> {{ number_format($salaries->fixed_salary,2) }}</td>
-                                        <td>{{ number_format($salaries->allowancess_fixed, 2) }}</td>
-                                        <td><span class='badge badge-danger'>{{ number_format($salaries->advances,2) }}</span></td>
-                                        <td><span class='badge badge-danger'>{{ number_format($salaries->discounts, 2) }}</span></td>
-                                        <td>{{ $salaries->getActive() }}</td>
-                                        <td>{{ __('translation.Month')}}-{{ $salaries->month_number}}</td>
-                                    <td><span class='badge badge-success'>{{ number_format($salaries->totle_salaries, 2) }}</span></td>
-                                    </tr>
-                                    <?php $sum_salaries += $salaries->totle_salaries; ?>
-                                    @empty
-                                    <td colspan="4">
-                                        <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
-                                    </td>
-                                    @endforelse
-
-                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ __('translation.total') }}:</td>
-                                        <td><span class='badge badge-success'>{{ number_format($sum_salaries , 2) }}<span class='badge badge-success'> </td>
-
-                                       
-
-                                    </tr>
-
-
-
-                                </tbody>
-                            </table>
-
-
-                        </div><!-- end of table responsive -->
-                    </div><!-- end of col -->
-                </div><!-- end of row -->
-                <!--end::Table-->
+                                            <th class="">{{ __('translation.month_number') }}</th>
+                                            <th class="">{{ __('translation.created_at') }}</th>
+                                            <th class="">{{ __('translation.status') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr class='table-success'>
+                                            <th style="text-align:center" colspan="2" >{{ __('translation.total') }} : </th>
+                                           
+                                            <th id=''colspan="4" style="font-weight:bolder;/* margin: 28%; */padding: 17px 137px;">0</th>
+                                            <th id='credit_total' style="font-weight:bolder;"></th>
+                                            <th id='credit_total' style="font-weight:bolder;"></th>
+                                            <th id='credit_total' style="font-weight:bolder;">0</th>
+                                            <th id='credit_total' style="font-weight:bolder;"></th>
+                                            
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div><!-- end of table responsive -->
+                        </div><!-- end of col -->
+                    </div><!-- end of row -->
+                    <!--end::Table-->
+                </div>
+                <!--end::Card body-->
             </div>
-            <!--end::Card body-->
+            <!--end::Modals-->
         </div>
-        <!--end::Modals-->
+        <!--end::Container-->
     </div>
-    <!--end::Container-->
-</div>
 @endsection
 @push('scripts')
 
-
-
-<script type="text/javascript">
-    function printDiv() {
-        var printContents = document.getElementById('print').innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-        location.reload();
-    }
-
-</script>
-
-
-@endpush
-
-
-
-
-<!-- jQuery -->
-{{-- 
-
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-<script src="{{ asset('datatable/jquery.js') }}"></script>
-<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/custom/index.js') }}"></script> --}}
-
-<!-- DataTables  & Plugins -->
-{{-- <script src="{{URL::asset('datatable/js/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-bs4/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-responsive/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/jszip/jszip.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.print.min.js')}}"></script>
-<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.colVis.min.js')}}"></script>
-
-<!-- AdminLTE App -->
+<script src="{{ asset('datatable/select2.min.js') }}"></script>
 
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
+
+   $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
+   $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
+   let stauts, type, School_salaries,  being_month,end_month, id = @json(request()->id);
+   let rolesTable = $('#roles-table').DataTable({
+       dom: "Brtp",
+       serverSide: true,
+       processing: true,
+       distroy: true,
+       "language": {
+           "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+       },
+       buttons: [
+           'copy', {
+               extend:'excel',
+               text:'{{ __('translation.export_As_exel') }}' ,
+           },
+
+           { extend: 'print',
+                   title: '@lang('translation.Staff_salaries')',
+                   className: 'btn btn-default',
+                   autoPrint: true,
+
+                   customize: function (win) {
+                       $(win.document.body).css('direction', 'rtl');
+                       $(win.document.body).find('th').addClass('display').css('text-align', 'center');
+                       $(win.document.body).find('table').addClass('display').css('font-size', '16px');
+                       $(win.document.body).find('table').addClass('display').css('text-align', 'center');
+                       $(win.document.body).find('tr:nth-child(odd) td').each(function (index) {
+                           $(this).css('background-color', '#D0D0D0');
+                       });
+                       $(win.document.body).find('h1').css('text-align', 'center');
+                   }}
+
+       ]  ,
+         ajax: {
+            url: '{{ route('School_reports.School_salaries.report_data') }}',
+           data: function(q) {
+               q.type = type;
+               q.School_salaries = School_salaries;
+               q.end_month = end_month;
+               q.being_month = being_month;
+               q.id = id;
+
+           },
+       },
+
+       columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'school_id',
+                    name: 'school_id'
+                },
+                {
+                    data: 'teachers_id',
+                    name: 'teachers_id'
+                },
+
+                {
+                    data: 'fixed_salary',
+                    name: 'fixed_salary'
+                },
+
+
+                {
+                    data: 'allowancess_fixed',
+                    name: 'allowancess_fixed'
+                },
+
+                    {
+                        data: 'advances',
+                        name: 'advances'
+                    },
+                    {
+                        data: 'discounts',
+                        name: 'discounts'
+                    },
+
+                {
+                    data: 'totle_salaries',
+                    name: 'totle_salaries'
+                },
+                {
+                    data: 'month_number',
+                    name: 'month_number'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                },
+
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+   ],     order: [
+           [2, 'desc']
+       ],
+       footerCallback: function (row, data, start, end, display) {
+        // console.log(footerCallback);
+            var api = this.api();
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+            };
+            pageTotal = api
+                .column(7)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+              
+
+                console.log(pageTotal, 'credit   --------------');
+            $(api.column(7).footer()).html(`${new Intl.NumberFormat().format(pageTotal)}`);
+           
+        },
+
+
+   });
+
+   $('#handelSearch').keyup(function() {
+       rolesTable.search(this.value).draw();
+
+   });
+
+   $('#end_month').on('change', function() {
+    end_month = $(this).val();
+    console.log(end_month);
+     rolesTable.ajax.reload();
+});
+
+$('#being_month').on('change', function() {
+    being_month = $(this).val();
+    console.log(being_month);
+     rolesTable.ajax.reload();
+});
+   $('#School_salaries').on('change', function() {
+    School_salaries = $(this).val();
+       console.log(School_salaries);
+       rolesTable.ajax.reload();
+   });
+   $('#from_date').on('change', function() {
+       from_date = $(this).val();
+       console.log(from_date);
+       rolesTable.ajax.reload();
+   });
+   $('input[name="amount"]').attr('type', 'number');
 </script>
-@endpush --}}
+@endpush

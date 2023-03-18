@@ -19,8 +19,8 @@ class School_AllowancesController extends Controller
     {
 
       
-
-        return view('admin.School_teachers.School_allowances.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_allowances.index' ,compact('school_id'));
     } //end of index
 
 

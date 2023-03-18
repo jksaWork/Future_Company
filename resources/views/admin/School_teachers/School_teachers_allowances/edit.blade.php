@@ -20,7 +20,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_id') }}
+                                        <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.school_name') }}
                                         </label>
                                         <select class="form-control form-control-solid" value="{{ old('school_id') }}" name="school_id" class="form-control" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">

@@ -33,7 +33,20 @@
 
                         </div>
                         {{-- </form> --}}
-
+                        <div class="d-flex mr-3" style="
+                        margin: auto;
+                    ">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="School_salaries">
+                                    <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
+                                    </option>
+                                    @foreach ($school_id as $school_id)
+                                        <option  value="{{ $school_id->id }}">{{ $school_id->school_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -69,7 +82,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{ __('translation.id') }}</th>
-                                            <th class="">{{ __('translation.school_type') }}</th>
+                                            <th class="">{{ __('translation.school_name') }}</th>
                                             <th class="">{{ __('translation.teachers_name') }}</th>
                                             <th class="">{{ __('translation.fixed_salary') }}</th>
                                             <th class="">{{ __('translation.allownacees_salary') }}</th>
@@ -103,7 +116,7 @@
 
    $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
    $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
-   let stauts, type, transaction_type, from_date, id = @json(request()->id);
+   let stauts, type, School_salaries, from_date, id = @json(request()->id);
    let rolesTable = $('#roles-table').DataTable({
        dom: "Brtp",
        serverSide: true,
@@ -139,7 +152,7 @@
             url: '{{ route('data.salaries.hitory.data') }}',
            data: function(q) {
                q.type = type;
-               q.transaction_type = transaction_type;
+               q.School_salaries = School_salaries;
                q.from_date = from_date;
                q.id = id;
 
@@ -221,9 +234,9 @@
        type = $(this).val();
        rolesTable.ajax.reload();
    });
-   $('#owner').on('change', function() {
-       transaction_type = $(this).val();
-       console.log(transaction_type);
+   $('#School_salaries').on('change', function() {
+    School_salaries = $(this).val();
+       console.log(School_salaries);
        rolesTable.ajax.reload();
    });
    $('#from_date').on('change', function() {

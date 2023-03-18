@@ -1,6 +1,6 @@
 {{-- @extends('layouts.school.master') --}}
 @extends('layouts.school.master')
-@section('main-head', __('translation.employee_allowances_recovery'))
+@section('main-head', __('translation.allowances_recovery'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->

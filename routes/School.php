@@ -43,6 +43,7 @@ Route::group(
         Route::get('/allowances_id/{id}', [School_TeachersAllowancesController::class ,'allowances_id']);
         Route::get('/teachers/{id}', [School_AdvancesController::class ,'teachers']);
         Route::get('/teachers_salaries/{id}', [School_SalariesController::class ,'teachers_salaries']);
+        Route::get('/spendings/{id}', [School_ReportController::class ,'spendings']);
         // being Employee
         Route::prefix('School')->name('School.')->middleware(['auth:admin'])->group(function () {
             //category routes
@@ -83,11 +84,14 @@ Route::group(
 
         // Route::prefix('reports')->name('reports.')->group(function () {
         Route::prefix('School_reports')->name('School_reports.')->middleware(['auth:admin'])->group(function () {
-
+            Route::get('report_spending_data', [School_ReportController::class, 'report_spending_data'])->name('School_spending.report.data');
             Route::get('report_spending', [School_ReportController::class, 'report_spending'])->name('School_spending.report');
             Route::get('report_employee', [School_ReportController::class, 'report_employee'])->name('School_employee.report');
+            Route::get('report_teachers', [School_ReportController::class, 'teachers'])->name('School_employee.report.data');
             Route::get('report_employee_allowances', [School_ReportController::class, 'report_employee_allowances'])->name('School_employee_allowances.report');
+            Route::get('report_employee_allowances_data', [School_ReportController::class, 'report_employee_allowances_data'])->name('School_employee_allowances.report_data');
             Route::get('report_salaries', [School_ReportController::class, 'report_salaries'])->name('School_salaries.report');
+            Route::get('report_salaries_data', [School_ReportController::class, 'report_salaries_data'])->name('School_salaries.report_data');
 
             Route::get('monthly-spending-renvues', [School_ReportController::class, 'MonthlyRealstateRenvueAndSpending'])->name('School_MonthlyRealstateRenvueAndSpending');
             Route::get('monthly-spending-data', [School_ReportController::class, 'MonthData'])->name('School_MonthData');

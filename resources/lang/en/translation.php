@@ -467,4 +467,7 @@ return [
     'edit_teachers_Advances'=>'edit teachers Advances',
     'teachers_salaries'=>'Teachers Salaries ',
     'edit_school'=> 'Edit School',
+    'allowances_total'=>' total allowances',
+    'allowances_vlue'=>' vlue allowances',
+    'allowances_recovery'=>' Allowances Recovery ',
 ];

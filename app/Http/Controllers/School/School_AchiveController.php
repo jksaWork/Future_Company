@@ -12,7 +12,7 @@ use App\Models\school_sections;
 use App\Models\school_spendings;
 use App\Models\school_categories;
 use App\Models\School_Teachers_allowances;
-use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\SchoolTreasuryTransactionHistory;
 use Yajra\DataTables\Facades\DataTables;
 
 use Illuminate\Support\Facades\DB;
@@ -100,12 +100,12 @@ class School_AchiveController extends Controller
     {
     try{
         $flight = school_spendings::withTrashed()->where('id', $id)->restore();
-        // $spending = school_spendings::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->section->section_name, $spending->id);
-        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($spending->Allowances_id->allowances_value , 'incentives', $spending->employee->name . '-'.$spending->Allowances_id->allowances_name , $spending->id);
-        // $spending->update([
-        //     'Transaction_id' => $res->id,
-        // ]);
+        $spending = school_spendings::findOrFail($id);
+        $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->School->school_name, $spending->id);
+        // $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spending->Allowances_id->allowances_value , 'incentives', $spending->employee->name . '-'.$spending->Allowances_id->allowances_name , $spending->id);
+        $spending->update([
+            'Transaction_id' => $res->id,
+        ]);
          session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('School_Achive.School_spending.Achive');
     } catch (Exception $e) {
@@ -329,11 +329,11 @@ class School_AchiveController extends Controller
     {
         try{
         $flight = School_Teachers_allowances::withTrashed()->where('id', $id)->restore();
-        // $employee_allow = School_Teachers_allowances::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
-        // $employee_allow->update([
-        //     'Transaction_id' => $res->id,
-        // ]);
+        $employee_allow = School_Teachers_allowances::findOrFail($id);
+        $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->School->school_name , $employee_allow->id);
+        $employee_allow->update([
+            'Transaction_id' => $res->id,
+        ]);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('School_Achive.School_employee_allowances.Achive');
     } catch (Exception $e) {
@@ -395,14 +395,15 @@ class School_AchiveController extends Controller
         // return $id;
         try{
         $flight = school_advances::withTrashed()->where('id', $id)->restore();
-        // $advances = school_advances::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
-        // $advances->update([
-        //     'Transaction_id' => $res->id,
-        // ]);
+        $advances = school_advances::findOrFail($id);
+        $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->id);
+        $advances->update([
+            'Transaction_id' => $res->id,
+        ]);
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('School_Achive.School_Advances.Achive');
     } catch (Exception $e) {
+        dd($e);
         if ($e->getCode() == 50) {
             DB::commit();  
             session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
@@ -461,11 +462,11 @@ class School_AchiveController extends Controller
         try{
         // $id = $request->invoice_id;
         $flight = School_salaries::withTrashed()->where('id', $id)->restore();
-        // $salaries = School_salaries::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
-        // $salaries->update([
-        //     'Transaction_id' => $res->id,
-        // ]);
+        $salaries = School_salaries::findOrFail($id);
+        $res = SchoolTreasuryTransactionHistory::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->teachers->name . '-' . $salaries->School->school_name, $salaries->id);
+        $salaries->update([
+            'Transaction_id' => $res->id,
+        ]);
         DB::commit();
         session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('School_Achive.School_salaries.Achive');

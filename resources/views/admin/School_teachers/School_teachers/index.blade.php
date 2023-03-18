@@ -33,7 +33,20 @@
 
                         </div>
                         {{-- </form> --}}
-
+                        <div class="d-flex mr-3" style="
+                        margin: auto;
+                    ">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="school_teachers">
+                                    <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
+                                    </option>
+                                    @foreach ($school_id as $school_id)
+                                        <option  value="{{ $school_id->id }}">{{ $school_id->school_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -72,7 +85,7 @@
                                             <th class="">{{ __('translation.name') }}</th>
                                             <th class="">{{ __('translation.phone') }}</th>
                                             <th class="">{{ __('translation.salary') }}</th>
-                                            <th class="">{{ __('translation.school_type') }}</th>
+                                            <th class="">{{ __('translation.school_name') }}</th>
                                             <th class="">{{ __('translation.categories_id') }}</th>
                                             <th class="">{{ __('translation.allowances_id') }}</th>
                                             <th class="">{{ __('translation.created_ats') }}</th>
@@ -101,7 +114,7 @@
 
    $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
    $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
-   let stauts, type, transaction_type, from_date, id = @json(request()->id);
+   let stauts, type, school_teachers, from_date, id = @json(request()->id);
    let rolesTable = $('#roles-table').DataTable({
        dom: "Brtp",
        serverSide: true,
@@ -137,7 +150,7 @@
             url: '{{ route('data.teachers.hitory.data') }}',
            data: function(q) {
                q.type = type;
-               q.transaction_type = transaction_type;
+               q.school_teachers = school_teachers;
                q.from_date = from_date;
                q.id = id;
 
@@ -207,9 +220,9 @@
        type = $(this).val();
        rolesTable.ajax.reload();
    });
-   $('#owner').on('change', function() {
-       transaction_type = $(this).val();
-       console.log(transaction_type);
+   $('#school_teachers').on('change', function() {
+    school_teachers = $(this).val();
+       console.log(school_teachers);
        rolesTable.ajax.reload();
    });
    $('#from_date').on('change', function() {

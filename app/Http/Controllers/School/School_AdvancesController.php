@@ -7,7 +7,7 @@ use App\Models\school_teachers;
 use App\Models\school_advances;
 use App\Models\school_teachers_allowances;
 use App\Models\school_salaries;
-use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\SchoolTreasuryTransactionHistory;
 use App\Models\school_types;
 use Illuminate\Support\Facades\DB;
 // use App\Http\Requests\Request;
@@ -21,8 +21,8 @@ class School_AdvancesController extends Controller
     {
 
         // $Advances = Advances::all();
-
-        return view('admin.School_teachers.School_Advances.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_Advances.index',compact('school_id'));
     } //end of index
 
 
@@ -89,12 +89,12 @@ class School_AdvancesController extends Controller
                     'month_number' => $request->month_number,
                 ]);
 
-                // $advances = Advances::findOrFail($advance->id);
-                // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion( $advances->advances_value, 'advance', $advances->employee->name .'-'.__('translation.Add_Advances') , $advances->id);
+                $advances = school_advances::findOrFail($advance->id);
+                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->id);
 
-                // $advances->update([
-                //     'Transaction_id' => $res->id,
-                // ]);
+                $advances->update([
+                    'Transaction_id' => $res->id,
+                ]);
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
                 return redirect()->route('School.Advances.index');
@@ -197,7 +197,7 @@ class School_AdvancesController extends Controller
                 'month_number' => $request->month_number,
             ]);
             // return  $Advancess->advances_value;
-            // $res = FinancialTreasuryTransactionHistorys::EditTransaction($Advancess->Transaction_id, $Advancess->advances_value);
+            $res = SchoolTreasuryTransactionHistory::EditTransaction($Advancess->Transaction_id, $Advancess->advances_value);
 
             DB::commit();
             session()->flash('success', __('site.updated_successfully'));
@@ -228,7 +228,7 @@ class School_AdvancesController extends Controller
     {
         try{
         $Advances = school_advances::findOrFail($id);
-        // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $Advances->Transaction_id);
+        $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $Advances->Transaction_id);
         $Advances->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('School.Advances.index');

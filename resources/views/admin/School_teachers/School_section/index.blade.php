@@ -37,7 +37,9 @@
 
                  
                     
-                    <div class="d-flex mr-3">
+                    <div class="d-flex mr-3" style="
+                    margin: auto;
+                ">
                         <div class="form-group">
                             <select class="form-control" name="" id="section">
                                 <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
@@ -113,7 +115,7 @@
 
         $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
         $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
-        let stauts, type, transaction_type, from_date, id = @json(request()->id);
+        let stauts, type, section, from_date, id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "Brtp",
             serverSide: true,
@@ -149,7 +151,7 @@
                 url: '{{ route('data.Section.hitory.data') }}',
                 data: function(q) {
                     q.type = type;
-                    q.transaction_type = transaction_type;
+                    q.section = section;
                 q.from_date = from_date;
                     q.id = id;
 
@@ -199,8 +201,8 @@
         });
         $('#section').on('change', function() {
             // console.log(transaction_type);
-            transaction_type = $(this).val();
-            console.log(transaction_type);
+            section = $(this).val();
+            console.log(section);
             rolesTable.ajax.reload();
         });
         $('#from_date').on('change', function() {

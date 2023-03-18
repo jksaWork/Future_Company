@@ -7,7 +7,7 @@ use App\Models\school_teachers;
 use App\Models\school_teachers_allowances;
 use App\Models\school_allowances;
 use App\Models\school_types;
-use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Employee_allowancesRequest;
 use Illuminate\Http\Request;
@@ -18,19 +18,8 @@ class School_TeachersAllowancesController extends Controller
 
     public function index(Request $request)
     {
-        // // return $Categorys;
-        // // $employee_allowances = employee_allowances::all();
-        // $employee_allowances =employee_allowances::where([
-        //     ['status',  0],
-        // ])->get();
-        // // return $employee_allowances;
-        // $employee   = employee::all();
-        // $allowances =allowances::where([
-        //     ['status',  0],
-        // ])->get();
-        // // $allowances = allowances::all();
-
-        return view('admin.School_teachers.School_teachers_allowances.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_teachers_allowances.index', compact('school_id'));
     } //end of index
 
 
@@ -72,20 +61,20 @@ class School_TeachersAllowancesController extends Controller
                 'status' => 0,
                 'month_number' => $request->month_number,
             ]);
-        //     $employee_allow = employee_allowances::findOrFail($employee_allow->id);
-        //     //    return  $spendingses->spending_value;
+            $employee_allow = school_teachers_allowances::findOrFail($employee_allow->id);
+            //    return  $spendingses->spending_value;
             
-        //     $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->employee->name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->School->school_name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
             
-        //    $d= $employee_allow->update([
-        //         'Transaction_id' => $res->id,
-        //     ]);
+           $d= $employee_allow->update([
+                'Transaction_id' => $res->id,
+            ]);
             
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.Teachers_allowances.index');
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             // if ($e->getCode() == 51) {
             //     DB::commit();
             //     session()->flash('success', __('site.added_successfully'));
@@ -156,13 +145,13 @@ class School_TeachersAllowancesController extends Controller
             'status' => 0,
             'month_number' => $request->month_number,
         ]);
-        // $res = FinancialTreasuryTransactionHistorys::EditTransaction( $employee->Transaction_id , $employee->Allowances_id->allowances_value );
+        $res = SchoolTreasuryTransactionHistory::EditTransaction( $school_teachers_allowances->Transaction_id , $school_teachers_allowances->Allowances_id->allowances_value );
 
         DB::commit();
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('School.Teachers_allowances.index');
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));
@@ -184,8 +173,8 @@ class School_TeachersAllowancesController extends Controller
         // return $id;
         try{
         $school_teachers_allowances = school_teachers_allowances::findOrFail($id);  
-        // return $employemployee_allowancesee->Transaction_id;
-        // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction( $employemployee_allowancesee->Transaction_id);
+        // return $school_teachers_allowances->Transaction_id;
+        $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $school_teachers_allowances->Transaction_id);
  
         $school_teachers_allowances->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));

@@ -33,7 +33,20 @@
 
                         </div>
                         {{-- </form> --}}
-
+                        <div class="d-flex mr-3" style="
+                        margin: auto;
+                    ">
+                            <div class="form-group">
+                                <select class="form-control" name="" id="school_teachers_allowances">
+                                    <option value="" selected disabled> {{ __('translation.Choose_school_id') }}
+                                    </option>
+                                    @foreach ($school_id as $school_id)
+                                        <option  value="{{ $school_id->id }}">{{ $school_id->school_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -69,7 +82,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{ __('translation.id') }}</th>
-                                            <th class="">{{ __('translation.school_type') }}</th>
+                                            <th class="">{{ __('translation.school_name') }}</th>
                                              <th class="">{{ __('translation.teachers_name') }}</th>
                                             <th class="">{{ __('translation.allowances_name') }}</th>
                                             <th class="">{{ __('translation.month_number') }}</th>
@@ -99,7 +112,7 @@
 
    $.fn.dataTable.ext.classes.sPageButton= 'paginate_button page-item';
    $.fn.dataTable.ext.classes.sPageButtonActive= 'paginate_button page-item active';
-   let stauts, type, transaction_type, from_date, id = @json(request()->id);
+   let stauts, type, school_teachers_allowances, from_date, id = @json(request()->id);
    let rolesTable = $('#roles-table').DataTable({
        dom: "Brtp",
        serverSide: true,
@@ -135,7 +148,7 @@
             url: '{{ route('data.teachers_allowances.hitory.data') }}',
            data: function(q) {
                q.type = type;
-               q.transaction_type = transaction_type;
+               q.school_teachers_allowances = school_teachers_allowances;
                q.from_date = from_date;
                q.id = id;
 
@@ -192,9 +205,9 @@
        type = $(this).val();
        rolesTable.ajax.reload();
    });
-   $('#owner').on('change', function() {
-       transaction_type = $(this).val();
-       console.log(transaction_type);
+   $('#school_teachers_allowances').on('change', function() {
+    school_teachers_allowances = $(this).val();
+       console.log(school_teachers_allowances);
        rolesTable.ajax.reload();
    });
    $('#from_date').on('change', function() {

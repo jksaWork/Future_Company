@@ -17,7 +17,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Exception;
 use PhpParser\Node\Stmt\Return_;
-use DB;
+use Illuminate\Support\Facades\DB;
+// use DB;
 
 class ReportController extends Controller
 {

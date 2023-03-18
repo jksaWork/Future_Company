@@ -1,114 +1,217 @@
-@extends('layouts.admin.admin')
+@extends('layouts.school.master')
+@section('css')
+    <style>
+        @media print {
+            #print_Button {
+                display: none;
+            }
+            #form{
+                display: none;
+            }
+        }
+
+    </style>
+@endsection
+@section('title')
+{{__('translation.salaries_list')}}
+@stop
+@section('main-head', __('translation.salaries_report'))
 @section('content')
-    <div>
-        <h2>@lang('settings.settings')</h2>
+<div class="post d-flex flex-column-fluid" id="kt_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-xxl">
+        <!--begin::Card-->
+        <div class="card" id="print">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                {{-- <div class="card-title"> --}}
+                <!--begin::Search-->
+                <div class="d-flex justify-conetnt-between align-items-center position-relative my-1 col-md-8">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+
+                    {{-- </form> --}}
+
+
+                </div>
+
+
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0" >
+                <div class="d-flex flex-stack pb-10">
+                    <!--begin::Logo-->
+                    <a href="#"> </a>
+                    <!--end::Logo-->
+                    <!--begin::Action-->
+                    <a href="#" class="btn btn-sm btn-success" id="print_Button" onclick="printDiv()">{{ __('translation.print') }}</a>
+                    <!--end::Action-->
+                </div>
+                <form action="{{ route('reports.salaries.report') }}" id='form'>
+                    <div class="form-group row">
+
+                        <div class="col-md-3">
+                            <label class="form-label">{{ __('translation.being_month') }}:</label>
+                            <input type="date" name='being_month' class="form-control mb-2 mb-md-0" value="{{date('Y-M-D')}}" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">{{ __('translation.end_month') }}:</label>
+                            <input type="date" name='end_month' value="{{ date('Y-m-d') }}" class="form-control mb-2 mb-md-0" placeholder="Enter contact number" />
+                        </div>
+
+                        <div class="col-md-6" style="
+                            text-align: -webkit-auto;
+                            padding: 26px;
+                        ">
+                            <button class="btn btn-primary"> {{ __('translation.search') }}
+                            </button>
+                        </div>
+
+
+                    </div>
+                </form><br><br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-rounded table-striped border gy-7 gs-7"  >
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('translation.id') }}</th>
+                                        <th class="">{{ __('translation.school_type') }}</th>
+                                        <th class="">{{ __('translation.employee_name') }}</th>
+                                            <th class="">{{ __('translation.fixed_salary') }}</th>
+                                            <th class="">{{ __('translation.allownacees_salary') }}</th>
+                                            <th class="">{{ __('translation.advances') }}</th>
+                                            <th class="">{{ __('translation.discounts') }}</th>
+                                            <th class="">{{ __('translation.status') }}</th>
+                                            <th class="">{{ __('translation.month') }}</th>
+                                            <th class="">{{ __('translation.totle_salaries') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
+
+                                    <?php $sum_salaries = 0; ?>
+                                    @forelse ($salaries as $index=>$salaries)
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $salaries->School->school_name }}</td>
+                                        <td>{{ $salaries->teachers->name }}</td>
+                                        <td> {{ number_format($salaries->fixed_salary,2) }}</td>
+                                        <td>{{ number_format($salaries->allowancess_fixed, 2) }}</td>
+                                        <td><span class='badge badge-danger'>{{ number_format($salaries->advances,2) }}</span></td>
+                                        <td><span class='badge badge-danger'>{{ number_format($salaries->discounts, 2) }}</span></td>
+                                        <td>{{ $salaries->getActive() }}</td>
+                                        <td>{{ __('translation.Month')}}-{{ $salaries->month_number}}</td>
+                                    <td><span class='badge badge-success'>{{ number_format($salaries->totle_salaries, 2) }}</span></td>
+                                    </tr>
+                                    <?php $sum_salaries += $salaries->totle_salaries; ?>
+                                    @empty
+                                    <td colspan="4">
+                                        <div class="text-center">{{ __('translation.No_Data_Was_Found') }}</div>
+                                    </td>
+                                    @endforelse
+
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200" style="text-align: center;" >
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ __('translation.total') }}:</td>
+                                        <td><span class='badge badge-success'>{{ number_format($sum_salaries , 2) }}<span class='badge badge-success'> </td>
+
+                                       
+
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div><!-- end of table responsive -->
+                    </div><!-- end of col -->
+                </div><!-- end of row -->
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Modals-->
     </div>
-
-    <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('settings.general_settings')</li>
-    </ul> <div class="post d-flex flex-column-fluid" id="kt_post">
-        <!--begin::Container-->
-        <div id="kt_content_container" class="container-xxl">
-            <!--begin::Card-->
-            <div class="card">
-                <!--begin::Card header-->
-                {{-- <div class="card-header border-0 pt-6"> --}}
-                    <!--begin::Card title-->
-                    {{-- <h3 style='font-size:20px'>{{ __('translation.assing_new_owner') }} </h3> --}}
-                {{-- </div> --}}
-                <!--begin::Card body-->
-                {{-- <div class="card-body pt-0"> --}}
-
-                    {{-- @include('layouts.includes.session') --}}
-    <div class="row">
-        {{-- <div class="col-md-12">
-            <div class="tile ">
-                <form method="post" action="{{ route('admin.setting.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('post')
-                    logo
-                    <div class="form-group">
-                        <label>@lang('settings.logo')</label>
-                        <input type="file" name="logo" class="form-control load-image">
-                        <img src="{{ Storage::url('uploads/' . setting('logo')) }}" class="loaded-image" alt="" style="display: {{ setting('logo') ? 'block' : 'none' }}; width: 100px; margin: 10px 0;">
-                    </div>
-                    fav_icon
-                    <div class="form-group">
-                        <label>@lang('settings.fav_icon')</label>
-                        <input type="file" name="fav_icon" class="form-control load-image">
-                        <img src="{{ Storage::url('uploads/' . setting('fav_icon')) }}" class="loaded-image" alt="" style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
-                    </div>
-                    title
-                    <div class="form-group">
-                        <label>@lang('settings.title')</label>
-                        <input type="text" name="title" class="form-control" value="{{ setting('title') }}">
-                    </div>
-                    description
-                    <div class="form-group">
-                        <label>@lang('settings.description')</label>
-                        <textarea name="description" class="form-control">{{ setting('description') }}</textarea>
-                    </div>
-                    keywords
-                    <div class="form-group">
-                        <label>@lang('settings.keywords')</label>
-                        <input type="text" name="keywords" class="form-control" value="{{ setting('keywords') }}">
-                    </div>
-
-                    email
-                    <div class="form-group">
-                        <label>@lang('users.email')</label>
-                        <input type="text" name="email" class="form-control" value="{{ setting('email') }}">
-                    </div>
-                    submit
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.update')</button>
-                    </div>
-                </form><!-- end of form -->
-            </div><!-- end of tile -->
-        </div><!-- end of col --> --}}
-
-
-        
-    </div><!-- end of row -->
-                
+    <!--end::Container-->
+</div>
 @endsection
 @push('scripts')
-    <script>
-        $(function(){
-            $('input[name="logo"]').on('change' ,function(e){
-                // alert('jksa');
-                let that = $(this);
-                reader = new FileReader();
-                reader.onload = function(){
-                    console.log(reader.result);
-                    that.parent().find('.loaded-image').attr('src' , reader.result);
-                    that.parent().find('.loaded-image').css('display' , 'block');
-                }
-                // console.log(e.target.files[0]);
-                // that.parent().find('.loaded-image').attr('src' , e.target.files[0]);
-                reader.readAsDataURL(e.target.files[0]);
-                // that.parent().find('.loaded-image').attr('src' , e.target.files[0]);
 
-                // reader.onlaod();
-            });
 
-            $('input[name="fav_icon"]').on('change' ,function(e){
-                // alert('jksa');
-                let that = $(this);
-                reader = new FileReader();
-                reader.onload = function(){
-                    console.log(reader.result);
-                    that.parent().find('.loaded-image').attr('src' , reader.result);
-                    that.parent().find('.loaded-image').css('display' , 'block');
-                }
-                // console.log(e.target.files[0]);
-                // that.parent().find('.loaded-image').attr('src' , e.target.files[0]);
-                reader.readAsDataURL(e.target.files[0]);
-                // that.parent().find('.loaded-image').attr('src' , e.target.files[0]);
 
-                // reader.onlaod();
-            });
-        })
-    </script>
+<script type="text/javascript">
+    function printDiv() {
+        var printContents = document.getElementById('print').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    }
+
+</script>
+
+
 @endpush
+
+
+
+
+<!-- jQuery -->
+{{-- 
+
+<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="{{ asset('datatable/jquery.js') }}"></script>
+<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/custom/index.js') }}"></script> --}}
+
+<!-- DataTables  & Plugins -->
+{{-- <script src="{{URL::asset('datatable/js/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-bs4/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-responsive/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-responsive/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-buttons/dataTables.buttons.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/jszip/jszip.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.html5.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.print.min.js')}}"></script>
+<script src="{{URL::asset('datatable/js/datatables-buttons/buttons.colVis.min.js')}}"></script>
+
+<!-- AdminLTE App -->
+
+<script>
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+@endpush --}}

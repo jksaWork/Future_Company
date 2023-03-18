@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\EmployeeRequest;
-use App\Models\FinancialTreasuryTransactionHistorys;
+use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Http\Request;
 use Exception;
 use PhpParser\Node\Stmt\Foreach_;
@@ -23,8 +23,8 @@ class School_SalariesController extends Controller
 
     public function index(Request $request)
     {
-        // $salaries = salaries::all();
-        return view('admin.School_teachers.School_salaries.index');
+        $school_id =school_types::all();
+        return view('admin.School_teachers.School_salaries.index', compact('school_id'));
     } //end of index
 
 
@@ -53,7 +53,7 @@ class School_SalariesController extends Controller
         DB::beginTransaction();
 
         try {
-            if ($request->totle_salaries > 0) {
+            if ($request->totle_salaries >= 0) {
 
 
                 $DATA = school_salaries::create([
@@ -70,12 +70,12 @@ class School_SalariesController extends Controller
                     'discrption' => $request->discrption,
                 ]);
                 //    return  $DATA;
-                // $salaries = school_salaries::findOrFail($DATA->id);
-                // $res = FinancialTreasuryTransactionHistorys::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->employee->name . '-' . __('translation.add_salaries'), $salaries->id);
+                $salaries = school_salaries::findOrFail($DATA->id);
+                $res = SchoolTreasuryTransactionHistory::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->teachers->name . '-' . $salaries->School->school_name, $salaries->id);
 
-                // $salaries->update([
-                //     'Transaction_id' => $res->id,
-                // ]);
+                $salaries->update([
+                    'Transaction_id' => $res->id,
+                ]);
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
                 return redirect()->route('School.salaries.index');
@@ -133,7 +133,7 @@ class School_SalariesController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            if ($request->totle_salaries > 0) {
+            if ($request->totle_salaries >= 0) {
             $salaries = school_salaries::findOrFail($id);
 
             $salaries->update([
@@ -146,7 +146,7 @@ class School_SalariesController extends Controller
                 'discounts' => $request->discounts,
                 'discrption' => $request->discrption,
             ]);
-            // $res = FinancialTreasuryTransactionHistorys::EditTransaction($salaries->Transaction_id, $request->totle_salaries);
+            $res = SchoolTreasuryTransactionHistory::EditTransaction($salaries->Transaction_id, $request->totle_salaries);
             DB::commit();
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('School.salaries.index');
@@ -156,7 +156,7 @@ class School_SalariesController extends Controller
             return redirect()->route('School.salaries.index');
         }
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             if ($e->getCode() == 51) {
                 DB::commit();
                 session()->flash('success', __('site.updated_successfully'));
@@ -178,11 +178,11 @@ class School_SalariesController extends Controller
         // return $id;
         try {
             $salaries = school_salaries::findOrFail($id);
-            // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
+            $res = SchoolTreasuryTransactionHistory::DestoryTransaction($salaries->Transaction_id);
             // $res = FinancialTreasuryTransactionHistorys::DestoryTransaction($salaries->Transaction_id);
             $salaries->delete();
             session()->flash('error', __('site.has_been_transferred_successfully'));
-            return redirect()->route('Employee.salaries.index');
+            return redirect()->route('School.salaries.index');
         } catch (Exception $e) {
             if ($e->getCode() == 51) {
                 DB::commit();
