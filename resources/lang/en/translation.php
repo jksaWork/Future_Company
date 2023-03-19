@@ -470,4 +470,5 @@ return [
     'allowances_total'=>' total allowances',
     'allowances_vlue'=>' vlue allowances',
     'allowances_recovery'=>' Allowances Recovery ',
+    'Teachers_number'=>'Teachers number ',
 ];

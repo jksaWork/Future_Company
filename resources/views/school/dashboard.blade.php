@@ -13,7 +13,7 @@
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('Employee.All_Employee.index') }}" class="card bg-warning hoverable card-xl-stretch mb-xl-8" style="background-color: #4a148c !important";>
+                    <a href="{{ route('School.All_Teachers.index') }}" class="card bg-warning hoverable card-xl-stretch mb-xl-8" style="background-color: #033541 !important";>
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
@@ -33,7 +33,7 @@
                                        {{$employe}}
                                        @endif
                                     </div>
-                                    <div class="fw-bold text-white fs-4">{{ __('translation.employees_number') }}</div>
+                                    <div class="fw-bold text-white fs-4">{{ __('translation.Teachers_number') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
 
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('Employee.spending.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #004d40 !important";>
+                    <a href="{{ route('School.spending.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #d8fa2c !important";>
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('admin.finanical') }}" class="card bg-success hoverable card-xl-stretch mb-xl-8" style="background-color: #3e2723 !important";>
+                    <a href="{{ route('admin.finanical') }}" class="card bg-success hoverable card-xl-stretch mb-xl-8" style="background-color: #61f041 !important";>
                         <!--begin::Body-->
 
                         <div class="card-body">
@@ -112,7 +112,7 @@
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('Employee.employee_allowances.index') }}" class="card bg-warning hoverable card-xl-stretch mb-xl-8" style="background-color: #827717 !important";>
+                    <a href="{{ route('School.Teachers_allowances.index') }}" class="card bg-warning hoverable card-xl-stretch mb-xl-8" style="background-color: #4551f7 !important";>
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
@@ -142,7 +142,7 @@
 
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('Employee.Advances.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #263238 !important";>
+                    <a href="{{ route('Employee.Advances.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #e58080 !important";>
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('Employee.salaries.index', ['service_id' => 1]) }}" class="card bg-success hoverable card-xl-stretch mb-xl-8" style="background-color: #BF360C !important";>
+                    <a href="{{ route('School.salaries.index', ['service_id' => 1]) }}" class="card bg-success hoverable card-xl-stretch mb-xl-8" style="background-color: #f2c122 !important";>
                         <!--begin::Body-->
 
                         <div class="card-body">
@@ -183,7 +183,7 @@
                             <div class="d-flex justify-content-around">
                                 <div class="">
                                     <span class="svg-icon svg-icon-white svg-icon-4x ms-n1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16" style="color: #ffffff !important;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16" style="color: #fbf9f9 !important;">
                                             <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
                                             <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
                                             <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
@@ -269,6 +269,7 @@
 {{-- @endsection --}}
 
 </div>
+
 @endsection
 
 

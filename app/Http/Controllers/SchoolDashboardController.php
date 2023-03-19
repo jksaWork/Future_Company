@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advances;
-use App\Models\employee;
-use App\Models\employee_allowances;
+use App\Models\school_advances;
+use App\Models\school_teachers;
+use App\Models\School_Teachers_allowances;
 use App\Models\FinancialTreasury;
-use App\Models\salaries;
-use App\Models\spendings;
+use App\Models\School_salaries;
+use App\Models\school_spendings;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+// use DB;
 
 class SchoolDashboardController extends Controller
 {
@@ -25,21 +26,21 @@ class SchoolDashboardController extends Controller
             return $item;
         })->all();
         // dd($data);
-
+ 
 
 
         $sum = collect([33, 22, 27]);
         $data['recored'] = $sum->map(fn ($el) => floor($el / $sum->sum() * 100));
 
-        $employe =  employee::count();
+        $employe =  school_teachers::count();
         // return $employe;
-        $spendings = spendings::select(
+        $spendings = school_spendings::select(
             DB::raw('SUM(spending_value) as sum')
         )->get();
         $FinancialTreasury = FinancialTreasury::select(
             DB::raw('SUM(total) as sum')
         )->get();
-        $employee_allowances = employee_allowances::where('status', 1)->get();
+        $employee_allowances = School_Teachers_allowances::where('status', 1)->get();
 
         $S = 0;
         foreach ($employee_allowances as $key => $employee_allowance) {
@@ -47,15 +48,15 @@ class SchoolDashboardController extends Controller
             $S += $employee_allowances[0]->Allowances_id->allowances_value;
         }
 
-        $Advances = Advances::select(
+        $Advances = school_advances::select(
             DB::raw('SUM(Advances_value) as sum')
         )->get();
-        $salaries = salaries::select(
+        $salaries = School_salaries::select(
             DB::raw('SUM(totle_salaries) as sum')
         )->get();
 
 
-        $spendings_data = spendings::select(
+        $spendings_data = school_spendings::select(
             DB::raw('YEAR(month) as year'),
             DB::raw('MONTH(month) as month'),
             DB::raw('SUM(spending_value) as sum')

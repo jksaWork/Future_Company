@@ -546,7 +546,7 @@ return [
     'chose_renter' => 'اختر المستاجر',
 
 
-
+'Teachers_number'=>'عدد المعلمين',
     'school_type'=>'انواع  المدارس',
     'allowances_recovery'=>'سلة محذوفات الحوافز',
     'show_data'=>'عرض البيانات',
