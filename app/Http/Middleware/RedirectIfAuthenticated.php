@@ -18,6 +18,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, ...$guards)
     {
+        return redirect()->route('admin.selection');
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

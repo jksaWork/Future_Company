@@ -13,6 +13,10 @@ class AdminAuthController extends Controller
     {
         return view('admin.auth.login');
     }
+    public function guest_login()
+    {
+        return view('auth.selection');
+    }
 
     public function login(AdminAuthRequest $request)
     {

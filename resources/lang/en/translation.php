@@ -471,4 +471,7 @@ return [
     'allowances_vlue'=>' vlue allowances',
     'allowances_recovery'=>' Allowances Recovery ',
     'Teachers_number'=>'Teachers number ',
+    'Homepage'=>' Home page',
+    'Select_the_login_method'=>'Select the login method',
+    'Real_estate'=>'Real estate',
 ];

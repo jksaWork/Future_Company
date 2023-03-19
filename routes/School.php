@@ -45,7 +45,8 @@ Route::group(
         Route::get('/teachers_salaries/{id}', [School_SalariesController::class ,'teachers_salaries']);
         Route::get('/spendings/{id}', [School_ReportController::class ,'spendings']);
         // being Employee
-        Route::prefix('School')->name('School.')->middleware(['auth:admin'])->group(function () {
+        Route::middleware('auth:web')->group(function () {
+        Route::prefix('School')->name('School.')->group(function () {
             //category routes
            
             Route::resource('school_type', School_TypeController::class)->except(['show']);
@@ -141,6 +142,8 @@ Route::group(
         
         });
         Route::get('Teachers-status/{id}', [School_DataController::class , 'ChangeStatus'])->name('Teachers.status');
-
+    });
     }
+
 );
+   

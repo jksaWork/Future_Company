@@ -12,6 +12,10 @@ class AgentAuthController extends Controller
     {
         return view('agent.auth.login');
     }
+    public function selection()
+    {
+        return view('auth.selection');
+    }
 
     public function login(AdminAuthRequest $request)
     {

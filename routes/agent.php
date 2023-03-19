@@ -12,6 +12,8 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function (){
+        
+        Route::get('selection', [AgentAuthController::class, 'selection'])->name('admin.selection');
         Route::get('login' , [AgentAuthController::class , 'getlogin'])->name('agent.get.login');
         Route::post('login' , [AgentAuthController::class , 'login'])->name('agent.login');
 

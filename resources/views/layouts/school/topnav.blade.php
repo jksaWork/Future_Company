@@ -188,7 +188,7 @@
                             </div>
 
                             <div class="menu-item px-5" >
-                                <a href="{{ route('Employee.setting') }}" class="menu-link px-5">
+                                <a href="{{ route('School.setting') }}" class="menu-link px-5">
                                     <span class="menu-title position-relative"> {{ __('translation.setting') }}
                                 </a>
                                 <!--end::Menu sub-->

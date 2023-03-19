@@ -546,6 +546,11 @@ return [
     'chose_renter' => 'اختر المستاجر',
 
 
+
+
+'Real_estate'=>'العقارات',
+'Homepage'=>'الصفحة الرئيسة',
+'Select_the_login_method'=>'حدد طريقة الدخول',
 'Teachers_number'=>'عدد المعلمين',
     'school_type'=>'انواع  المدارس',
     'allowances_recovery'=>'سلة محذوفات الحوافز',
