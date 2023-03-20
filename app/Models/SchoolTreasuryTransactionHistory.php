@@ -20,7 +20,6 @@ class SchoolTreasuryTransactionHistory extends Model
         "incentives" => "debit",
         'student_revenues' => "credit",
         'transfer_revenues'  => "credit",
-
         'main_treasury' => "credit"
     ];
 
@@ -126,7 +125,17 @@ class SchoolTreasuryTransactionHistory extends Model
             return $q->where('type', request()->type);
         });
     }
+    public function scopeWhenSchoolType($query)
+    {
+        $query->when(request()->has('school_id') && request()->school_id != null, function ($q) {
+            return $q->where('school_id', request()->school_id);
+        });
+    }
 
+    public function School()
+    {
+        return  $this->belongsTo(school_types::class, 'school_id');
+    }
     public function scopewhenTransactionType($query)
     {
         $query->when(request()->has('transaction_type') && request()->transaction_type != null, function ($q) {

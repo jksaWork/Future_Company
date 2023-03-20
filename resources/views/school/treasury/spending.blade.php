@@ -59,8 +59,27 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     {{-- <div class="card-title"> --}}
-                    <div class="row col-md-9">
-                        <div class="col-md-4">
+                    <div class="row col-md-12">
+                        <div class="col-md-3">
+                            <div class="">
+                                <div class="form-group">
+                                    <label class='form-lable'> {{ __('translation.school') }}</label>
+                                    <select id='school_id' style='width:100%' name='school_id' class='form-control'>
+                                        <option value='0'>
+                                            {{ __('translation.school_id') }}
+                                        </option>
+                                        @foreach (\App\Models\school_types::get() as $school)
+                                            {{-- @if ($type == 'credit') --}}
+                                                <option value='{{ $school->id }}'>
+                                                    {{ $school->school_name }}
+                                                </option>
+                                            {{-- @endif --}}
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="">
                                 <div class="form-group">
                                     <label class='form-lable'> {{ __('translation.transaction_type') }}</label>
@@ -80,7 +99,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">{{ __('translation.from_date') }}</label>
                                 <input id='from_date' type="date" class="form-control form-control-solid" name=""
@@ -88,7 +107,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">{{ __('translation.to_date') }}</label>
                                 <input id='to_date' type="date" class="form-control form-control-solid" name=""
@@ -125,6 +144,7 @@
                                             <th>{{ __('translation.transaction_id') }}</th>
                                             <th>{{ __('translation.trans_type') }}</th>
                                             <th>{{ __('translation.transaction_type') }}</th>
+                                            <th>{{ __('translation.school') }}</th>
                                             <th>{{ __('translation.amount') }}</th>
                                             <th>{{ __('translation.note') }}</th>
                                             <th>{{ __('translation.created_at') }}</th>
@@ -209,7 +229,7 @@
 
     <script>
         let stauts, type = 'debit',
-            transaction_type, from_date, to_date;
+            transaction_type, from_date, to_date , school_id;
         let rolesTable = $('#roles-table').DataTable({
             dom: "tiplr",
             serverSide: true,
@@ -225,6 +245,7 @@
                     q.transaction_type = transaction_type;
                     q.from_date = from_date;
                     q.to_date = to_date;
+                    q.school_id = school_id;
                 },
             },
 
@@ -246,7 +267,12 @@
                     searchable: false,
                     sortable: false
                 },
-
+                {
+                    data: 'school_id',
+                    name: 'school_id',
+                    searchable: false,
+                    sortable: false
+                },
                 {
                     data: 'amount',
                     name: 'amount',
@@ -286,6 +312,10 @@
 
         $('#realstate').on('change', function() {
             type = $(this).val();
+            rolesTable.ajax.reload();
+        });
+        $('#school_id').on('change', function() {
+            school_id = $(this).val();
             rolesTable.ajax.reload();
         });
         $('#owner').on('change', function() {

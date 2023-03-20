@@ -46,10 +46,16 @@ class StudentRevenueController extends Controller
 
     public function data()
     {
-        $query = StudentRevenue::query() #  TODO: With('Category')
+        $query = StudentRevenue::withTrashed() #  TODO: With('Category')
             ->typeScope()
-            ->where('deleted_at', null);
-        // dd('jksa');
+            ->when(request()->with_trashed != null, function ($q) {
+                // dd('asd');
+                $q->whereNotNull('deleted_at');
+            })->when(request()->with_trashed == null, function ($q) {
+                $q->where('deleted_at', null);
+            });
+
+
         return  DataTables::of($query)
             ->editColumn('created_at', function ($item) {
                 return $item->created_at->format('Y-m-d');
@@ -230,7 +236,7 @@ class StudentRevenueController extends Controller
                 // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             }
             DB::rollback();
-            dd($th);
+            return  redirect()->back()->withErrors(__('translation.6'));
         }
     }
 
@@ -259,5 +265,54 @@ class StudentRevenueController extends Controller
         }
 
         // dd($student);
+    }
+
+
+    public function getArchive()
+    {
+        $headings = [
+            'student_revenues' => __('translation.student_renvue'),
+            'transfer_renvue' => __('translation.transfer_renvue')
+        ];
+
+        return view('school.students.archive', compact('headings'));
+    }
+
+    public function resotreFromArachive($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $StudentRevenue = StudentRevenue::onlyTrashed()->find($id);
+            $StudentRevenue->restore();
+            // dd($StudentRevenue);
+            $transaaction = SchoolTreasuryTransactionHistory::MakeTransacaion(
+                $StudentRevenue->amount,
+                $StudentRevenue->revenue_type,
+                __('translation.recept_revenues') . $StudentRevenue->student_name,
+                $StudentRevenue->school_id,
+                $StudentRevenue->id
+            );
+            $StudentRevenue->transaction_id = $transaaction->id;
+            $StudentRevenue->save();
+            session()->flash('success', __('translation.recept_revenues_success_fule'));
+            DB::commit();
+            return  redirect()->back();
+        } catch (\Throwable $th) {
+            if ($th->getCode() == 51) {
+                DB::commit();
+                session()->flash('success', __('translation.revenues_edit_successfully'));
+                return redirect()->route('school.students.revenues.index', ['type' => $request->type_id])->withErrors(__('translation.' . $e->getMessage()))->withInput();
+                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            }
+            DB::rollback();
+            return  redirect()->back()->withErrors(__('translation.6'));
+
+            //throw $th;
+        }
+        // dd($StudentRevenue);
+
+        // dd('Hello jksa')
+        // dd($id);
     }
 }

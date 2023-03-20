@@ -117,8 +117,27 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     {{-- <div class="card-title"> --}}
-                    <div class="row col-md-9">
-                        <div class="col-md-4">
+                    <div class="row col-md-10">
+                        <div class="col-md-3">
+                            <div class="">
+                                <div class="form-group">
+                                    <label class='form-lable'> {{ __('translation.school') }}</label>
+                                    <select id='school_id' style='width:100%' name='school_id' class='form-control'>
+                                        <option value='0'>
+                                            {{ __('translation.school_id') }}
+                                        </option>
+                                        @foreach (\App\Models\school_types::get() as $school)
+                                            {{-- @if ($type == 'credit') --}}
+                                                <option value='{{ $school->id }}'>
+                                                    {{ $school->school_name }}
+                                                </option>
+                                            {{-- @endif --}}
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="">
                                 <div class="form-group">
                                     <label class='form-lable'> {{ __('translation.type') }}</label>
@@ -130,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="">
                                 <div class="form-group">
                                     <label class='form-lable'> {{ __('translation.transaction_type') }}</label>
@@ -145,8 +164,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">{{ __('translation.from_date') }}</label>
                                 <input id='from_date' type="date" class="form-control form-control-solid"
@@ -200,6 +218,7 @@
                                             <th>{{ __('translation.transaction_id') }}</th>
                                             <th>{{ __('translation.trans_type') }}</th>
                                             <th>{{ __('translation.transaction_type') }}</th>
+                                            <th>{{ __('translation.school') }}</th>
                                             <th>{{ __('translation.amount') }}</th>
                                             <th>{{ __('translation.note') }}</th>
                                             <th>{{ __('translation.created_at') }}</th>
@@ -289,7 +308,7 @@
 @push('scripts')
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     <script>
-        let stauts, type, transaction_type, from_date, id = @json(request()->id);
+        let stauts, type, transaction_type, from_date,  school_id; id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "Brtp",
             serverSide: true,
@@ -328,7 +347,7 @@
                     q.transaction_type = transaction_type;
                     q.from_date = from_date;
                     q.id = id;
-
+                    q.school_id = school_id;
                 },
             },
 
@@ -349,6 +368,13 @@
                     name: 'transaction_type',
                     searchable: false,
                     sortable: false
+                },
+
+                {
+                    data: 'school_id',
+                    name: 'school_id',
+                    searchable: true,
+                    sortable: true
                 },
 
                 {
@@ -400,6 +426,10 @@
         $('#from_date').on('change', function() {
             from_date = $(this).val();
             console.log(from_date);
+            rolesTable.ajax.reload();
+        });
+        $('#school_id').on('change', function() {
+            school_id = $(this).val();
             rolesTable.ajax.reload();
         });
         $('input[name="amount"]').attr('type', 'number');

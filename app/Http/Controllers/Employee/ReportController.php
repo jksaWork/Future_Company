@@ -11,6 +11,7 @@ use App\Models\spending;
 use App\Models\spendings;
 use App\Models\Category;
 use App\Models\employee_allowances;
+use App\Models\school_types;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 // use App\Http\Requests\Request;
@@ -101,7 +102,7 @@ class ReportController extends Controller
     public function MonthData()
     {
         $q = DB::table('financial_treasury_transaction_historys')->select(
-            DB::raw("MONTH(created_at) AS mon , year(created_at) as yea "),
+            DB::raw("MONTH(created_at) AS mon , year(created_at) as yea  "),
             DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from financial_treasury_transaction_historys WHERE type = 'credit' and MONTH(created_at) = mon and year(created_at) = yea ) as credit_total"),
             DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from financial_treasury_transaction_historys WHERE type = 'debit' and MONTH(created_at) = mon and year(created_at) = yea) as debit_total"),
             DB::raw("(SELECT credit_total - debit_total) as total")
@@ -128,5 +129,108 @@ class ReportController extends Controller
                 return number_format($item->total, 2);
             })
             ->toJson();
+    }
+
+
+    public function SchoolMonthly()
+    {
+        $schools = school_types::get();
+        return view('reports.school.monthly_renvue_speding', compact('schools'));
+    }
+
+    public function SchoolMonthlyData()
+    {
+
+        $q = DB::table('school_treasury_transaction_histories')->select(
+            DB::raw("MONTH(created_at) AS mon , year(created_at) as yea , school_id as school"),
+            DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from school_treasury_transaction_histories WHERE type = 'credit' and MONTH(created_at) = mon and year(created_at) = yea and school_id = school ) as credit_total"),
+            DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from school_treasury_transaction_histories WHERE type = 'debit' and MONTH(created_at) = mon and year(created_at) = yea and school_id = school ) as debit_total"),
+            DB::raw("(SELECT credit_total - debit_total) as total")
+        )
+            ->when(request()->year != null, function ($q) {
+                $q->whereYear('created_at', request()->year);
+            })
+            ->when(request()->month != null, function ($q) {
+                $q->whereMonth('created_at', request()->month);
+            })
+            ->when(request()->school_id != null, function ($q) {
+                // dd(request()->school_id);
+                $q->where('school_id', request()->school_id);
+            })
+            ->groupBy("mon", 'yea', 'school');
+
+        $res =   DataTables::of($q)
+            ->addColumn('month_name', function ($item) {
+                return date("F", mktime(1, null, null, $item->mon, 1));
+            })
+            ->editColumn('credit_total', function ($item) {
+                return number_format($item->credit_total, 2);
+            })
+            ->editColumn('debit_total', function ($item) {
+                // dd('hello');
+                return number_format($item->debit_total, 2);
+            })
+            ->editColumn('total', function ($item) {
+                return number_format($item->total, 2);
+            })
+            ->editColumn('school', function ($item) {
+                // dd($item);
+                return school_types::findOrFail($item->school)->school_name;
+            })
+            ->toJson();
+        return $res;
+        // dd($result[0]);
+        // return $q->get();
+    }
+
+    public function SchoolSpending()
+    {
+        $schools = school_types::get();
+        return view('reports.school.school_spending', compact('schools'));
+    }
+
+    public function SchoolSpendingData()
+    {
+
+        $q = DB::table('school_treasury_transaction_histories')->select(
+            DB::raw("MONTH(created_at) AS mon , year(created_at) as yea , school_id as school"),
+            DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from school_treasury_transaction_histories WHERE type = 'credit' and MONTH(created_at) = mon and year(created_at) = yea and school_id = school ) as credit_total"),
+            DB::raw("(SELECT COALESCE(SUM(amount),0) AS amont from school_treasury_transaction_histories WHERE type = 'debit' and MONTH(created_at) = mon and year(created_at) = yea and school_id = school ) as debit_total"),
+            DB::raw("(SELECT credit_total - debit_total) as total")
+        )
+            ->when(request()->year != null, function ($q) {
+                $q->whereYear('created_at', request()->year);
+            })
+            ->when(request()->month != null, function ($q) {
+                $q->whereMonth('created_at', request()->month);
+            })
+            ->when(request()->school_id != null, function ($q) {
+                // dd(request()->school_id);
+                $q->where('school_id', request()->school_id);
+            })
+            ->groupBy('school');
+
+        $res =   DataTables::of($q)
+            ->addColumn('month_name', function ($item) {
+                return date("F", mktime(1, null, null, $item->mon, 1));
+            })
+            ->editColumn('credit_total', function ($item) {
+                return number_format($item->credit_total, 2);
+            })
+            ->editColumn('debit_total', function ($item) {
+                // dd('hello');
+                return number_format($item->debit_total, 2);
+            })
+            ->editColumn('total', function ($item) {
+                return number_format($item->total, 2);
+            })
+            ->editColumn('school', function ($item) {
+                // dd($item);
+                return school_types::findOrFail($item->school)->school_name;
+            })
+            ->toJson();
+        return $res;
+        // dd($result[0]);
+        // return $q->get();
     }
 }//end of controller

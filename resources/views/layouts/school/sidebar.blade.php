@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('dashboard') ?: 'active' }}" href="/admin/dashboard">
+                    <a class="menu-link {{ request()->routeIs('dashboard') ?: 'active' }}" href="/school/dashboard">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -100,8 +100,6 @@
                                 <span class="menu-title"> {{ __('translation.spending') }}</span>
                             </a>
                         </div>
-
-
                         <div class="menu-item">
                             <a class="menu-link" href="{{ route('school.finincal.revenues') }}">
                                 <span class="menu-bullet">
@@ -110,21 +108,42 @@
                                 <span class="menu-title"> {{ __('translation.revenues_trsury') }}</span>
                             </a>
                         </div>
-
-
                     </div>
                 </div>
-
-
                 <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
+                    <div class="menu-content pb-2">
                         <span
-                            class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.real_state_mangements') }}
+                            class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.school_type') }}</span>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
+                                    <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
+                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                                  </svg>  </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"> {{ __('translation.school_type') }} </span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('School.school_type.index', ['service_id' => 1]) }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{ __('translation.show_data') }}</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
+                    <div class="menu-content pt-3 pb-2">
                         <span
                             class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.student_renvue') }}
                     </div>
@@ -162,51 +181,39 @@
                             </a>
                         </div>
                     </div>
-
-
-                    <div class="menu-item">
-                        <div class="menu-content pb-2">
-                            <span
-                                class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.school_type') }}</span>
-                        </div>
-                    </div>
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <span class="menu-link">
                             <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
                                 <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
-                                        <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
-                                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-                                      </svg>  </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-gear" viewBox="0 0 16 16">
+                                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708L7.293 1.5Z"/>
+                                        <path d="M11.886 9.46c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.044c-.613-.181-.613-1.049 0-1.23l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                                      </svg>
+                                </span>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title"> {{ __('translation.school_type') }} </span>
+                            <span class="menu-title">{{ __('translation.transfer_renvue') }} </span>
                             <span class="menu-arrow"></span>
                         </span>
-                    
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ route('School.school_type.index', ['service_id' => 1]) }}">
+                                <a class="menu-link" href="{{ route('school.students.revenues.index' , ['type' => 'transfer_revenues']) }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">{{ __('translation.show_data') }}</span>
+                                    <span class="menu-title">{{ __('translation.show_students_transfeer_renvue') }}</span>
                                 </a>
                             </div>
-                    
-                    
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('school.students.revenues.create' , ['type' => 'transfer_revenues']) }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.recept_students_renvue') }}</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                     
-
-
-
 
                     <div class="menu-item">
                         <div class="menu-content pb-2">
@@ -228,7 +235,7 @@
                             <span class="menu-title"> {{ __('translation.School_expenses') }} </span>
                             <span class="menu-arrow"></span>
                         </span>
-                    
+
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('School.section.index', ['service_id' => 1]) }}">
@@ -246,14 +253,14 @@
                                     <span class="menu-title"> {{ __('translation.spending') }}</span>
                                 </a>
                             </div>
-                    
-                    
+
+
                         </div>
                     </div>
-                    
+
                     {{-- END section --}}
-                    
-                    
+
+
                     {{-- being all employees --}}
                     <div class="menu-item">
                         <div class="menu-content pb-2">
@@ -303,9 +310,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
+
+
+
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -319,7 +326,7 @@
                             <span class="menu-title"> {{ __('translation.teachers_accounts') }} </span>
                             <span class="menu-arrow"></span>
                         </span>
-                    
+
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('School.Teachers_allowances.index') }}">
@@ -329,9 +336,9 @@
                                     <span class="menu-title"> {{ __('translation.employee_allowances') }}</span>
                                 </a>
                             </div>
-                    
-                    
-                    
+
+
+
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('School.Advances.index') }}">
                                     <span class="menu-bullet">
@@ -340,8 +347,8 @@
                                     <span class="menu-title"> {{ __('translation.Advancess') }}</span>
                                 </a>
                             </div>
-                    
-                    
+
+
                             <div class="menu-item">
                                 <a class="menu-link" href="{{ route('School.salaries.index') }}">
                                     <span class="menu-bullet">
@@ -352,9 +359,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
+
+
+
 
 
 
@@ -367,49 +374,6 @@
                     </div>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
-                            <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
-                                    <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                                    <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"/>
-                                  </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </span>
-                        <span class="menu-title"> {{ __('translation.user_account') }}</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('users.create') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.add_account') }}</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('users.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.show_users') }}</span>
-                            </a>
-                        </div>
-                        {{-- <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.roles.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{ __('translation.roles') }}</span>
-                            </a>
-                        </div> --}}
-                    </div>
-
-                </div>
                 {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -493,14 +457,22 @@
                             <span class="menu-arrow"></span>
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    
-                    
+
+
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ route('School_reports.School_MonthlyRealstateRenvueAndSpending') }}">
+                                <a class="menu-link" href="{{ route('school.reports.SchoolMonthlyReports') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">{{ __('translation.MonthlyRealstateRenvueAndSpending') }}</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('school.reports.SchoolSpending') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.school_spending') }}</span>
                                 </a>
                             </div>
                             <div class="menu-item">
@@ -527,7 +499,7 @@
                                         <span class="menu-title">{{ __('translation.teachers_allowances_report') }}</span>
                                     </a>
                                 </div>
-                    
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_reports.School_salaries.report') }}">
                                         <span class="menu-bullet">
@@ -536,13 +508,13 @@
                                         <span class="menu-title">{{ __('translation.salaries_report') }}</span>
                                     </a>
                                 </div>
-                    
-                    
-                    
-                    
+
+
+
+
                         </div>
-                    
-                    
+
+
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                             <span class="menu-link">
                                 <span class="menu-icon">
@@ -566,7 +538,24 @@
                                         <span class="menu-title">{{ __('translation.Expense_sections') }}</span>
                                     </a>
                                 </div> --}}
-                    
+
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('School_Achive.School_spending.Achive', ['service_id' => 1])}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">{{ __('translation.students_renvue') }}</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('school.student_renvues_archive', ['type' => 'transfer_revenues'])}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">{{ __('translation.transfer_renvue') }}</span>
+                                    </a>
+                                </div>
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.School_spending.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -575,18 +564,7 @@
                                         <span class="menu-title">{{ __('translation.spending') }}</span>
                                     </a>
                                 </div>
-                    
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('School_Achive.Category.Achive', ['service_id' => 1])}}">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>School_Achive
-                                        <span class="menu-title">{{ __('translation.Categoires') }}</span>
-                                    </a>
-                                </div> --}}
-                    
-                    
-                    
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.School_allowances.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -595,9 +573,9 @@
                                         <span class="menu-title">{{ __('translation.Allowances_and_incentives') }}</span>
                                     </a>
                                 </div>
-                    
-                    
-                    
+
+
+
                                 {{-- <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.employee.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -606,7 +584,7 @@
                                         <span class="menu-title">{{ __('translation.all_employees') }}</span>
                                     </a>
                                 </div> --}}
-                    
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.School_employee_allowances.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -615,7 +593,7 @@
                                         <span class="menu-title">{{ __('translation.employee_allowances') }}</span>
                                     </a>
                                 </div>
-                    
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.School_Advances.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -624,7 +602,7 @@
                                         <span class="menu-title">{{ __('translation.Advancess') }}</span>
                                     </a>
                                 </div>
-                    
+
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('School_Achive.School_salaries.Achive', ['service_id' => 1])}}">
                                         <span class="menu-bullet">
@@ -633,10 +611,10 @@
                                         <span class="menu-title">{{ __('translation.salaries') }}</span>
                                     </a>
                                 </div>
-                    
+
                         </div>
                         </div></div>
-                    
+
 
 
 
@@ -646,7 +624,7 @@
 
 
 
-            
+
 
 
         </div>

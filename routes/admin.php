@@ -18,6 +18,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AssingOrderToClientController;
 use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\Employee\ReportController;
 use App\Http\Controllers\FinanicalTreasuryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
@@ -43,7 +44,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', [DashboardController::class, 'getIndex']);
+Route::get('/', fn () =>  redirect()->route('admin.selection'));
 Route::get('/switch', fn () => 'jksa')->name('switchLan');
 Route::get('/pro', fn () => 'jksa')->name('profile');
 Route::middleware('auth')->group(function () {
@@ -77,7 +78,7 @@ Route::group(
     ],
     function () {
         //  New Route Login
-        Route::prefix('admin')->middleware('guest:admin')->group(function () {
+        Route::prefix('admin')->group(function () {
             Route::get('login', [AdminAuthController::class, 'getlogin'])->name('admin.get_login');
             Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login');
         });
@@ -171,6 +172,17 @@ Route::group(
                     Route::resource('revenues', StudentRevenueController::class);
                     Route::get('revenues-data', [StudentRevenueController::class, 'data'])->name('revenues.data');
                 });
+
+                Route::prefix('reports')->name('reports.')->group(function () {
+                    // Route::resource('revenues', StudentRevenueController::class);
+                    Route::get('montly-reports', [ReportController::class, 'SchoolMonthly'])->name('SchoolMonthlyReports');
+                    Route::get('montly-data', [ReportController::class, 'SchoolMonthlyData'])->name('SchoolMonthlyData');
+                    Route::get('school-spending', [ReportController::class, 'SchoolSpending'])->name('SchoolSpending');
+                    Route::get('school-spending-data', [ReportController::class, 'SchoolSpendingData'])->name('SchoolSpendingData');
+                });
+
+                Route::get('archive', [StudentRevenueController::class, 'getArchive'])->name('student_renvues_archive');
+                Route::get('archive-restore/{id}', [StudentRevenueController::class, 'resotreFromArachive'])->name('resotreFromArachive');
             });
         });
     }

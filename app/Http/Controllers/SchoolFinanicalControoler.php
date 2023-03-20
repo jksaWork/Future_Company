@@ -73,6 +73,7 @@ class SchoolFinanicalControoler extends Controller
         $query = SchoolTreasuryTransactionHistory::whenType()
             ->whenTransactionType()
             ->WhenFromDate()
+            ->WhenSchoolType()
             ->when(request()->id != null, fn ($q) => $q->where('id', request()->id))
             ->orderBy('id', 'desc');
         // dd($query->get());
@@ -88,6 +89,9 @@ class SchoolFinanicalControoler extends Controller
                 else return "<span class='badge badge-light-danger'> " . __('translation.' . $item->type) . "</span>";
             })
 
+            ->editColumn('school_id', function ($item) {
+                return $item->School->school_name;
+            })
             ->editColumn('amount', function ($item) {
                 return number_format($item->amount, 2);
             })

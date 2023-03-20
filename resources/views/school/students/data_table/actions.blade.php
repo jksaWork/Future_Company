@@ -1,4 +1,4 @@
-{{-- @if (auth()->user()->hasPermission('update_admins')) --}}
+@if ($deleted_at ==  null)
 <div style="min-width: 200px">
     <a href="{{ route('school.students.revenues.show', $id) }}" class="btn btn-light-primary btn-sm btn-icon">
         <i class="fa fa-eye"></i>
@@ -30,4 +30,13 @@
         </button>
     </form>
 </div>
-{{-- @endif --}}
+
+@else
+<a href="{{ route('school.resotreFromArachive', $id) }}" class="btn btn-light-warning me-1">
+    <span class="svg-icon svg-icon-3">
+          <span>
+            {{ __('translation.restore') }}
+          </span>
+    </span>
+</a>
+@endif

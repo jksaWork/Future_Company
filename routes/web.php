@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-Route::get('admin', fn () => view('layouts.admin.admin'));
+// Route::get('admin', fn () => view('layouts.admin.admin'));
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(
