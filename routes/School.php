@@ -97,7 +97,7 @@ Route::group(
                 Route::get('monthly-spending-renvues', [School_ReportController::class, 'MonthlyRealstateRenvueAndSpending'])->name('School_MonthlyRealstateRenvueAndSpending');
                 Route::get('monthly-spending-data', [School_ReportController::class, 'MonthData'])->name('School_MonthData');
             });
-            Route::prefix('School_Achive')->name('School_Achive.')->middleware(['auth:admin'])->group(function () {
+            Route::prefix('School_Achive')->name('School_Achive.')->middleware(['auth:web'])->group(function () {
 
                 Route::get('Achive_section', [School_AchiveController::class, 'Achive_section'])->name('School_section.Achive');
                 Route::get('Section-Achive', [School_AchiveController::class, 'SectionAchive'])->name('School_Section.Achives');

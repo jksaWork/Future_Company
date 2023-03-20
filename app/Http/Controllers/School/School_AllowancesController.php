@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\School_allowances;
 use App\Models\school_types;
 use App\Models\Category;
-use App\Models\School_Teachers_allowances;
+use App\Models\school_teachers_allowances;
 
 use App\Http\Requests\allowancesRequest;
 use Illuminate\Http\Request;
@@ -101,7 +101,7 @@ class School_AllowancesController extends Controller
     {
 
         try{
-        $s  = School_Teachers_allowances::where([
+        $s  = school_teachers_allowances::where([
             ['allowances_id', $id],
         ])->get();
        $d= $s->count();

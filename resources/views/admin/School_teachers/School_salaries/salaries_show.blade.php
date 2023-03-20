@@ -1,8 +1,4 @@
-@extends(
-    auth()->guard('admin')->check()
-        ? 'layouts.school.master'
-        : 'layouts.agents.agent_layouts'
-)
+@extends('layouts.school.master')
 @section('main-head', __('translation.Add_a_new_salary'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">

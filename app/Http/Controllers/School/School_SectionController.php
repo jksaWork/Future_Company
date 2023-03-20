@@ -58,6 +58,7 @@ class School_SectionController extends Controller
 
     public function edit(Request $request ,$id)
     {
+        // return $id;
         $school_id =school_types::all();
         $school_sections = school_sections::find($id);
         return view('admin.School_teachers.School_section.edit', compact('school_sections','school_id'));

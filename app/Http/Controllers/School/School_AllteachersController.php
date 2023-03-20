@@ -228,9 +228,9 @@ class School_AllteachersController extends Controller
 
     public function allowances($id)
     {
-        $categories_id = DB::table("School_allowances")->where([["school_id", $id],['status' , 1]])->pluck("allowances_name", "id");
+        $allowances = DB::table("School_allowances")->where([["school_id", $id],['status' , 1]])->pluck("allowances_name", "id");
        
-        return json_encode($categories_id);
+        return json_encode($allowances);
     }
 
 

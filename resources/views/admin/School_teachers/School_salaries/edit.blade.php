@@ -1,9 +1,4 @@
-{{-- @if (!) --}}
-{{-- @dd('jksa');
 @extends('layouts.school.master')
-@else --}}
-@extends(auth()->guard('admin')->check() ?'layouts.school.master':'layouts.agents.agent_layouts')
-{{-- @endif --}}
 @section('main-head')
     {{__('translation.edite_salariesss')}}
     <small> - {{ $salaries->teachers->name }}</small>

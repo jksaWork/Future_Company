@@ -50,7 +50,7 @@ class School_DataController extends Controller
 
             ->editColumn(
                 'actions',
-                'admin.School_teachers.school_section.data_table.actions'
+                'admin.School_teachers.School_section.data_table.actions'
             )
 
             ->editColumn('school_id', function ($item) {
