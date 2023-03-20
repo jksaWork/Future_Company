@@ -82,7 +82,7 @@
 @push('scripts')
     <script src="{{ asset('datatable/select2.min.js') }}"></script>
     <script>
-        let stauts, type, transaction_type, from_date, id = @json(request()->id);
+        let stauts, type = @json(request()->type), transaction_type, from_date, id = @json(request()->id);
         let rolesTable = $('#roles-table').DataTable({
             dom: "Brtp",
             serverSide: true,

@@ -143,7 +143,7 @@ class StudentRevenueController extends Controller
                 return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
             }
             DB::rollback();
-            dd($e);
+            // dd($e);
             return  redirect()->back()->withErrors(__('translation.6'));
         }
     }
