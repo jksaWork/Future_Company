@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\school_advances;
 use App\Models\school_teachers;
-use App\Models\School_Teachers_allowances;
+use App\Models\school_teachers_allowances as School_Teachers_allowances;
 use App\Models\FinancialTreasury;
-use App\Models\School_salaries;
+use App\Models\school_salaries as School_salaries;
 use App\Models\school_spendings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class SchoolDashboardController extends Controller
             return $item;
         })->all();
         // dd($data);
- 
+
 
 
         $sum = collect([33, 22, 27]);
