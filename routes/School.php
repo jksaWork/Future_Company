@@ -17,7 +17,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\School_SettingController;
 use App\Http\Controllers\School\School_ReportController;
 use App\Http\Controllers\School\School_AchiveController;
-use App\Http\Controllers\School\School_TypeController;
+use App\Http\Controllers\School\school_TypeController  as School_TypeController;
 
 /*
 |--------------------------------------------------------------------------
