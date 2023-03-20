@@ -22,7 +22,7 @@ class StudentRevenueController extends Controller
     {
         $headings = [
             'student_revenues' => __('translation.student_renvue'),
-            'transfer_renvue' => __('translation.transfer_renvue')
+            'transfer_revenues' => __('translation.transfer_renvue')
         ];
 
         return view('school.students.index', compact('headings'));
@@ -38,7 +38,7 @@ class StudentRevenueController extends Controller
         //
         $headings = [
             'student_revenues' => __('translation.student_renvue'),
-            'transfer_renvue' => __('translation.transfer_renvue')
+            'transfer_revenues' => __('translation.transfer_renvue')
         ];
         $schooles = school_types::get();
         return view('school.students.create', compact('headings', 'schooles'));
@@ -132,8 +132,6 @@ class StudentRevenueController extends Controller
             );
             $renvue->transaction_id = $transaaction->id;
             $renvue->save();
-
-
             session()->flash('success', __('translation.recept_revenues_success_fule'));
             DB::commit();
             return redirect()->route('school.students.revenues.index', ['type' => $request->type_id]);
@@ -143,10 +141,9 @@ class StudentRevenueController extends Controller
                 DB::commit();
                 session()->flash('success', __('site.added_successfully'));
                 return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
             }
-            // dd($th);
             DB::rollback();
+            dd($e);
             return  redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -176,7 +173,7 @@ class StudentRevenueController extends Controller
         $studentRevenue = StudentRevenue::findOrFail($studentRevenue);
         $headings = [
             'student_revenues' => __('translation.student_renvue'),
-            'transfer_renvue' => __('translation.transfer_renvue')
+            'transfer_revenues' => __('translation.transfer_renvue')
         ];
         $schooles = school_types::get();
         return view('school.students.edit', compact('headings', 'schooles', 'studentRevenue'));
@@ -307,8 +304,6 @@ class StudentRevenueController extends Controller
             }
             DB::rollback();
             return  redirect()->back()->withErrors(__('translation.6'));
-
-            //throw $th;
         }
         // dd($StudentRevenue);
 
