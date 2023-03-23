@@ -84,7 +84,7 @@
      <script>
      let role, year, month, school_id;
      let rolesTable = $('#roles-table').DataTable({
-          dom: "Brtp",
+          dom: "Brt",
           serverSide: true,
           processing: true,
           "language": {
