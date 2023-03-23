@@ -4,14 +4,14 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Models\School_allowances;
-use App\Models\School_salaries;
+use App\Models\school_salaries;
 use App\Models\school_teachers;
 use App\Models\school_advances;
 use App\Models\school_types;
 use App\Models\school_sections;
 use App\Models\school_spendings;
 use App\Models\school_categories;
-use App\Models\School_Teachers_allowances;
+use App\Models\school_teachers_allowances;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Exception;
@@ -156,7 +156,7 @@ class School_DataController extends Controller
                 'admin.School_teachers.School_teachers.data_table.actions'
             )
             ->addColumn('allowances_id', function ($item) use ($str) {
-                $allowancesS = School_Teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
+                $allowancesS = school_teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
                 foreach ($allowancesS as $key => $allowances) {
                     $str .= "<span class='badge badge-light-info'>" . $allowances->Allowances_id->allowances_name . ' ( ' . $allowances->Allowances_id->allowances_value  . ' ) ' . '</span>';
                 }
@@ -187,7 +187,7 @@ class School_DataController extends Controller
     {
         $str = '';
         if (request()->school_teachers_allowances == null) {
-            $query = school_teachers_allowances::query()->where('status', 0);
+            $query = school_teachers_allowances::query()->where('status', 0); 
         } else {
             $query = school_teachers_allowances::query()->where([['school_id', request()->school_teachers_allowances],['status', 0]])->get(); # code...
         }
@@ -250,9 +250,9 @@ class School_DataController extends Controller
     public function salarieshistoryData(Request $request)
     {
         if (request()->School_salaries == null) {
-            $query = School_salaries::query();
+            $query = school_salaries::query();
         } else {
-            $query = School_salaries::query()->where('school_id', request()->School_salaries)->get(); # code...
+            $query = school_salaries::query()->where('school_id', request()->School_salaries)->get(); # code...
         }
         $str = '';
         // $query = School_salaries::query();

@@ -4,14 +4,14 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Models\School_allowances;
-use App\Models\School_salaries;
+use App\Models\school_salaries;
 use App\Models\school_teachers;
 use App\Models\school_advances;
 use App\Models\school_types;
 use App\Models\school_sections;
 use App\Models\school_spendings;
 use App\Models\school_categories;
-use App\Models\School_Teachers_allowances;
+use App\Models\school_teachers_allowances;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 // use App\Http\Requests\Request;
@@ -85,7 +85,7 @@ class School_ReportController extends Controller
        }
         return  DataTables::of($query)
         ->addColumn('allowances_id', function ($item) use ($str) {
-            $allowancesS = School_Teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
+            $allowancesS = school_teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
             foreach ($allowancesS as $key => $allowances) {
                 $str .= "<span class='badge badge-light-info'>" . $allowances->Allowances_id->allowances_name . ' ( ' . $allowances->Allowances_id->allowances_value  . ' ) ' . '</span>';
             }
@@ -93,7 +93,7 @@ class School_ReportController extends Controller
             return $str;
         })
             ->addColumn('allowances_total', function ($item)  {
-                $allowancesS = School_Teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
+                $allowancesS = school_teachers_allowances::where(['teachers_id' => $item->id,  'status' => 1])->get();
                 // $str = $allowancesS->sum("allowances->Allowances_id->allowances_value");
                $str = 0;
                 foreach ($allowancesS as $key => $allowances) {
@@ -163,29 +163,19 @@ class School_ReportController extends Controller
 
     public function report_salaries(Request $request)
     {
-
-
-        // $e = $request->end_month;
-        // $b = $request->being_month;
-        // if ($b == null or $e == null) {
-
-        //     $salaries = School_salaries::where('status', 1)->get();
-        //     return view('admin.School_teachers.School_Repoet.salaries', compact('salaries'));
-        // } else {
-        //     $salaries = School_salaries::where('status', 1)->whereBetween('created_at', [$b, Carbon::parse($e)->endOfDay(),])->get();
-        $school_id =school_types::all();
+                 $school_id =school_types::all();
             return view('admin.School_teachers.School_Repoet.salaries', compact('school_id'));
-        // }
+        
     } 
     public function report_salaries_data(Request $request)
     {
         if (request()->being_month == null or request()->end_month ==null ) {
-            $query = School_salaries::query()->where('school_id', request()->School_salaries);
+            $query = school_salaries::query()->where('school_id', request()->School_salaries);
         } else {
-            $query = School_salaries::query()->whereBetween('created_at', [request()->being_month, Carbon::parse(request()->end_month)->endOfDay(),])->where('school_id', request()->School_salaries); 
+            $query = school_salaries::query()->whereBetween('created_at', [request()->being_month, Carbon::parse(request()->end_month)->endOfDay(),])->where('school_id', request()->School_salaries); 
         }
        if(request()->being_month == null and request()->end_month ==null and request()->School_salaries == null ){
-        $query = School_salaries::query();
+        $query = school_salaries::query();
        }
         $str = '';
         // $query = School_salaries::query();
