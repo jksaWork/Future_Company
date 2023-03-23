@@ -141,7 +141,7 @@
 
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('School.Advances.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #e58080 !important";>
+                    <a href="{{ route('School.Advances.index', ['service_id' => 1]) }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8" style="background-color: #ef7474 !important";>
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
@@ -154,7 +154,7 @@
                                     </span>
                                 </div>
                                 <!--end::Svg Icon-->
-                                <div class="">
+                            <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
                                         @if ($Advances[0]->sum === null)
                                         0.00
