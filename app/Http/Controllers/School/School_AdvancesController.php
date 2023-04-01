@@ -90,7 +90,7 @@ class School_AdvancesController extends Controller
                 ]);
 
                 $advances = school_advances::findOrFail($advance->id);
-                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->id);
+                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'. __('translation.Add_Advances') ,  $advances->school_id, $advances->id);
 
                 $advances->update([
                     'Transaction_id' => $res->id,
@@ -251,7 +251,7 @@ class School_AdvancesController extends Controller
     } //end of destroy
 }
 public function teachers($id){
-    $teachers = DB::table("school_teachers")->where([["school_id", $id],['status' , 1]])->pluck("name", "id");
+    $teachers = DB::table("School_teachers")->where([["school_id", $id],['status' , 1],['deleted_at' ,NULL]])->pluck("name", "id");
        
     return json_encode($teachers);
 }

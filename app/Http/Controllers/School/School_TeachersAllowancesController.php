@@ -5,7 +5,7 @@ namespace App\Http\Controllers\School;
 use App\Http\Controllers\Controller;
 use App\Models\school_teachers;
 use App\Models\school_teachers_allowances;
-use App\Models\school_allowances;
+use App\Models\School_allowances;
 use App\Models\school_types;
 use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ class School_TeachersAllowancesController extends Controller
         $employees =school_teachers::where([
             ['status',  1],
         ])->get();
-        $allowances =school_allowances::where([
+        $allowances =School_allowances::where([
             ['status',  0],
         ])->get();
         // return $allowances;
@@ -64,7 +64,9 @@ class School_TeachersAllowancesController extends Controller
             $employee_allow = school_teachers_allowances::findOrFail($employee_allow->id);
             //    return  $spendingses->spending_value;
             
-            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->School->school_name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->teachers->name . '-'.$employee_allow->Allowances_id->allowances_name ,
+            $employee_allow->school_id , 
+            $employee_allow->id);
             
            $d= $employee_allow->update([
                 'Transaction_id' => $res->id,
@@ -109,7 +111,7 @@ class School_TeachersAllowancesController extends Controller
         // return $id;
         $employees = school_teachers::where([['status', 1],])->get();
     
-        $allowances =school_allowances::where([
+        $allowances =School_allowances::where([
             ['status',  0],
         ])->get();
         $school_types =school_types::all();
@@ -198,12 +200,12 @@ class School_TeachersAllowancesController extends Controller
     }
     } //end of destroy
     public function allowances_id($id){
-        $allowances_id = DB::table("school_allowances")->where([["school_id", $id],['status' , 0]])->pluck("allowances_name", "id");
+        $allowances_id = DB::table("school_allowances")->where([["school_id", $id],['status' , 0],['deleted_at' ,NULL]])->pluck("allowances_name", "id");
        
         return json_encode($allowances_id);
     }
  public function teachers_id($id){
-    $teachers_id = DB::table("school_teachers")->where([["school_id", $id],['status' , 1]])->pluck("name", "id");
+    $teachers_id = DB::table("School_teachers")->where([["school_id", $id],['status' , 1],['deleted_at' ,NULL]])->pluck("name", "id");
        
     return json_encode($teachers_id);
     }

@@ -134,7 +134,7 @@ class SchoolTreasuryTransactionHistory extends Model
 
     public function School()
     {
-        return  $this->belongsTo(school_types::class, 'school_id');
+        return  $this->belongsTo('App\Models\school_types', 'school_id');
     }
     public function scopewhenTransactionType($query)
     {
