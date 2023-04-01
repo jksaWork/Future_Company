@@ -194,7 +194,7 @@ let rolesTable = $('#roles-table').DataTable({
 
                 console.log(pageTotal, 'credit   --------------');
                 console.log(pageTotal2, 'debit   --------------');
-            // Update footer
+          //   Update footer
 
             $(api.column(5).footer()).html(`${new Intl.NumberFormat().format(pageTotal - pageTotal2)}`);
             $(api.column(3).footer()).html(`${new Intl.NumberFormat().format(pageTotal)}`);

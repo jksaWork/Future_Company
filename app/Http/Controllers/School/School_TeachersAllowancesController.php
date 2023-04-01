@@ -62,12 +62,18 @@ class School_TeachersAllowancesController extends Controller
                 'month_number' => $request->month_number,
             ]);
             $employee_allow = school_teachers_allowances::findOrFail($employee_allow->id);
+<<<<<<< HEAD
             //    return  $spendingses->spending_value;
             
             $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->teachers->name . '-'.$employee_allow->Allowances_id->allowances_name ,
             $employee_allow->school_id , 
             $employee_allow->id);
+=======
+            //    return  $employee_allow->school_id;
+>>>>>>> d179b885d68cb99f4b07810d6d3f1bca465ff6ac
             
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->School->school_name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->school_id , $employee_allow->id);
+            // return $res;
            $d= $employee_allow->update([
                 'Transaction_id' => $res->id,
             ]);
@@ -76,7 +82,7 @@ class School_TeachersAllowancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.Teachers_allowances.index');
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
             // if ($e->getCode() == 51) {
             //     DB::commit();
             //     session()->flash('success', __('site.added_successfully'));
