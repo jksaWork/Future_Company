@@ -474,4 +474,18 @@ return [
     'Homepage'=>' Home page',
     'Select_the_login_method'=>'Select the login method',
     'Real_estate'=>'Real estate',
+    'students_renvue'=>'Students Renvue',
+    'transfer_renvue'=>'Transfer Renvue',
+    'STUDENT_RENVUE'=>'STUDENT RENVUE',
+    'show_students_renvue'=>'Show Students Renvue',
+    'recept_students_renvue'=>'Recept Students Renvue',
+    'search_student_name_guard_amount'=>'search student ame guard amount',
+    'student_name'=>'Student Name',
+    'student_guard'=>'Student Guard',
+    'school_idd'=>'School Id',
+    'opration_type'=>'Opration Type',
+    'opration_idd'=>'Opration Id',
+    'revenue_type'=>'Revenue Type',
+    'recept_date'=>'Recept Date',
+
 ];
