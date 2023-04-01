@@ -5,7 +5,7 @@ namespace App\Http\Controllers\School;
 use App\Http\Controllers\Controller;
 use App\Models\school_teachers;
 use App\Models\school_teachers_allowances;
-use App\Models\school_allowances;
+use App\Models\School_allowances;
 use App\Models\school_types;
 use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ class School_TeachersAllowancesController extends Controller
         $employees =school_teachers::where([
             ['status',  1],
         ])->get();
-        $allowances =school_allowances::where([
+        $allowances =School_allowances::where([
             ['status',  0],
         ])->get();
         // return $allowances;
@@ -62,10 +62,10 @@ class School_TeachersAllowancesController extends Controller
                 'month_number' => $request->month_number,
             ]);
             $employee_allow = school_teachers_allowances::findOrFail($employee_allow->id);
-            //    return  $spendingses->spending_value;
+            //    return  $employee_allow->school_id;
             
-            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->School->school_name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->id);
-            
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($employee_allow->Allowances_id->allowances_value , 'incentives', $employee_allow->School->school_name . '-'.$employee_allow->Allowances_id->allowances_name , $employee_allow->school_id , $employee_allow->id);
+            // return $res;
            $d= $employee_allow->update([
                 'Transaction_id' => $res->id,
             ]);
@@ -74,7 +74,7 @@ class School_TeachersAllowancesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.Teachers_allowances.index');
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
             // if ($e->getCode() == 51) {
             //     DB::commit();
             //     session()->flash('success', __('site.added_successfully'));

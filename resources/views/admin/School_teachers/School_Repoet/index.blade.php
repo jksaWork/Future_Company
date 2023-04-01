@@ -163,7 +163,9 @@
                            $(this).css('background-color', '#D0D0D0');
                        });
                        $(win.document.body).find('h1').css('text-align', 'center');
-                   }}
+                       $(win.document.body).find('tfoot').css('color', 'red');
+                   }
+                }
 
        ]  ,
          ajax: {

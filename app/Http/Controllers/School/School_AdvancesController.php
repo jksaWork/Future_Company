@@ -90,7 +90,7 @@ class School_AdvancesController extends Controller
                 ]);
 
                 $advances = school_advances::findOrFail($advance->id);
-                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->id);
+                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->school_id, $advances->id);
 
                 $advances->update([
                     'Transaction_id' => $res->id,

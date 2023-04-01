@@ -58,7 +58,7 @@ class School_SpendingController extends Controller
             // return $school_spendings;
             $spendingses = school_spendings::findOrFail($school_spendings->id);
             //    return  $spendingses->spending_value;
-            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $school_spendings->id);
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $spendingses->school_id, $spendingses->id);
 
             $spendingses->update([
                 'Transaction_id' => $res->id,

@@ -25,7 +25,7 @@ class School_AttachmentController extends Controller
             $file->storeAs('attachments/employeess/'.$request->teachers_name, $file->getClientOriginalName(),'upload_attachments');
            
             // insert in image_table
-            $images= new school_images();
+            $images= new school_images(); 
             $images->filename=$name;
             $images->imageable_id = $request->teachers_id;
             $images->school_id = $request->school_id;
