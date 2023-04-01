@@ -5,7 +5,7 @@
                     {{session()->get('success')}}
                 </h1>
         </div>
-        <script>
+        {{-- <script>
             toastr.options = {
                 "closeButton": true,
                 "debug": true,
@@ -23,7 +23,7 @@
                 "hideMethod": "fadeOut"
             };
             toastr.success("Are you the six fingered man?");
-        </script>
+        </script> --}}
         {{ session()->forget('success') }}
         @endif
     @if (session()->has('error'))
@@ -33,7 +33,7 @@
             {{-- </div> --}}
         </div>
         {{ session()->forget('error') }}
-        <script>
+        {{-- <script>
             toastr.options = {
                 "closeButton": true,
                 "debug": true,
@@ -51,7 +51,7 @@
                 "hideMethod": "fadeOut"
             };
             toastr.error("New order has been placed!");
-        </script>
+        </script> --}}
     @endif
 
     @if($errors->any())

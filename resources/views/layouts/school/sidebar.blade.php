@@ -5,7 +5,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <a href="/school/dashboard">
-            <img alt="Logo" src="{{ asset('school_uploads/' . setting('school_logo') )}}" class="h-50px logo" style='max-width:50px;' />
+            <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style="margin: 100%;max-width: 53px;" />
         </a>
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"

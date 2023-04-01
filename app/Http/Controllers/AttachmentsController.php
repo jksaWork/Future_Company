@@ -75,16 +75,16 @@ class AttachmentsController extends Controller
     public  function show($id)
     {
         $file_name = Attachments::find($id)->url;
-        if (Str::startsWith($file_name, 'http://localhost:8000/'))
-            $file_name = Str::replaceFirst('http://localhost:8000/',  '', $file_name);
+        if (Str::startsWith($file_name, 'https://futurecompany.edhub.sd'))
+            $file_name = Str::replaceFirst('https://futurecompany.edhub.sd',  '', $file_name);
         return response()->file(public_path($file_name));
     }
 
     public function download($id)
     {
         $file_name = Attachments::find($id)->url;
-        if (Str::startsWith($file_name, 'http://localhost:8000/'))
-            $file_name = Str::replaceFirst('http://localhost:8000/',  '', $file_name);
+        if (Str::startsWith($file_name, 'https://futurecompany.edhub.sd'))
+            $file_name = Str::replaceFirst('https://futurecompany.edhub.sd',  '', $file_name);
         $pathToFile = public_path($file_name);
         return response()->download($pathToFile);
     }
