@@ -90,11 +90,11 @@ class School_AdvancesController extends Controller
                 ]);
 
                 $advances = school_advances::findOrFail($advance->id);
-<<<<<<< HEAD
+
                 $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'. __('translation.Add_Advances') ,  $advances->school_id, $advances->id);
-=======
-                $res = SchoolTreasuryTransactionHistory::MakeTransacaion( $advances->advances_value, 'advance', $advances->teachers->name .'-'.$advances->School->school_name , $advances->school_id, $advances->id);
->>>>>>> d179b885d68cb99f4b07810d6d3f1bca465ff6ac
+
+               
+
 
                 $advances->update([
                     'Transaction_id' => $res->id,

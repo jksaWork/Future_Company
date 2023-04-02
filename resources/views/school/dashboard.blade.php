@@ -61,7 +61,11 @@
                                 <!--end::Svg Icon-->
                                 <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
-                                        {{ $spendings[0]->sum }}
+                                          @if ($spendings[0]->sum  === null)
+                                        0.00
+                                        @else
+                                        {{number_format($spendings[0]->sum , 2)}}
+                                        @endif
                                     </div>
                                     <div class="fw-bold text-white fs-4">{{ __('translation.spendings') }}</div>
                                 </div>

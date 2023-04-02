@@ -71,11 +71,10 @@ class School_SalariesController extends Controller
                 ]);
                 //    return  $DATA;
                 $salaries = school_salaries::findOrFail($DATA->id);
-<<<<<<< HEAD
+
                 $res = SchoolTreasuryTransactionHistory::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->teachers->name . '-' . __('translation.add_salaries'), $salaries->school_id, $salaries->id);
-=======
-                $res = SchoolTreasuryTransactionHistory::MakeTransacaion($salaries->totle_salaries, 'salries', $salaries->teachers->name . '-' . $salaries->teachers->name,$salaries->school_id, $salaries->id);
->>>>>>> d179b885d68cb99f4b07810d6d3f1bca465ff6ac
+
+             
 
                 $salaries->update([
                     'Transaction_id' => $res->id,
@@ -254,11 +253,10 @@ class School_SalariesController extends Controller
     }
     public function teachers_salaries($id)
     {
-<<<<<<< HEAD
+
         $teachers = DB::table("School_teachers")->where([["school_id", $id],['status' , 1],['deleted_at' ,NULL]])->pluck("name", "id");
-=======
-        $teachers = DB::table("school_teachers")->where([["school_id", $id],['status' , 1],['deleted_at' ,NULL]])->pluck("name", "id");
->>>>>>> d179b885d68cb99f4b07810d6d3f1bca465ff6ac
+
+        
        
         return json_encode($teachers);
     }

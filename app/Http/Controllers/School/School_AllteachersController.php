@@ -147,7 +147,7 @@ class School_AllteachersController extends Controller
 
     public function update(Request $request, $id)
     {
-        // return $id;
+        // return $request;
         $request->validate([
             'school_id' =>'required',
             'name' => 'required',
@@ -161,13 +161,14 @@ class School_AllteachersController extends Controller
         ]);
         try {
             
-            $school_categories = school_categories::where('categories_name', $request->categories_id)->first()->id;
-            // return $id;
+            // $school_categories = school_categories::where('categories_name', $request->categories_id)->first()->id;
+            // return $school_categories;
             // return $allowances_prvent;
             $employee = school_teachers::findOrFail($id);
 
             $employee->update([
                 'name' => $request->name,
+                'school_id' => $request->school_id,
                 'email' => $request->email,
                 'description' => $request->description,
                 'month_number' => Carbon::now(),
@@ -175,9 +176,10 @@ class School_AllteachersController extends Controller
                 'address' => $request->address,
                 'month' => $request->month,
                 'salary' => $request->salary,
-                'categories_id' => $school_categories,
+                'categories_id' => $request->categories_id,
                 'description' => $request->description,
             ]);
+            // return $employee;
 
             $allowances_prvent =  collect($request->data);
 
