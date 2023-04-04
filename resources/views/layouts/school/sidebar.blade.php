@@ -7,6 +7,9 @@
         <a href="/school/dashboard">
             <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style="margin: 100%;max-width: 53px;" />
         </a>
+        <small style="
+        color: white;
+    ">helllo</small>
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
