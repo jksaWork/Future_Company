@@ -529,10 +529,12 @@ return [
     'attachments'=>'attachments',
     'attachment_is_required'=>'attachment is required',
     'student_revenues'=>'student revenues',
+
     'Choose_school_id'=>'Choose School Id',
     'go_to_employee'=>'Go To Employee',
 
        'feedback'=>'feedback',
+
 
 
 

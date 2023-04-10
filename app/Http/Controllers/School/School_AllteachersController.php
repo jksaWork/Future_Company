@@ -167,6 +167,7 @@ class School_AllteachersController extends Controller
             $employee = school_teachers::findOrFail($id);
 
             $employee->update([
+                'school_id' => $request->school_id,
                 'name' => $request->name,
                 'school_id' => $request->school_id,
                 'email' => $request->email,

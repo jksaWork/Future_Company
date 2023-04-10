@@ -32,7 +32,7 @@
                                 <div class="d-flex flex-stack pb-10">
                                     <!--begin::Logo-->
                                     <a href="#">
-                                        <img alt="Logo" src="{{ asset('uploads/' . setting('logo'))}}" class=" image-input-wrapper w-125px h-125px"> 
+                                        <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class=" image-input-wrapper w-125px h-125px"> 
                                     </a>
                                     <!--end::Logo-->
                                     <!--begin::Action-->
@@ -93,7 +93,7 @@
                                             <div class="fw-bold fs-7 text-gray-600 mb-1">{{ __('translation.Issue_By') }}:</div>
                                             <!--end::Label-->
                                             <!--end::Text-->
-                                            <div class="fw-bolder fs-6 text-gray-800">{{ setting('title') }}</div>
+                                            <div class="fw-bolder fs-6 text-gray-800">{{ setting('school_title') }}</div>
                                             <!--end::Text-->
                                             <!--end::Description-->
                                            

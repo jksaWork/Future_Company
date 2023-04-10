@@ -60,7 +60,7 @@
                                     <button class="btn btn-primary">
                                         {{__('translation.save')}}
                                     </button>
-                                    <a href='{{ route('owners.index')}}' class="btn btn-outline-danger">
+                                    <a href='{{ route('school.students.revenues.index')}}' class="btn btn-outline-danger">
                                         {{__('translation.cancel')}}
                                     </a>
                                 </div>
