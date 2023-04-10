@@ -26,10 +26,10 @@ class SchoolTreasuryTransactionHistory extends Model
     public function genrateUrl()
     {
         $urls = [
-            'advance' => route('Employee.Advances.index', ['id' => $this->ref_id]),
-            'salries' => route('Employee.salaries.index', ['id' => $this->ref_id]),
-            'spending' => route('Employee.spending.index', ['id' => $this->ref_id]),
-            'incentives' => '',
+            'advance' => route('School.Advances.index', ['id' => $this->ref_id]),
+            'salries' => route('School.salaries.index', ['id' => $this->ref_id]),
+            'spending' => route('School.spending.index', ['id' => $this->ref_id]),
+            'incentives' => route('School.Teachers_allowances.index', ['id' => $this->ref_id]),
             'student_revenues' => "credit",
             'transfer_revenues'  => "credit",
             'main_treasury' => '',
