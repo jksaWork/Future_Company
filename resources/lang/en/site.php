@@ -20,6 +20,7 @@ return [
     'recovery_successfully'=>'Record recovery successfully',
     'This_month_salary_was_delivered_earlier'=>"This month's salary was delivered earlier",
     'You_have_exceeded_the_salary_imit'=>'You have exceeded the salary imit',
+    'The_amount_entered_is_greater_than_the_customer_account'=>'The amount entered is greater than the customer account',
     'Some_Thing_Went_Worng'=>'Some Thing Went Worng',
     'confirm_delete' => 'Confirm deletion',
     'total'=>'spendings total ',

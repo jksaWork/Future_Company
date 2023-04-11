@@ -83,7 +83,7 @@
                                 </div>
 
                                 
-                                <div class="fv-row mb-7 col-md-12 ">
+                                {{-- <div class="fv-row mb-7 col-md-12 ">
                                     <label class=" fs-6 fw-bold mb-2">{{ __('translation.spending_value') }}</label>
                                     <input type="number" class="form-control form-control-solid" value="{{ old('spending_value') }}"
                                         placeholder="" step="0.01" name="spending_value" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -93,7 +93,7 @@
                                                 {{$message}}
                                             </span>
                                         @enderror
-                                </div>
+                                </div> --}}
                                 <label for="" class=" fs-6 fw-bold mb-2"> {{ __('translation.description') }}
                                 </label>
                                 <textarea class="form-control form-control-solid" rows="3"  name="description" value="{{ old('description') }}"

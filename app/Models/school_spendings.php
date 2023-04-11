@@ -12,17 +12,6 @@ class school_spendings extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
-
-    // protected $fillable = [
-    //     'spending_name',
-    //     'description',
-    //     'spending_value',
-    //     'month',
-    //     'section_id',
-    //     'Transaction_id',
-    //     'school_id',
-    // ];
-
    public function section()
    {
    return $this->belongsTo('App\Models\school_sections','section_id');
@@ -32,11 +21,4 @@ class school_spendings extends Model
     {
     return $this->belongsTo('App\Models\school_types','school_id');
     }
-
-
-
-
-
-
-
 }

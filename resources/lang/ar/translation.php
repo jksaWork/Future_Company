@@ -622,4 +622,12 @@ return [
     'school_spending_reports' => ' تقارير منصرفات المدارس ',
     'restore' => 'استرجاع',
     'school' => 'المدرسه',
+    'Add_a_new_account'=>'اضافة حساب جديد',
+    'Add_a_new_amount'=>'اضافة مبلغ لحساب ',
+    'data'=>'البيانات',
+    'for_him'=>'له',
+    'on_him'=>'عليه',
+    'Withdraw_an_amount_from_an_account'=>'سحب مبلغ من حساب',
+    'Outgoing_details'=>'تفاصيل منصرفات',
+    'Modify_the_process'=>'تعديل العملية',
 ];
