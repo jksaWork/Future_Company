@@ -529,14 +529,21 @@ return [
     'attachments'=>'attachments',
     'attachment_is_required'=>'attachment is required',
     'student_revenues'=>'student revenues',
-    'Choose_school_id'=>'Choose_school_id',
+
+    'Choose_school_id'=>'Choose School Id',
     'go_to_employee'=>'Go To Employee',
 
        'feedback'=>'feedback',
 
+<<<<<<< HEAD
        'Add_a_new_account'=>'Add a new account',
        'Add_a_new_amount'=>'Add a new amount',
        'Withdraw_an_amount_from_an_account'=>'Withdraw an amount from an account',
        'Outgoing_details'=>'Outgoing details',
        'Modify_the_process'=>'Modify the process',
+=======
+
+
+
+>>>>>>> master
 ];

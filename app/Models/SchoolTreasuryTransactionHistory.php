@@ -26,7 +26,9 @@ class SchoolTreasuryTransactionHistory extends Model
     public function genrateUrl()
     {
         $urls = [
-            'advance' => route('School.Advances.index', ['id' => $this->ref_id]),
+
+             'advance' => route('School.Advances.index', ['id' => $this->ref_id]),
+
             'salries' => route('School.salaries.index', ['id' => $this->ref_id]),
             'spending' => route('School.spending.index', ['id' => $this->ref_id]),
             'incentives' => route('School.Teachers_allowances.index', ['id' => $this->ref_id]),
@@ -134,7 +136,7 @@ class SchoolTreasuryTransactionHistory extends Model
 
     public function School()
     {
-        return  $this->belongsTo(school_types::class, 'school_id');
+        return  $this->belongsTo('App\Models\school_types', 'school_id');
     }
     public function scopewhenTransactionType($query)
     {
