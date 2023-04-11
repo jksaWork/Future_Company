@@ -534,5 +534,9 @@ return [
 
        'feedback'=>'feedback',
 
-
+       'Add_a_new_account'=>'Add a new account',
+       'Add_a_new_amount'=>'Add a new amount',
+       'Withdraw_an_amount_from_an_account'=>'Withdraw an amount from an account',
+       'Outgoing_details'=>'Outgoing details',
+       'Modify_the_process'=>'Modify the process',
 ];
