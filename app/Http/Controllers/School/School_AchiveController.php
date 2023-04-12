@@ -7,6 +7,7 @@ use App\Models\School_allowances;
 use App\Models\school_salaries;
 use App\Models\school_teachers;
 use App\Models\school_advances;
+use App\Models\type_accounts;
 use App\Models\school_types;
 use App\Models\school_sections;
 use App\Models\school_spendings;
@@ -101,11 +102,16 @@ class School_AchiveController extends Controller
     try{
         $flight = school_spendings::withTrashed()->where('id', $id)->restore();
         $spending = school_spendings::findOrFail($id);
-        $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spending->spending_value, 'spending', $spending->spending_name . '-' . $spending->School->school_name, $spending->id);
-        // $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spending->Allowances_id->allowances_value , 'incentives', $spending->employee->name . '-'.$spending->Allowances_id->allowances_name , $spending->id);
-        $spending->update([
-            'Transaction_id' => $res->id,
-        ]);
+        $type_accounts =type_accounts::where([['status' , 2],['school_spendings_id' , $id ]])->get();
+        
+        foreach ($type_accounts as  $type_accounts) {
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($type_accounts->value, 'spending', $spending->spending_name . '-' . $spending->School->school_name , $spending->school_id, $type_accounts->id);
+            $type_accounts->update([
+                'Transaction_id' => $res->id,
+            ]);
+       
+        }
+       
          session()->flash('success', __('site.recovery_successfully'));
         return redirect()->route('School_Achive.School_spending.Achive');
     } catch (Exception $e) {

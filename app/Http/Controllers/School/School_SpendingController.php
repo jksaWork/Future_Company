@@ -159,7 +159,11 @@ class School_SpendingController extends Controller
         // return $id;
         try{
         $school_spendings = school_spendings::findOrFail($id);
-        $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $school_spendings->Transaction_id);
+        $type_accounts =type_accounts::where([['status' , 2],['school_spendings_id' , $id ]])->get();
+        foreach ($type_accounts as  $type_accounts) {
+            $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $type_accounts->Transaction_id);
+        }
+      
         $school_spendings->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('School.spending.index');
@@ -189,9 +193,10 @@ class School_SpendingController extends Controller
 $e = $request->end_month;
 $b = $request->being_month;
 $x= $id;
+$type_accounts = school_spendings::findOrFail($id);
 if ($b == null or $e == null) {
 
-        $type_accounts = school_spendings::findOrFail($id);
+       
         $pluss = type_accounts::where([['school_spendings_id' , $id]])->get();
         return view('admin.School_teachers.School_spending.print', compact('pluss','x','type_accounts'));
     } else {
