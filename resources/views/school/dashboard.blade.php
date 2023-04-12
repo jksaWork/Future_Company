@@ -61,8 +61,12 @@
                                 <!--end::Svg Icon-->
                                 <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
+<<<<<<< HEAD
                                         {{-- {{ $spendings[0]->sum }} --}}
                                         @if ($spendings[0]->sum  === null)
+=======
+                                          @if ($spendings[0]->sum  === null)
+>>>>>>> master
                                         0.00
                                         @else
                                         {{number_format($spendings[0]->sum , 2)}}
@@ -276,14 +280,14 @@
 
 @endsection
 
-
+@push('scripts')
 
    <script src="{{ asset('datatable/chart.js') }}"></script>
 
 
 
 
-@push('scripts');
+
 <script src="{{ asset('admin_assets/js/custom/index.js')}}"></script>
 <script src="//code.jquery.com/jquery.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>

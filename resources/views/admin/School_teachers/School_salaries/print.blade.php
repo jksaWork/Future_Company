@@ -32,7 +32,7 @@
                                 <div class="d-flex flex-stack pb-10">
                                     <!--begin::Logo-->
                                     <a href="#">
-                                        <img alt="Logo" src="{{ asset('uploads/' . setting('logo'))}}" class="h-30px image-input-wrapper w-125px h-125px"> 
+                                        <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-30px image-input-wrapper w-125px h-125px"> 
                                     </a>
                                     <!--end::Logo-->
                                     <!--begin::Action-->

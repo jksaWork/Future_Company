@@ -3,13 +3,23 @@
     data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <!--begin::Brand-->
-    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-        <a href="/school/dashboard">
-            <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style="margin: 100%;max-width: 53px;" />
-        </a>
-        <small style="
+    <div class="aside-logo flex-column-auto" id="kt_aside_logo" style="
+    display: flex;
+">
+        <!--<a href="/school/dashboard">-->
+
+            <!--<img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style='max-width:50px;' />-->
+
+        <!--</a>-->
+
+         <small style="
         color: white;
+<<<<<<< HEAD
     ">{{setting('school_title')}} </small>
+=======
+    ">{{ setting('school_title') }}</small>
+
+>>>>>>> d901c3127d99ad116edc9d3e2140e748f0afeb3b
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
