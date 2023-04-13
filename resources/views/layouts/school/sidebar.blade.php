@@ -6,15 +6,21 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo" style="
     display: flex;
 ">
-        <!--<a href="/school/dashboard">-->
+      
 
-            <!--<img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style='max-width:50px;' />-->
 
-        <!--</a>-->
+ <a href="/school/dashboard">
+
+            <img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style='max-width:50px;' />
+
+        </a>
 
          <small style="
         color: white;
     ">{{ setting('school_title') }}</small>
+        
+
+       
 
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"

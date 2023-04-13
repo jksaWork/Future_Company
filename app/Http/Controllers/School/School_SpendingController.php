@@ -57,41 +57,11 @@ class School_SpendingController extends Controller
                 'description' => $request->description,
 
             ]);
-            // return $school_spendings;
-<<<<<<< HEAD
-            // $spendingses = school_spendings::findOrFail($school_spendings->id);
-            // //    return  $spendingses->spending_value;
-            // $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $spendingses->school_id, $spendingses->id);
-=======
-            $spendingses = school_spendings::findOrFail($school_spendings->id);
-            //    return  $spendingses->spending_value;
-            
-            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->section->section_name,
-            $spendingses->school_id,$school_spendings->id);
-            
-           
->>>>>>> master
-
-            // $spendingses->update([
-            //     'Transaction_id' => $res->id,
-            // ]);
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.spending.index');
         } catch (Exception $e) {
-            // dd($e);
-            // if ($e->getCode() == 51) {
-            //     DB::commit();
-            //     session()->flash('success', __('site.added_successfully'));
-            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            // }
-
-            // DB::rollBack();
-            // if ($e->getCode() == 50) {
-            //     session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            //     return redirect()->back();
-            // }
+           
             DB::rollBack();
             session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
@@ -199,9 +169,10 @@ class School_SpendingController extends Controller
 $e = $request->end_month;
 $b = $request->being_month;
 $x= $id;
+$type_accounts = school_spendings::findOrFail($id);
 if ($b == null or $e == null) {
 
-        $type_accounts = school_spendings::findOrFail($id);
+        
         $pluss = type_accounts::where([['school_spendings_id' , $id]])->get();
         return view('admin.School_teachers.School_spending.print', compact('pluss','x','type_accounts'));
     } else {

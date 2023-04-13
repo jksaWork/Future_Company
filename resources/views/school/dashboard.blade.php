@@ -61,12 +61,9 @@
                                 <!--end::Svg Icon-->
                                 <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
-<<<<<<< HEAD
-                                        {{-- {{ $spendings[0]->sum }} --}}
-                                        @if ($spendings[0]->sum  === null)
-=======
+
                                           @if ($spendings[0]->sum  === null)
->>>>>>> master
+
                                         0.00
                                         @else
                                         {{number_format($spendings[0]->sum , 2)}}
@@ -100,7 +97,7 @@
                                 <!--end::Svg Icon-->
                                 <div class="">
                                     <div class="text-white fw-bolder fs-2 mb-2 mt-5">
-                                       {{-- {{$FinancialTreasury[0]->sum}} --}}
+                                       
                                        @if ($FinancialTreasury[0]->sum === null)
                                        0.00
                                        @else
