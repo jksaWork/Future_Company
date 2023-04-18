@@ -3,10 +3,23 @@
     data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <!--begin::Brand-->
-    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-        <a href="/school/dashboard">
-            <img alt="Logo" src="{{ asset('school_uploads/' . setting('school_logo') )}}" class="h-50px logo" style='max-width:50px;' />
-        </a>
+    <div class="aside-logo flex-column-auto" id="kt_aside_logo" style="
+    display: flex;
+">
+        <!--<a href="/school/dashboard">-->
+
+            <!--<img alt="Logo" src="{{ asset('school_uploads/'. setting('school_fav_icon')) }}" class="h-50px logo" style='max-width:50px;' />-->
+
+        <!--</a>-->
+
+         <small style="
+        color: white;
+<<<<<<< HEAD
+    ">{{setting('school_title')}} </small>
+=======
+    ">{{ setting('school_title') }}</small>
+
+>>>>>>> d901c3127d99ad116edc9d3e2140e748f0afeb3b
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
@@ -39,7 +52,7 @@
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true">
                 <div class="menu-item">
-                    <div class="menu-content pb-2">
+                    <div class="menu-content pb-2"> 
                         <span
                             class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('translation.dashboard') }}</span>
                     </div>

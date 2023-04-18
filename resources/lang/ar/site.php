@@ -14,6 +14,7 @@ return [
     'Are_you_sure'=>"'هل أنت واثق؟'",
     'added_successfully' => 'تمت إضافة السجل بنجاح',
     'You_cannot_delete_this_field'=>'لا يمكنك حذف هذه الحقل ',
+    'The_amount_entered_is_greater_than_the_customer_account'=>'المبلغ المدخل اكبر من حساب العميل',
     'updated_successfully' => 'تم تحديث السجل بنجاح',
     'deleted_successfully' => 'تم حذف السجل بنجاح',
     'has_been_transferred_successfully' => 'تم نقل السجل بنجاح',

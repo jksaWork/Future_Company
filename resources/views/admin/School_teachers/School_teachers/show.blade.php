@@ -213,7 +213,7 @@
                                                 @forelse ($allowances_id as $index=>$employee)
                                                     <tr class="fw-bolder fs-6 text-gray-800">
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{!! $employee->employee->name !!}</td>
+                                                        <td>{!! $employee->teachers->name !!}</td>
                                                         <td>{!! $employee->Allowances_id->allowances_name !!}</td>
                                                         <td><span class='badge badge-success'>{{ number_format($employee->Allowances_id->allowances_value, 2) }}</span>
                                                         </td>
@@ -268,7 +268,7 @@
 
 
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{!! $Advances->employee->name !!}</td>
+                                                        <td>{!! $Advances->teachers->name !!}</td>
                                                         <td><span class='badge badge-success'>{!! number_format($Advances->advances_value, 2) !!}</span></td>
                                                         <td>{!! $Advances->month_number !!}</td>
                                                         <td>{!! $Advances->created_at->format('d/M/Y') !!}</td>
@@ -322,7 +322,7 @@
 
 
                                                         <td>{{ $index + 1 }}</td>
-                                                        <td>{!! $salaries->employee->name !!}</td>
+                                                        <td>{!! $salaries->teachers->name !!}</td>
                                                         <td>{!! number_format($salaries->fixed_salary, 2) !!}</td>
                                                         <td>{!! number_format($salaries->allownacees_salary, 2) !!}</td>
                                                         <td>{!! number_format($salaries->advances, 2) !!}</td>

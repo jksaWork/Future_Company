@@ -51,6 +51,7 @@
                     </div>
 
                     <div class="card-toolbar">
+                        
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                             <a href='{{ route('School.spending.create', ['type' => request()->type]) }}'
@@ -83,7 +84,7 @@
                                         <tr>
                                             <th>{{ __('translation.id') }}</th>
                                             <th class="">{{ __('translation.spending_name') }}</th>
-                                            <th class="">{{ __('translation.spending_value') }}</th>
+                                            <th class="">{{ __('translation.value') }}</th>
                                             <th class="">{{ __('translation.school_name') }}</th>
                                             <th class="">{{ __('translation.section_id') }}</th>
                                             <th class="">{{ __('translation.created_at') }}</th>

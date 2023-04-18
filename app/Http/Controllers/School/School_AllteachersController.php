@@ -42,9 +42,19 @@ class School_AllteachersController extends Controller
     } //end of create
 
 
-    public function store(SchooleRequest $request)
+    public function store(Request $request)
     {
-        // return $request;
+         $request->validate([
+            'school_id' =>'required',
+            'name' =>'required',
+            'email' => 'required|email|unique:School_teachers,email,',
+            'phone' =>'required|max:100|unique:School_teachers,phone,',
+            'address' =>'required|string|max:500',
+            'salary' =>'required|nullable|numeric',
+            'categories_id' =>'required|exists:school_categories,id',
+            'month'=>'required|date_format:Y-m-d',
+            'data'=>'required',
+        ]);
 
        
         try {
@@ -137,7 +147,7 @@ class School_AllteachersController extends Controller
 
     public function update(Request $request, $id)
     {
-        // return $id;
+        // return $request;
         $request->validate([
             'school_id' =>'required',
             'name' => 'required',
@@ -151,13 +161,15 @@ class School_AllteachersController extends Controller
         ]);
         try {
             
-            $school_categories = school_categories::where('categories_name', $request->categories_id)->first()->id;
-            // return $id;
+            // $school_categories = school_categories::where('categories_name', $request->categories_id)->first()->id;
+            // return $school_categories;
             // return $allowances_prvent;
             $employee = school_teachers::findOrFail($id);
 
             $employee->update([
+                'school_id' => $request->school_id,
                 'name' => $request->name,
+                'school_id' => $request->school_id,
                 'email' => $request->email,
                 'description' => $request->description,
                 'month_number' => Carbon::now(),
@@ -165,9 +177,10 @@ class School_AllteachersController extends Controller
                 'address' => $request->address,
                 'month' => $request->month,
                 'salary' => $request->salary,
-                'categories_id' => $school_categories,
+                'categories_id' => $request->categories_id,
                 'description' => $request->description,
             ]);
+            // return $employee;
 
             $allowances_prvent =  collect($request->data);
 
@@ -228,7 +241,7 @@ class School_AllteachersController extends Controller
 
     public function allowances($id)
     {
-        $allowances = DB::table("School_allowances")->where([["school_id", $id],['status' , 1]])->pluck("allowances_name", "id");
+        $allowances = DB::table("school_allowances")->where([["school_id", $id],['status' , 1],['deleted_at' ,NULL]])->pluck("allowances_name", "id");
        
         return json_encode($allowances);
     }

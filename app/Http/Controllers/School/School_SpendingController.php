@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\school_sections;
 use App\Models\school_types;
 use App\Models\school_spendings;
+use App\Models\type_accounts;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SchoolTreasuryTransactionHistory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\spendingRequest as SpendingRequest;
 use App\Http\Requests\updataSpendingRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Exception;
 
 class School_SpendingController extends Controller
@@ -41,7 +43,7 @@ class School_SpendingController extends Controller
             'spending_name' => 'required|string|max:100',
             'section_id' => 'required|exists:school_sections,id',
             'month' => 'required|date_format:Y-m-d',
-            'spending_value' => 'required|min:0|numeric',
+            // 'spending_value' => 'required|min:0|numeric',
         ]);
         DB::beginTransaction();
 
@@ -51,35 +53,46 @@ class School_SpendingController extends Controller
                 'school_id' => $request->school_id,
                 'spending_name' => $request->spending_name,
                 'month' => $request->month,
-                'spending_value' => $request->spending_value,
+                'spending_value' => 0,
                 'description' => $request->description,
 
             ]);
             // return $school_spendings;
+<<<<<<< HEAD
+            // $spendingses = school_spendings::findOrFail($school_spendings->id);
+            // //    return  $spendingses->spending_value;
+            // $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $spendingses->school_id, $spendingses->id);
+=======
             $spendingses = school_spendings::findOrFail($school_spendings->id);
             //    return  $spendingses->spending_value;
-            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->School->school_name, $school_spendings->id);
+            
+            $res = SchoolTreasuryTransactionHistory::MakeTransacaion($spendingses->spending_value, 'spending', $spendingses->spending_name . '-' . $spendingses->section->section_name,
+            $spendingses->school_id,$school_spendings->id);
+            
+           
+>>>>>>> master
 
-            $spendingses->update([
-                'Transaction_id' => $res->id,
-            ]);
+            // $spendingses->update([
+            //     'Transaction_id' => $res->id,
+            // ]);
             DB::commit();
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('School.spending.index');
         } catch (Exception $e) {
-            dd($e);
-            if ($e->getCode() == 51) {
-                DB::commit();
-                session()->flash('success', __('site.added_successfully'));
-                return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
-                // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-            }
+            // dd($e);
+            // if ($e->getCode() == 51) {
+            //     DB::commit();
+            //     session()->flash('success', __('site.added_successfully'));
+            //     return redirect()->back()->withErrors(__('translation.' . $e->getMessage()))->withInput();
+            //     // if ($e->getCode() == 50)   session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            // }
 
+            // DB::rollBack();
+            // if ($e->getCode() == 50) {
+            //     session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
+            //     return redirect()->back();
+            // }
             DB::rollBack();
-            if ($e->getCode() == 50) {
-                session()->flash('error',  __('site.There_is_no_amount_available_in_the_safe'));
-                return redirect()->back();
-            }
             session()->flash('error',  __('site.Some_Thing_Went_Worng'));
             return redirect()->back();
         }
@@ -111,7 +124,7 @@ class School_SpendingController extends Controller
             'spending_name' => 'required|string|max:100',
             'section_id' => 'required',
             'month' => 'required|date_format:Y-m-d',
-            'spending_value' => 'required|min:0|numeric',
+            // 'spending_value' => 'required|min:0|numeric',
         ]);
         DB::beginTransaction();
         try {
@@ -124,17 +137,16 @@ class School_SpendingController extends Controller
                 'school_id' => $request->school_id,
                 'spending_name' => $request->spending_name,
                 'month' => $request->month,
-                'spending_value' => $request->spending_value,
                 'description' => $request->description,
             ]);
             // return $spending->Transaction_id;
-            $res = SchoolTreasuryTransactionHistory::EditTransaction($school_spendings->Transaction_id, $school_spendings->spending_value);
+            // $res = SchoolTreasuryTransactionHistory::EditTransaction($school_spendings->Transaction_id, $school_spendings->spending_value);
             // return $res;
             DB::commit();
             session()->flash('success', __('site.updated_successfully'));
             return redirect()->route('School.spending.index');
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
 
             if ($e->getCode() == 51) {
                 DB::commit();
@@ -157,7 +169,11 @@ class School_SpendingController extends Controller
         // return $id;
         try{
         $school_spendings = school_spendings::findOrFail($id);
-        $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $school_spendings->Transaction_id);
+        $type_accounts =type_accounts::where([['status' , 2],['school_spendings_id' , $id ]])->get();
+        foreach ($type_accounts as  $type_accounts) {
+            $res = SchoolTreasuryTransactionHistory::DestoryTransaction( $type_accounts->Transaction_id);
+        }
+      
         $school_spendings->delete();
         session()->flash('error', __('site.has_been_transferred_successfully'));
         return redirect()->route('School.spending.index');
@@ -181,11 +197,23 @@ class School_SpendingController extends Controller
     }
     } //end of destroy
 
-    public function print_spending($id)
+    public function print_spending(Request $request, $id)
     {
-        $spending = school_spendings::findOrFail($id);
-        return view('admin.School_teachers.School_spending.print', compact('spending'));
+// return $request;
+$e = $request->end_month;
+$b = $request->being_month;
+$x= $id;
+$type_accounts = school_spendings::findOrFail($id);
+if ($b == null or $e == null) {
 
+       
+        $pluss = type_accounts::where([['school_spendings_id' , $id]])->get();
+        return view('admin.School_teachers.School_spending.print', compact('pluss','x','type_accounts'));
+    } else {
+        $pluss = type_accounts::where([['school_spendings_id' , $id]])->whereBetween('month', [$b, Carbon::parse($e)->endOfDay(),])->get();
+
+        return view('admin.School_teachers.School_spending.print', compact('pluss','x','type_accounts'));
+    }
         
     } //end of destroy
 
@@ -196,6 +224,23 @@ class School_SpendingController extends Controller
        
         return json_encode($section_id);
     }
+
+    public function pluss_spending($id)
+    {
+        // return $id;
+        $school_spendings = school_spendings::findOrFail($id);
+        return view('admin.School_teachers.School_spending.account', compact('school_spendings'));
+
+        
+    } //end of destroy
+    public function minus_spending($id)
+    {
+        // return $id;
+        $school_spendings = school_spendings::findOrFail($id);
+        return view('admin.School_teachers.School_spending.minus', compact('school_spendings'));
+
+        
+    } //end of destroy
 
 
 
