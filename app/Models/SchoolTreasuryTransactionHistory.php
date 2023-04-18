@@ -83,6 +83,13 @@ class SchoolTreasuryTransactionHistory extends Model
         return $instance;
     }
 
+    public function AppendTransactionToSupplier($transaction_id, $supplier_id)
+    {
+        $oldInstance = SchoolTreasuryTransactionHistory::findOrFail($transaction_id);
+        $oldInstance->supplier_id = $supplier_id;
+        $oldInstance->save();
+    }
+
     public static function EditTransaction($transaction_id, $new_amount)
     {
         $oldInstance = SchoolTreasuryTransactionHistory::findOrFail($transaction_id);

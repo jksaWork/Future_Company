@@ -29,6 +29,7 @@ use App\Http\Controllers\SchoolDashboardController;
 use App\Http\Controllers\SchoolFinanicalControoler;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentRevenueController;
+use App\Http\Controllers\SupplierController;
 use App\Models\StudentRevenue;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -83,6 +84,10 @@ Route::group(
             Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login');
         });
 
+        Route::middleware('auth:web,admin')->group(function () {
+            Route::resource('supplier', SupplierController::class);
+            Route::get('supplier-data', [SupplierController::class, 'getAjaxData'])->name('supplier.data');
+        });
 
         Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
             Route::get('role/data', [RoleController::class, 'data'])->name('roles.data');

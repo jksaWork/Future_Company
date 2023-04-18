@@ -78,7 +78,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title"> {{ __('translation.finanical_treasury') }} </span>
+                        <span class="menu-title"> {{ __('translation.finanical_mangements') }} </span>
                         <span class="menu-arrow"></span>
                     </span>
 
@@ -106,6 +106,14 @@
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title"> {{ __('translation.revenues_trsury') }}</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('supplier.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title"> {{ __('translation.supplier') }}</span>
                             </a>
                         </div>
                     </div>

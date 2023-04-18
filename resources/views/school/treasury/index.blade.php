@@ -277,6 +277,20 @@
                             <div class="scroll-y me-n7 pe-7" id="#">
                                 <!--begin::Input group-->
                                 <x:text-input name='amount' class='col-md-12' />
+
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for=""
+                                                style='font-size:20px'>{{ __('translation.single_supplier') }}</label>
+                                            <select id='realstate' style='width:100%' name='realstate_id'
+                                            >
+
+                                            <option value='0'> {{ __('translation.chose_supplier') }}
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
                                 <!--end::Input group-->
                                 <x:text-area class='col-md-12' name='note'></x:text-area>
                                 <!--begin::Input group-->
@@ -433,5 +447,62 @@
             rolesTable.ajax.reload();
         });
         $('input[name="amount"]').attr('type', 'number');
+    </script>
+@endpush
+
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+        $(document).ready(function() {
+            $('.js-example-disabled-results').select2();
+            $("#realstate").select2({
+                dropdownParent:$('kt_modal_add_customer'),
+                ajax: {
+                    url: "{{ route('owners.ajax') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            search: params.term // search term
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+
+            });
+            $("#realstate").select2({
+                ajax: {
+                    url: "{{ route('realstate.ajax') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        let term =  {
+                            search: params.term,
+                            type: 'rent' ,
+                            is_rent: '1',
+                        };
+                        console.log(term, params);
+                        return term;
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+
+            });
+
+        });
     </script>
 @endpush

@@ -622,4 +622,13 @@ return [
     'school_spending_reports' => ' تقارير منصرفات المدارس ',
     'restore' => 'استرجاع',
     'school' => 'المدرسه',
+    'finanical_mangements' => 'الاداره الماليه ',
+    'supplier' => 'الموردين',
+    'supplier_mangements' => 'اداره الموردين ',
+    'description' => 'الوصف',
+    'add_supplier' => 'اضافه مورد',
+    'supplier_id' => 'رقم المورد',
+    'edit_data' => 'تعديل بيانات المورد',
+    'single_supplier' => 'المورد',
+    'chose_supplier' => ' اختيار المورد',
 ];
